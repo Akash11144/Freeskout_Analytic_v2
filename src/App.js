@@ -1,23 +1,25 @@
-import logo from './logo.svg';
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import './App.css';
+import Redir from './components/redirection';
+import LogIn from './components/login'
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      hello home
+      <BrowserRouter>
+          <Routes>
+            <Route path='/rd' element={<Redir></Redir>} ></Route>
+            <Route path='/lg' element={<LogIn></LogIn>} ></Route>
+          </Routes>
+          <div>
+            <Link to='/rd' >Freeskout</Link>
+          </div>
+          <div>
+            <Link to='/lg' >Log in</Link>
+          </div>
+      </BrowserRouter>
     </div>
   );
 }
