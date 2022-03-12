@@ -4,6 +4,8 @@ const c=require("mongoose");
 const bp=require('body-parser')
 const userRoutes = require('../backend/routes');
 const cors=require('cors');
+const port=process.env.PORT || 8000;
+
 
 b.use(cors());
 b.use(bp.urlencoded({extended:false}));
@@ -21,4 +23,4 @@ c.connect(dbURI,options).then(()=> console.log('connection to database establish
 b.use('/user',userRoutes)
 
 
-b.listen('1369',(req,res)=>console.log('server started'));
+b.listen(port,(req,res)=>console.log('server started'));
