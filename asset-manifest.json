@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Freeskout_Analytic_v2/static/css/main.a26ba8d1.css",
+    "main.js": "/Freeskout_Analytic_v2/static/js/main.1f708b60.js",
+    "static/js/787.badc3f33.chunk.js": "/Freeskout_Analytic_v2/static/js/787.badc3f33.chunk.js",
+    "index.html": "/Freeskout_Analytic_v2/index.html",
+    "main.a26ba8d1.css.map": "/Freeskout_Analytic_v2/static/css/main.a26ba8d1.css.map",
+    "main.1f708b60.js.map": "/Freeskout_Analytic_v2/static/js/main.1f708b60.js.map",
+    "787.badc3f33.chunk.js.map": "/Freeskout_Analytic_v2/static/js/787.badc3f33.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a26ba8d1.css",
+    "static/js/main.1f708b60.js"
+  ]
+}
