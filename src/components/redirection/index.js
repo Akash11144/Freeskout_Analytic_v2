@@ -1,6 +1,7 @@
 import reactga4 from "react-ga4";
 import pt from "platform";
-import {useEffect} from 'react'
+import { useEffect } from 'react'
+import Styles from './index.module.css'
 
 // ----------------------------------------------------
 
@@ -167,7 +168,7 @@ const userData = async () => {
   ud.time = timeGenerator();
 
 
-// _________________________________________________________
+  // _________________________________________________________
 
   // await fetch("http://localhost:1369/user/getUser", {
   //   method: "POST",
@@ -191,11 +192,24 @@ function Redir() {
   }, [])
 
   return (
-    <div
-      style={{ width: "100%", height: "100vh", backgroundColor: "lightblue" }}
-    >
-      {console.log("hello",ud)}
-
+    <div className={Styles.mainCont}>
+      <div className={Styles.stars}></div>
+      <div className={Styles.stars2}></div>
+      <div className={Styles.stars3}></div>
+      <div className={Styles.LoadConatinerDiv}>
+        <div className={Styles.text}>
+          <span className={Styles.fCont} >F</span>
+          <span className={Styles.rCont} >r</span>
+          <span className={Styles.eCont} >e</span>
+          <span className={Styles.seCont} >e</span>
+          <span className={Styles.sCont} >s</span>
+          <span className={Styles.kCont} >k</span>
+          <span className={Styles.oCont} >o</span>
+          <span className={Styles.uCont} >u</span>
+          <span className={Styles.tCont} >t</span>
+        </div>
+        {console.log("hello", ud)}
+      </div>
     </div>
   );
 }
