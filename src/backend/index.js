@@ -18,11 +18,6 @@ const options ={
 
 c.connect(dbURI,options).then(()=> console.log('connection to database established'));
 
-b.use((req,res,next)=>{
-    console.log("before using" , req.body);
-    next();
-})
-
 b.use('/user',userRoutes)
 
 

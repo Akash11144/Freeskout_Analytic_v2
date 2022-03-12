@@ -7,7 +7,6 @@ import Dash from "./components/dashboard";
 function App() {
   return (
     <div className="App">
-      hello home
       <BrowserRouter>
         <Routes>
           <Route path="/rd" element={<Redir></Redir>}></Route>
@@ -17,6 +16,7 @@ function App() {
             path="/"
             element={
               <div>
+                <h1>Hello Home</h1>
                 <div>
                   <Link to="/rd">Freeskout</Link>
                 </div>
