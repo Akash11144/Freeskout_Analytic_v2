@@ -11,7 +11,7 @@ b.post('/getUser',async(req,res)=>{
 })
 
 b.get('/getC',async(req,res)=>{
-    let data= await user.find().count();
+    let data= await user.find();
     res.send(data);
 })
 
