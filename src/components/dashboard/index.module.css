@@ -1,0 +1,12 @@
+.heading {
+    text-align: center;
+}
+.main {
+    width: 80%;
+    margin: 0 auto;
+    background-color: grey;
+    text-align: center;
+}
+.main > h2 {
+    text-shadow:  0 0 4px rgba(0, 0, 0, 0.433);
+}
