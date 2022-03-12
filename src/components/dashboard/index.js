@@ -14,7 +14,7 @@ const Dash=()=>{
 
     useEffect(() => {
         const dataFetch= async ()=>{
-            let y = await fetch("http://localhost:1369/user/getC");
+            let y = await fetch("https://freeskout-analytic-v2-backend.herokuapp.com/user/getC");
             let y1=await y.json();
             console.log("data here", y1,y.status);
             setcount(y1);

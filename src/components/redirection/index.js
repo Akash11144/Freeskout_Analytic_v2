@@ -22,9 +22,9 @@ let ud = {
 
 const reDirection = async () => {
   await userData();
-  window.setInterval(()=>{
-  window.open("https://freeskout.com/", "_self");
-  },2000)
+  // window.setInterval(()=>{
+  // window.open("https://freeskout.com/", "_self");
+  // },2000)
 };
 
 const userData = async () => {
@@ -172,7 +172,7 @@ const userData = async () => {
 
   // _________________________________________________________
 
-  await fetch("http://localhost:1369/user/getUser", {
+  await fetch("https://freeskout-analytic-v2-backend.herokuapp.com/user/getUser", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
