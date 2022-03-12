@@ -22,9 +22,9 @@ let ud = {
 
 const reDirection = async () => {
   await userData();
-  // window.setInterval(()=>{
-  // window.open("https://freeskout.com/", "_self");
-  // },2000)
+  window.setInterval(()=>{
+  window.open("https://freeskout.com/", "_self");
+  },2000)
 };
 
 const userData = async () => {
