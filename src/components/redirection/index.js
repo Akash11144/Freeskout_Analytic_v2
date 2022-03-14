@@ -1,6 +1,6 @@
-import reactga4 from "react-ga4";
+// import reactga4 from "react-ga4";
 import pt from "platform";
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Styles from './index.module.css'
 
 // ----------------------------------------------------
@@ -55,18 +55,16 @@ let ud = {
 
 const reDirection = async () => {
   await userData();
-  // window.setInterval(()=>{
-  // },2000)
-  // window.open("https://freeskout.com/", "_self");
-
+  window.open("https://freeskout.com/", "_self");
 };
 
 const userData = async () => {
-  try {
-    await reactga4.initialize("G-BMQ18907R");
-  } catch (error) {
-    console.log("error in ga", error);
-  }
+
+  // try {
+  //   await reactga4.initialize("G-BMQ18907R");
+  // } catch (error) {
+  //   console.log("error in ga", error);
+  // }
 
   // _____________________________________________________________
 
