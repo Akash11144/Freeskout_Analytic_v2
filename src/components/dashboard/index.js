@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import dstyles from "./index.module.css";
 
 const Dash = () => {
-  const [count, setcount] = useState(0);
+  const [data, setData] = useState({
+    fixData: [],
+    changableData: [],
+  });
 
   useEffect(() => {
     const dataFetch = async () => {
@@ -11,20 +14,65 @@ const Dash = () => {
       );
       let y1 = await y.json();
       console.log("data here", y1, y.status);
-      setcount(y1);
+      setData({
+        fixData: y1,
+        changableData: y1,
+      });
     };
     dataFetch();
   }, []);
+
+  const dataSetter = (a) => {
+    if (a === "all") {
+      setData({
+        ...data,
+        changableData: data.fixData,
+      });
+    }
+    if (a === "windows") {
+      let y = data.fixData.filter((a) => a.os_name === "Windows");
+      setData({
+        ...data,
+        changableData: y,
+      });
+    }
+    if (a === "ios") {
+      let y = data.fixData.filter((a) => a.os_name === "iOS");
+      console.log(y);
+      setData({
+        ...data,
+        changableData: y,
+      });
+    }
+    if (a === "android") {
+      let y = data.fixData.filter((a) => a.os_name === "Android");
+      console.log(y);
+      setData({
+        ...data,
+        changableData: y,
+      });
+    }
+  };
 
   return (
     <div>
       <h1 className={dstyles.heading}>Dashboard</h1>
       <div className={dstyles.main}>
-        {count.length ? <h1>{count.length}</h1> : <h1>Loading...</h1>}
+        {data.changableData.length ? (
+          <h1>{data.changableData.length}</h1>
+        ) : (
+          <h1>Loading...</h1>
+        )}
       </div>
-      {count.length ? (
+      <div className={dstyles.buttonHolder}>
+        <button onClick={() => dataSetter("all")}>All</button>
+        <button onClick={() => dataSetter("windows")}>windows</button>
+        <button onClick={() => dataSetter("ios")}>ios</button>
+        <button onClick={() => dataSetter("android")}>Android</button>
+      </div>
+      {data.changableData.length ? (
         <div className={dstyles.userContainer}>
-          {count.map((a) => (
+          {data.changableData.map((a) => (
             <Profile {...a}></Profile>
           ))}
         </div>
