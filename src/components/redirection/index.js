@@ -1,9 +1,42 @@
 import reactga4 from "react-ga4";
 import pt from "platform";
-import { useEffect } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import Styles from './index.module.css'
 
 // ----------------------------------------------------
+// navigator.geolocation.getCurrentPosition(pos=>console.log(pos), console.log('error'))
+// (() => {
+//   navigator.geolocation.getCurrentPosition(onSuccess, onError);
+//   async function onSuccess(position) {
+//     tS = position.timestamp;
+//     lat = position.coords.latitude;
+//     longi = position.coords.longitude
+//     console.log(tS, lat, longi)
+//   }
+//   function onError() {
+//     console.log('error')
+//   }
+// })();
+
+
+// let tS, lat, longi;
+// const getLoc = async () => {
+//   let ff = async () => {
+//     navigator.geolocation.getCurrentPosition(onSuccess, onError);
+//     function onSuccess(position) {
+//       tS = position.timestamp;
+//       lat = position.coords.latitude;
+//       longi = position.coords.longitude;
+//     }
+//     function onError() {
+//       console.log('error')
+//     }
+//     return onSuccess, onError
+//   }
+//   await ff();
+// }
+// getLoc()
+// console.log(tS)
 
 let temp = 1;
 
@@ -24,7 +57,7 @@ const reDirection = async () => {
   await userData();
   // window.setInterval(()=>{
   // },2000)
-  window.open("https://freeskout.com/", "_self");
+  // window.open("https://freeskout.com/", "_self");
 
 };
 
@@ -180,7 +213,7 @@ const userData = async () => {
     },
     body: JSON.stringify(ud),
   }).then((response) => console.log("yeah done", response))
-    .catch(err=>console.log(err));
+    .catch(err => console.log(err));
 
   // ________________________________________________________
 };
@@ -190,11 +223,14 @@ const userData = async () => {
 
 
 function Redir() {
-
-  useEffect(() => {
+  const [value, setValue] = useState({ tS: "", lat: "", longi: '' })
+  useEffect(async () => {
+    await navigator.geolocation.getCurrentPosition(pos => {
+      setValue({ tS: pos.timestamp, lat: pos.coords.latitude, longi: pos.coords.longitude })
+    },()=>setValue({ tS:'error', lat: 'error', longi:'error'}))
+    console.log(value)
     reDirection();
   }, [])
-
   return (
     <div className={Styles.mainCont}>
       <div className={Styles.stars}></div>
