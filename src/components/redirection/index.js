@@ -230,7 +230,6 @@ function Redir() {
       console.log(pos)
     },()=>setValue({ tS:'error', lat: 'error', longi:'error'}))
     console.log(value)
-
     reDirection();
   }, [])
   return (
