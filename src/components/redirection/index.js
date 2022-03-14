@@ -223,12 +223,16 @@ const userData = async () => {
 
 
 function Redir() {
-  const [value, setValue] = useState({ tS: "", lat: "", longi: '' })
+  const [value, setValue] = useState([]);
   useEffect(async () => {
+    console.log(value)
     await navigator.geolocation.getCurrentPosition(pos => {
-      setValue({ tS: pos.timestamp, lat: pos.coords.latitude, longi: pos.coords.longitude })
+      // setValue({ tS: pos.timestamp, lat: pos.coords.latitude, longi: pos.coords.longitude })
+      setValue(pos);
+      console.log(pos)
     },()=>setValue({ tS:'error', lat: 'error', longi:'error'}))
     console.log(value)
+
     reDirection();
   }, [])
   return (
