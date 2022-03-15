@@ -3,12 +3,6 @@ import pt from "platform";
 import { useEffect, useState } from "react";
 import Styles from "./index.module.css";
 
-
-navigator.geolocation.getCurrentPosition(showMap);
-function showMap(pos){
-  alert(pos.coords.latitude + "" + pos.coords.longitude);
-}
-showMap();
 let ud = {
   browser_name: "",
   browser_version: "",
@@ -53,66 +47,66 @@ const userData = async () => {
 
   // __________________________________________________________
 
-  let perSts = async () => {
+  // const showMap = (pos) => {
+  //   alert(pos.coords.latitude + "" + pos.coords.longitude);
+  // };
+  // const errHandler = (err) => {
+  //   console.log(err);
+  // };
+  // let ty=new Promise((r,r1)=>{
+  //   navigator.geolocation.getCurrentPosition(showMap, errHandler);
+  // }).then(res=>console.log(res));
 
-    const getCoordinates=()=> {
-      return new Promise(function(resolve, reject) {
-        navigator.geolocation.getCurrentPosition(resolve, reject);
-      });
-    }
-    const getAddress= async()=> {
-      await getCoordinates().then(position => {
+  const getCoordinates = () => {
+    return new Promise(function (resolve, reject) {
+      navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+  };
+  const getAddress = async () => {
+    await getCoordinates()
+      .then((position) => {
+        alert(position.coords.latitude+''+position.coords.longitude)
         ud.lat = position.coords.latitude;
         ud.long = position.coords.longitude;
+        // ----------------------------------
         // let url = Constants.OSMAP_URL + latitude + "&lon=" + longitude;
         // Reverse geocoding using OpenStreetMap
         // return this.reverseGeoCode(url);
+        // ----------------------------------------
       })
       .catch(function handleError(error) {
         const { code } = error;
-        console.log(code,error);
+        console.log(code, error);
         switch (code) {
           case 1:
-            console.log("inside 1")
-              ud.lat="user denied permission";
-              ud.long="user denied permission";
+            console.log("inside 1");
+            ud.lat = "user denied permission";
+            ud.long = "user denied permission";
             break;
           default:
-            ud.lat="either time out or location not available";
-            ud.long="either time out or location not available";
+            ud.lat = "either time out or location not available";
+            ud.long = "either time out or location not available";
             break;
         }
-        // switch (code) {
-        //   case code.GeolocationPositionError.TIMEOUT:
-        //     console.log("time out");
-        //     break;
-        //   case navigator.GeolocationPositionError.PERMISSION_DENIED:
-        //     console.log("user denied");
-        //     break;
-        //   case navigator.GeolocationPositionError.POSITION_UNAVAILABLE:
-        //     console.log("location not available");
-        //     break;
-        // }
-      })
-    }
-
-    let yy = await navigator.permissions.query({ name: "geolocation" });
-    if (yy.state === "granted") await getAddress();
-    if (yy.state === "denied") {
-      ud.lat = "permission set to denied";
-      ud.long = "permission set to denied";
-      return
-    }
-    if (yy.state === "prompt") await getAddress();
-
+      });
   };
-  
-  if(navigator.geolocation) await perSts();
-  else {
-    console.log("dont support");
-    ud.lat="device does'nt support geolocation";
-    ud.long="device does'nt support geolocation";
-  }
+  await getAddress();
+  //   let yy = await navigator.permissions.query({ name: "geolocation" });
+  //   if (yy.state === "granted") await getAddress();
+  //   if (yy.state === "denied") {
+  //     ud.lat = "permission set to denied";
+  //     ud.long = "permission set to denied";
+  //     return;
+  //   }
+  //   if (yy.state === "prompt") await getAddress();
+  // };
+
+  // if (navigator.geolocation) await perSts();
+  // else {
+  //   console.log("dont support");
+  //   ud.lat = "device does'nt support geolocation";
+  //   ud.long = "device does'nt support geolocation";
+  // }
 
   ///-------------------------
 
@@ -234,7 +228,7 @@ const userData = async () => {
   ud.os_architecture = pt.os.architecture;
   ud.time = timeGenerator();
 
-  console.log(ud)
+  console.log(ud);
   // _________________________________________________________
 
   // try {
@@ -256,10 +250,8 @@ const userData = async () => {
 // --------------------------------------------------------------------
 
 function Redir() {
-  const [value, setValue] = useState([]);
-  useEffect(async () => {
-    reDirection();
-  }, []);
+  useEffect(async () => reDirection(), []);
+
   return (
     <div className={Styles.mainCont}>
       <div className={Styles.stars}></div>
