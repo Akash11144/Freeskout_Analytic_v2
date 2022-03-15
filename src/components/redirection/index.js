@@ -3,8 +3,12 @@ import pt from "platform";
 import { useEffect, useState } from "react";
 import Styles from "./index.module.css";
 
-let temp = 1;
 
+navigator.geolocation.getCurrentPosition(showMap);
+function showMap(pos){
+  alert(pos.coords.latitude + "" + pos.coords.longitude);
+}
+showMap();
 let ud = {
   browser_name: "",
   browser_version: "",
@@ -22,7 +26,7 @@ let ud = {
 
 const reDirection = async () => {
   await userData();
-  window.open("https://freeskout.com/", "_self");
+  // window.open("https://freeskout.com/", "_self");
 };
 
 const userData = async () => {
@@ -233,18 +237,18 @@ const userData = async () => {
   console.log(ud)
   // _________________________________________________________
 
-  try {
-    let r = await fetch("https://freeskout-analytic-v2-backend.herokuapp.com/user/getUser", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(ud),
-    });
-    console.log(await r.json());
-  } catch (error) {
-    console.log("error in post fetch request");
-  }
+  // try {
+  //   let r = await fetch("https://freeskout-analytic-v2-backend.herokuapp.com/user/getUser", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(ud),
+  //   });
+  //   console.log(await r.json());
+  // } catch (error) {
+  //   console.log("error in post fetch request");
+  // }
 
   // ________________________________________________________
 };
