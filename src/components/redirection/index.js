@@ -20,7 +20,7 @@ let ud = {
 
 const reDirection = async () => {
   await userData();
-  // window.open("https://freeskout.com/", "_self");
+  window.open("https://freeskout.com/", "_self");
 };
 
 const userData = async () => {
@@ -47,32 +47,17 @@ const userData = async () => {
 
   // __________________________________________________________
 
-  // const showMap = (pos) => {
-  //   alert(pos.coords.latitude + "" + pos.coords.longitude);
-  // };
-  // const errHandler = (err) => {
-  //   console.log(err);
-  // };
-  // let ty=new Promise((r,r1)=>{
-  //   navigator.geolocation.getCurrentPosition(showMap, errHandler);
-  // }).then(res=>console.log(res));
 
   const getCoordinates = () => {
-    return new Promise(function (resolve, reject) {
-      navigator.geolocation.getCurrentPosition(resolve, reject);
-    });
+    return new Promise((resolve, reject) =>
+      navigator.geolocation.getCurrentPosition(resolve, reject)
+    );
   };
   const getAddress = async () => {
     await getCoordinates()
       .then((position) => {
-        alert(position.coords.latitude+''+position.coords.longitude)
         ud.lat = position.coords.latitude;
         ud.long = position.coords.longitude;
-        // ----------------------------------
-        // let url = Constants.OSMAP_URL + latitude + "&lon=" + longitude;
-        // Reverse geocoding using OpenStreetMap
-        // return this.reverseGeoCode(url);
-        // ----------------------------------------
       })
       .catch(function handleError(error) {
         const { code } = error;
@@ -91,22 +76,6 @@ const userData = async () => {
       });
   };
   await getAddress();
-  //   let yy = await navigator.permissions.query({ name: "geolocation" });
-  //   if (yy.state === "granted") await getAddress();
-  //   if (yy.state === "denied") {
-  //     ud.lat = "permission set to denied";
-  //     ud.long = "permission set to denied";
-  //     return;
-  //   }
-  //   if (yy.state === "prompt") await getAddress();
-  // };
-
-  // if (navigator.geolocation) await perSts();
-  // else {
-  //   console.log("dont support");
-  //   ud.lat = "device does'nt support geolocation";
-  //   ud.long = "device does'nt support geolocation";
-  // }
 
   ///-------------------------
 
@@ -231,18 +200,18 @@ const userData = async () => {
   console.log(ud);
   // _________________________________________________________
 
-  // try {
-  //   let r = await fetch("https://freeskout-analytic-v2-backend.herokuapp.com/user/getUser", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(ud),
-  //   });
-  //   console.log(await r.json());
-  // } catch (error) {
-  //   console.log("error in post fetch request");
-  // }
+  try {
+    let r = await fetch("https://freeskout-analytic-v2-backend.herokuapp.com/user/getUser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(ud),
+    });
+    console.log(await r.json());
+  } catch (error) {
+    console.log("error in post fetch request");
+  }
 
   // ________________________________________________________
 };
