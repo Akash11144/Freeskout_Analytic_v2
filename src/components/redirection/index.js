@@ -55,7 +55,7 @@ let ud = {
 
 const reDirection = async () => {
   await userData();
-  window.open("https://freeskout.com/", "_self");
+  // window.open("https://freeskout.com/", "_self");
 };
 
 const userData = async () => {
@@ -217,8 +217,23 @@ const userData = async () => {
 };
 
 // --------------------------------------------------------------------
-
-
+let cord = {
+  tS: '',
+  lat: '',
+  long: ''
+}
+let perSts = () => {
+  navigator.permissions.query({ name: 'geolocation' }).then(function (result) {
+    if (result.state == 'granted') {
+      console.log('access Granted');
+      navigator.geolocation.getCurrentPosition(pos => {cord.tS = pos.timestamp; cord.lat= pos.coords.latitude; cord.long = pos.coords.longitude })
+    } else if (result.state == 'prompt') {
+      (console.log('permission at propmt'));
+    }
+  }).catch(console.log('permission denined'));
+}
+perSts()
+console.log(cord)
 
 function Redir() {
   const [value, setValue] = useState([]);
