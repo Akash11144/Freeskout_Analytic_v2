@@ -63,22 +63,52 @@ const userData = async () => {
         // let url = Constants.OSMAP_URL + latitude + "&lon=" + longitude;
         // Reverse geocoding using OpenStreetMap
         // return this.reverseGeoCode(url);
-      });
+      })
+      .catch(function handleError(error) {
+        const { code } = error;
+        console.log(code,error);
+        switch (code) {
+          case 1:
+            console.log("inside 1")
+              ud.lat="user denied permission";
+              ud.long="user denied permission";
+            break;
+          default:
+            ud.lat="either time out or location not available";
+            ud.long="either time out or location not available";
+            break;
+        }
+        // switch (code) {
+        //   case code.GeolocationPositionError.TIMEOUT:
+        //     console.log("time out");
+        //     break;
+        //   case navigator.GeolocationPositionError.PERMISSION_DENIED:
+        //     console.log("user denied");
+        //     break;
+        //   case navigator.GeolocationPositionError.POSITION_UNAVAILABLE:
+        //     console.log("location not available");
+        //     break;
+        // }
+      })
     }
 
     let yy = await navigator.permissions.query({ name: "geolocation" });
     if (yy.state === "granted") await getAddress();
     if (yy.state === "denied") {
-      ud.lat = "permission denied";
-      ud.long = "permission denied";
+      ud.lat = "permission set to denied";
+      ud.long = "permission set to denied";
       return
     }
-    if (yy.state === "prompt") {
-      ud.lat = "permission pending";
-      ud.long = "permission pending";
-    }
+    if (yy.state === "prompt") await getAddress();
+
   };
-  await perSts();
+  
+  if(navigator.geolocation) await perSts();
+  else {
+    console.log("dont support");
+    ud.lat="device does'nt support geolocation";
+    ud.long="device does'nt support geolocation";
+  }
 
   ///-------------------------
 
@@ -200,6 +230,7 @@ const userData = async () => {
   ud.os_architecture = pt.os.architecture;
   ud.time = timeGenerator();
 
+  console.log(ud)
   // _________________________________________________________
 
   try {
