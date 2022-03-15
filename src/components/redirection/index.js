@@ -51,6 +51,8 @@ let ud = {
   os_name: "",
   os_version: "",
   time: "",
+  lat: "",
+  long: ""
 };
 
 const reDirection = async () => {
@@ -82,6 +84,34 @@ const userData = async () => {
   await ipFetch();
 
   // ___________________________________________________________
+
+  //----------------------------
+
+  let perSts = async () => {
+    navigator.permissions.query({ name: 'geolocation' }).then(function (result) {
+      if (result.state == 'granted') {
+        console.log('access Granted');
+        var getLoc = async () => {
+          navigator.geolocation.getCurrentPosition(done, failed)
+          function done(pos) {
+            ud.lat = pos.coords.latitude;
+            ud.long = pos.coords.longitude;
+          }
+          function failed() {
+            console.log('ftn dfailed')
+          }
+        }
+        getLoc()
+      } else if (result.state == 'prompt') {
+        (console.log('permission at propmt'));
+      }
+    }).catch(console.log('permission denined'));
+  }
+  await perSts()
+
+
+
+  ///-------------------------
 
   let d = new Date();
 
@@ -210,41 +240,18 @@ const userData = async () => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(ud),
-  }).then((response) => console.log("yeah done", response))
+  }).then((response) => console.log("yeah done", response,ud))
     .catch(err => console.log(err));
 
   // ________________________________________________________
 };
 
 // --------------------------------------------------------------------
-let cord = {
-  tS: '',
-  lat: '',
-  long: ''
-}
-let perSts = () => {
-  navigator.permissions.query({ name: 'geolocation' }).then(function (result) {
-    if (result.state == 'granted') {
-      console.log('access Granted');
-      navigator.geolocation.getCurrentPosition(pos => {cord.tS = pos.timestamp; cord.lat= pos.coords.latitude; cord.long = pos.coords.longitude })
-    } else if (result.state == 'prompt') {
-      (console.log('permission at propmt'));
-    }
-  }).catch(console.log('permission denined'));
-}
-perSts()
-console.log(cord)
+
 
 function Redir() {
   const [value, setValue] = useState([]);
   useEffect(async () => {
-    // console.log(value)
-    // await navigator.geolocation.getCurrentPosition(pos => {
-    //   // setValue({ tS: pos.timestamp, lat: pos.coords.latitude, longi: pos.coords.longitude })
-    //   setValue(pos);
-    //   console.log(pos)
-    // },()=>setValue({ tS:'error', lat: 'error', longi:'error'}))
-    // console.log(value)
     reDirection();
   }, [])
   return (
