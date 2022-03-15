@@ -1,42 +1,7 @@
 // import reactga4 from "react-ga4";
 import pt from "platform";
-import { useEffect, useState } from 'react'
-import Styles from './index.module.css'
-
-// ----------------------------------------------------
-// navigator.geolocation.getCurrentPosition(pos=>console.log(pos), console.log('error'))
-// (() => {
-//   navigator.geolocation.getCurrentPosition(onSuccess, onError);
-//   async function onSuccess(position) {
-//     tS = position.timestamp;
-//     lat = position.coords.latitude;
-//     longi = position.coords.longitude
-//     console.log(tS, lat, longi)
-//   }
-//   function onError() {
-//     console.log('error')
-//   }
-// })();
-
-
-// let tS, lat, longi;
-// const getLoc = async () => {
-//   let ff = async () => {
-//     navigator.geolocation.getCurrentPosition(onSuccess, onError);
-//     function onSuccess(position) {
-//       tS = position.timestamp;
-//       lat = position.coords.latitude;
-//       longi = position.coords.longitude;
-//     }
-//     function onError() {
-//       console.log('error')
-//     }
-//     return onSuccess, onError
-//   }
-//   await ff();
-// }
-// getLoc()
-// console.log(tS)
+import { useEffect, useState } from "react";
+import Styles from "./index.module.css";
 
 let temp = 1;
 
@@ -45,23 +10,22 @@ let ud = {
   browser_version: "",
   id: "",
   ip: "",
+  lat: "not awailable",
+  long: "not awailable",
   product_manufacturer: "",
   product_name: "",
   os_architecture: "",
   os_name: "",
   os_version: "",
   time: "",
-  lat: "",
-  long: ""
 };
 
 const reDirection = async () => {
   await userData();
-  // window.open("https://freeskout.com/", "_self");
+  window.open("https://freeskout.com/", "_self");
 };
 
 const userData = async () => {
-
   // try {
   //   await reactga4.initialize("G-BMQ18907R");
   // } catch (error) {
@@ -83,33 +47,38 @@ const userData = async () => {
   };
   await ipFetch();
 
-  // ___________________________________________________________
-
-  //----------------------------
+  // __________________________________________________________
 
   let perSts = async () => {
-    navigator.permissions.query({ name: 'geolocation' }).then(function (result) {
-      if (result.state == 'granted') {
-        console.log('access Granted');
-        var getLoc = async () => {
-          navigator.geolocation.getCurrentPosition(done, failed)
-          function done(pos) {
-            ud.lat = pos.coords.latitude;
-            ud.long = pos.coords.longitude;
-          }
-          function failed() {
-            console.log('ftn dfailed')
-          }
-        }
-        getLoc()
-      } else if (result.state == 'prompt') {
-        (console.log('permission at propmt'));
-      }
-    }).catch(console.log('permission denined'));
-  }
-  await perSts()
 
+    const getCoordinates=()=> {
+      return new Promise(function(resolve, reject) {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+      });
+    }
+    const getAddress= async()=> {
+      await getCoordinates().then(position => {
+        ud.lat = position.coords.latitude;
+        ud.long = position.coords.longitude;
+        // let url = Constants.OSMAP_URL + latitude + "&lon=" + longitude;
+        // Reverse geocoding using OpenStreetMap
+        // return this.reverseGeoCode(url);
+      });
+    }
 
+    let yy = await navigator.permissions.query({ name: "geolocation" });
+    if (yy.state === "granted") await getAddress();
+    if (yy.state === "denied") {
+      ud.lat = "permission denied";
+      ud.long = "permission denied";
+      return
+    }
+    if (yy.state === "prompt") {
+      ud.lat = "permission pending";
+      ud.long = "permission pending";
+    }
+  };
+  await perSts();
 
   ///-------------------------
 
@@ -231,29 +200,31 @@ const userData = async () => {
   ud.os_architecture = pt.os.architecture;
   ud.time = timeGenerator();
 
-
   // _________________________________________________________
 
-  await fetch("https://freeskout-analytic-v2-backend.herokuapp.com/user/getUser", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(ud),
-  }).then((response) => console.log("yeah done", response,ud))
-    .catch(err => console.log(err));
+  try {
+    let r = await fetch("https://freeskout-analytic-v2-backend.herokuapp.com/user/getUser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(ud),
+    });
+    console.log(await r.json());
+  } catch (error) {
+    console.log("error in post fetch request");
+  }
 
   // ________________________________________________________
 };
 
 // --------------------------------------------------------------------
 
-
 function Redir() {
   const [value, setValue] = useState([]);
   useEffect(async () => {
     reDirection();
-  }, [])
+  }, []);
   return (
     <div className={Styles.mainCont}>
       <div className={Styles.stars}></div>
@@ -261,17 +232,16 @@ function Redir() {
       <div className={Styles.stars3}></div>
       <div className={Styles.LoadConatinerDiv}>
         <div className={Styles.text}>
-          <span className={Styles.fCont} >F</span>
-          <span className={Styles.rCont} >r</span>
-          <span className={Styles.eCont} >e</span>
-          <span className={Styles.seCont} >e</span>
-          <span className={Styles.sCont} >s</span>
-          <span className={Styles.kCont} >k</span>
-          <span className={Styles.oCont} >o</span>
-          <span className={Styles.uCont} >u</span>
-          <span className={Styles.tCont} >t</span>
+          <span className={Styles.fCont}>F</span>
+          <span className={Styles.rCont}>r</span>
+          <span className={Styles.eCont}>e</span>
+          <span className={Styles.seCont}>e</span>
+          <span className={Styles.sCont}>s</span>
+          <span className={Styles.kCont}>k</span>
+          <span className={Styles.oCont}>o</span>
+          <span className={Styles.uCont}>u</span>
+          <span className={Styles.tCont}>t</span>
         </div>
-        {console.log("hello", ud)}
       </div>
     </div>
   );
