@@ -3,6 +3,7 @@ import "./App.css";
 import Redir from "./components/redirection";
 import LogIn from "./components/login";
 import Dash from "./components/dashboard";
+import Trial from './components/trial'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route path="/rd" element={<Redir></Redir>}></Route>
           <Route path="/lg" element={<LogIn></LogIn>}></Route>
           <Route path="/da" element={<Dash></Dash>}></Route>
+          <Route path="/tr" element={<Trial></Trial>}></Route>
           <Route
             path="/"
             element={

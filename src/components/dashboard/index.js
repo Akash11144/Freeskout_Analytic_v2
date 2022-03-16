@@ -88,15 +88,17 @@ export default Dash;
 const Profile = (props) => {
   return (
     <div className={dstyles.user}>
-      <p>browser name: {props.browser_name}</p>
-      <p>browser version: {props.browser_version}</p>
       <p>id: {props.id}</p>
       <p>ip: {props.ip}</p>
+      <p>browser name: {props.browser_name}</p>
+      <p>browser version: {props.browser_version}</p>
       <p>os architecture: {props.os_architecture}</p>
       <p>os name: {props.os_name}</p>
       <p>os version: {props.os_version}</p>
       <p>product manufacturer: {props.product_manufacturer}</p>
       <p>product name: {props.product_name}</p>
+      <p>latitude: {props.lat}</p>
+      <p>longitude: {props.long}</p>
       <p>time: {props.time}</p>
     </div>
   );
