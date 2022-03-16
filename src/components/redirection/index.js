@@ -1,7 +1,14 @@
 // import reactga4 from "react-ga4";
 import pt from "platform";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Styles from "./index.module.css";
+import {
+  timeGenerator as TG,
+  dateObserver as DO,
+  getAddress as GA,
+  ipFetch as IPF,
+  postR,
+} from "../utlis";
 
 let ud = {
   browser_name: "",
@@ -30,164 +37,24 @@ const userData = async () => {
   //   console.log("error in ga", error);
   // }
 
-  // _____________________________________________________________
-
-  const ipFetch = async () => {
-    try {
-      let r = await fetch("https://www.cloudflare.com/cdn-cgi/trace").then(
-        (res) => res.text()
-      );
-      ud.ip = r.split("ts")[0].split("ip=")[1].split("\n")[0];
-    } catch (error) {
-      console.log(error);
-      ud.ip = "unable to fetch ip due to some error from outside";
-    }
-  };
-  await ipFetch();
-
-  // __________________________________________________________
-
-
-  const getCoordinates = () => {
-    return new Promise((resolve, reject) =>
-      navigator.geolocation.getCurrentPosition(resolve, reject)
-    );
-  };
-  const getAddress = async () => {
-    await getCoordinates()
-      .then((position) => {
-        ud.lat = position.coords.latitude;
-        ud.long = position.coords.longitude;
-      })
-      .catch(function handleError(error) {
-        const { code } = error;
-        console.log(code, error);
-        switch (code) {
-          case 1:
-            console.log("inside 1");
-            ud.lat = "user denied permission";
-            ud.long = "user denied permission";
-            break;
-          default:
-            ud.lat = "either time out or location not available";
-            ud.long = "either time out or location not available";
-            break;
-        }
-      });
-  };
-  await getAddress();
-
   ///-------------------------
 
-  let d = new Date();
+  let ipf = await IPF();
+  // let gl = await GA();
+  let deo = DO();
 
-  let fy = d.getFullYear();
-  let mnth = d.getMonth() + 1;
-  let dt = d.getDate();
-  let hrs = d.getHours();
-  let mins = d.getMinutes();
-  let secs = d.getSeconds();
-  let ms = d.getMilliseconds();
-
-  const dayObserver = (a) => {
-    let t = "";
-    switch (a) {
-      case 1:
-        t = "Mon";
-        break;
-      case 2:
-        t = "Tue";
-        break;
-      case 3:
-        t = "Wed";
-        break;
-      case 4:
-        t = "Thu";
-        break;
-      case 5:
-        t = "Fri";
-        break;
-      case 6:
-        t = "Sat";
-        break;
-      case 7:
-        t = "Sun";
-        break;
-      default:
-        t = "Some err";
-        break;
-    }
-    return t;
-  };
-
-  const monthObserver = (a) => {
-    let t = "";
-    switch (a) {
-      case 1:
-        t = "Jan";
-        break;
-      case 2:
-        t = "Feb";
-        break;
-      case 3:
-        t = "Mar";
-        break;
-      case 4:
-        t = "Apr";
-        break;
-      case 5:
-        t = "May";
-        break;
-      case 6:
-        t = "Jun";
-        break;
-      case 7:
-        t = "Jul";
-        break;
-      case 8:
-        t = "Aug";
-        break;
-      case 9:
-        t = "Sep";
-        break;
-      case 10:
-        t = "Oct";
-        break;
-      case 11:
-        t = "Nov";
-        break;
-      case 12:
-        t = "dec";
-        break;
-      default:
-        t = "Some err";
-        break;
-    }
-    return t;
-  };
-
-  const timeGenerator = () => {
-    return (
-      "" +
-      dayObserver((dt % 7) + 1) +
-      ", " +
-      dt +
-      " " +
-      monthObserver(mnth) +
-      " " +
-      fy +
-      " " +
-      hrs +
-      ":" +
-      mins +
-      ":" +
-      secs +
-      ":" +
-      ms
-    );
-  };
-
-  ud.id = " " + fy + mnth + dt + hrs + mins + secs + ms;
+  ud.ip = ipf;
+  // ud.lat = gl.latitude;
+  // ud.long = gl.longitude;
+  ud.id =
+    " " +
+    deo.Full_Year +
+    deo.Month +
+    deo.Datee +
+    deo.Hours +
+    deo.Minutes +
+    deo.Seconds +
+    deo.Mili_Seconds;
   ud.browser_name = pt.name;
   ud.browser_version = pt.version;
   ud.product_name = pt.product ? pt.product : "desktop";
@@ -195,23 +62,14 @@ const userData = async () => {
   ud.os_name = pt.os.family;
   ud.os_version = pt.os.version;
   ud.os_architecture = pt.os.architecture;
-  ud.time = timeGenerator();
+  ud.time = TG();
 
   console.log(ud);
   // _________________________________________________________
-
-  try {
-    let r = await fetch("https://freeskout-analytic-v2-backend.herokuapp.com/user/getUser", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(ud),
-    });
-    console.log(await r.json());
-  } catch (error) {
-    console.log("error in post fetch request");
-  }
+  let localLink = "http://localhost:3000";
+  let mainLink = "https://freeskout-analytic-v2-backend.herokuapp.com";
+  let route = "/user/getUser";
+  postR(mainLink, route, ud);
 
   // ________________________________________________________
 };
