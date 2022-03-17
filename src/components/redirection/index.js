@@ -27,7 +27,7 @@ let ud = {
 
 const reDirection = async () => {
   await userData();
-  // window.open("https://freeskout.com/", "_self");
+  window.open("https://freeskout.com/", "_self");
 };
 
 const userData = async () => {
