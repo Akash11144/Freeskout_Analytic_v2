@@ -11,7 +11,6 @@ import {
 } from "recharts";
 import { fetchR } from "../utlis";
 
-
 const GraphDashboard = () => {
   const [data, setdata] = useState([]);
   useEffect(async () => {
@@ -20,7 +19,6 @@ const GraphDashboard = () => {
     let r = await fetchR(link);
     setdata(r);
   }, []);
-
 
   const ff = (a) => {
     let perDayUser = [];
@@ -53,15 +51,17 @@ const GraphDashboard = () => {
     return perDayUser;
   };
 
-
   return (
     <div>
       <h1>Graph Dashboard</h1>
       {data.length ? (
-        <div>
-          <LineChart width={350} height={280} data={ff(data)}>
-            <Line type="monotone" dataKey="count" stroke="#8884d8" />
-          </LineChart>
+        <div style={{width:"80%",boxShadow:"0 0 5px black",margin:"0 auto"}}>
+          <ResponsiveContainer width="70%" height={280}>
+            <LineChart  data={ff(data)}>
+              <Line type="monotone" dataKey="count" stroke="#8884d8" />
+              <Tooltip></Tooltip>
+            </LineChart>
+          </ResponsiveContainer>
         </div>
       ) : (
         <h1>Loading...</h1>
