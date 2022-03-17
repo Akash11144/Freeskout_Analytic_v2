@@ -4,6 +4,7 @@ import Redir from "./components/redirection";
 import LogIn from "./components/login";
 import Dash from "./components/dashboard";
 import Trial from './components/trial'
+import GraphDashboard from "./components/graph-dashboard";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/lg" element={<LogIn></LogIn>}></Route>
           <Route path="/da" element={<Dash></Dash>}></Route>
           <Route path="/tr" element={<Trial></Trial>}></Route>
+          <Route path="/gda" element={<GraphDashboard></GraphDashboard>}></Route>
           <Route
             path="/"
             element={

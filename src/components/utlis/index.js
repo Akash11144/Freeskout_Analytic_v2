@@ -191,3 +191,13 @@ export const postR = async (mainLink,route,pdata)=>{
         console.log("error in post fetch request");
       }
 }
+
+export const fetchR = async (a) =>{
+  try {
+    let t=await fetch(a);
+    let t1=await t.json();
+    return t1;
+  } catch (error) {
+    console.log(error)
+  }
+}
