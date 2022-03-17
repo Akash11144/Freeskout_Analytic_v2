@@ -25,10 +25,6 @@ let ud = {
   time: "",
 };
 
-const reDirection = async () => {
-  await userData();
-  window.open("https://freeskout.com/", "_self");
-};
 
 const userData = async () => {
   // try {
@@ -69,7 +65,7 @@ const userData = async () => {
   let localLink = "http://localhost:3000";
   let mainLink = "https://freeskout-analytic-v2-backend.herokuapp.com";
   let route = "/user/getUser";
-  postR(mainLink, route, ud);
+  await postR(mainLink, route, ud);
 
   // ________________________________________________________
 };
@@ -77,7 +73,10 @@ const userData = async () => {
 // --------------------------------------------------------------------
 
 function Redir() {
-  useEffect(async () => reDirection(), []);
+  useEffect(async () => {
+    await userData();
+    window.open("https://freeskout.com/", "_self");
+  }, []);
 
   return (
     <div className={Styles.mainCont}>
