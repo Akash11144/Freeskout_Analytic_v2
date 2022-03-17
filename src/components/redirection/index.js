@@ -15,8 +15,8 @@ let ud = {
   browser_version: "",
   id: "",
   ip: "",
-  lat: "not awailable",
-  long: "not awailable",
+  // lat: "not awailable",
+  // long: "not awailable",
   product_manufacturer: "",
   product_name: "",
   os_architecture: "",
@@ -27,7 +27,7 @@ let ud = {
 
 const reDirection = async () => {
   await userData();
-  window.open("https://freeskout.com/", "_self");
+  // window.open("https://freeskout.com/", "_self");
 };
 
 const userData = async () => {
@@ -37,15 +37,15 @@ const userData = async () => {
   //   console.log("error in ga", error);
   // }
 
-  ///-------------------------
+  //__________________________________________
 
   let ipf = await IPF();
-  // let gl = await GA();
   let deo = DO();
+  // let gl = await GA();
 
-  ud.ip = ipf;
   // ud.lat = gl.latitude;
   // ud.long = gl.longitude;
+  ud.ip = ipf;
   ud.id =
     " " +
     deo.Full_Year +

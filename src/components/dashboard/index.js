@@ -87,7 +87,7 @@ export default Dash;
 
 const Profile = (props) => {
   return (
-    <div className={dstyles.user}>
+    <div className={dstyles.user} key={props.id} >
       <p>id: {props.id}</p>
       <p>ip: {props.ip}</p>
       <p>browser name: {props.browser_name}</p>
@@ -97,8 +97,8 @@ const Profile = (props) => {
       <p>os version: {props.os_version}</p>
       <p>product manufacturer: {props.product_manufacturer}</p>
       <p>product name: {props.product_name}</p>
-      <p>latitude: {props.lat}</p>
-      <p>longitude: {props.long}</p>
+      {/* <p>latitude: {props.lat}</p>
+      <p>longitude: {props.long}</p> */}
       <p>time: {props.time}</p>
     </div>
   );
