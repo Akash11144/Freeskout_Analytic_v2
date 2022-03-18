@@ -14,7 +14,6 @@ import { fetchR } from "../utlis";
 const GraphDashboard = () => {
   const [data, setdata] = useState([]);
   useEffect(async () => {
-    console.log("inside ue1");
     let link = "https://freeskout-analytic-v2-backend.herokuapp.com/user/getC";
     let r = await fetchR(link);
     setdata(r);
@@ -30,6 +29,11 @@ const GraphDashboard = () => {
       };
       d.count = d.count + 1;
       d.data2.push(a[i]);
+      if(i==a.length-1)
+      {
+        perDayUser.push(d);
+        break
+      }
       for (let j = i + 1; j < a.length; j++) {
         let c = a[j].time.split(" ")[1];
         if (b === c) {
@@ -55,8 +59,8 @@ const GraphDashboard = () => {
     <div>
       <h1>Graph Dashboard</h1>
       {data.length ? (
-        <div style={{width:"80%",boxShadow:"0 0 5px black",margin:"0 auto"}}>
-          <ResponsiveContainer width="70%" height={280}>
+        <div style={{width:"90%",boxShadow:"0 0 5px black",margin:"0 auto"}}>
+          <ResponsiveContainer width="90%" height={280}>
             <LineChart  data={ff(data)}>
               <Line type="monotone" dataKey="count" stroke="#8884d8" />
               <Tooltip></Tooltip>
