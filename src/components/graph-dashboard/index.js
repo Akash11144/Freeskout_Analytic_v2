@@ -24,15 +24,16 @@ const GraphDashboard = () => {
     for (let i = 0; i < a.length; i++) {
       let b = a[i].time.split(" ")[1];
       let d = {
+        name: 0,
         count: 0,
         data2: [],
       };
+      d.name = b;
       d.count = d.count + 1;
       d.data2.push(a[i]);
-      if(i==a.length-1)
-      {
+      if (i == a.length - 1) {
         perDayUser.push(d);
-        break
+        break;
       }
       for (let j = i + 1; j < a.length; j++) {
         let c = a[j].time.split(" ")[1];
@@ -59,11 +60,17 @@ const GraphDashboard = () => {
     <div>
       <h1>Graph Dashboard</h1>
       {data.length ? (
-        <div style={{width:"90%",boxShadow:"0 0 5px black",margin:"0 auto"}}>
-          <ResponsiveContainer width="90%" height={280}>
-            <LineChart  data={ff(data)}>
+        <div
+          style={{ width: "90%", boxShadow: "0 0 5px black", margin: "0 auto" }}
+        >
+          <ResponsiveContainer width="90%" height={200}>
+            <LineChart data={ff(data)}>
               <Line type="monotone" dataKey="count" stroke="#8884d8" />
-              <Tooltip></Tooltip>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
             </LineChart>
           </ResponsiveContainer>
         </div>

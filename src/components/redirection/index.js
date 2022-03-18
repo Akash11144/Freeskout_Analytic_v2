@@ -5,6 +5,7 @@ import Styles from "./index.module.css";
 import {
   timeGenerator as TG,
   dateObserver as DO,
+  dayObserver,
   getAddress as GA,
   ipFetch as IPF,
   postR,
@@ -13,16 +14,22 @@ import {
 let ud = {
   browser_name: "",
   browser_version: "",
+  date:0,
+  day:0,
+  hours:0,
   id: "",
   ip: "",
   // lat: "not awailable",
   // long: "not awailable",
+  minutes:0,
+  month:0,
   product_manufacturer: "",
   product_name: "",
   os_architecture: "",
   os_name: "",
   os_version: "",
   time: "",
+  year:0
 };
 
 
@@ -59,13 +66,18 @@ const userData = async () => {
   ud.os_version = pt.os.version;
   ud.os_architecture = pt.os.architecture;
   ud.time = TG();
-
+  ud.year=deo.Full_Year;
+  ud.month=+deo.Month;
+  ud.date=+deo.Datee;
+  ud.day=dayObserver((deo.Datee % 7) + 1);
+  ud.hours=+deo.Hours;
+  ud.minutes=+deo.Minutes;
   console.log(ud);
   // _________________________________________________________
-  let localLink = "http://localhost:3000";
+  let localLink = "http://localhost:8000";
   let mainLink = "https://freeskout-analytic-v2-backend.herokuapp.com";
   let route = "/user/getUser";
-  await postR(mainLink, route, ud);
+  await postR(localLink, route, ud);
 
   // ________________________________________________________
 };
@@ -75,7 +87,7 @@ const userData = async () => {
 function Redir() {
   useEffect(async () => {
     await userData();
-    window.open("https://freeskout.com/", "_self");
+    // window.open("https://freeskout.com/", "_self");
   }, []);
 
   return (

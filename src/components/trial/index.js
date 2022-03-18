@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { postR } from "../utlis";
+import { postR , monthNumberObserver as MNO } from "../utlis";
 
 
 let link = "not using/http://localhost:8000";
@@ -11,7 +11,7 @@ const Trial = () => {
     try {
       let y = await fetch("http://localhost:8000/user/getC");
       let y1 = await y.json();
-      console.log(y.status);
+      console.log(y1);
       setdata(y1);
     } catch (error) {
       console.log(error);
@@ -19,17 +19,18 @@ const Trial = () => {
   }, []);
 
   const setData = async () => {
-    let y = JSON.parse(localStorage.getItem("data trial"));
+    let y = JSON.parse(localStorage.getItem("d2trial"));
+    console.log(y)
     for (let i = 0; i < y.length; i++) {
-      if (y[i].lat === "" || y[i].lat || y[i].lat === "not awailable")
-        await postR(link,route,y[i]);
-      else {
-        y[i].lat = "not available";
-        y[i].long = "not available";
-       await  postR(link,route,y[i]);
-      }
+      y[i].year=+y[i].time.split(" ")[3];
+      y[i].month=MNO(y[i].time.split(" ")[2]);
+      y[i].date=+y[i].time.split(" ")[1];
+      y[i].day=y[i].time.split(" ")[0];
+      y[i].hours=+y[i].time.split(" ")[4].split(":")[0];
+      y[i].mins=+y[i].time.split(" ")[4].split(":")[0];
+      await postR(link, route, y[i]);
     }
-    console.log("done");
+    console.log("done",y);
   };
 
   const delData = async () => {

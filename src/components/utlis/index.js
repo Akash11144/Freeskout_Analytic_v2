@@ -1,13 +1,31 @@
 export const dateObserver = () => {
   let d = new Date();
+  let m=d.getMonth()+1;
+  let m1=(m<10) ? "0" + m : m;
+  let dt=d.getDate();
+  let dt1=(dt<10) ? "0" + dt : dt;
+  let hr=d.getHours();
+  let hr1=(hr<10) ? "0" + hr : hr;
+  let mn=d.getMinutes();
+  let mn1=(mn<10) ? "0" + mn : mn;
+  let sec=d.getSeconds();
+  let sec1=(sec<10) ? "0" + sec : sec;
+  let ms=d.getMilliseconds();
+  let ms1=0;
+  if(ms<10)
+    ms1=("0"+"0"+ms);
+  else if(ms<100)
+    ms1=("0"+ms);
+    else
+    ms1=ms;
   return {
     Full_Year: d.getFullYear(),
-    Month: d.getMonth() + 1,
-    Datee: d.getDate(),
-    Hours: d.getHours(),
-    Minutes: d.getMinutes(),
-    Seconds: d.getSeconds(),
-    Mili_Seconds: d.getMilliseconds(),
+    Month: m1,
+    Datee: dt1,
+    Hours: hr1,
+    Minutes: mn1,
+    Seconds: sec1,
+    Mili_Seconds: ms1
   };
 };
 
@@ -59,6 +77,58 @@ export const monthObserver = (a) => {
   return t;
 };
 
+
+
+// -----------------------------------------------------------------
+
+export const monthNumberObserver = (a) => {
+  let t = 0;
+  switch (a) {
+    case "Jan":
+      t = 1;
+      break;
+    case "Feb":
+      t = 2;
+      break;
+    case "Mar":
+      t = 3;
+      break;
+    case "Apr":
+      t = 4;
+      break;
+    case "May":
+      t = 5;
+      break;
+    case "Jun":
+      t = 6;
+      break;
+    case "Jul":
+      t = 7;
+      break;
+    case "Aug":
+      t = 8;
+      break;
+    case "Sep":
+      t = 9;
+      break;
+    case "Oct":
+      t = 10;
+      break;
+    case "Nov":
+      t = 11;
+      break;
+    case "dec":
+      t = 12;
+      break;
+    default:
+      t = "Some err";
+      break;
+  }
+  return t;
+};
+
+
+
 // -------------------------------------------------------------
 
 export const dayObserver = (a) => {
@@ -102,7 +172,7 @@ export const timeGenerator = () => {
     ", " +
     y.Datee +
     " " +
-    monthObserver(y.Month) +
+    monthObserver(+y.Month) +
     " " +
     y.Full_Year +
     " " +
