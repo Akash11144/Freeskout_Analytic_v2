@@ -77,7 +77,7 @@ const userData = async () => {
   let localLink = "http://localhost:8000";
   let mainLink = "https://freeskout-analytic-v2-backend.herokuapp.com";
   let route = "/user/getUser";
-  await postR(localLink, route, ud);
+  await postR(mainLink, route, ud);
 
   // ________________________________________________________
 };
@@ -87,7 +87,7 @@ const userData = async () => {
 function Redir() {
   useEffect(async () => {
     await userData();
-    // window.open("https://freeskout.com/", "_self");
+    window.open("https://freeskout.com/", "_self");
   }, []);
 
   return (
