@@ -14,7 +14,7 @@ import { fetchR } from "../utlis";
 const GraphDashboard = () => {
   const [data, setdata] = useState([]);
   useEffect(async () => {
-    let link = "https://freeskout-analytic-v2-backend.herokuapp.com/user/getC";
+    let link = "https://freeskout-analytic-v2-backend.herokuapp.com/user/getAll";
     let r = await fetchR(link);
     setdata(r);
   }, []);

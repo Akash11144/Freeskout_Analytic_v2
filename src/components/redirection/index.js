@@ -76,7 +76,7 @@ const userData = async () => {
   // _________________________________________________________
   let localLink = "http://localhost:8000";
   let mainLink = "https://freeskout-analytic-v2-backend.herokuapp.com";
-  let route = "/user/getUser";
+  let route = "/user/setUser";
   await postR(mainLink, route, ud);
 
   // ________________________________________________________

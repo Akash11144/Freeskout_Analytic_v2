@@ -3,13 +3,13 @@ import { postR , monthNumberObserver as MNO } from "../utlis";
 
 
 let link = "not using/http://localhost:8000";
-let route = "not using/user/getUser";
+let route = "not using/user/setUser";
 
 const Trial = () => {
   const [data, setdata] = useState([]);
   useEffect(async () => {
     try {
-      let y = await fetch("http://localhost:8000/user/getC");
+      let y = await fetch("http://localhost:8000/user/getAll");
       let y1 = await y.json();
       console.log(y1);
       setdata(y1);

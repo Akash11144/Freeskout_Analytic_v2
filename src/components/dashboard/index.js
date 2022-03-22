@@ -10,7 +10,7 @@ const Dash = () => {
   useEffect(() => {
     const dataFetch = async () => {
       let y = await fetch(
-        "https://freeskout-analytic-v2-backend.herokuapp.com/user/getC"
+        "https://freeskout-analytic-v2-backend.herokuapp.com/user/getAll"
       );
       let y1 = await y.json();
       console.log("data here", y1, y.status);
