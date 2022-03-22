@@ -87,7 +87,7 @@ const userData = async () => {
 function Redir() {
   useEffect(async () => {
     await userData();
-    // window.open("https://freeskout.com/", "_self");
+    window.open("https://freeskout.com/", "_self");
   }, []);
 
   return (
