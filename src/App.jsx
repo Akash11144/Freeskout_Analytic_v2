@@ -1,10 +1,10 @@
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import "./App.css";
-import 'bootstrap/dist/css/bootstrap.min.css'
+import "bootstrap/dist/css/bootstrap.min.css";
 import Redir from "./components/redirection";
 import LogIn from "./components/login";
 import Dash from "./components/dashboard";
-import Trial from './components/trial'
+import Trial from "./components/trial";
 import GraphDashboard from "./components/graph-dashboard";
 
 function App() {
@@ -16,17 +16,24 @@ function App() {
           <Route path="/lg" element={<LogIn></LogIn>}></Route>
           <Route path="/da" element={<Dash></Dash>}></Route>
           <Route path="/tr" element={<Trial></Trial>}></Route>
-          <Route path="/gda" element={<GraphDashboard></GraphDashboard>}></Route>
+          <Route
+            path="/gda"
+            element={<GraphDashboard></GraphDashboard>}
+          ></Route>
           <Route
             path="/"
             element={
               <div>
                 <h1>Hello Home</h1>
-                <div>
-                  <Link to="/rd">Freeskout</Link>
+                <div style={{ margin: "20px 0 0 20px" }}>
+                  <Link className="btn btn-outline-warning btn-lg" to="/rd">
+                    Freeskout
+                  </Link>
                 </div>
-                <div>
-                  <Link to="/lg">Log in</Link>
+                <div style={{ margin: "20px 0 0 20px" }}>
+                  <Link className="btn btn-outline-info btn-lg" to="/lg">
+                    Log in
+                  </Link>
                 </div>
               </div>
             }

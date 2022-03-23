@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { postR , monthNumberObserver as MNO } from "../utlis";
-
+import { postR, monthNumberObserver as MNO } from "../utlis";
 
 let link = "not using/http://localhost:8000";
 let route = "not using/user/setUser";
@@ -20,17 +19,36 @@ const Trial = () => {
 
   const setData = async () => {
     let y = JSON.parse(localStorage.getItem("d2trial"));
-    console.log(y)
+    console.log(y);
     for (let i = 0; i < y.length; i++) {
-      y[i].year=+y[i].time.split(" ")[3];
-      y[i].month=MNO(y[i].time.split(" ")[2]);
-      y[i].date=+y[i].time.split(" ")[1];
-      y[i].day=y[i].time.split(" ")[0];
-      y[i].hours=+y[i].time.split(" ")[4].split(":")[0];
-      y[i].mins=+y[i].time.split(" ")[4].split(":")[0];
+      switch (y[i].day) {
+        case "Mon,":
+          y[i].day = "Mon";
+          break;
+        case "Tue,":
+          y[i].day = "Tue";
+          break;
+        case "Wed,":
+          y[i].day = "Wed";
+          break;
+        case "Thu,":
+          y[i].day = "Thu";
+          break;
+        case "Fri,":
+          y[i].day = "Fri";
+          break;
+        case "Sat,":
+          y[i].day = "Sat";
+          break;
+        case "Sun,":
+          y[i].day = "Sun";
+          break;
+        default:
+          break;
+      }
       await postR(link, route, y[i]);
     }
-    console.log("done",y);
+    console.log("done", y);
   };
 
   const delData = async () => {
@@ -52,25 +70,17 @@ const Trial = () => {
     >
       <h1>Trial</h1>
       <button
-        style={{
-          border: "0",
-          borderRadius: "50px",
-          padding: "10px",
-          fontSize: "20px",
-          boxShadow: "0px 5px 20px black",
-        }}
+        className="btn btn-danger btn-lg"
+        style={{ boxShadow: "0px 0px 20px black" }}
         onClick={() => setData()}
       >
         set data L
       </button>
       <br></br>
       <button
+        className="btn btn-danger btn-lg"
         style={{
-          border: "0",
-          borderRadius: "50px",
-          padding: "10px",
-          fontSize: "20px",
-          boxShadow: "0px 5px 20px black",
+          boxShadow: "0px 0px 20px black",
           marginTop: "10px",
         }}
         onClick={() => delData()}

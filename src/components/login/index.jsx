@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom';
-
+import { Link } from "react-router-dom";
 
 function LogIn() {
   return (
@@ -15,7 +14,9 @@ function LogIn() {
     >
       log in
       <div>
-        <Link to="/da">Log in</Link>
+        <Link className="btn btn-primary btn-lg" to="/da">
+          Log in
+        </Link>
       </div>
     </div>
   );

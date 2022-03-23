@@ -14,6 +14,7 @@ import {
 import { fetchR } from "../utlis";
 import Bar1 from "./graphs/bar";
 import Line1 from "./graphs/line";
+import OSbased from "./graphs/os-based";
 
 const GraphDashboard = () => {
   const [data, setdata] = useState([]);
@@ -29,6 +30,7 @@ const GraphDashboard = () => {
       <h1>Graph Dashboard</h1>
       {data.length ? <Line1 {...data}></Line1> : <h1>Loading line.....</h1>}
       <Bar1></Bar1>
+      {data.length ? <OSbased {...data}></OSbased> : <h1>Loading line.....</h1>}
     </div>
   );
 };

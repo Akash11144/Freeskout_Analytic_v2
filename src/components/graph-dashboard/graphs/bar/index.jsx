@@ -18,43 +18,43 @@ const Bar1 = () => {
       y.push({
         day: "Mon",
         count: +(await fetchR(
-          "https://freeskout-analytic-v2-backend.herokuapp.com/user/DayC/Mon,"
+          "https://freeskout-analytic-v2-backend.herokuapp.com/user/DayC/Mon"
         )),
       });
       y.push({
         day: "Tue",
         count: +(await fetchR(
-          "https://freeskout-analytic-v2-backend.herokuapp.com/user/DayC/Tue,"
+          "https://freeskout-analytic-v2-backend.herokuapp.com/user/DayC/Tue"
         )),
       });
       y.push({
         day: "Wed",
         count: +(await fetchR(
-          "https://freeskout-analytic-v2-backend.herokuapp.com/user/DayC/Wed,"
+          "https://freeskout-analytic-v2-backend.herokuapp.com/user/DayC/Wed"
         )),
       });
       y.push({
         day: "Thu",
         count: +(await fetchR(
-          "https://freeskout-analytic-v2-backend.herokuapp.com/user/DayC/Thu,"
+          "https://freeskout-analytic-v2-backend.herokuapp.com/user/DayC/Thu"
         )),
       });
       y.push({
         day: "Fri",
         count: +(await fetchR(
-          "https://freeskout-analytic-v2-backend.herokuapp.com/user/DayC/Fri,"
+          "https://freeskout-analytic-v2-backend.herokuapp.com/user/DayC/Fri"
         )),
       });
       y.push({
         day: "Sat",
         count: +(await fetchR(
-          "https://freeskout-analytic-v2-backend.herokuapp.com/user/DayC/Sat,"
+          "https://freeskout-analytic-v2-backend.herokuapp.com/user/DayC/Sat"
         )),
       });
       y.push({
         day: "Sun",
         count: +(await fetchR(
-          "https://freeskout-analytic-v2-backend.herokuapp.com/user/DayC/Sun,"
+          "https://freeskout-analytic-v2-backend.herokuapp.com/user/DayC/Sun"
         )),
       });
       console.log(y);
@@ -62,10 +62,6 @@ const Bar1 = () => {
     };
     DayGetter();
   }, []);
-
-  //   if (dayData.temp === 0) {
-  //     DayGetter();
-  //   }
 
   return (
     <React.Fragment>
@@ -94,7 +90,7 @@ const Bar1 = () => {
               <YAxis />
               <Tooltip />
               {/* <Legend /> */}
-              <Bar dataKey="count" fill="#8884d8" />
+              <Bar dataKey="count" fill="#db1840" />
               {/* <Bar dataKey="uv" fill="#82ca9d" /> */}
             </BarChart>
           </ResponsiveContainer>
