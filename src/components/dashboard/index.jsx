@@ -65,10 +65,10 @@ const Dash = () => {
         )}
       </div>
       <div className={dstyles.buttonHolder}>
-        <button onClick={() => dataSetter("all")}>All</button>
-        <button onClick={() => dataSetter("windows")}>windows</button>
-        <button onClick={() => dataSetter("ios")}>ios</button>
-        <button onClick={() => dataSetter("android")}>Android</button>
+        <button className="btn btn-outline-primary" onClick={() => dataSetter("all")}>All</button>
+        <button className="btn btn-outline-dark" onClick={() => dataSetter("windows")}>windows</button>
+        <button className="btn btn-outline-warning" onClick={() => dataSetter("ios")}>ios</button>
+        <button className="btn btn-outline-info" onClick={() => dataSetter("android")}>Android</button>
       </div>
       {data.changableData.length ? (
         <div className={dstyles.userContainer}>

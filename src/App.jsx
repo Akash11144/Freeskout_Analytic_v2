@@ -1,5 +1,6 @@
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import "./App.css";
+import 'bootstrap/dist/css/bootstrap.min.css'
 import Redir from "./components/redirection";
 import LogIn from "./components/login";
 import Dash from "./components/dashboard";

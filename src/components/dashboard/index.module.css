@@ -16,18 +16,18 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: coral;
-  padding: 5px;
+  box-shadow: 0 0 2px grey;
+  padding: 15px 2px;
   margin-bottom: 5px;
 }
-.buttonHolder > button {
+/* .buttonHolder > button {
   border: 0;
   background-color: goldenrod;
   cursor: pointer;
   letter-spacing: 1px;
   text-transform: uppercase;
   padding: 5px 10px;
-}
+} */
 .userContainer {
   width: 98%;
   padding: 5px;
