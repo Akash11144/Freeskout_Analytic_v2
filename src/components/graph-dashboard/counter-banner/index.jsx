@@ -1,30 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { fetchR } from "../../utlis/index";
 const CounterBanner = () => {
+  let link = "https://freeskout-analytic-v2-backend.herokuapp.com";
   const [data, setdata] = useState([]);
   useEffect(async () => {
     const ff = async () => {
       let y = [];
-      let a = await fetchR("http://localhost:8000/user/getAllC");
+      let a = await fetchR(link + "/user/getAllC");
       y.push({ name: "all", count: a });
       y.push({
         name: "Windows",
-        count: await fetchR("http://localhost:8000/user/OSC?sortBy=Windows"),
+        count: await fetchR(link + "/user/OSC?sortBy=Windows"),
       });
       y.push({
         name: "iOS",
-        count: await fetchR("http://localhost:8000/user/OSC?sortBy=iOS"),
+        count: await fetchR(link + "/user/OSC?sortBy=iOS"),
       });
       y.push({
         name: "Android",
-        count: await fetchR("http://localhost:8000/user/OSC?sortBy=Android"),
+        count: await fetchR(link + "/user/OSC?sortBy=Android"),
       });
-      let b = await fetchR("http://localhost:8000/user/DeviceC/desktop");
+      let b = await fetchR(link + "/user/DeviceC/desktop");
       y.push({
         name: "Desktop",
         count: b,
       });
-      let c = await fetchR("http://localhost:8000/user/DeviceC/iPad");
+      let c = await fetchR(link + "/user/DeviceC/iPad");
       y.push({
         name: "iPad",
         count: c,

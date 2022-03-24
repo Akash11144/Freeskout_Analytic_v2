@@ -28,8 +28,11 @@ function App() {
                 <Link className="btn btn-outline-warning btn-lg m-1" to="/rd">
                   Freeskout
                 </Link>
-                <Link className="btn btn-outline-info btn-lg m-1" to="/lg">
-                  Log in
+                <Link className="btn btn-outline-info btn-lg m-1" to="/da">
+                  user dashboard
+                </Link>
+                <Link className="btn btn-outline-primary btn-lg m-1" to="/gda">
+                  Graph dashboard
                 </Link>
               </div>
             }
