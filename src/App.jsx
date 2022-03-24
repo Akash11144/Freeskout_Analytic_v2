@@ -23,18 +23,14 @@ function App() {
           <Route
             path="/"
             element={
-              <div>
+              <div className="container mx-auto">
                 <h1>Hello Home</h1>
-                <div style={{ margin: "20px 0 0 20px" }}>
-                  <Link className="btn btn-outline-warning btn-lg" to="/rd">
-                    Freeskout
-                  </Link>
-                </div>
-                <div style={{ margin: "20px 0 0 20px" }}>
-                  <Link className="btn btn-outline-info btn-lg" to="/lg">
-                    Log in
-                  </Link>
-                </div>
+                <Link className="btn btn-outline-warning btn-lg m-1" to="/rd">
+                  Freeskout
+                </Link>
+                <Link className="btn btn-outline-info btn-lg m-1" to="/lg">
+                  Log in
+                </Link>
               </div>
             }
           ></Route>

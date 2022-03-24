@@ -27,8 +27,7 @@ export const perDay = (a) => {
         }
       } else {
         pdu.push(d);
-        let k = 0;
-        for (k = currentDate + 1; k < nextDate; k++)
+        for (let k = currentDate + 1; k < nextDate; k++)
           if (nextDate !== k) pdu.push({ name: k, count: 0, uData: [] });
         i = j - 1;
         break;

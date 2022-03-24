@@ -65,10 +65,30 @@ const Dash = () => {
         )}
       </div>
       <div className={dstyles.buttonHolder}>
-        <button className="btn btn-outline-primary" onClick={() => dataSetter("all")}>All</button>
-        <button className="btn btn-outline-dark" onClick={() => dataSetter("windows")}>windows</button>
-        <button className="btn btn-outline-warning" onClick={() => dataSetter("ios")}>ios</button>
-        <button className="btn btn-outline-info" onClick={() => dataSetter("android")}>Android</button>
+        <button
+          className="btn btn-outline-primary"
+          onClick={() => dataSetter("all")}
+        >
+          All
+        </button>
+        <button
+          className="btn btn-outline-dark"
+          onClick={() => dataSetter("windows")}
+        >
+          windows
+        </button>
+        <button
+          className="btn btn-outline-warning"
+          onClick={() => dataSetter("ios")}
+        >
+          ios
+        </button>
+        <button
+          className="btn btn-outline-info"
+          onClick={() => dataSetter("android")}
+        >
+          Android
+        </button>
       </div>
       {data.changableData.length ? (
         <div className={dstyles.userContainer}>
@@ -87,7 +107,7 @@ export default Dash;
 
 const Profile = (props) => {
   return (
-    <div className={dstyles.user} key={props.id} >
+    <div className={dstyles.user} key={props.id}>
       <p>id: {props.id}</p>
       <p>ip: {props.ip}</p>
       <p>browser name: {props.browser_name}</p>
