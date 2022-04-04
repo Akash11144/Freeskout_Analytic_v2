@@ -1,23 +1,20 @@
 export const dateObserver = () => {
   let d = new Date();
-  let m=d.getMonth()+1;
-  let m1=(m<10) ? "0" + m : m;
-  let dt=d.getDate();
-  let dt1=(dt<10) ? "0" + dt : dt;
-  let hr=d.getHours();
-  let hr1=(hr<10) ? "0" + hr : hr;
-  let mn=d.getMinutes();
-  let mn1=(mn<10) ? "0" + mn : mn;
-  let sec=d.getSeconds();
-  let sec1=(sec<10) ? "0" + sec : sec;
-  let ms=d.getMilliseconds();
-  let ms1=0;
-  if(ms<10)
-    ms1=("0"+"0"+ms);
-  else if(ms<100)
-    ms1=("0"+ms);
-    else
-    ms1=ms;
+  let m = d.getMonth() + 1;
+  let m1 = m < 10 ? "0" + m : m;
+  let dt = d.getDate();
+  let dt1 = dt < 10 ? "0" + dt : dt;
+  let hr = d.getHours();
+  let hr1 = hr < 10 ? "0" + hr : hr;
+  let mn = d.getMinutes();
+  let mn1 = mn < 10 ? "0" + mn : mn;
+  let sec = d.getSeconds();
+  let sec1 = sec < 10 ? "0" + sec : sec;
+  let ms = d.getMilliseconds();
+  let ms1 = 0;
+  if (ms < 10) ms1 = "0" + "0" + ms;
+  else if (ms < 100) ms1 = "0" + ms;
+  else ms1 = ms;
   return {
     Full_Year: d.getFullYear(),
     Month: m1,
@@ -25,7 +22,7 @@ export const dateObserver = () => {
     Hours: hr1,
     Minutes: mn1,
     Seconds: sec1,
-    Mili_Seconds: ms1
+    Mili_Seconds: ms1,
   };
 };
 
@@ -77,8 +74,6 @@ export const monthObserver = (a) => {
   return t;
 };
 
-
-
 // -----------------------------------------------------------------
 
 export const monthNumberObserver = (a) => {
@@ -126,8 +121,6 @@ export const monthNumberObserver = (a) => {
   }
   return t;
 };
-
-
 
 // -------------------------------------------------------------
 
@@ -207,8 +200,10 @@ export const getAddress = async () => {
       console.log(code, error);
       switch (code) {
         case 0:
-          y.latitude = "the position could not be determined and the browser does not know why";
-          y.longitude = "the position could not be determined and the browser does not know why";
+          y.latitude =
+            "the position could not be determined and the browser does not know why";
+          y.longitude =
+            "the position could not be determined and the browser does not know why";
           break;
         case 1:
           y.latitude = "user denied permission";
@@ -228,46 +223,49 @@ export const getAddress = async () => {
           break;
       }
     });
-    return y;
+  return y;
 };
 
 // --------------------------------------------------------------------
 
 export const ipFetch = async () => {
-    try {
-      let r = await fetch("https://www.cloudflare.com/cdn-cgi/trace").then(
-        (res) => res.text()
-      );
-      return r.split("ts")[0].split("ip=")[1].split("\n")[0];
-    } catch (error) {
-      console.log(error);
-      return "unable to fetch ip due to some error from outside";
-    }
-  };
+  try {
+    let r = await fetch("https://www.cloudflare.com/cdn-cgi/trace").then(
+      (res) => res.text()
+    );
+    return r.split("ts")[0].split("ip=")[1].split("\n")[0];
+  } catch (error) {
+    console.log(error);
+    return "unable to fetch ip due to some error from outside";
+  }
+};
 
 //   --------------------------------------------------------------------------------
 
-export const postR = async (mainLink,route,pdata)=>{
-    try {
-        let r = await fetch(mainLink+route, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(pdata)
-        });
-        console.log(await r.json());
-      } catch (error) {
-        console.log("error in post fetch request");
-      }
-}
-
-export const fetchR = async (a) =>{
+export const postR = async (mainLink, route, pdata) => {
   try {
-    let t=await fetch(a);
-    let t1=await t.json();
+    console.log(mainLink, route, pdata);
+    let r = await fetch(mainLink + route, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(pdata),
+    });
+    // let r1 = await r.json();
+    // console.log(r1);
+    return await r.json();
+  } catch (error) {
+    console.log("error in post fetch request", error);
+  }
+};
+
+export const fetchR = async (a) => {
+  try {
+    let t = await fetch(a);
+    let t1 = await t.json();
     return t1;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
