@@ -17,25 +17,25 @@ let route2 = "/user/persistLogin";
 
 function App() {
   // const [user, setuser] = useState(true);
-  const checkUser = async (t) => {
-    console.log(t);
-    let r = await postR(localLink, route2, { a: "akakak" }, `Bearer ${t}`);
-    console.log(r);
-    if (r.ares === "Freeskout") {
+
+  useEffect(() => {
+    const checkUser = (t) => {
+      console.log(t);
+      // let r = await postR(localLink, route2, { a: "akakak" }, `Bearer ${t}`);
+      // console.log(r);
+      // if (r.ares === "Freeskout") {
       // setuser(false);
       // window.open("https://freeskout.com/", "_self");
-      // window.location.replace("http://localhost:3000/gda");
+      // window.location.replace("/gda");
       // window.location.href = "http://localhost:3000/gda";
+      // }
+    };
+    let t = JSON.parse(localStorage.getItem("Freeskout-session"));
+    if (t === null);
+    else {
+      checkUser(t);
     }
-  };
-
-  let t = JSON.parse(localStorage.getItem("Freeskout-session"));
-  if (t === null);
-  else {
-    checkUser(t);
-  }
-
-  useEffect(() => {}, []);
+  }, []);
 
   const handleLogin = async () => {
     let un = document.getElementsByTagName("input")[0];
