@@ -7,23 +7,45 @@ import Dash from "./components/dashboard";
 import Trial from "./components/trial";
 import GraphDashboard from "./components/graph-dashboard";
 import { postR } from "./components/utlis";
+import { useEffect, useState } from "react";
+
+let localLink = "http://localhost:8000";
+// let mainLink = "https://freeskout-analytic-v2-backend.herokuapp.com";
+let route = "/user/login";
+// let route1 = "/user/c";
+let route2 = "/user/persistLogin";
 
 function App() {
+  // const [user, setuser] = useState(true);
+  const checkUser = async (t) => {
+    console.log(t);
+    let r = await postR(localLink, route2, { a: "akakak" }, `Bearer ${t}`);
+    console.log(r);
+    if (r.ares === "Freeskout") {
+      // setuser(false);
+      // window.open("https://freeskout.com/", "_self");
+      // window.location.replace("http://localhost:3000/gda");
+      // window.location.href = "http://localhost:3000/gda";
+    }
+  };
+
+  let t = JSON.parse(localStorage.getItem("Freeskout-session"));
+  if (t === null);
+  else {
+    checkUser(t);
+  }
+
+  useEffect(() => {}, []);
+
   const handleLogin = async () => {
     let un = document.getElementsByTagName("input")[0];
     let pass = document.getElementsByTagName("input")[1];
-    let localLink = "http://localhost:8000";
-    let mainLink = "https://freeskout-analytic-v2-backend.herokuapp.com";
-    let route = "/user/login";
-    let route1 = "/user/c";
+
     let data = { name: un.value, password: pass.value };
-    let r = await postR(localLink, route, data);
+    let r = await postR(localLink, route, data, "");
     console.log(r);
     if (r.allowed) {
-      localStorage.setItem(
-        "Freeskout-session",
-        JSON.stringify({ name: un.value, token: r.ares })
-      );
+      localStorage.setItem("Freeskout-session", JSON.stringify(r.ares));
       window.open("http://localhost:3000/gda", "_self");
       return;
     }
@@ -92,16 +114,6 @@ function App() {
                         id="exampleInputPassword1"
                       />
                     </div>
-                    {/* <div className="mb-3 form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input"
-                        id="exampleCheck1"
-                      />
-                      <label className="form-check-label" for="exampleCheck1">
-                        Check me out
-                      </label>
-                    </div> */}
                     <button
                       type="submit"
                       className="btn btn-primary"

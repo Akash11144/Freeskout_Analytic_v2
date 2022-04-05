@@ -1,16 +1,4 @@
 import React, { useEffect, useState } from "react";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-  BarChart,
-  Bar,
-} from "recharts";
 import { fetchR } from "../utlis";
 import CounterBanner from "./counter-banner";
 import Bar1 from "./graphs/bar";
@@ -20,10 +8,10 @@ import OSbased from "./graphs/os-based";
 const GraphDashboard = () => {
   const [data, setdata] = useState([]);
   useEffect(async () => {
-    let link =
-      "https://freeskout-analytic-v2-backend.herokuapp.com/user/getAll";
-    let r = await fetchR(link);
-    setdata(r);
+    // let link =
+    //   "https://freeskout-analytic-v2-backend.herokuapp.com/user/getAll";
+    // let r = await fetchR(link);
+    // setdata(r);
   }, []);
 
   return (

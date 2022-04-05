@@ -242,13 +242,14 @@ export const ipFetch = async () => {
 
 //   --------------------------------------------------------------------------------
 
-export const postR = async (mainLink, route, pdata) => {
+export const postR = async (mainLink, route, pdata, Auth) => {
   try {
-    console.log(mainLink, route, pdata);
+    console.log(mainLink, route, pdata, Auth);
     let r = await fetch(mainLink + route, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: Auth,
       },
       body: JSON.stringify(pdata),
     });
