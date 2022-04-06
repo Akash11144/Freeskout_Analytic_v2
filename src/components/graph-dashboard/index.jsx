@@ -5,6 +5,7 @@ import CounterBanner from "./counter-banner";
 import Bar1 from "./graphs/bar";
 import Line1 from "./graphs/line";
 import OSbased from "./graphs/os-based";
+import { motion } from "framer-motion";
 
 const GraphDashboard = () => {
   const navi1 = useNavigate();
@@ -20,13 +21,17 @@ const GraphDashboard = () => {
   }, []);
 
   return (
-    <div>
+    <motion.div
+      initial={{ width: 0 }}
+      animate={{ width: "100%" }}
+      exit={{ x: window.innerWidth }}
+    >
       <h1 className="text-center">Graph Dashboard</h1>
       {data.length ? <CounterBanner></CounterBanner> : <h1>Loading.....</h1>}
       {data.length ? <Line1 {...data}></Line1> : <h1>Loading....</h1>}
       <Bar1></Bar1>
       {data.length ? <OSbased {...data}></OSbased> : <h1>Loading.....</h1>}
-    </div>
+    </motion.div>
   );
 };
 

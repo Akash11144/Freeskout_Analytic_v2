@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import dstyles from "./index.module.css";
+import { motion } from "framer-motion";
 
 const Dash = () => {
   const [data, setData] = useState({
@@ -8,6 +9,9 @@ const Dash = () => {
   });
 
   useEffect(() => {
+    if (JSON.parse(localStorage.getItem("Freeskout-session")) === null) {
+      navi1("/");
+    }
     const dataFetch = async () => {
       let y = await fetch(
         "https://freeskout-analytic-v2-backend.herokuapp.com/user/getAll"
@@ -55,7 +59,11 @@ const Dash = () => {
   };
 
   return (
-    <div>
+    <motion.div
+      initial={{ width: 0 }}
+      animate={{ width: "100%" }}
+      exit={{ x: window.innerWidth }}
+    >
       <h1 className={dstyles.heading}>Dashboard</h1>
       <div className={dstyles.main}>
         {data.changableData.length ? (
@@ -99,7 +107,7 @@ const Dash = () => {
       ) : (
         <div>Loading...</div>
       )}
-    </div>
+    </motion.div>
   );
 };
 

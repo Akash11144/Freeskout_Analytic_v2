@@ -10,28 +10,28 @@ import {
   ipFetch as IPF,
   postR,
 } from "../utlis";
+import { motion } from "framer-motion";
 
 let ud = {
   browser_name: "",
   browser_version: "",
-  date:0,
-  day:0,
-  hours:0,
+  date: 0,
+  day: 0,
+  hours: 0,
   id: "",
   ip: "",
   // lat: "not awailable",
   // long: "not awailable",
-  minutes:0,
-  month:0,
+  minutes: 0,
+  month: 0,
   product_manufacturer: "",
   product_name: "",
   os_architecture: "",
   os_name: "",
   os_version: "",
   time: "",
-  year:0
+  year: 0,
 };
-
 
 const userData = async () => {
   // try {
@@ -66,12 +66,12 @@ const userData = async () => {
   ud.os_version = pt.os.version;
   ud.os_architecture = pt.os.architecture;
   ud.time = TG();
-  ud.year=deo.Full_Year;
-  ud.month=+deo.Month;
-  ud.date=+deo.Datee;
-  ud.day=dayObserver((deo.Datee % 7) + 1);
-  ud.hours=+deo.Hours;
-  ud.minutes=+deo.Minutes;
+  ud.year = deo.Full_Year;
+  ud.month = +deo.Month;
+  ud.date = +deo.Datee;
+  ud.day = dayObserver((deo.Datee % 7) + 1);
+  ud.hours = +deo.Hours;
+  ud.minutes = +deo.Minutes;
   console.log(ud);
   // _________________________________________________________
   let localLink = "http://localhost:8000";
@@ -91,7 +91,12 @@ function Redir() {
   }, []);
 
   return (
-    <div className={Styles.mainCont}>
+    <motion.div
+      className={Styles.mainCont}
+      initial={{ width: 0 }}
+      animate={{ width: "100%" }}
+      exit={{ x: window.innerWidth }}
+    >
       <div className={Styles.stars}></div>
       <div className={Styles.stars2}></div>
       <div className={Styles.stars3}></div>
@@ -108,7 +113,7 @@ function Redir() {
           <span className={Styles.tCont}>t</span>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
