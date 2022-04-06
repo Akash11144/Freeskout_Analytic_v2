@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import dstyles from "./index.module.css";
-import { motion } from "framer-motion";
 import { useNavigate } from "react-router";
 
 const Dash = () => {
@@ -61,11 +60,7 @@ const Dash = () => {
   };
 
   return (
-    <motion.div
-      initial={{ width: 0 }}
-      animate={{ width: "100%" }}
-      exit={{ x: window.innerWidth }}
-    >
+    <div>
       <h1 className={dstyles.heading}>Dashboard</h1>
       <div className={dstyles.main}>
         {data.changableData.length ? (
@@ -109,7 +104,7 @@ const Dash = () => {
       ) : (
         <div>Loading...</div>
       )}
-    </motion.div>
+    </div>
   );
 };
 
