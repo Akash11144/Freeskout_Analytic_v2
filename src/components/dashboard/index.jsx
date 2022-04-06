@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import dstyles from "./index.module.css";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router";
 
 const Dash = () => {
+  const navi1 = useNavigate();
   const [data, setData] = useState({
     fixData: [],
     changableData: [],

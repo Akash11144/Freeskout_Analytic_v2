@@ -3,14 +3,13 @@ import { Route, Routes, useLocation, useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import Dash from "../dashboard";
 import GraphDashboard from "../graph-dashboard";
-import LogIn from "../login";
 import Redir from "../redirection";
 import Trial from "../trial";
 import { postR } from "../utlis";
 import { AnimatePresence } from "framer-motion";
 
 let localLink = "http://localhost:8000";
-// let mainLink = "https://freeskout-analytic-v2-backend.herokuapp.com";
+let mainLink = "https://freeskout-analytic-v2-backend.herokuapp.com";
 let route = "/user/login";
 // let route1 = "/user/c";
 let route2 = "/user/persistLogin";
@@ -27,7 +26,7 @@ const MainRoutes = () => {
     let un = document.getElementsByTagName("input")[0];
     let pass = document.getElementsByTagName("input")[1];
     let data = { name: un.value, password: pass.value };
-    let r = await postR(localLink, route, data, "");
+    let r = await postR(mainLink, route, data, "");
     console.log(r);
     if (r.allowed) {
       localStorage.setItem("Freeskout-session", JSON.stringify(r.ares));
@@ -51,7 +50,6 @@ const MainRoutes = () => {
     <AnimatePresence>
       <Routes location={loc} key={loc.pathname}>
         <Route path="/rd" element={<Redir></Redir>}></Route>
-        <Route path="/lg" element={<LogIn></LogIn>}></Route>
         <Route path="/da" element={<Dash></Dash>}></Route>
         <Route path="/tr" element={<Trial></Trial>}></Route>
         <Route path="/gda" element={<GraphDashboard></GraphDashboard>}></Route>
