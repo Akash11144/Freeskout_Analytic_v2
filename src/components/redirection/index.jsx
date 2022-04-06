@@ -10,7 +10,6 @@ import {
   ipFetch as IPF,
   postR,
 } from "../utlis";
-import { motion } from "framer-motion";
 
 let ud = {
   browser_name: "",
@@ -91,12 +90,7 @@ function Redir() {
   }, []);
 
   return (
-    <motion.div
-      className={Styles.mainCont}
-      initial={{ width: 0 }}
-      animate={{ width: "100%" }}
-      exit={{ x: window.innerWidth }}
-    >
+    <div className={Styles.mainCont}>
       <div className={Styles.stars}></div>
       <div className={Styles.stars2}></div>
       <div className={Styles.stars3}></div>
@@ -113,7 +107,7 @@ function Redir() {
           <span className={Styles.tCont}>t</span>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 

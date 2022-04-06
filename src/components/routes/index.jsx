@@ -15,7 +15,6 @@ let route2 = "/user/persistLogin";
 
 const MainRoutes = () => {
   const navi = useNavigate();
-  const loc = useLocation();
   useEffect(() => {
     let t = JSON.parse(localStorage.getItem("Freeskout-session"));
     if (t !== null) navi("/gda");
