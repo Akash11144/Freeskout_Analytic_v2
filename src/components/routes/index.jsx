@@ -24,7 +24,7 @@ const MainRoutes = () => {
     let un = document.getElementsByTagName("input")[0];
     let pass = document.getElementsByTagName("input")[1];
     let data = { name: un.value, password: pass.value };
-    let r = await postR(mainLink, route, data, "");
+    let r = await postR(localLink, route, data, "");
     console.log(r);
     if (r.allowed) {
       localStorage.setItem("Freeskout-session", JSON.stringify(r.ares));
