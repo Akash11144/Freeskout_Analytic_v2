@@ -13,8 +13,8 @@ const GraphDashboard = () => {
     if (JSON.parse(localStorage.getItem("Freeskout-session")) === null) {
       navi1("/");
     }
-    let link =
-      "https://freeskout-analytic-v2-backend.herokuapp.com/user/getAll";
+    // https://freeskout-analytic-v2-backend.herokuapp.com
+    let link = "http://localhost:8000/user/getAll";
     let r = await fetchR(link);
     setdata(r);
   }, []);
