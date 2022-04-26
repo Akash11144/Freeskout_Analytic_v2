@@ -14,6 +14,7 @@ const OSbased = (props) => {
   const [data, setdata] = useState([]);
   useEffect(() => {
     let y = perDay(props);
+    console.log("inside os based graph");
     const ff = () => {
       let obj = [];
       for (let i = 0; i < y.length; i++) {
@@ -32,6 +33,7 @@ const OSbased = (props) => {
 
   return (
     <React.Fragment>
+      {console.log("inside os based page return")}
       {data.length ? (
         <div
           style={{

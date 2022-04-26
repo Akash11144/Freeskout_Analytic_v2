@@ -9,18 +9,25 @@ import OSbased from "./graphs/os-based";
 const GraphDashboard = () => {
   const navi1 = useNavigate();
   const [data, setdata] = useState([]);
-  useEffect(async () => {
-    if (JSON.parse(localStorage.getItem("Freeskout-session")) === null) {
-      navi1("/");
-    }
-    // https://freeskout-analytic-v2-backend.herokuapp.com
-    let link = "http://localhost:8000/user/getAll";
-    let r = await fetchR(link);
-    setdata(r);
+  useEffect(() => {
+    // console.log("inside graph main page");
+    const fetchData = async () => {
+      if (JSON.parse(localStorage.getItem("Freeskout-session")) === null) {
+        // navi1("/");
+      }
+      let link =
+        "https://freeskout-analytic-v2-backend.herokuapp.com/user/getAll";
+      // let link = "http://localhost:8000/user/getAll";
+      let r = await fetchR(link);
+      console.log("main page", r);
+      setdata(r);
+    };
+    fetchData();
   }, []);
 
   return (
     <div>
+      {/* {console.log("inside main page return")} */}
       <h1 className="text-center">Graph Dashboard</h1>
       {data.length ? <CounterBanner></CounterBanner> : <h1>Loading.....</h1>}
       {data.length ? <Line1 {...data}></Line1> : <h1>Loading....</h1>}

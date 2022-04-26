@@ -13,6 +13,7 @@ import { fetchR } from "../../../utlis";
 const Bar1 = () => {
   const [data, setdata] = useState([]);
   useEffect(() => {
+    // console.log("inside bar graph");
     const DayGetter = async () => {
       let y = [];
       y.push({
@@ -57,7 +58,7 @@ const Bar1 = () => {
           "https://freeskout-analytic-v2-backend.herokuapp.com/user/DayC/Sun"
         )),
       });
-      console.log(y);
+      // console.log("bar data", y);
       setdata(y);
     };
     DayGetter();
@@ -65,6 +66,7 @@ const Bar1 = () => {
 
   return (
     <React.Fragment>
+      {/* {console.log("inside bar return", data)} */}
       {data.length ? (
         <div
           style={{

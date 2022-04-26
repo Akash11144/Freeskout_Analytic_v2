@@ -12,10 +12,14 @@ import { perDay } from "../../graph-utils";
 
 const Line1 = (props) => {
   const [data, setdata] = useState([]);
-  useEffect(() => setdata(perDay(props)), []);
+  useEffect(() => {
+    console.log("inside line graph");
+    setdata(perDay(props));
+  }, []);
 
   return (
     <React.Fragment>
+      {console.log("inside line page return")}
       {data.length ? (
         <div
           style={{
