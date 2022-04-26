@@ -1,0 +1,154 @@
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(255, 255, 255);
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: rgb(255, 255, 255);
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: rgb(255, 255, 255);
+}
+body {
+  background: url(../../../assets/teahub.io-blur-wallpaper-hd-309906.jpg)
+    no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.maindiv {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+.Glassdiv {
+  position: absolute;
+  width: 50%;
+  top: 15vh;
+  left: 25%;
+  height: 70vh;
+  backdrop-filter: blur(5px) saturate(200%);
+  -webkit-backdrop-filter: blur(5px) saturate(200%);
+  background-color: rgba(255, 255, 255, 0.35);
+  border-radius: 12px;
+  border: 1px solid rgba(209, 213, 219, 0.3);
+}
+.loginMainDiv {
+  position: absolute;
+  width: 50%;
+  top: 15vh;
+  left: 25%;
+  padding: 2% 3%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.FsImgCont {
+  display: flex;
+  justify-content: center;
+}
+.FsImgCont > img {
+  width: 50%;
+}
+.formContainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  padding: 3% 2%;
+  width: 70%;
+  margin: 2% auto;
+}
+.form__label {
+  color: #fff;
+  letter-spacing: 1px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: -25%;
+  margin-top: -12%;
+  display: block;
+  width: 70%;
+  transition: all 0.3s;
+  transform: translateY(-290%);
+}
+
+.form__input {
+  background-color: transparent;
+  color: #333;
+  outline: none;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 4% 3%;
+  border-radius: 0.2rem;
+  width: 150%;
+  margin: 9% -25%;
+  display: block;
+  border: none;
+  border-bottom: 2px solid #fff;
+  transition: all 0.3s;
+}
+
+.form__input:placeholder-shown + .form__label {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transform: translateY(-40%);
+  transform: translateY(-40%);
+}
+.loginBtnCont {
+  margin-top: 5%;
+}
+.logInBtn {
+  display: inline-block;
+  padding: 0.75rem 1.25rem;
+  border-radius: 10rem;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: 0.15rem;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  cursor: pointer;
+}
+.logInBtn:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1adb80;
+  border-radius: 10rem;
+  z-index: -2;
+}
+.logInBtn:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: #159c5d;
+  transition: all 0.3s;
+  border-radius: 10rem;
+  z-index: -1;
+}
+.logInBtn:hover {
+  color: #fff;
+}
+.logInBtn:hover:before {
+  width: 100%;
+}
+.logInBtn:active {
+  transform: translateY(5px);
+}
