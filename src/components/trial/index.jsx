@@ -7,48 +7,23 @@ let route = "not using/user/setUser";
 const Trial = () => {
   const [data, setdata] = useState([]);
   useEffect(async () => {
-    try {
-      let y = await fetch("http://localhost:8000/user/getAll");
-      let y1 = await y.json();
-      console.log(y1);
-      setdata(y1);
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+    //   let y = await fetch("http://localhost:8000/user/getAll");
+    //   let y1 = await y.json();
+    //   console.log(y1);
+    //   setdata(y1);
+    // } catch (error) {
+    //   console.log(error);
+    // }
   }, []);
 
   const setData = async () => {
-    let y = JSON.parse(localStorage.getItem("d2trial"));
-    console.log(y);
-    for (let i = 0; i < y.length; i++) {
-      switch (y[i].day) {
-        case "Mon,":
-          y[i].day = "Mon";
-          break;
-        case "Tue,":
-          y[i].day = "Tue";
-          break;
-        case "Wed,":
-          y[i].day = "Wed";
-          break;
-        case "Thu,":
-          y[i].day = "Thu";
-          break;
-        case "Fri,":
-          y[i].day = "Fri";
-          break;
-        case "Sat,":
-          y[i].day = "Sat";
-          break;
-        case "Sun,":
-          y[i].day = "Sun";
-          break;
-        default:
-          break;
-      }
-      await postR(link, route, y[i]);
-    }
-    console.log("done", y);
+    let localLink = "http://localhost:8000";
+    let mainLink = "https://freeskout-analytic-v2-backend.herokuapp.com";
+    let route = "/valid/login";
+    let cred = { name: "Freeskout", password: "Freeskout_rajesh" };
+    let a = await postR(mainLink, route, cred);
+    console.log(a);
   };
 
   const delData = async () => {

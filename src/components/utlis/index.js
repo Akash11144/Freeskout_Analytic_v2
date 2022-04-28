@@ -255,6 +255,7 @@ export const postR = async (mainLink, route, pdata, Auth) => {
     });
     // let r1 = await r.json();
     // console.log(r1);
+    // return r1;
     return await r.json();
   } catch (error) {
     console.log("error in post fetch request", error);
