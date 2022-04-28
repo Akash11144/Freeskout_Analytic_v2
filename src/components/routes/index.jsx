@@ -19,7 +19,7 @@ const MainRoutes = () => {
   const navi = useNavigate();
   useEffect(() => {
     let t = JSON.parse(localStorage.getItem("Freeskout-session"));
-    // if (t !== null) navi("/gda");
+    if (t !== null) navi("/gda");
   }, []);
 
   const handleLogin = async () => {
@@ -30,7 +30,7 @@ const MainRoutes = () => {
     console.log(r);
     if (r.allowed) {
       localStorage.setItem("Freeskout-session", JSON.stringify(r.ares));
-      // navi("/gda");
+      navi("/gda");
       return;
     }
     if (r.ares === "user not available") {
@@ -138,7 +138,15 @@ const MainRoutes = () => {
                 </div>
               </div>
               <div className={Styles.loginBtnCont}>
-                <div className={Styles.logInBtn}>Log Me In</div>
+                <div
+                  className={Styles.logInBtn}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleLogin();
+                  }}
+                >
+                  Log Me In
+                </div>
                 <Link className={Styles.siteLinkBtn} to="">
                   www.freeskout.com
                 </Link>
