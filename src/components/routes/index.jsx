@@ -11,7 +11,7 @@ import companyLogo from "../routes/freeskout.png";
 
 let localLink = "http://localhost:8000";
 let mainLink = "https://freeskout-analytic-v2-backend.herokuapp.com";
-let route = "/user/login";
+let route = "/valid/login";
 // let route1 = "/user/c";
 let route2 = "/user/persistLogin";
 
