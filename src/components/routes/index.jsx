@@ -29,18 +29,19 @@ const MainRoutes = () => {
     let r = await postR(localLink, route, data, "");
     console.log(r);
     if (r.allowed) {
+      console.log("cred accepted");
       localStorage.setItem("Freeskout-session", JSON.stringify(r.ares));
       navi("/gda");
       return;
     }
-    if (r.ares === "user not available") {
+    if (r.ares === "User not available") {
       alert("user not available");
       un.value = "";
       pass.value = "";
       return;
     }
     if (r.ares === "password not match") {
-      alert("password not match");
+      alert("Incorrect Password");
       pass.value = "";
       return;
     }
