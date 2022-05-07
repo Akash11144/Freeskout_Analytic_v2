@@ -34,8 +34,8 @@ const MainRoutes = () => {
       navi("/gda");
       return;
     }
-    if (r.ares === "User not available") {
-      alert("user not available");
+    if (r.ares === "user not available") {
+      alert("User not available");
       un.value = "";
       pass.value = "";
       return;
@@ -107,7 +107,9 @@ const MainRoutes = () => {
           //   </div>
           // </div>
           <div className={Styles.maindiv}>
-            <div className={Styles.Glassdiv}></div>
+            <div className={Styles.stars}></div>
+            <div className={Styles.stars2}></div>
+            <div className={Styles.stars3}></div>
             <div className={Styles.loginMainDiv}>
               <div className={Styles.FsImgCont}>
                 <img src={companyLogo} alt="Company Logo" />
