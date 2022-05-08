@@ -19,6 +19,7 @@ body {
   align-items: center;
 }
 .maindiv {
+  user-select: none;
   background: linear-gradient(to right, #00031d, #000536);
   overflow: hidden;
   display: flex;
