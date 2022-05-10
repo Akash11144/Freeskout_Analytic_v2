@@ -8,7 +8,7 @@
   align-items: center;
   padding: 0% 3% 0.5% 3%;
   user-select: none;
-  /* height: 10vh; */
+  height: 10vh;
 }
 .leftMain {
   display: flex;
