@@ -1,12 +1,18 @@
 import Styles from '../topbar/index.module.css'
+import companyLogo from "../routes/freeskout.png";
 const topbar = () => {
     return (
         <div className={Styles.mainCont}>
-            <div className={Styles.navOptnCont}>
-                <span className={Styles.navOptns}>Home</span>
-                <span className={Styles.navOptns}>Home</span>
-                <span className={Styles.navOptns}>Home</span>
-                <span className={Styles.navOptns}>Home</span>
+            <div className={Styles.leftMain}>
+                <div className={Styles.logoCont}>
+                    <img src={companyLogo}></img>
+                </div>
+                <div className={Styles.navOptnCont}>
+                    <span className={Styles.navOptns}>Home</span>
+                    <span className={Styles.navOptns}>Home</span>
+                    <span className={Styles.navOptns}>Home</span>
+                    <span className={Styles.navOptns}>Home</span>
+                </div>
             </div>
             <div className={Styles.dateTimeCont}>
                 <div className={Styles.secDiv}>
@@ -102,7 +108,7 @@ const TimeSet = () => {
             currentHours = " " + " na ";
 
     }
-    let fullTime = currentHours;
+    let fullTime = " " + currentHours;
     return (
         <span className={Styles.time}>{fullTime}</span>
     );

@@ -1,5 +1,5 @@
 .mainCont {
-  width: 79%;
+  width: 100%;
   float: right;
   background: linear-gradient(to right, #00031d, #000536);
   color: white;
@@ -8,13 +8,28 @@
   align-items: center;
   padding: 0% 3% 0.5% 3%;
   user-select: none;
+  /* height: 10vh; */
+}
+.leftMain {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 35%;
+  box-sizing: border-box;
+}
+.logoCont {
+  width: 30%;
+  padding: 3%;
+}
+.logoCont > img {
+  width: 30%;
 }
 .navOptnCont {
-  width: 30%;
+  width: 80%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  float: left;
+  margin-left: -10%;
 }
 .dateTimeCont {
   width: 30%;

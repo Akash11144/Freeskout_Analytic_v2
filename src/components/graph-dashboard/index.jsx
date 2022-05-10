@@ -29,71 +29,85 @@ const GraphDashboard = () => {
   }, []);
 
   return (
-    <div className={Styles.mainCont}>
+    <div className={Styles.mainGcont}>
       <Topbar></Topbar>
-      <Sidebar></Sidebar>
-      <div className={Styles.graphCont}>
-        {data.length ? <CounterBanner></CounterBanner> : <h1>Loading.....</h1>}
-        <div className={Styles.slectedgraphDiv}>
-          <div className={Styles.slectedgraphLeftDiv}>
-            {data.length ? <Line1 {...data}></Line1> : <h1>Loading....</h1>}
-          </div>
-          <div className={Styles.slectedgraphRightDiv}>
-            <div className={Styles.graphNameNdetails}>
-              <h2 className={Styles.graphName}>Name & Type of Graph</h2>
-              <p className={Styles.axesDetails}>x - "Hello", y - "Challo"</p>
+      <div className={Styles.sidePlusMain}>
+        <Sidebar></Sidebar>
+        <div className={Styles.mainAppCont}>
+          <div className={Styles.graphContainer}>
+            {data.length ? (
+              <CounterBanner></CounterBanner>
+            ) : (
+              <h1>Loading.....</h1>
+            )}
+            <div className={Styles.slectedgraphDiv}>
+              <div className={Styles.slectedgraphLeftDiv}>
+                {data.length ? <Line1 {...data}></Line1> : <h1>Loading....</h1>}
+              </div>
+              <div className={Styles.slectedgraphRightDiv}>
+                <div className={Styles.graphNameNdetails}>
+                  <h2 className={Styles.graphName}>Name & Type of Graph</h2>
+                  <p className={Styles.axesDetails}>
+                    x - "Hello", y - "Challo"
+                  </p>
+                </div>
+                <div className={Styles.otherDetailsDiv}>
+                  <p className={Styles.majorDetails}>
+                    lorem ipsum dollar lorem ipsum dollar lorem ipsum dollar
+                  </p>
+                </div>
+              </div>
             </div>
-            <div className={Styles.otherDetailsDiv}>
-              <p className={Styles.majorDetails}>
-                lorem ipsum dollar lorem ipsum dollar lorem ipsum dollar
-              </p>
+            <div className={Styles.nxtGraphsContDiv}>
+              <h2 className={Styles.nxtGraphsHead}></h2>
+              <div className={Styles.nextgraphs}>
+                <div className={Styles.nextGraphCont}>
+                  {data.length ? (
+                    <Line1 {...data}></Line1>
+                  ) : (
+                    <h1>Loading....</h1>
+                  )}
+                </div>
+                <p className={Styles.nxtGraphName}>Line Graph</p>
+              </div>
+              <div className={Styles.nextgraphs}>
+                <div className={Styles.nextGraphCont}>
+                  <Bar1></Bar1>
+                </div>
+                <p className={Styles.nxtGraphName}>BAR Graph</p>
+              </div>
+              <div className={Styles.nextgraphs}>
+                <div className={Styles.nextGraphCont}>
+                  {data.length ? (
+                    <OSbased {...data}></OSbased>
+                  ) : (
+                    <h1>Loading.....</h1>
+                  )}{" "}
+                </div>
+                <p className={Styles.nxtGraphName}>OS based</p>
+              </div>
+              <div className={Styles.nextgraphs}>
+                {data.length ? <Line1 {...data}></Line1> : <h1>Loading....</h1>}
+                <div className={Styles.nextGraphCont}>Line Graph</div>
+                <p className={Styles.nxtGraphName}></p>
+              </div>
+              <div className={Styles.nextgraphs}>
+                <div className={Styles.nextGraphCont}>
+                  <Bar1></Bar1>
+                </div>
+                <p className={Styles.nxtGraphName}>BAR Graph</p>
+              </div>
+              <div className={Styles.nextgraphs}>
+                <div className={Styles.nextGraphCont}>
+                  {data.length ? (
+                    <OSbased {...data}></OSbased>
+                  ) : (
+                    <h1>Loading.....</h1>
+                  )}{" "}
+                </div>
+                <p className={Styles.nxtGraphName}>OS based</p>
+              </div>
             </div>
-          </div>
-        </div>
-        <div className={Styles.nxtGraphsContDiv}>
-          <h2 className={Styles.nxtGraphsHead}></h2>
-          <div className={Styles.nextgraphs}>
-            <div className={Styles.nextGraphCont}>
-              {data.length ? <Line1 {...data}></Line1> : <h1>Loading....</h1>}
-            </div>
-            <p className={Styles.nxtGraphName}>Line Graph</p>
-          </div>
-          <div className={Styles.nextgraphs}>
-            <div className={Styles.nextGraphCont}>
-              <Bar1></Bar1>
-            </div>
-            <p className={Styles.nxtGraphName}>BAR Graph</p>
-          </div>
-          <div className={Styles.nextgraphs}>
-            <div className={Styles.nextGraphCont}>
-              {data.length ? (
-                <OSbased {...data}></OSbased>
-              ) : (
-                <h1>Loading.....</h1>
-              )}{" "}
-            </div>
-            <p className={Styles.nxtGraphName}>OS based</p>
-          </div>
-          <div className={Styles.nextgraphs}>
-            {data.length ? <Line1 {...data}></Line1> : <h1>Loading....</h1>}
-            <div className={Styles.nextGraphCont}>Line Graph</div>
-            <p className={Styles.nxtGraphName}></p>
-          </div>
-          <div className={Styles.nextgraphs}>
-            <div className={Styles.nextGraphCont}>
-              <Bar1></Bar1>
-            </div>
-            <p className={Styles.nxtGraphName}>BAR Graph</p>
-          </div>
-          <div className={Styles.nextgraphs}>
-            <div className={Styles.nextGraphCont}>
-              {data.length ? (
-                <OSbased {...data}></OSbased>
-              ) : (
-                <h1>Loading.....</h1>
-              )}{" "}
-            </div>
-            <p className={Styles.nxtGraphName}>OS based</p>
           </div>
         </div>
       </div>

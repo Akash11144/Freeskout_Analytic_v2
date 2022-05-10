@@ -1,21 +1,35 @@
-.mainCont {
+.mainGcont {
+  /* width: 100vw; */
+  background-color: aqua;
   height: 100vh;
   user-select: none;
 }
-.graphCont {
-  height: 92.5vh;
+.sidePlusMain {
+  transform: translateY(10vh);
+  position: relative;
+}
+.mainAppCont {
+  position: absolute;
+  left: 20%;
+  top: 0%;
+  width: 80%;
+  background-color: red;
+  height: 90vh;
   overflow-y: auto;
   overflow-x: hidden;
-  width: 79%;
-  float: right;
-  margin-top: -44.1%;
+}
+.graphCont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 .slectedgraphDiv {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 3% 2%;
   height: 60%;
+  z-index: 1;
 }
 .slectedgraphLeftDiv {
   width: 59%;
@@ -50,17 +64,15 @@
 }
 
 .nxtGraphsContDiv {
-  background-color: bisque;
+  background-color: blue;
   padding: 1% 2%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: flex-start;
-  height: 40vh;
-  position: absolute;
-  bottom: 00.5%;
-  overflow-y: auto;
-  overflow-x: hidden;
+  /* height: 40vh; */
+  /* overflow-y: auto;
+  overflow-x: hidden; */
 }
 .nextgraphs {
   width: 31%;

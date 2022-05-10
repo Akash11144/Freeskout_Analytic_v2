@@ -4,15 +4,6 @@ import { Link } from "react-router-dom";
 const sidebar = () => {
     return (
         <div className={Styles.mainCont}>
-            <div className={Styles.logoAndNameHolder}>
-                <div className={Styles.logoCont}>
-                    <img src={companyLogo}></img>
-                </div>
-                <div className={Styles.NameCont}>
-                    <h3 className={Styles.name}>Freeskout</h3>
-                    <p className={Styles.motto}>Discovered Connect Collaborate</p>
-                </div>
-            </div>
             <h3 className={Styles.hiCOnt}>Hi<span className={Styles.usernameCont}>  Admin</span> ,</h3>
             <div className={Styles.optnContainer}>
                 <div className={Styles.optsGroup} id="optOne">Option One</div>
