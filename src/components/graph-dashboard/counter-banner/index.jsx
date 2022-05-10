@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchR } from "../../utlis/index";
+import Styles from "../counter-banner/index.module.css";
 const CounterBanner = () => {
   let link = "https://freeskout-analytic-v2-backend.herokuapp.com";
   const [data, setdata] = useState([]);
@@ -50,48 +51,48 @@ const CounterBanner = () => {
     <React.Fragment>
       {console.log("inside counter dashboard return")}
       {data.length ? (
-        <div className="container">
-          <div className="row p-1 mx-auto">
-            <div className="col-auto mt-2">
-              <span className="badge bg-info fs-6">
-                All{" "}
-                <span className="badge bg-warning fs-6">{data[0].count}</span>
+        <div className={Styles.mainCont}>
+          <div className={Styles.tabsCont}>
+            <div className={Styles.tabs}>
+              <span className={Styles.deviceName}>
+                All-{""}
+                <span className={Styles.deviceNumber}> {data[0].count}</span>
               </span>
             </div>
-            <div className="col-auto mt-2">
-              <span className="badge bg-success fs-6">
-                Windows{" "}
-                <span className="badge bg-warning fs-6">{data[1].count}</span>
+            <div className={Styles.tabs}>
+              <span className={Styles.deviceName}>
+                Windows-{""}
+                <span className={Styles.deviceNumber}> {data[1].count}</span>
               </span>
             </div>
-            <div className="col-auto mt-2">
-              <span className="badge bg-primary fs-6">
-                IOS{" "}
-                <span className="badge bg-warning fs-6"> {data[2].count}</span>
+            <div className={Styles.tabs}>
+              <span className={Styles.deviceName}>
+                IOS-{""}
+                <span className={Styles.deviceNumber}> {data[2].count}</span>
               </span>
             </div>
-            <div className="col-auto mt-2">
-              <span className="badge bg-danger fs-6">
-                Android{" "}
-                <span className="badge bg-warning fs-6"> {data[3].count}</span>
+            <div className={Styles.tabs}>
+              <span className={Styles.deviceName}>
+                Android-{""}
+                <span className={Styles.deviceNumber}> {data[3].count}</span>
               </span>
             </div>
-            <div className="col-auto mt-2">
-              <span className="badge bg-secondary fs-6">
-                Desktop{" "}
-                <span className="badge bg-warning fs-6"> {data[4].count}</span>
+            <div className={Styles.tabs}>
+              <span className={Styles.deviceName}>
+                Desktop-{""}
+                <span className={Styles.deviceNumber}> {data[4].count}</span>
               </span>
             </div>
-            <div className="col-auto mt-2">
-              <span className="badge bg-dark fs-6">
-                Mobile{" "}
-                <span className="badge bg-warning fs-6"> {data[6].count}</span>
+            <div className={Styles.tabs}>
+              <span className={Styles.deviceName}>
+                Mobile-{""}
+                <span className={Styles.deviceNumber}> {data[6].count}</span>
               </span>
             </div>
-            <div className="col-auto mt-2">
-              <span className="badge bg-info fs-6">
-                IPad{" "}
-                <span className="badge bg-warning fs-6"> {data[5].count}</span>
+            <div className={Styles.tabs}>
+              <span className={Styles.deviceName}>
+                IPad-{""}
+                <span className={Styles.deviceNumber}> {data[5].count}</span>
               </span>
             </div>
           </div>

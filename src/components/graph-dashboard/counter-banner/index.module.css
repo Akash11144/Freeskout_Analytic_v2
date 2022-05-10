@@ -1,0 +1,12 @@
+.mainCont {
+  background-color: antiquewhite;
+  margin-top: 1%;
+}
+.tabsCont {
+  background-color: beige;
+  display: flex;
+  justify-content: space-evenly;
+}
+.tabs {
+  cursor: pointer;
+}

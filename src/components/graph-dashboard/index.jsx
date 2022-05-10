@@ -5,6 +5,9 @@ import CounterBanner from "./counter-banner";
 import Bar1 from "./graphs/bar";
 import Line1 from "./graphs/line";
 import OSbased from "./graphs/os-based";
+import Topbar from "../topbar";
+import Sidebar from "../sidebar";
+import Styles from "../graph-dashboard/index.module.css";
 
 const GraphDashboard = () => {
   const navi1 = useNavigate();
@@ -26,13 +29,74 @@ const GraphDashboard = () => {
   }, []);
 
   return (
-    <div>
-      {/* {console.log("inside main page return")} */}
-      <h1 className="text-center">Graph Dashboard</h1>
-      {data.length ? <CounterBanner></CounterBanner> : <h1>Loading.....</h1>}
-      {data.length ? <Line1 {...data}></Line1> : <h1>Loading....</h1>}
-      <Bar1></Bar1>
-      {data.length ? <OSbased {...data}></OSbased> : <h1>Loading.....</h1>}
+    <div className={Styles.mainCont}>
+      <Topbar></Topbar>
+      <Sidebar></Sidebar>
+      <div className={Styles.graphCont}>
+        {data.length ? <CounterBanner></CounterBanner> : <h1>Loading.....</h1>}
+        <div className={Styles.slectedgraphDiv}>
+          <div className={Styles.slectedgraphLeftDiv}>
+            {data.length ? <Line1 {...data}></Line1> : <h1>Loading....</h1>}
+          </div>
+          <div className={Styles.slectedgraphRightDiv}>
+            <div className={Styles.graphNameNdetails}>
+              <h2 className={Styles.graphName}>Name & Type of Graph</h2>
+              <p className={Styles.axesDetails}>x - "Hello", y - "Challo"</p>
+            </div>
+            <div className={Styles.otherDetailsDiv}>
+              <p className={Styles.majorDetails}>
+                lorem ipsum dollar lorem ipsum dollar lorem ipsum dollar
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className={Styles.nxtGraphsContDiv}>
+          <h2 className={Styles.nxtGraphsHead}></h2>
+          <div className={Styles.nextgraphs}>
+            <div className={Styles.nextGraphCont}>
+              {data.length ? <Line1 {...data}></Line1> : <h1>Loading....</h1>}
+            </div>
+            <p className={Styles.nxtGraphName}>Line Graph</p>
+          </div>
+          <div className={Styles.nextgraphs}>
+            <div className={Styles.nextGraphCont}>
+              <Bar1></Bar1>
+            </div>
+            <p className={Styles.nxtGraphName}>BAR Graph</p>
+          </div>
+          <div className={Styles.nextgraphs}>
+            <div className={Styles.nextGraphCont}>
+              {data.length ? (
+                <OSbased {...data}></OSbased>
+              ) : (
+                <h1>Loading.....</h1>
+              )}{" "}
+            </div>
+            <p className={Styles.nxtGraphName}>OS based</p>
+          </div>
+          <div className={Styles.nextgraphs}>
+            {data.length ? <Line1 {...data}></Line1> : <h1>Loading....</h1>}
+            <div className={Styles.nextGraphCont}>Line Graph</div>
+            <p className={Styles.nxtGraphName}></p>
+          </div>
+          <div className={Styles.nextgraphs}>
+            <div className={Styles.nextGraphCont}>
+              <Bar1></Bar1>
+            </div>
+            <p className={Styles.nxtGraphName}>BAR Graph</p>
+          </div>
+          <div className={Styles.nextgraphs}>
+            <div className={Styles.nextGraphCont}>
+              {data.length ? (
+                <OSbased {...data}></OSbased>
+              ) : (
+                <h1>Loading.....</h1>
+              )}{" "}
+            </div>
+            <p className={Styles.nxtGraphName}>OS based</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

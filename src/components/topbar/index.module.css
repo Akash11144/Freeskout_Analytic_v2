@@ -1,0 +1,44 @@
+.mainCont {
+  width: 79%;
+  float: right;
+  background: linear-gradient(to right, #00031d, #000536);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0% 3% 0.5% 3%;
+  user-select: none;
+}
+.navOptnCont {
+  width: 30%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  float: left;
+}
+.dateTimeCont {
+  width: 30%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-direction: column;
+}
+.secDiv {
+  width: fit-content;
+  float: right;
+}
+.dateCont {
+  margin: unset;
+  margin-top: 5%;
+}
+.timeCont {
+  margin: unset;
+  /* margin-top: -5%; */
+}
+.navOptns {
+  cursor: pointer;
+}
+
+.navOptns:active {
+  transform: translateY(5px);
+}

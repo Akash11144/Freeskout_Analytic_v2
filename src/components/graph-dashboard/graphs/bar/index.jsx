@@ -9,6 +9,7 @@ import {
   YAxis,
 } from "recharts";
 import { fetchR } from "../../../utlis";
+import Styles from "../bar/index.module.css";
 
 const Bar1 = () => {
   const [data, setdata] = useState([]);
@@ -65,42 +66,44 @@ const Bar1 = () => {
   }, []);
 
   return (
-    <React.Fragment>
-      {/* {console.log("inside bar return", data)} */}
-      {data.length ? (
-        <div
-          style={{
-            width: "98%",
-            boxShadow: "0 0 5px black",
-            margin: "20px auto",
-          }}
-        >
-          <ResponsiveContainer width="100%" height={400}>
-            <BarChart
-              // width={500}
-              // height={300}
-              data={data}
-              margin={{
-                top: 20,
-                right: 10,
-                left: 0,
-                bottom: 0,
-              }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="day" />
-              <YAxis />
-              <Tooltip />
-              {/* <Legend /> */}
-              <Bar dataKey="count" fill="#db1840" />
-              {/* <Bar dataKey="uv" fill="#82ca9d" /> */}
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-      ) : (
-        <h1>loading...</h1>
-      )}
-    </React.Fragment>
+    <div className={Styles.mainCont}>
+      <React.Fragment>
+        {/* {console.log("inside bar return", data)} */}
+        {data.length ? (
+          <div
+            style={{
+              width: "98%",
+              boxShadow: "0 0 5px black",
+              margin: "20px auto",
+            }}
+          >
+            <ResponsiveContainer width="100%" height={400}>
+              <BarChart
+                // width={500}
+                // height={300}
+                data={data}
+                margin={{
+                  top: 20,
+                  right: 10,
+                  left: 0,
+                  bottom: 0,
+                }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="day" />
+                <YAxis />
+                <Tooltip />
+                {/* <Legend /> */}
+                <Bar dataKey="count" fill="#db1840" />
+                {/* <Bar dataKey="uv" fill="#82ca9d" /> */}
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        ) : (
+          <h1>loading...</h1>
+        )}
+      </React.Fragment>
+    </div>
   );
 };
 
