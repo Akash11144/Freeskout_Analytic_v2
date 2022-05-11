@@ -1,6 +1,7 @@
 import Styles from '../topbar/index.module.css'
 import companyLogo from "../routes/freeskout.png";
-import MyTimer from '../TimeFile';
+// import MyTimer from '../TimeFile';
+import Clock from '../Shubham';
 
 
 const topbar = () => {
@@ -25,7 +26,7 @@ const topbar = () => {
                     </p>
                     <p className={Styles.timeCont}>
                         Time:
-                        <MyTimer></MyTimer>
+                        <Clock></Clock>
                     </p>
                 </div>
             </div>
