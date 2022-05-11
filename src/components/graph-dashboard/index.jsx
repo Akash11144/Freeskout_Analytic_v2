@@ -7,6 +7,7 @@ import Line1 from "./graphs/line";
 import OSbased from "./graphs/os-based";
 import Topbar from "../topbar";
 import Sidebar from "../sidebar";
+import Loader from "../loadingAnimation";
 import Styles from "../graph-dashboard/index.module.css";
 
 const GraphDashboard = () => {
@@ -35,14 +36,10 @@ const GraphDashboard = () => {
         <Sidebar></Sidebar>
         <div className={Styles.mainAppCont}>
           <div className={Styles.graphContainer}>
-            {data.length ? (
-              <CounterBanner></CounterBanner>
-            ) : (
-              <h1>Loading.....</h1>
-            )}
+            {data.length ? <CounterBanner></CounterBanner> : <Loader />}
             <div className={Styles.slectedgraphDiv}>
               <div className={Styles.slectedgraphLeftDiv}>
-                {data.length ? <Line1 {...data}></Line1> : <h1>Loading....</h1>}
+                {data.length ? <Line1 {...data}></Line1> : <Loader />}
               </div>
               <div className={Styles.slectedgraphRightDiv}>
                 <div className={Styles.graphNameNdetails}>
@@ -62,11 +59,7 @@ const GraphDashboard = () => {
               <h2 className={Styles.nxtGraphsHead}></h2>
               <div className={Styles.nextgraphs}>
                 <div className={Styles.nextGraphCont}>
-                  {data.length ? (
-                    <Line1 {...data}></Line1>
-                  ) : (
-                    <h1>Loading....</h1>
-                  )}
+                  {data.length ? <Line1 {...data}></Line1> : <Loader />}
                 </div>
                 <p className={Styles.nxtGraphName}>Line Graph</p>
               </div>
@@ -78,16 +71,12 @@ const GraphDashboard = () => {
               </div>
               <div className={Styles.nextgraphs}>
                 <div className={Styles.nextGraphCont}>
-                  {data.length ? (
-                    <OSbased {...data}></OSbased>
-                  ) : (
-                    <h1>Loading.....</h1>
-                  )}{" "}
+                  {data.length ? <OSbased {...data}></OSbased> : <Loader />}{" "}
                 </div>
                 <p className={Styles.nxtGraphName}>OS based</p>
               </div>
               <div className={Styles.nextgraphs}>
-                {data.length ? <Line1 {...data}></Line1> : <h1>Loading....</h1>}
+                {data.length ? <Line1 {...data}></Line1> : <Loader />}
                 <div className={Styles.nextGraphCont}>Line Graph</div>
                 <p className={Styles.nxtGraphName}></p>
               </div>
@@ -99,11 +88,7 @@ const GraphDashboard = () => {
               </div>
               <div className={Styles.nextgraphs}>
                 <div className={Styles.nextGraphCont}>
-                  {data.length ? (
-                    <OSbased {...data}></OSbased>
-                  ) : (
-                    <h1>Loading.....</h1>
-                  )}{" "}
+                  {data.length ? <OSbased {...data}></OSbased> : <Loader />}{" "}
                 </div>
                 <p className={Styles.nxtGraphName}>OS based</p>
               </div>

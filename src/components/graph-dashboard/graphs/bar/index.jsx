@@ -10,6 +10,7 @@ import {
 } from "recharts";
 import { fetchR } from "../../../utlis";
 import Styles from "../bar/index.module.css";
+import LoaderAnmation from "../../../loadingAnimation";
 
 const Bar1 = () => {
   const [data, setdata] = useState([]);
@@ -100,7 +101,9 @@ const Bar1 = () => {
             </ResponsiveContainer>
           </div>
         ) : (
-          <h1>loading...</h1>
+          <div className={Styles.loaderContainer}>
+            <LoaderAnmation></LoaderAnmation>
+          </div>
         )}
       </React.Fragment>
     </div>
