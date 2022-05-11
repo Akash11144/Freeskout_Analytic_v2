@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import LoaderAnmation from "../../loadingAnimation";
 import { fetchR } from "../../utlis/index";
 import Styles from "../counter-banner/index.module.css";
 const CounterBanner = () => {
@@ -98,7 +99,9 @@ const CounterBanner = () => {
           </div>
         </div>
       ) : (
-        <h1>loading badges....</h1>
+        <div>
+          <LoaderAnmation />
+        </div>
       )}
     </React.Fragment>
   );

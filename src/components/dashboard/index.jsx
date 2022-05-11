@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import dstyles from "./index.module.css";
 import { useNavigate } from "react-router";
+import Loader from "../loadingAnimation";
 
 const Dash = () => {
   const navi1 = useNavigate();
@@ -66,7 +67,9 @@ const Dash = () => {
         {data.changableData.length ? (
           <h1>{data.changableData.length}</h1>
         ) : (
-          <h1>Loading...</h1>
+          <div>
+            <Loader></Loader>
+          </div>
         )}
       </div>
       <div className={dstyles.buttonHolder}>

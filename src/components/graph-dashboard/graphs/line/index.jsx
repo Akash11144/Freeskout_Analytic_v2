@@ -8,6 +8,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import LoaderAnmation from "../../../loadingAnimation";
 import { perDay } from "../../graph-utils";
 
 const Line1 = (props) => {
@@ -48,7 +49,9 @@ const Line1 = (props) => {
           </ResponsiveContainer>
         </div>
       ) : (
-        <h1>Loading...</h1>
+        <div>
+          <LoaderAnmation></LoaderAnmation>
+        </div>
       )}
     </React.Fragment>
   );
