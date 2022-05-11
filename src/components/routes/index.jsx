@@ -11,15 +11,15 @@ import companyLogo from "../routes/freeskout.png";
 
 let localLink = "http://localhost:8000";
 let mainLink = "https://freeskout-analytic-v2-backend.herokuapp.com";
-let route = "/valid/login";
+let route = "/validate/login";
 // let route1 = "/user/c";
-let route2 = "/user/persistLogin";
+let route2 = "/validate/persistLogin";
 
 const MainRoutes = () => {
   const navi = useNavigate();
   useEffect(() => {
     let t = JSON.parse(localStorage.getItem("Freeskout-session"));
-    if (t !== null) navi("/gda");
+    // if (t !== null) navi("/gda");
   }, []);
 
   const handleLogin = async () => {
@@ -27,11 +27,12 @@ const MainRoutes = () => {
     let pass = document.getElementsByTagName("input")[1];
     let data = { name: un.value, password: pass.value };
     let r = await postR(localLink, route, data, "");
+    let r1 = await postR(localLink, route2, data, "");
     console.log(r);
     if (r.allowed) {
       console.log("cred accepted");
       localStorage.setItem("Freeskout-session", JSON.stringify(r.ares));
-      navi("/gda");
+      // navi("/gda");
       return;
     }
     if (r.ares === "user not available") {
