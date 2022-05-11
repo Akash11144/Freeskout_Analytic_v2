@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 let MyTimer = () => {
-  const [myTime, setmyTime] = useState("na");
   const timeFtn = () => {
     let currentHours;
     let date = new Date();
@@ -46,7 +45,16 @@ let MyTimer = () => {
     setmyTime(currentHours);
     console.log(myTime);
   };
-  return <span>{timeFtn()}</span>;
+  const [myTime, setmyTime] = useState("na");
+  // useEffect(() => setInterval(() => timeFtn(), 1000), []);
+  useEffect(() => {
+    let id = setInterval(() => timeFtn(), 1000);
+    return () => {
+      clearInterval(id);
+    };
+  }, []);
+
+  return <span>{myTime}</span>;
 };
 // setInterval(MyTimer, 100);
 // console.log(currentHours);
