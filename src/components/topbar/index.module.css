@@ -33,23 +33,21 @@
   margin-left: -10%;
 }
 .dateTimeCont {
-  width: 30%;
+  width: 15%;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
   flex-direction: column;
 }
 .secDiv {
-  width: fit-content;
+  width: 100%;
   float: right;
 }
 .dateCont {
   margin: unset;
-  margin-top: 5%;
 }
 .timeCont {
   margin: unset;
-  /* margin-top: -5%; */
 }
 .navOptns {
   cursor: pointer;

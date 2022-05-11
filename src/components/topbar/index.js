@@ -1,7 +1,7 @@
 import Styles from '../topbar/index.module.css'
 import companyLogo from "../routes/freeskout.png";
-// import MyTimer from '../TimeFile';
-import Clock from '../Shubham';
+import Calendar from "../Calendar/DateFile"
+import Time from "../Calendar/TimeFile"
 
 
 const topbar = () => {
@@ -22,11 +22,11 @@ const topbar = () => {
                 <div className={Styles.secDiv}>
                     <p className={Styles.dateCont}>
                         Date:
-                        <DateSet />
+                        <Calendar></Calendar>
                     </p>
                     <p className={Styles.timeCont}>
                         Time:
-                        <Clock></Clock>
+                        <Time></Time>
                     </p>
                 </div>
             </div>
