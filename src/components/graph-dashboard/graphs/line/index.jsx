@@ -44,7 +44,6 @@ const Line1 = (props) => {
               <XAxis dataKey="name" />
               <YAxis />
               <Tooltip />
-              {/* <Legend /> */}
             </LineChart>
           </ResponsiveContainer>
         </div>
