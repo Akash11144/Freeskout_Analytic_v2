@@ -27,7 +27,7 @@
   align-items: flex-start;
   margin-top: 1%;
   padding: 3% 2%;
-  background-color: blueviolet;
+  background-color: rgb(2, 9, 69);
 }
 .slectedgraphLeftDiv {
   width: 59%;
@@ -38,6 +38,9 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  border-left: 5px solid grey;
+  padding: 1.5% 1%;
+  margin-left: 5%;
 }
 .graphNameNdetails {
   display: flex;
@@ -48,17 +51,23 @@
 .graphName {
   margin: unset;
   font-weight: 600;
+  color: rgba(245, 245, 245, 1);
 }
 .axesDetails {
   margin: unset;
+  color: rgba(245, 245, 245, 0.582);
+  margin: 3% 0;
 }
 .otherDetailsDiv {
-  padding: 1% 1.5%;
 }
 .majorDetails {
+  padding: 1% 1.5%;
   margin: unset;
   letter-spacing: 0.5px;
-  line-height: 0.5;
+  line-height: 1.5;
+  width: 75%;
+  margin: 0 auto;
+  color: rgba(245, 245, 245, 0.864);
 }
 
 .nxtGraphsContDiv {

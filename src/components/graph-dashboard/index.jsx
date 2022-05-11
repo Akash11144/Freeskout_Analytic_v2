@@ -36,7 +36,8 @@ const GraphDashboard = () => {
         <Sidebar></Sidebar>
         <div className={Styles.mainAppCont}>
           <div className={Styles.graphContainer}>
-            {data.length ? <CounterBanner></CounterBanner> : <Loader />}
+            {/* {data.length ? <CounterBanner></CounterBanner> : <Loader />} */}
+            <CounterBanner></CounterBanner>
             <div className={Styles.slectedgraphDiv}>
               <div className={Styles.slectedgraphLeftDiv}>
                 {data.length ? <Line1 {...data}></Line1> : <Loader />}
@@ -50,6 +51,8 @@ const GraphDashboard = () => {
                 </div>
                 <div className={Styles.otherDetailsDiv}>
                   <p className={Styles.majorDetails}>
+                    lorem ipsum dollar lorem ipsum dollar lorem ipsum dollar
+                    lorem ipsum dollar lorem ipsum dollar lorem ipsum dollar
                     lorem ipsum dollar lorem ipsum dollar lorem ipsum dollar
                   </p>
                 </div>

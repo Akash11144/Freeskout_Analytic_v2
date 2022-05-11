@@ -51,58 +51,94 @@ const CounterBanner = () => {
   return (
     <React.Fragment>
       {console.log("inside counter dashboard return")}
-      {data.length ? (
-        <div className={Styles.mainCont}>
-          <div className={Styles.tabsCont}>
-            <div className={Styles.tabs}>
-              <span className={Styles.deviceName}>
-                All-{""}
-                <span className={Styles.deviceNumber}> {data[0].count}</span>
+      <div className={Styles.mainCont}>
+        <div className={Styles.tabsCont}>
+          <div className={Styles.tabs}>
+            <span className={Styles.deviceName}>
+              All-{""}
+              <span className={Styles.deviceNumber}>
+                {data.length ? (
+                  <span>{data[0].count}</span>
+                ) : (
+                  <LoaderAnmation></LoaderAnmation>
+                )}{" "}
               </span>
-            </div>
-            <div className={Styles.tabs}>
-              <span className={Styles.deviceName}>
-                Windows-{""}
-                <span className={Styles.deviceNumber}> {data[1].count}</span>
+            </span>
+          </div>
+          <div className={Styles.tabs}>
+            <span className={Styles.deviceName}>
+              Windows-{""}
+              <span className={Styles.deviceNumber}>
+                {data.length ? (
+                  <span> {data[1].count}</span>
+                ) : (
+                  <LoaderAnmation></LoaderAnmation>
+                )}
               </span>
-            </div>
-            <div className={Styles.tabs}>
-              <span className={Styles.deviceName}>
-                IOS-{""}
-                <span className={Styles.deviceNumber}> {data[2].count}</span>
+            </span>
+          </div>
+          <div className={Styles.tabs}>
+            <span className={Styles.deviceName}>
+              IOS-{""}
+              <span className={Styles.deviceNumber}>
+                {data.length ? (
+                  <span>{data[2].count}</span>
+                ) : (
+                  <LoaderAnmation></LoaderAnmation>
+                )}{" "}
               </span>
-            </div>
-            <div className={Styles.tabs}>
-              <span className={Styles.deviceName}>
-                Android-{""}
-                <span className={Styles.deviceNumber}> {data[3].count}</span>
+            </span>
+          </div>
+          <div className={Styles.tabs}>
+            <span className={Styles.deviceName}>
+              Android-{""}
+              <span className={Styles.deviceNumber}>
+                {data.length ? (
+                  <span> {data[3].count}</span>
+                ) : (
+                  <LoaderAnmation></LoaderAnmation>
+                )}
               </span>
-            </div>
-            <div className={Styles.tabs}>
-              <span className={Styles.deviceName}>
-                Desktop-{""}
-                <span className={Styles.deviceNumber}> {data[4].count}</span>
+            </span>
+          </div>
+          <div className={Styles.tabs}>
+            <span className={Styles.deviceName}>
+              Desktop-{""}
+              <span className={Styles.deviceNumber}>
+                {data.length ? (
+                  <span>{data[4].count}</span>
+                ) : (
+                  <LoaderAnmation></LoaderAnmation>
+                )}{" "}
               </span>
-            </div>
-            <div className={Styles.tabs}>
-              <span className={Styles.deviceName}>
-                Mobile-{""}
-                <span className={Styles.deviceNumber}> {data[6].count}</span>
+            </span>
+          </div>
+          <div className={Styles.tabs}>
+            <span className={Styles.deviceName}>
+              Mobile-{""}
+              <span className={Styles.deviceNumber}>
+                {data.length ? (
+                  <span> {data[6].count}</span>
+                ) : (
+                  <LoaderAnmation></LoaderAnmation>
+                )}
               </span>
-            </div>
-            <div className={Styles.tabs}>
-              <span className={Styles.deviceName}>
-                IPad-{""}
-                <span className={Styles.deviceNumber}> {data[5].count}</span>
+            </span>
+          </div>
+          <div className={Styles.tabs}>
+            <span className={Styles.deviceName}>
+              IPad-{""}
+              <span className={Styles.deviceNumber}>
+                {data.length ? (
+                  <span> {data[5].count}</span>
+                ) : (
+                  <LoaderAnmation></LoaderAnmation>
+                )}
               </span>
-            </div>
+            </span>
           </div>
         </div>
-      ) : (
-        <div>
-          <LoaderAnmation />
-        </div>
-      )}
+      </div>
     </React.Fragment>
   );
 };
