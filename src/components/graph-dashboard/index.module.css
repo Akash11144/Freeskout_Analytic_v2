@@ -12,7 +12,6 @@
   left: 20%;
   top: 10%;
   width: 80%;
-  background-color: red;
   height: 90vh;
   overflow-y: auto;
   overflow-x: hidden;
@@ -63,15 +62,11 @@
 }
 
 .nxtGraphsContDiv {
-  background-color: blue;
   padding: 1% 2%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: flex-start;
-  /* height: 40vh; */
-  /* overflow-y: auto;
-  overflow-x: hidden; */
 }
 .nextgraphs {
   width: 31%;
