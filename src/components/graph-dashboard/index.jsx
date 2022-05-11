@@ -76,9 +76,10 @@ const GraphDashboard = () => {
                 <p className={Styles.nxtGraphName}>OS based</p>
               </div>
               <div className={Styles.nextgraphs}>
-                {data.length ? <Line1 {...data}></Line1> : <Loader />}
-                <div className={Styles.nextGraphCont}>Line Graph</div>
-                <p className={Styles.nxtGraphName}></p>
+                <div className={Styles.nextGraphCont}>
+                  {data.length ? <Line1 {...data}></Line1> : <Loader />}
+                </div>
+                <p className={Styles.nxtGraphName}>Line Graph</p>
               </div>
               <div className={Styles.nextgraphs}>
                 <div className={Styles.nextGraphCont}>

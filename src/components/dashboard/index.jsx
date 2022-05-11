@@ -105,7 +105,9 @@ const Dash = () => {
           ))}
         </div>
       ) : (
-        <div>Loading...</div>
+        <div>
+          <Loader />
+        </div>
       )}
     </div>
   );
