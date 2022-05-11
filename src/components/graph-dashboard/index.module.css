@@ -5,13 +5,12 @@
   user-select: none;
 }
 .sidePlusMain {
-  transform: translateY(10vh);
   position: relative;
 }
 .mainAppCont {
   position: absolute;
   left: 20%;
-  top: 0%;
+  top: 10%;
   width: 80%;
   background-color: red;
   height: 90vh;

@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 const sidebar = () => {
     return (
         <div className={Styles.mainCont}>
+            <div className={Styles.stars}></div>
+            <div className={Styles.stars2}></div>
+            <div className={Styles.stars3}></div>
             <h3 className={Styles.hiCOnt}>Hi<span className={Styles.usernameCont}>  Admin</span> ,</h3>
             <div className={Styles.optnContainer}>
                 <div className={Styles.optsGroup} id="optOne">Option One</div>
