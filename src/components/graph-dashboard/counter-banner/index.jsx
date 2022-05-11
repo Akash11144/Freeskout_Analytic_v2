@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import LoaderAnmation from "../../loadingAnimation";
+// import LoaderAnmation from "../../loadingAnimation";
 import { fetchR } from "../../utlis/index";
 import Styles from "../counter-banner/index.module.css";
 const CounterBanner = () => {
@@ -60,7 +60,10 @@ const CounterBanner = () => {
                 {data.length ? (
                   <span>{data[0].count}</span>
                 ) : (
-                  <LoaderAnmation></LoaderAnmation>
+                  <div className={Styles.loaderCont}>
+                    {" "}
+                    <LoaderAnmation></LoaderAnmation>
+                  </div>
                 )}{" "}
               </span>
             </span>
@@ -72,7 +75,10 @@ const CounterBanner = () => {
                 {data.length ? (
                   <span> {data[1].count}</span>
                 ) : (
-                  <LoaderAnmation></LoaderAnmation>
+                  <div className={Styles.loaderCont}>
+                    {" "}
+                    <LoaderAnmation></LoaderAnmation>
+                  </div>
                 )}
               </span>
             </span>
@@ -84,7 +90,10 @@ const CounterBanner = () => {
                 {data.length ? (
                   <span>{data[2].count}</span>
                 ) : (
-                  <LoaderAnmation></LoaderAnmation>
+                  <div className={Styles.loaderCont}>
+                    {" "}
+                    <LoaderAnmation></LoaderAnmation>
+                  </div>
                 )}{" "}
               </span>
             </span>
@@ -96,7 +105,10 @@ const CounterBanner = () => {
                 {data.length ? (
                   <span> {data[3].count}</span>
                 ) : (
-                  <LoaderAnmation></LoaderAnmation>
+                  <div className={Styles.loaderCont}>
+                    {" "}
+                    <LoaderAnmation></LoaderAnmation>
+                  </div>
                 )}
               </span>
             </span>
@@ -108,7 +120,10 @@ const CounterBanner = () => {
                 {data.length ? (
                   <span>{data[4].count}</span>
                 ) : (
-                  <LoaderAnmation></LoaderAnmation>
+                  <div className={Styles.loaderCont}>
+                    {" "}
+                    <LoaderAnmation></LoaderAnmation>
+                  </div>
                 )}{" "}
               </span>
             </span>
@@ -120,7 +135,10 @@ const CounterBanner = () => {
                 {data.length ? (
                   <span> {data[6].count}</span>
                 ) : (
-                  <LoaderAnmation></LoaderAnmation>
+                  <div className={Styles.loaderCont}>
+                    {" "}
+                    <LoaderAnmation></LoaderAnmation>
+                  </div>
                 )}
               </span>
             </span>
@@ -132,7 +150,10 @@ const CounterBanner = () => {
                 {data.length ? (
                   <span> {data[5].count}</span>
                 ) : (
-                  <LoaderAnmation></LoaderAnmation>
+                  <div className={Styles.loaderCont}>
+                    {" "}
+                    <LoaderAnmation></LoaderAnmation>
+                  </div>
                 )}
               </span>
             </span>
@@ -144,3 +165,15 @@ const CounterBanner = () => {
 };
 
 export default CounterBanner;
+
+const LoaderAnmation = () => {
+  return (
+    <div className={Styles.mainCont}>
+      <div className={Styles.spinnerBox}>
+        <div className={Styles.circleBorder}>
+          <div className={Styles.circleCore}></div>
+        </div>
+      </div>
+    </div>
+  );
+};
