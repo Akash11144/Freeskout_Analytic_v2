@@ -1,5 +1,5 @@
 .mainCont {
-  background-color: antiquewhite;
+  /* background-color: antiquewhite; */
   margin-top: 1%;
 }
 .tabsCont {
@@ -14,10 +14,23 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  border: 2px solid rgba(0, 4, 44, 1);
+  padding: 5px 7.5px;
+  border-radius: 3.75px;
+  box-shadow: 1px 1px 2px black;
 }
-
+.deviceName:active {
+  transform: translateY(5px);
+  transition-duration: 200ms;
+}
+.deviceName:hover {
+  padding: 5px 7.5px;
+  background-color: aliceblue;
+  border-radius: 3.75px;
+  border-color: aliceblue;
+  box-shadow: 1px 1px 2px rgba(0, 4, 44, 1);
+}
 /* Loader Animation Code */
-/* KEYFRAMES */
 
 @keyframes spin {
   from {
