@@ -1,5 +1,8 @@
 import Styles from '../topbar/index.module.css'
 import companyLogo from "../routes/freeskout.png";
+import MyTimer from '../TimeFile';
+
+
 const topbar = () => {
     return (
         <div className={Styles.mainCont}>
@@ -22,7 +25,7 @@ const topbar = () => {
                     </p>
                     <p className={Styles.timeCont}>
                         Time:
-                        <TimeSet />
+                        <MyTimer></MyTimer>
                     </p>
                 </div>
             </div>
@@ -30,7 +33,6 @@ const topbar = () => {
     )
 }
 export default topbar;
-
 const DateSet = () => {
     let date = new Date
     let currentDate = date.getDate()
@@ -82,34 +84,4 @@ const DateSet = () => {
         <span className={Styles.date}>{fullDate}</span>
     )
 }
-const TimeSet = () => {
-    let date = new Date
-    let currentHours = 'na';
-    let currentMinutes = date.getMinutes()
-    let selectedHours = date.getHours();
-    switch (true) {
-        case (selectedHours == 0): {
-            currentHours = " " + 0 + ":" + currentMinutes
-            break;
-        }
-        case (selectedHours == 12): {
-            currentHours = " " + 12 + ":" + currentMinutes
-            break;
-        }
-        case (selectedHours > 12 && selectedHours != 0 && selectedHours != 12): {
-            currentHours = " " + selectedHours - 12 + ":" + currentMinutes + " PM"
-            break;
-        }
-        case (selectedHours < 12): {
-            currentHours = " " + selectedHours + ":" + currentMinutes + " AM"
-            break;
-        }
-        default:
-            currentHours = " " + " na ";
 
-    }
-    let fullTime = " " + currentHours;
-    return (
-        <span className={Styles.time}>{fullTime}</span>
-    );
-}
