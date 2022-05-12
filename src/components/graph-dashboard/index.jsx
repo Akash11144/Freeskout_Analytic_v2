@@ -58,42 +58,50 @@ const GraphDashboard = () => {
               </div>
             </div>
             <div className={Styles.nxtGraphsContDiv}>
-              <h2 className={Styles.nxtGraphsHead}></h2>
-              <div className={Styles.nextgraphs}>
-                <div className={Styles.nextGraphCont}>
-                  {data.length ? <Line1 {...data}></Line1> : <Loader />}
+              <h2 className={Styles.nxtGraphsHead}>Related Graphs</h2>
+              <div className={Styles.nxtGraphsCont}>
+                <div className={Styles.nextGraphSecCont}>
+                  <div className={Styles.nextgraphs}>
+                    <div className={Styles.nextGraphCont}>
+                      {data.length ? <Line1 {...data}></Line1> : <Loader />}
+                    </div>
+                    <p className={Styles.nxtGraphName}>Line Graph</p>
+                  </div>
+                  <div className={Styles.nextgraphs}>
+                    <div className={Styles.nextGraphCont}>
+                      <Bar1></Bar1>
+                    </div>
+                    <p className={Styles.nxtGraphName}>BAR Graph</p>
+                  </div>
                 </div>
-                <p className={Styles.nxtGraphName}>Line Graph</p>
-              </div>
-              <div className={Styles.nextgraphs}>
-                <div className={Styles.nextGraphCont}>
-                  <Bar1></Bar1>
+                <div className={Styles.nextGraphSecCont}>
+                  <div className={Styles.nextgraphs}>
+                    <div className={Styles.nextGraphCont}>
+                      {data.length ? <OSbased {...data}></OSbased> : <Loader />}{" "}
+                    </div>
+                    <p className={Styles.nxtGraphName}>OS based</p>
+                  </div>
+                  <div className={Styles.nextgraphs}>
+                    <div className={Styles.nextGraphCont}>
+                      {data.length ? <Line1 {...data}></Line1> : <Loader />}
+                    </div>
+                    <p className={Styles.nxtGraphName}>Line Graph</p>
+                  </div>
                 </div>
-                <p className={Styles.nxtGraphName}>BAR Graph</p>
-              </div>
-              <div className={Styles.nextgraphs}>
-                <div className={Styles.nextGraphCont}>
-                  {data.length ? <OSbased {...data}></OSbased> : <Loader />}{" "}
+                <div className={Styles.nextGraphSecCont}>
+                  <div className={Styles.nextgraphs}>
+                    <div className={Styles.nextGraphCont}>
+                      <Bar1></Bar1>
+                    </div>
+                    <p className={Styles.nxtGraphName}>BAR Graph</p>
+                  </div>
+                  <div className={Styles.nextgraphs}>
+                    <div className={Styles.nextGraphCont}>
+                      {data.length ? <OSbased {...data}></OSbased> : <Loader />}{" "}
+                    </div>
+                    <p className={Styles.nxtGraphName}>OS based</p>
+                  </div>
                 </div>
-                <p className={Styles.nxtGraphName}>OS based</p>
-              </div>
-              <div className={Styles.nextgraphs}>
-                <div className={Styles.nextGraphCont}>
-                  {data.length ? <Line1 {...data}></Line1> : <Loader />}
-                </div>
-                <p className={Styles.nxtGraphName}>Line Graph</p>
-              </div>
-              <div className={Styles.nextgraphs}>
-                <div className={Styles.nextGraphCont}>
-                  <Bar1></Bar1>
-                </div>
-                <p className={Styles.nxtGraphName}>BAR Graph</p>
-              </div>
-              <div className={Styles.nextgraphs}>
-                <div className={Styles.nextGraphCont}>
-                  {data.length ? <OSbased {...data}></OSbased> : <Loader />}{" "}
-                </div>
-                <p className={Styles.nxtGraphName}>OS based</p>
               </div>
             </div>
           </div>

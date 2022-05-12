@@ -7,10 +7,26 @@ import {
   Tooltip,
   XAxis,
   YAxis,
+  Legend,
 } from "recharts";
 import { fetchR } from "../../../utlis";
 import Styles from "../bar/index.module.css";
 import LoaderAnmation from "../../../loadingAnimation";
+const getPath = (x, y, width, height) =>
+  `M${x},${y + height}
+   C${x + width / 3},${y + height} ${x + width / 2},${y + height / 3} ${
+    x + width / 2
+  }, ${y}
+   C${x + width / 2},${y + height / 3} ${x + (2 * width) / 3},${y + height} ${
+    x + width
+  }, ${y + height}
+   Z`;
+
+const TriangleBar = (props) => {
+  const { fill, x, y, width, height } = props;
+
+  return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
+};
 
 const Bar1 = () => {
   const [data, setdata] = useState([]);
@@ -69,13 +85,15 @@ const Bar1 = () => {
   return (
     <div className={Styles.mainCont}>
       <React.Fragment>
-        {/* {console.log("inside bar return", data)} */}
         {data.length ? (
           <div
             style={{
+              background: "rgba(255, 255, 255, 0.3)",
               width: "98%",
+              borderRadius: "10%",
               boxShadow: "0 0 5px black",
               margin: "20px auto",
+              padding: "7% 6% 7% 0",
             }}
           >
             <ResponsiveContainer width="100%" height={400}>
@@ -84,19 +102,37 @@ const Bar1 = () => {
                 // height={300}
                 data={data}
                 margin={{
-                  top: 20,
-                  right: 10,
+                  top: 10,
+                  right: 5,
                   left: 0,
-                  bottom: 0,
+                  bottom: 3,
                 }}
               >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="day" />
-                <YAxis />
-                <Tooltip />
-                {/* <Legend /> */}
-                <Bar dataKey="count" fill="#db1840" />
-                {/* <Bar dataKey="uv" fill="#82ca9d" /> */}
+                <CartesianGrid
+                  strokeDasharray="10 10"
+                  stroke="rgba(102, 100, 100, 0.07)"
+                />
+                <XAxis dataKey="day" stroke="rgb(2, 9, 69)" />
+                <YAxis stroke="rgb(2, 9, 69)" />
+                <Tooltip cursor={{ fill: "transparent" }} />
+                {/* <Legend
+                  width={100}
+                  wrapperStyle={{
+                    top: 20,
+                    right: 10,
+                    backgroundColor: "(rgba(255,255,255,0.3)",
+                    border: "1px solid #d5d5d5",
+                    borderRadius: 3,
+                    lineHeight: "10px",
+                    padding: "1% 2%",
+                  }}
+                /> */}
+                <Bar
+                  dataKey="count"
+                  fill="#1adb80"
+                  shape={<TriangleBar />}
+                  barSize={100}
+                />
               </BarChart>
             </ResponsiveContainer>
           </div>
