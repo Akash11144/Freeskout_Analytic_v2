@@ -13,7 +13,7 @@
 .deviceName {
   display: flex;
   justify-content: space-evenly;
-  color: rgba(0, 4n, 44, 21);
+  color: rgba(0, 4, 44, 1);
   font-weight: 600;
   align-items: center;
   border: 2px solid rgba(0, 4, 44, 1);

@@ -27,7 +27,7 @@
   align-items: flex-start;
   margin-top: 1%;
   padding: 3% 2%;
-  background-color: rgb(2, 9, 69);
+  background-color: rgb(2, 9, 69, 1);
 }
 .slectedgraphLeftDiv {
   width: 59%;

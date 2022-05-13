@@ -8,6 +8,7 @@ import OSbased from "./graphs/os-based";
 import Topbar from "../topbar";
 import Sidebar from "../sidebar";
 import Loader from "../loadingAnimation";
+import MainGraph from "../graph-dashboard/mainGraph";
 import Styles from "../graph-dashboard/index.module.css";
 
 const GraphDashboard = () => {
@@ -39,7 +40,7 @@ const GraphDashboard = () => {
             <CounterBanner></CounterBanner>
             <div className={Styles.slectedgraphDiv}>
               <div className={Styles.slectedgraphLeftDiv}>
-                {data.length ? <Line1 {...data}></Line1> : <Loader />}
+                {data.length ? <MainGraph {...data}></MainGraph> : <Loader />}
               </div>
               <div className={Styles.slectedgraphRightDiv}>
                 <div className={Styles.graphNameNdetails}>

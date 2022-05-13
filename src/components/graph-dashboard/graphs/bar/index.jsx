@@ -96,7 +96,7 @@ const Bar1 = () => {
               padding: "7% 6% 7% 0",
             }}
           >
-            <ResponsiveContainer width="100%" height={400}>
+            <ResponsiveContainer width="100%" height={350}>
               <BarChart
                 // width={500}
                 // height={300}
