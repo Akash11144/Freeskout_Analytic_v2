@@ -18,8 +18,21 @@ const GraphDashboard = () => {
   useEffect(() => {
     // console.log("inside graph main page");
     const fetchData = async () => {
-      if (JSON.parse(localStorage.getItem("Freeskout-session")) === null) {
+      let ls = JSON.parse(localStorage.getItem("Freeskout-session"));
+      if (ls === null) {
+        console.log("token not found in local storage", ls);
         // navi1("/");
+      } else {
+        let r1 = await fetch("http://localhost:8000/validate/persistLogin", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${ls}`,
+          },
+        });
+        let r2 = await r1.json();
+        console.log(r2);
+        alert(`welcome ${r2.ares.name}`);
       }
       let link =
         "https://freeskout-analytic-v2-backend.herokuapp.com/user/getAll";
