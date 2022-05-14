@@ -38,7 +38,7 @@ const MainGraph = (props) => {
       {data.length ? (
         <div
           style={{
-            background: "rgba(255, 255, 255, 0.3)",
+            background: "rgba(0, 0, 0, 0.3)",
             width: "98%",
             borderRadius: "50px",
             boxShadow: "0 0 5px black",
@@ -46,24 +46,35 @@ const MainGraph = (props) => {
             padding: "7% 6% 7% 0",
           }}
         >
-          <ResponsiveContainer width="100%" height={250}>
+          <ResponsiveContainer width="100%" height={300}>
             <AreaChart
-              width={100}
-              height={300}
               data={data}
               margin={{
-                top: 10,
+                top: 1,
                 right: 5,
                 left: 0,
                 bottom: 3,
               }}
             >
-              <Area type="monotone" dataKey="iOS" stroke="#8884d8" />
-              <Area type="monotone" dataKey="Android" stroke="#db1840" />
-              <Area type="monotone" dataKey="Windows" stroke="#248624" />
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
+              <Area type="monotone" dataKey="iOS" stroke="black" fill="grey" />
+              <Area
+                type="monotone"
+                dataKey="Android"
+                stroke="blue"
+                fill="cadetblue"
+              />
+              <Area
+                type="monotone"
+                dataKey="Windows"
+                stroke="red"
+                fill="pink"
+              />
+              <CartesianGrid
+                strokeDasharray="5 5"
+                stroke="rgba(255,255,255,0.3)"
+              />
+              <XAxis dataKey="name" stroke="#fff" />
+              <YAxis stroke="#fff" />
               <Tooltip />
               {/* <Legend /> */}
             </AreaChart>

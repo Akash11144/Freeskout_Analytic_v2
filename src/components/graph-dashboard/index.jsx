@@ -10,6 +10,7 @@ import Sidebar from "../sidebar";
 import Loader from "../loadingAnimation";
 import MainGraph from "../graph-dashboard/mainGraph";
 import Styles from "../graph-dashboard/index.module.css";
+import DivDivider from "../divDivider";
 
 const GraphDashboard = () => {
   const navi1 = useNavigate();
@@ -57,6 +58,9 @@ const GraphDashboard = () => {
                   </p>
                 </div>
               </div>
+            </div>
+            <div className={Styles.dividerDiv}>
+              <DivDivider></DivDivider>
             </div>
             <div className={Styles.nxtGraphsContDiv}>
               <h2 className={Styles.nxtGraphsHead}>Related Graphs</h2>

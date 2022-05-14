@@ -68,12 +68,12 @@ const OSbased = (props) => {
       {data.length ? (
         <div
           style={{
-            background: "rgba(255, 255, 255, 0.3)",
-            width: "98%",
-            borderRadius: "10%",
-            boxShadow: "0 0 5px black",
-            margin: "20px auto",
-            padding: "7% 6% 7% 0",
+            padding: "7% 0%",
+            background: "rgba( 255, 255, 255, 0.45 )",
+            boxShadow: " 0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+            backdropFilter: " blur( 6.5px )",
+            WebkitBackdropFilter: "blur(6.5px)",
+            borderRadius: "10px",
           }}
         >
           <ResponsiveContainer width="100%" height={350}>

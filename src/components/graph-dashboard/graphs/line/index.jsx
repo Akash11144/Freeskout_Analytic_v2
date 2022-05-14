@@ -27,12 +27,12 @@ const Line1 = (props) => {
       {data.length ? (
         <div
           style={{
-            background: "rgba(255, 255, 255, 0.3)",
-            width: "98%",
-            borderRadius: "10%",
-            boxShadow: "0 0 5px black",
-            margin: "20px auto",
             padding: "7% 6% 7% 0",
+            background: "rgba( 255, 255, 255, 0.45 )",
+            boxShadow: " 0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+            backdropFilter: " blur( 6.5px )",
+            WebkitBackdropFilter: "blur(6.5px)",
+            borderRadius: "10px",
           }}
         >
           <ResponsiveContainer width="100%" height={350}>
@@ -41,8 +41,8 @@ const Line1 = (props) => {
               margin={{
                 top: 10,
                 right: 5,
-                left: 0,
-                bottom: 3,
+                left: 15,
+                bottom: 17,
               }}
             >
               <Line
@@ -60,19 +60,19 @@ const Line1 = (props) => {
                 label={{
                   value: "Date",
                   position: "bottom",
-                  stroke: "#fff",
+                  stroke: "rgba(0,0,0,0.6)",
                   letterSpacing: "2px",
                   fontWeight: "100",
                 }}
               />
               <YAxis
                 stroke={"rgba(0,0,0,0.8)"}
-                padding={{ top: 30, bottom: 0 }}
+                padding={{ top: 20, bottom: 0 }}
                 label={{
                   value: "Users",
                   angle: -90,
-                  position: "insideLeft",
-                  stroke: "#fff",
+                  position: "left",
+                  stroke: "rgba(0,0,0,0.6)",
                   letterSpacing: "2px",
                 }}
               ></YAxis>
