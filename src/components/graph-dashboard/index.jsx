@@ -15,35 +15,11 @@ import DivDivider from "../divDivider";
 const GraphDashboard = () => {
   const navi1 = useNavigate();
   const [data, setdata] = useState([]);
-  const [person, setperson] = useState("");
   useEffect(() => {
     // console.log("inside graph main page");
     const fetchData = async () => {
-      let ls = JSON.parse(localStorage.getItem("Freeskout-session"));
-      if (ls === null) {
-        console.log("token not found in local storage", ls);
+      if (JSON.parse(localStorage.getItem("Freeskout-session")) === null) {
         // navi1("/");
-      } else {
-        let r1 = await fetch("http://localhost:8000/validate/persistLogin", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${ls}`,
-          },
-        });
-        let r2 = await r1.json();
-        console.log(r2);
-
-        if (r2.issue) navi1("/");
-        else {
-          setperson({ name: r2.output.name });
-          alert(`welcome ${r2.output.name}`);
-        }
-
-        alert(`welcome ${r2.ares.name}`);
-
-        // setperson({ name: r2.output });
-        // alert(`welcome ${r2.ares.name}`);
       }
       let link =
         "https://freeskout-analytic-v2-backend.herokuapp.com/user/getAll";
@@ -83,9 +59,7 @@ const GraphDashboard = () => {
                 </div>
               </div>
             </div>
-            <div className={Styles.dividerDiv}>
-              <DivDivider></DivDivider>
-            </div>
+            <div className={Styles.dividerDiv}></div>
             <div className={Styles.nxtGraphsContDiv}>
               <h2 className={Styles.nxtGraphsHead}>Related Graphs</h2>
               <div className={Styles.nxtGraphsCont}>
