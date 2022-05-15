@@ -32,14 +32,8 @@
   align-items: center;
   margin-left: -10%;
 }
-<<<<<<< HEAD
-.dateTimeLogoutCont {
-  width: 13%;
-  float: right;
-=======
 .dateTimeCont {
   width: 15%;
->>>>>>> parent of cb5faf2 (l)
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
@@ -47,10 +41,7 @@
 }
 .secDiv {
   width: 100%;
-<<<<<<< HEAD
-=======
   float: right;
->>>>>>> parent of cb5faf2 (l)
 }
 .dateCont {
   margin: unset;

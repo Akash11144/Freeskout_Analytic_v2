@@ -15,17 +15,14 @@ import DivDivider from "../divDivider";
 const GraphDashboard = () => {
   const navi1 = useNavigate();
   const [data, setdata] = useState([]);
+  const [person, setperson] = useState("");
   useEffect(() => {
     // console.log("inside graph main page");
     const fetchData = async () => {
       let ls = JSON.parse(localStorage.getItem("Freeskout-session"));
       if (ls === null) {
         console.log("token not found in local storage", ls);
-<<<<<<< HEAD
-        navi1("/");
-=======
         // navi1("/");
->>>>>>> parent of cb5faf2 (l)
       } else {
         let r1 = await fetch("http://localhost:8000/validate/persistLogin", {
           method: "GET",
@@ -36,20 +33,17 @@ const GraphDashboard = () => {
         });
         let r2 = await r1.json();
         console.log(r2);
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         if (r2.issue) navi1("/");
         else {
           setperson({ name: r2.output.name });
           alert(`welcome ${r2.output.name}`);
         }
-=======
+
         alert(`welcome ${r2.ares.name}`);
->>>>>>> parent of cb5faf2 (l)
-=======
+
         // setperson({ name: r2.output });
         // alert(`welcome ${r2.ares.name}`);
->>>>>>> parent of 695926d (cdsni)
       }
       let link =
         "https://freeskout-analytic-v2-backend.herokuapp.com/user/getAll";
@@ -64,21 +58,6 @@ const GraphDashboard = () => {
   return (
     <div className={Styles.mainGcont}>
       <Topbar></Topbar>
-<<<<<<< HEAD
-      {/* <div className={Styles.sidePlusMain}> */}
-      <Sidebar {...person}></Sidebar>
-      <div className={Styles.mainAppCont}>
-        <div className={Styles.graphContainer}>
-          <CounterBanner></CounterBanner>
-          <div className={Styles.slectedgraphDiv}>
-            <div className={Styles.slectedgraphLeftDiv}>
-              <MainGraph></MainGraph>
-            </div>
-            <div className={Styles.slectedgraphRightDiv}>
-              <div className={Styles.graphNameNdetails}>
-                <h2 className={Styles.graphName}>Name & Type of Graph</h2>
-                <p className={Styles.axesDetails}>x - "Hello", y - "Challo"</p>
-=======
       <div className={Styles.sidePlusMain}>
         <Sidebar></Sidebar>
         <div className={Styles.mainAppCont}>
@@ -87,7 +66,6 @@ const GraphDashboard = () => {
             <div className={Styles.slectedgraphDiv}>
               <div className={Styles.slectedgraphLeftDiv}>
                 {data.length ? <MainGraph {...data}></MainGraph> : <Loader />}
->>>>>>> parent of cb5faf2 (l)
               </div>
               <div className={Styles.slectedgraphRightDiv}>
                 <div className={Styles.graphNameNdetails}>
