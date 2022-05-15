@@ -1,13 +1,14 @@
 import Styles from "../sidebar/index.module.css"
 import companyLogo from "../routes/freeskout.png";
 import { Link } from "react-router-dom";
-const sidebar = () => {
+const sidebar = (props) => {
+    console.log('my' + props.name)
     return (
         <div className={Styles.mainCont}>
             <div className={Styles.stars}></div>
             <div className={Styles.stars2}></div>
             <div className={Styles.stars3}></div>
-            <h3 className={Styles.hiCOnt}>Hi<span className={Styles.usernameCont}>  Admin</span> ,</h3>
+            <h3 className={Styles.hiCOnt}>Hi<span className={Styles.usernameCont}>{props.name}</span> ,</h3>
             <div className={Styles.optnContainer}>
                 <div className={Styles.optsGroup} id="optOne">Option One</div>
                 <div className={Styles.optsGroup} id="optTwo">Option Two</div>

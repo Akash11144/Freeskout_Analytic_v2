@@ -2,9 +2,10 @@
   /* width: 100vw; */
   height: 100vh;
   user-select: none;
+  position: relative;
 }
 .sidePlusMain {
-  position: relative;
+  margin-top: 10vh;
 }
 .mainAppCont {
   position: absolute;
@@ -56,8 +57,7 @@
   color: rgba(245, 245, 245, 0.582);
   margin: 3% 0;
 }
-.otherDetailsDiv {
-}
+
 .majorDetails {
   padding: 1% 1.5%;
   margin: unset;
@@ -66,8 +66,6 @@
   width: 75%;
   margin: 0 auto;
   color: rgba(245, 245, 245, 0.864);
-}
-.dividerDiv {
 }
 .nxtGraphsHead {
   text-align: center;
