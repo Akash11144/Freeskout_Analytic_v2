@@ -9,13 +9,14 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import Loader from "../../loadingAnimation";
 import { perDay } from "../graph-utils";
 
 const MainGraph = (props) => {
-  console.log(props.name);
   const [data, setdata] = useState([]);
   useEffect(() => {
     let y = perDay(props);
+    console.log("inside os based graph");
     const ff = () => {
       let obj = [];
       for (let i = 0; i < y.length; i++) {
@@ -29,7 +30,6 @@ const MainGraph = (props) => {
       return obj;
     };
     let r = ff();
-    console.log("maingraph", r);
     setdata(r);
   }, []);
 
