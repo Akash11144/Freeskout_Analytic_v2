@@ -17,7 +17,7 @@ const MainRoutes = () => {
   const navi = useNavigate();
   useEffect(() => {
     let t = JSON.parse(localStorage.getItem("Freeskout-session"));
-    // if (t !== null) navi("/gda");
+    if (t !== null) navi("/gda");
   }, []);
 
   const handleLogin = async () => {
@@ -30,6 +30,7 @@ const MainRoutes = () => {
     else if (r.output) {
       console.log(r.output);
       localStorage.setItem("Freeskout-session", JSON.stringify(r.output));
+      navi("/gda");
     }
   };
 

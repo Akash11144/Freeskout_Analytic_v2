@@ -32,8 +32,11 @@ const GraphDashboard = () => {
         });
         let r2 = await r1.json();
         console.log(r2);
-        // setperson({ name: r2.output });
-        // alert(`welcome ${r2.ares.name}`);
+        if (r2.issue) navi1("/");
+        else {
+          setperson({ name: r2.output.name });
+          alert(`welcome ${r2.output.name}`);
+        }
       }
       // let link =
       // "https://freeskout-analytic-v2-backend.herokuapp.com/user/getAll";
