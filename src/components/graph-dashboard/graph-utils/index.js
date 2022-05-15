@@ -34,6 +34,22 @@ export const perDay = (a) => {
       }
     }
   }
-  console.log("done", pdu);
   return pdu;
+};
+
+export const perDayOS = (a) => {
+  console.log("inside ff props", a);
+  let y = perDay(a);
+  console.log("inside ff", y);
+  let obj = [];
+  for (let i = 0; i < y.length; i++) {
+    console.log("inside for");
+    let { uData } = y[i];
+    let u = uData.filter((a) => a.os_name === "iOS").length;
+    let u1 = uData.filter((a) => a.os_name === "Windows").length;
+    let u2 = uData.filter((a) => a.os_name === "Android").length;
+    obj.push({ name: y[i].name, iOS: u, Android: u2, Windows: u1 });
+  }
+  console.log("shubham", obj);
+  return obj;
 };

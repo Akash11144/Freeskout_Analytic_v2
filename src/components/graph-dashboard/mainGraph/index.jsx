@@ -9,33 +9,20 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { perDay } from "../graph-utils";
+import { perDay, perDayOS } from "../graph-utils";
 
 const MainGraph = (props) => {
   const [data, setdata] = useState([]);
   useEffect(() => {
-    let y = perDay(props);
-    const ff = () => {
-      let obj = [];
-      for (let i = 0; i < y.length; i++) {
-        console.log("inside for loop");
-        let { uData } = y[i];
-        let u = uData.filter((a) => a.os_name === "iOS").length;
-        let u1 = uData.filter((a) => a.os_name === "Windows").length;
-        let u2 = uData.filter((a) => a.os_name === "Android").length;
-        obj.push({ name: y[i].name, iOS: u, Android: u2, Windows: u1 });
-      }
-      console.log("shubham", obj);
-      return obj;
-    };
-    let r = ff();
-    console.log("maingraph", r);
+    console.log("checking props", props.length);
+    for (let i = 0; i < props.length; i++) console.log(props[i]);
+    let r = perDayOS(props);
     setdata(r);
   }, []);
 
+  //njn
   return (
     <React.Fragment>
-      {console.log("inside main page return")}
       {data.length ? (
         <div
           style={{
