@@ -16,7 +16,7 @@
   color: rgba(0, 4, 44, 1);
   font-weight: 600;
   align-items: center;
-  border: 2px solid rgba(0, 4, 44, 1);
+  border: 2px solid rgba(2, 9, 69, 1);
   padding: 5px 7.5px;
   border-radius: 3.75px;
 }
@@ -24,7 +24,7 @@
 .deviceName:hover {
   padding: 5px 7.5px;
   color: #fff;
-  background-color: rgba(0, 4, 44, 1);
+  background-color: rgba(2, 9, 69, 1);
   border-radius: 3.75px;
   box-shadow: unset;
 }

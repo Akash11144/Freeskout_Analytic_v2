@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Styles from "../mainGraph/index.module.css";
 import {
   AreaChart,
   Area,
@@ -82,7 +83,7 @@ const MainGraph = (props) => {
         </div>
       ) : (
         <div>
-          <Loader />
+          <LoaderAnmation></LoaderAnmation>
         </div>
       )}
     </React.Fragment>
@@ -90,3 +91,15 @@ const MainGraph = (props) => {
 };
 
 export default MainGraph;
+
+const LoaderAnmation = () => {
+  return (
+    <div className={Styles.mainCont}>
+      <div className={Styles.spinnerBox}>
+        <div className={Styles.circleBorder}>
+          <div className={Styles.circleCore}></div>
+        </div>
+      </div>
+    </div>
+  );
+};

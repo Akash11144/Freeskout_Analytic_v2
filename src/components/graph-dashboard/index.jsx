@@ -54,7 +54,7 @@ const GraphDashboard = () => {
           <CounterBanner></CounterBanner>
           <div className={Styles.slectedgraphDiv}>
             <div className={Styles.slectedgraphLeftDiv}>
-              {data.length ? <MainGraph {...data}></MainGraph> : <Loader />}
+              <MainGraph></MainGraph>
             </div>
             <div className={Styles.slectedgraphRightDiv}>
               <div className={Styles.graphNameNdetails}>
