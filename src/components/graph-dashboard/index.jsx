@@ -37,6 +37,7 @@ const GraphDashboard = () => {
         let r2 = await r1.json();
         console.log(r2);
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (r2.issue) navi1("/");
         else {
           setperson({ name: r2.output.name });
@@ -45,6 +46,10 @@ const GraphDashboard = () => {
 =======
         alert(`welcome ${r2.ares.name}`);
 >>>>>>> parent of cb5faf2 (l)
+=======
+        // setperson({ name: r2.output });
+        // alert(`welcome ${r2.ares.name}`);
+>>>>>>> parent of 695926d (cdsni)
       }
       let link =
         "https://freeskout-analytic-v2-backend.herokuapp.com/user/getAll";
