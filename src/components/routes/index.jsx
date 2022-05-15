@@ -12,8 +12,6 @@ import companyLogo from "../routes/freeskout.png";
 let localLink = "http://localhost:8000";
 let mainLink = "https://freeskout-analytic-v2-backend.herokuapp.com";
 let route = "/validate/login";
-// let route1 = "/user/c";
-let route2 = "/validate/persistLogin";
 
 const MainRoutes = () => {
   const navi = useNavigate();
@@ -27,24 +25,11 @@ const MainRoutes = () => {
     let pass = document.getElementsByTagName("input")[1];
     let data = { name: un.value, password: pass.value };
     let r = await postR(localLink, route, data, "");
-    let r1 = await postR(localLink, route2, data, "");
     console.log(r);
-    if (r.allowed) {
-      console.log("cred accepted");
-      localStorage.setItem("Freeskout-session", JSON.stringify(r.ares));
-      // navi("/gda");
-      return;
-    }
-    if (r.ares === "user not available") {
-      alert("User not available");
-      un.value = "";
-      pass.value = "";
-      return;
-    }
-    if (r.ares === "password not match") {
-      alert("Incorrect Password");
-      pass.value = "";
-      return;
+    if (r.issue) alert(r.issueDetail);
+    else if (r.output) {
+      console.log(r.output);
+      localStorage.setItem("Freeskout-session", JSON.stringify(r.output));
     }
   };
 
