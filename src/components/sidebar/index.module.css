@@ -606,6 +606,10 @@
   bottom: 10%;
   left: 25%;
 }
+.logoutbtn {
+  cursor: pointer;
+  margin: 2% 0;
+}
 .siteLinkBtn {
   text-decoration: none;
   color: #1adb80;

@@ -15,9 +15,16 @@ const sidebar = (props) => {
                 <div className={Styles.optsGroup} id="optThree">Option Three</div>
                 <div className={Styles.optsGroup} id="optFour">Option Four</div>
             </div>
-            <div className={Styles.siteLinkBtnContaier} >  <Link className={Styles.siteLinkBtn} to="">
-                www.freeskout.com
-            </Link></div>
+            <div className={Styles.siteLinkBtnContaier} >
+                <div className={Styles.logoutbtn}>
+                    Sign Out
+                </div>
+                <div className={Styles.siteLinkBtn}>
+                    <Link className={Styles.siteLinkBtn} to="">
+                        www.freeskout.com
+                    </Link>
+                </div>
+            </div>
         </div >
     );
 }
