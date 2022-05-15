@@ -10,7 +10,6 @@
   padding: 0% 3% 0.5% 3%;
   user-select: none;
   height: 10vh;
-  z-index: 2;
 }
 .leftMain {
   display: flex;
@@ -33,15 +32,25 @@
   align-items: center;
   margin-left: -10%;
 }
+<<<<<<< HEAD
 .dateTimeLogoutCont {
   width: 13%;
   float: right;
+=======
+.dateTimeCont {
+  width: 15%;
+>>>>>>> parent of cb5faf2 (l)
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-direction: column;
 }
 .secDiv {
   width: 100%;
+<<<<<<< HEAD
+=======
+  float: right;
+>>>>>>> parent of cb5faf2 (l)
 }
 .dateCont {
   margin: unset;
@@ -52,9 +61,7 @@
 .navOptns {
   cursor: pointer;
 }
+
 .navOptns:active {
   transform: translateY(5px);
-}
-.navOptns:hover {
-  color: red;
 }

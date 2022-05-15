@@ -18,7 +18,7 @@ const topbar = () => {
                     <span className={Styles.navOptns}>Home</span>
                 </div>
             </div>
-            <div className={Styles.dateTimeLogoutCont}>
+            <div className={Styles.dateTimeCont}>
                 <div className={Styles.secDiv}>
                     <p className={Styles.dateCont}>
                         Date:
