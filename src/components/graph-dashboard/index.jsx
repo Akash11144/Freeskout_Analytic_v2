@@ -15,23 +15,24 @@ import DivDivider from "../divDivider";
 const GraphDashboard = () => {
   const navi1 = useNavigate();
   const [data, setdata] = useState([]);
+  const [person, setperson] = useState("");
   useEffect(() => {
-    // console.log("inside graph main page");
     const fetchData = async () => {
-      let y = JSON.parse(localStorage.getItem("Freeskout-session"));
-      if (y === null) {
-        // navi1("/");
+      let ls = JSON.parse(localStorage.getItem("Freeskout-session"));
+      if (ls === null) {
+        console.log("token not found in local storage", ls);
       } else {
-        const r = await fetch("http://localhost:8000/valoidate/persistLogin", {
+        let r1 = await fetch("http://localhost:8000/validate/persistLogin", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${y}`,
+            Authorization: `Bearer ${ls}`,
           },
         });
-        console.log("persist 0 =>", r);
-        let x = await r.json();
-        console.log("persist data", x);
+        let r2 = await r1.json();
+        console.log(r2);
+        let z = r2.output.name;
+        setperson({ name: z });
       }
       // let link =
       // "https://freeskout-analytic-v2-backend.herokuapp.com/user/getAll";
@@ -47,7 +48,7 @@ const GraphDashboard = () => {
     <div className={Styles.mainGcont}>
       <Topbar></Topbar>
       <div className={Styles.sidePlusMain}>
-        <Sidebar {...data}></Sidebar>
+        <Sidebar {...person}></Sidebar>
         <div className={Styles.mainAppCont}>
           <div className={Styles.graphContainer}>
             <CounterBanner></CounterBanner>
