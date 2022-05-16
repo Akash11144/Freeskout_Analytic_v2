@@ -20,6 +20,8 @@ const MainRoutes = () => {
     // if (t !== null) navi("/gda");
   }, []);
 
+  // -----------------------------------------
+
   const handleLogin = async () => {
     let un = document.getElementsByTagName("input")[0];
     let pass = document.getElementsByTagName("input")[1];
