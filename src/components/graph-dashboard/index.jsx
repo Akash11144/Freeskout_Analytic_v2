@@ -21,9 +21,9 @@ const GraphDashboard = () => {
       if (JSON.parse(localStorage.getItem("Freeskout-session")) === null) {
         // navi1("/");
       }
-      let link =
-        "https://freeskout-analytic-v2-backend.herokuapp.com/user/getAll";
-      // let link = "http://localhost:8000/user/getAll";
+      // let link =
+      // "https://freeskout-analytic-v2-backend.herokuapp.com/user/getAll";
+      let link = "http://localhost:8000/user/getAll";
       let r = await fetchR(link);
       console.log("main page", r);
       setdata(r);
@@ -35,7 +35,7 @@ const GraphDashboard = () => {
     <div className={Styles.mainGcont}>
       <Topbar></Topbar>
       <div className={Styles.sidePlusMain}>
-        <Sidebar></Sidebar>
+        <Sidebar {...data}></Sidebar>
         <div className={Styles.mainAppCont}>
           <div className={Styles.graphContainer}>
             <CounterBanner></CounterBanner>
