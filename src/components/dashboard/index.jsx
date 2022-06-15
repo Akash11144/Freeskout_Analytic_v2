@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import dstyles from "./index.module.css";
 import { useNavigate } from "react-router";
 import Loader from "../loadingAnimation";
-
+import InformationPopUp from "../popUps/information";
 const Dash = () => {
   const navi1 = useNavigate();
   const [data, setData] = useState({
@@ -62,7 +62,7 @@ const Dash = () => {
 
   return (
     <div>
-      <h1 className={dstyles.heading}>Dashboard</h1>
+      {/* <h1 className={dstyles.heading}>Dashboard</h1>
       <div className={dstyles.main}>
         {data.changableData.length ? (
           <h1>{data.changableData.length}</h1>
@@ -108,7 +108,8 @@ const Dash = () => {
         <div>
           <Loader />
         </div>
-      )}
+      )}*/}
+      <InformationPopUp></InformationPopUp>
     </div>
   );
 };
@@ -127,8 +128,6 @@ const Profile = (props) => {
       <p>os version: {props.os_version}</p>
       <p>product manufacturer: {props.product_manufacturer}</p>
       <p>product name: {props.product_name}</p>
-      {/* <p>latitude: {props.lat}</p>
-      <p>longitude: {props.long}</p> */}
       <p>time: {props.time}</p>
     </div>
   );
