@@ -96,23 +96,34 @@ function Redir() {
   }, []);
 
   return (
-    <div className={Styles.mainCont}>
-      <div className={Styles.stars}></div>
-      <div className={Styles.stars2}></div>
-      <div className={Styles.stars3}></div>
-      <div className={Styles.LoadConatinerDiv}>
-        <div className={Styles.text}>
-          <span className={Styles.fCont}>F</span>
-          <span className={Styles.rCont}>r</span>
-          <span className={Styles.eCont}>e</span>
-          <span className={Styles.seCont}>e</span>
-          <span className={Styles.sCont}>s</span>
-          <span className={Styles.kCont}>k</span>
-          <span className={Styles.oCont}>o</span>
-          <span className={Styles.uCont}>u</span>
-          <span className={Styles.tCont}>t</span>
-        </div>
-      </div>
+    // <div className={Styles.mainCont}>
+    //   <div className={Styles.stars}></div>
+    //   <div className={Styles.stars2}></div>
+    //   <div className={Styles.stars3}></div>
+    //   <div className={Styles.LoadConatinerDiv}>
+    //     <div className={Styles.text}>
+    //       <span className={Styles.fCont}>F</span>
+    //       <span className={Styles.rCont}>r</span>
+    //       <span className={Styles.eCont}>e</span>
+    //       <span className={Styles.seCont}>e</span>
+    //       <span className={Styles.sCont}>s</span>
+    //       <span className={Styles.kCont}>k</span>
+    //       <span className={Styles.oCont}>o</span>
+    //       <span className={Styles.uCont}>u</span>
+    //       <span className={Styles.tCont}>t</span>
+    //     </div>
+    //   </div>
+    // </div>
+    <div className={Styles.section_loading}>
+      <ul className={Styles.list_bars}>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
     </div>
   );
 }
