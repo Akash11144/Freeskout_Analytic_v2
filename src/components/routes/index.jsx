@@ -8,7 +8,7 @@ import Trial from "../trial";
 import { postR } from "../utlis";
 import Styles from "../routes/index.module.css";
 import companyLogo from "../routes/freeskout.png";
-import Try1 from "../try";
+import RouteCreation from "../route-creation/layout";
 
 let localLink = "http://localhost:8000";
 let mainLink = "https://freeskout-analytic-v2-backend.herokuapp.com";
@@ -38,11 +38,11 @@ const MainRoutes = () => {
 
   return (
     <Routes>
-      <Route path="/rd" element={<Redir></Redir>}></Route>
-      <Route path="/da" element={<Dash></Dash>}></Route>
-      <Route path="/tr" element={<Trial></Trial>}></Route>
-      <Route path="/gda" element={<GraphDashboard></GraphDashboard>}></Route>
-      <Route path="/try/*" element={<Try1></Try1>}></Route>
+      <Route path="/rd" element={<Redir />}></Route>
+      <Route path="/da" element={<Dash />}></Route>
+      <Route path="/tr" element={<Trial />}></Route>
+      <Route path="/gda" element={<GraphDashboard />}></Route>
+      <Route path="/rc/*" element={<RouteCreation />}></Route>
       <Route
         path="/"
         element={

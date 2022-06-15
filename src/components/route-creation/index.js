@@ -8,7 +8,7 @@ const initialState = {
   value1: "",
 };
 
-export const Try = () => {
+export const RouteCreation = () => {
   const [Data, setData] = useState("");
 
   useEffect(() => {
@@ -70,7 +70,7 @@ export const Try = () => {
   );
 };
 
-export default Try;
+export default RouteCreation;
 
 // export const ValueContext = createContext({
 //   state: initialState,
