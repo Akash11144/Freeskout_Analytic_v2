@@ -17,10 +17,12 @@ const GraphDashboard = () => {
   const [data, setdata] = useState([]);
   const [person, setperson] = useState("");
   useEffect(() => {
-    const fetchData = async () => {
+    const checkPersistent = async () => {
       let ls = JSON.parse(localStorage.getItem("Freeskout-session"));
       if (ls === null) {
+        alert("you logout before login again");
         console.log("token not found in local storage", ls);
+        navi1("/");
       } else {
         let r1 = await fetch("http://localhost:8000/validate/persistLogin", {
           method: "GET",
@@ -31,99 +33,123 @@ const GraphDashboard = () => {
         });
         let r2 = await r1.json();
         console.log(r2);
-        let z = r2.output.name;
-        setperson({ name: z });
+        if (r2.issue) {
+          alert(r2.issueDetail);
+          navi1("/");
+        } else {
+          setperson(r2.output.name);
+          // let link =
+          // "https://freeskout-analytic-v2-backend.herokuapp.com/user/getAll";
+          let link = "http://localhost:8000/user/getAll";
+          let r = await fetchR(link);
+          console.log("main page", r);
+          setdata(r);
+        }
       }
-      // let link =
-      // "https://freeskout-analytic-v2-backend.herokuapp.com/user/getAll";
-      let link = "http://localhost:8000/user/getAll";
-      let r = await fetchR(link);
-      console.log("main page", r);
-      setdata(r);
     };
-    fetchData();
+    checkPersistent();
   }, []);
 
   return (
-    <div className={Styles.mainGcont}>
-      <Topbar></Topbar>
-      <div className={Styles.sidePlusMain}>
-        <Sidebar {...person}></Sidebar>
-        <div className={Styles.mainAppCont}>
-          <div className={Styles.graphContainer}>
-            <CounterBanner></CounterBanner>
-            <div className={Styles.slectedgraphDiv}>
-              <div className={Styles.slectedgraphLeftDiv}>
-                {data.length ? <MainGraph {...data}></MainGraph> : <Loader />}
-              </div>
-              <div className={Styles.slectedgraphRightDiv}>
-                <div className={Styles.graphNameNdetails}>
-                  <h2 className={Styles.graphName}>Name & Type of Graph</h2>
-                  <p className={Styles.axesDetails}>
-                    x - "Hello", y - "Challo"
-                  </p>
-                </div>
-                <div className={Styles.otherDetailsDiv}>
-                  <p className={Styles.majorDetails}>
-                    lorem ipsum dollar lorem ipsum dollar lorem ipsum dollar
-                    lorem ipsum dollar lorem ipsum dollar lorem ipsum dollar
-                    lorem ipsum dollar lorem ipsum dollar lorem ipsum dollar
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={Styles.dividerDiv}></div>
-            <div className={Styles.nxtGraphsContDiv}>
-              <h2 className={Styles.nxtGraphsHead}>Related Graphs</h2>
-              <div className={Styles.nxtGraphsCont}>
-                <div className={Styles.nextGraphSecCont}>
-                  <div className={Styles.nextgraphs}>
-                    <div className={Styles.nextGraphCont}>
-                      {data.length ? <Line1 {...data}></Line1> : <Loader />}
-                    </div>
-                    <p className={Styles.nxtGraphName}>Line Graph</p>
+    <React.Fragment>
+      {console.log(person)}
+      {person ? (
+        <div className={Styles.mainGcont}>
+          <Topbar></Topbar>
+          <div className={Styles.sidePlusMain}>
+            <Sidebar {...person}></Sidebar>
+            <div className={Styles.mainAppCont}>
+              <div className={Styles.graphContainer}>
+                <CounterBanner></CounterBanner>
+                <div className={Styles.slectedgraphDiv}>
+                  <div className={Styles.slectedgraphLeftDiv}>
+                    {data.length ? (
+                      <MainGraph {...data}></MainGraph>
+                    ) : (
+                      <Loader />
+                    )}
                   </div>
-                  <div className={Styles.nextgraphs}>
-                    <div className={Styles.nextGraphCont}>
-                      <Bar1></Bar1>
+                  <div className={Styles.slectedgraphRightDiv}>
+                    <div className={Styles.graphNameNdetails}>
+                      <h2 className={Styles.graphName}>Name & Type of Graph</h2>
+                      <p className={Styles.axesDetails}>
+                        x - "Hello", y - "Challo"
+                      </p>
                     </div>
-                    <p className={Styles.nxtGraphName}>BAR Graph</p>
+                    <div className={Styles.otherDetailsDiv}>
+                      <p className={Styles.majorDetails}>
+                        lorem ipsum dollar lorem ipsum dollar lorem ipsum dollar
+                        lorem ipsum dollar lorem ipsum dollar lorem ipsum dollar
+                        lorem ipsum dollar lorem ipsum dollar lorem ipsum dollar
+                      </p>
+                    </div>
                   </div>
                 </div>
-                <div className={Styles.nextGraphSecCont}>
-                  <div className={Styles.nextgraphs}>
-                    <div className={Styles.nextGraphCont}>
-                      {data.length ? <OSbased {...data}></OSbased> : <Loader />}{" "}
+                <div className={Styles.dividerDiv}></div>
+                <div className={Styles.nxtGraphsContDiv}>
+                  <h2 className={Styles.nxtGraphsHead}>Related Graphs</h2>
+                  <div className={Styles.nxtGraphsCont}>
+                    <div className={Styles.nextGraphSecCont}>
+                      <div className={Styles.nextgraphs}>
+                        <div className={Styles.nextGraphCont}>
+                          {data.length ? <Line1 {...data}></Line1> : <Loader />}
+                        </div>
+                        <p className={Styles.nxtGraphName}>Line Graph</p>
+                      </div>
+                      <div className={Styles.nextgraphs}>
+                        <div className={Styles.nextGraphCont}>
+                          <Bar1></Bar1>
+                        </div>
+                        <p className={Styles.nxtGraphName}>BAR Graph</p>
+                      </div>
                     </div>
-                    <p className={Styles.nxtGraphName}>OS based</p>
-                  </div>
-                  <div className={Styles.nextgraphs}>
-                    <div className={Styles.nextGraphCont}>
-                      {data.length ? <Line1 {...data}></Line1> : <Loader />}
+                    <div className={Styles.nextGraphSecCont}>
+                      <div className={Styles.nextgraphs}>
+                        <div className={Styles.nextGraphCont}>
+                          {data.length ? (
+                            <OSbased {...data}></OSbased>
+                          ) : (
+                            <Loader />
+                          )}{" "}
+                        </div>
+                        <p className={Styles.nxtGraphName}>OS based</p>
+                      </div>
+                      <div className={Styles.nextgraphs}>
+                        <div className={Styles.nextGraphCont}>
+                          {data.length ? <Line1 {...data}></Line1> : <Loader />}
+                        </div>
+                        <p className={Styles.nxtGraphName}>Line Graph</p>
+                      </div>
                     </div>
-                    <p className={Styles.nxtGraphName}>Line Graph</p>
-                  </div>
-                </div>
-                <div className={Styles.nextGraphSecCont}>
-                  <div className={Styles.nextgraphs}>
-                    <div className={Styles.nextGraphCont}>
-                      <Bar1></Bar1>
+                    <div className={Styles.nextGraphSecCont}>
+                      <div className={Styles.nextgraphs}>
+                        <div className={Styles.nextGraphCont}>
+                          <Bar1></Bar1>
+                        </div>
+                        <p className={Styles.nxtGraphName}>BAR Graph</p>
+                      </div>
+                      <div className={Styles.nextgraphs}>
+                        <div className={Styles.nextGraphCont}>
+                          {data.length ? (
+                            <OSbased {...data}></OSbased>
+                          ) : (
+                            <Loader />
+                          )}{" "}
+                        </div>
+                        <p className={Styles.nxtGraphName}>OS based</p>
+                      </div>
                     </div>
-                    <p className={Styles.nxtGraphName}>BAR Graph</p>
-                  </div>
-                  <div className={Styles.nextgraphs}>
-                    <div className={Styles.nextGraphCont}>
-                      {data.length ? <OSbased {...data}></OSbased> : <Loader />}{" "}
-                    </div>
-                    <p className={Styles.nxtGraphName}>OS based</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      ) : (
+        <div>login again{person.issueDetail}</div>
+      )}
+    </React.Fragment>
+    //
   );
 };
 

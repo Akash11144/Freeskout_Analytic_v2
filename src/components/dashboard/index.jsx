@@ -11,9 +11,9 @@ const Dash = () => {
   });
 
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem("Freeskout-session")) === null) {
-      navi1("/");
-    }
+    // if (JSON.parse(localStorage.getItem("Freeskout-session")) === null) {
+    //   navi1("/");
+    // }
     const dataFetch = async () => {
       let y = await fetch(
         "https://freeskout-analytic-v2-backend.herokuapp.com/user/getAll"

@@ -1,6 +1,7 @@
 // import reactga4 from "react-ga4";
 import pt from "platform";
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Styles from "./index.module.css";
 import {
   timeGenerator as TG,
@@ -29,10 +30,11 @@ let ud = {
   os_name: "",
   os_version: "",
   time: "",
+  route_name: "",
   year: 0,
 };
 
-const userData = async () => {
+const userData = async (location_pathname) => {
   // try {
   //   await reactga4.initialize("G-BMQ18907R");
   // } catch (error) {
@@ -71,6 +73,7 @@ const userData = async () => {
   ud.day = dayObserver((deo.Datee % 7) + 1);
   ud.hours = +deo.Hours;
   ud.minutes = +deo.Minutes;
+  ud.route_name = location_pathname;
   console.log(ud);
   // _________________________________________________________
   let localLink = "http://localhost:8000";
@@ -84,9 +87,12 @@ const userData = async () => {
 // --------------------------------------------------------------------
 
 function Redir() {
+  let uloc = useLocation();
   useEffect(async () => {
-    await userData();
-    window.open("https://freeskout.com/", "_self");
+    console.log("inside use effect");
+    console.log("checking location object", uloc);
+    await userData(uloc.pathname);
+    // window.open("https://freeskout.com/", "_self");
   }, []);
 
   return (
