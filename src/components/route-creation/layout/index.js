@@ -31,7 +31,11 @@ const RouteCreationDesign = (props) => {
   };
   useEffect(() => {
     console.log(" useEffect props", props);
-    setData(props);
+    let arr = [];
+    console.log(Object.keys(props));
+    console.log(Object.values(props));
+    console.log(Object.entries(props));
+    setData(Object.values(props));
   }, []);
 
   return (
