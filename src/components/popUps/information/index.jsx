@@ -1,5 +1,4 @@
 import Styles from "./index.module.css";
-import { BsX } from "react-icons/bs";
 const InformationPopUp = () => {
   return (
     <div className={Styles.mainCont}>

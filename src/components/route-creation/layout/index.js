@@ -1,11 +1,11 @@
-import { useContext, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 // import { ValueContext } from "..";
 
-const RouteCreation = () => {
+const RouteCreationDesign = (props) => {
+  const [Data, setData] = useState("");
   const route_inp = useRef(null);
   const name_inp = useRef(null);
   const desc_inp = useRef(null);
-
   // const {
   //   state: { value, value1 },
   //   dispatch,
@@ -29,6 +29,10 @@ const RouteCreation = () => {
     // console.log("result of post", r1);
     // dispatch({ type: "ADD_ROUTE", payload: a });
   };
+  useEffect(() => {
+    console.log(" useEffect props", props);
+    setData(props);
+  }, []);
 
   return (
     <div>
@@ -61,8 +65,28 @@ const RouteCreation = () => {
         />
       </div>
       <button onClick={() => handleValue()}>create</button>
+      <div>
+        {console.log(
+          "checking data inside return in layout of route creation",
+          Data
+        )}
+        {Data.length ? (
+          Data.map((item, index) => {
+            {
+              console.log(
+                "inside map of layout of route creation",
+                item,
+                index
+              );
+            }
+            return <h3 key={index}> Route = {item.path}</h3>;
+          })
+        ) : (
+          <h1>No Routes Found {Data.length}</h1>
+        )}
+      </div>
     </div>
   );
 };
 
-export default RouteCreation;
+export default RouteCreationDesign;
