@@ -46,54 +46,28 @@ const MainRoutes = () => {
       <Route
         path="/"
         element={
-          <div className={Styles.maindiv}>
-            <div className={Styles.stars}></div>
-            <div className={Styles.stars2}></div>
-            <div className={Styles.stars3}></div>
-            <div className={Styles.loginMainDiv}>
-              <div className={Styles.FsImgCont}>
-                <img src={companyLogo} alt="Company Logo" />
+          <div id="main" className={Styles.main_container}>
+            <div className={Styles.box}>
+              <h2>Login</h2>
+              <div className={Styles.inputContainer}>
+                <input
+                  type="text"
+                  required="requried"
+                  maxLength="50"
+                  className={Styles.userNameInput}
+                />
+                <span>Username</span>
               </div>
-              <div className={Styles.formContainer}>
-                <div className={Styles.form__group}>
-                  <input
-                    type="text"
-                    class={Styles.form__input}
-                    id="name"
-                    placeholder="Username"
-                    required=""
-                  />
-                  <label for="name" class={Styles.form__label}>
-                    Username
-                  </label>
-                </div>
-                <div className={Styles.form__group}>
-                  <input
-                    type="password"
-                    class={Styles.form__input}
-                    id="password"
-                    placeholder="Secret"
-                    required=""
-                  />
-                  <label for="name" class={Styles.form__label}>
-                    Secret
-                  </label>
-                </div>
+              <div className={Styles.inputContainer}>
+                <input
+                  type="password"
+                  required="requried"
+                  className={Styles.userNameInput}
+                  maxLength="50"
+                />
+                <span>Secret </span>
               </div>
-              <div className={Styles.loginBtnCont}>
-                <div
-                  className={Styles.logInBtn}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleLogin();
-                  }}
-                >
-                  Log Me In
-                </div>
-                <Link className={Styles.siteLinkBtn} to="">
-                  www.freeskout.com
-                </Link>
-              </div>
+              <div className={Styles.logInBtn}>Log In</div>
             </div>
           </div>
         }
