@@ -10,6 +10,7 @@ import Styles from "../routes/index.module.css";
 import companyLogo from "../assets/FsnoBg.gif";
 import RouteCreation from "../route-creation";
 import InformationPopUp from "../popUps/information";
+import SmallLoading from "../loadingAnimation/small-loading";
 
 let localLink = "http://localhost:8000";
 let mainLink = "https://freeskout-analytic-v2-backend.herokuapp.com";
@@ -21,8 +22,15 @@ let errorObj = {
   navigationRoute: "",
 };
 
+const getYear = () => {
+  var dt = new Date();
+  return dt.getFullYear();
+};
+
 const MainRoutes = () => {
   const [popUp, setpopUp] = useState(false);
+  const [Loading, setLoading] = useState(false);
+  const [PageLoading, setPageLoading] = useState(true);
 
   let username = useRef(null);
   let password = useRef(null);
@@ -32,16 +40,14 @@ const MainRoutes = () => {
   useEffect(() => {
     let t = JSON.parse(localStorage.getItem("Freeskout-session"));
     // if (t !== null) navi("/gda");
+    setPageLoading(false);
   }, []);
 
-  const getYear = () => {
-    var dt = new Date();
-    return dt.getFullYear();
-  };
-
   const handleLogin = async () => {
+    setLoading(true);
     if (username.current.value === "" || password.current.value === "") {
       errorObj.desc = "Please fill all fields";
+      setLoading(false);
       setpopUp(true);
     } else {
       let r = await postR(
@@ -50,12 +56,15 @@ const MainRoutes = () => {
         { name: username.current.value, password: password.current.value },
         ""
       );
-      console.log(r);
+      console.log("output from login page post", r);
       if (r.issue) {
         errorObj.desc = r.issueDetail;
+        setLoading(false);
         setpopUp(true);
-      } else if (r.output)
+      } else if (r.output) {
+        setLoading(false);
         localStorage.setItem("Freeskout-session", JSON.stringify(r.output));
+      }
     }
   };
 
@@ -70,6 +79,7 @@ const MainRoutes = () => {
         path="/"
         element={
           <div id="main" className={Styles.main_container}>
+            {PageLoading && <SmallLoading />}
             <div className={Styles.FsImgCont}>
               <img
                 src={companyLogo}
@@ -117,14 +127,10 @@ const MainRoutes = () => {
                 </span>
               </p>
             </div>
-            {popUp ? (
-              <InformationPopUp
-                {...errorObj}
-                b={(val) => setpopUp(val)}
-              ></InformationPopUp>
-            ) : (
-              ""
+            {popUp && (
+              <InformationPopUp {...errorObj} b={(val) => setpopUp(val)} />
             )}
+            {Loading && <SmallLoading />}
           </div>
         }
       />

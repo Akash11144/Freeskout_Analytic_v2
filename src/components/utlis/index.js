@@ -253,12 +253,16 @@ export const postR = async (mainLink, route, pdata, Auth) => {
       },
       body: JSON.stringify(pdata),
     });
+    console.log("r", r);
     let r1 = await r.json();
-    console.log(r1);
+    console.log("result of post from util", r1);
     return r1;
     // return await r.json();
   } catch (error) {
-    console.log("error in post request", error);
+    console.log(
+      "error in post request",
+      error.json().then((a) => console.log(a))
+    );
   }
 };
 

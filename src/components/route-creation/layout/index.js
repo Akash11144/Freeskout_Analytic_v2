@@ -20,6 +20,8 @@ const RouteCreationDesign = (props) => {
   const route_inp = useRef(null);
   const name_inp = useRef(null);
   const desc_inp = useRef(null);
+  const website_inp = useRef(null);
+
   // const {
   //   state: { value, value1 },
   //   dispatch,
@@ -29,9 +31,10 @@ const RouteCreationDesign = (props) => {
     let a = name_inp.current.value;
     let b = desc_inp.current.value;
     let c = route_inp.current.value;
+    let w = website_inp.current.value;
     let dt = new Date();
     let d = dt;
-    console.log(a, b, c, d);
+    console.log(a, b, c, d, w);
     // let r = await fetch("http://localhost:8000/route/addRoute", {
     //   method: "POST",
     //   headers: {
@@ -68,11 +71,20 @@ const RouteCreationDesign = (props) => {
         />
       </div>
       <div>
+        <label>Enter website to visit</label>
+        <input
+          ref={website_inp}
+          type="text"
+          placeholder="Enter website to visit"
+          required={true}
+        />
+      </div>
+      <div>
         <label>Enter Unique Route Name</label>
         <input
           ref={route_inp}
           type="text"
-          placeholder="enter route"
+          placeholder="enter route/Generate"
           required={true}
         />
         <button
