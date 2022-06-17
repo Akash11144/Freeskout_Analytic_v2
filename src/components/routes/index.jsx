@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Route, Routes, useNavigate } from "react-router";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import Dash from "../dashboard";
 import GraphDashboard from "../graph-dashboard";
 import Redir from "../redirection";
@@ -23,39 +22,43 @@ let errorObj = {
 };
 
 const MainRoutes = () => {
+  const [popUp, setpopUp] = useState(false);
+
+  let username = useRef(null);
+  let password = useRef(null);
+
   const navi = useNavigate();
+
   useEffect(() => {
     let t = JSON.parse(localStorage.getItem("Freeskout-session"));
     // if (t !== null) navi("/gda");
   }, []);
 
-  // -----------------------------------------
+  const getYear = () => {
+    var dt = new Date();
+    return dt.getFullYear();
+  };
 
   const handleLogin = async () => {
-    let un = document.getElementsByTagName("input")[0];
-    let pass = document.getElementsByTagName("input")[1];
-    let data = { name: un.value, password: pass.value };
-    let r = await postR(localLink, route, data, "");
-    console.log(r);
-    if (r.issue) {
-      errorObj.desc = r.issueDetail;
+    if (username.current.value === "" || password.current.value === "") {
+      errorObj.desc = "Please fill all fields";
       setpopUp(true);
-    } else if (r.output) {
-      console.log(r.output);
-      localStorage.setItem("Freeskout-session", JSON.stringify(r.output));
+    } else {
+      let r = await postR(
+        localLink,
+        route,
+        { name: username.current.value, password: password.current.value },
+        ""
+      );
+      console.log(r);
+      if (r.issue) {
+        errorObj.desc = r.issueDetail;
+        setpopUp(true);
+      } else if (r.output)
+        localStorage.setItem("Freeskout-session", JSON.stringify(r.output));
     }
   };
-  const [yr, setyr] = useState();
-  const [popUp, setpopUp] = useState(false);
-  useEffect(() => {
-    var dt = new Date();
-    var fYear = dt.getFullYear();
-    setyr(fYear);
-  }, []);
 
-  const renderHome = (val) => {
-    setpopUp(val);
-  };
   return (
     <Routes>
       <Route path="/rd" element={<Redir />} />
@@ -78,6 +81,7 @@ const MainRoutes = () => {
               <h2>Login</h2>
               <div className={Styles.inputContainer}>
                 <input
+                  ref={username}
                   type="text"
                   required="requried"
                   maxLength="50"
@@ -87,6 +91,7 @@ const MainRoutes = () => {
               </div>
               <div className={Styles.inputContainer}>
                 <input
+                  ref={password}
                   type="password"
                   required="requried"
                   className={Styles.userNameInput}
@@ -108,16 +113,14 @@ const MainRoutes = () => {
               <p className={Styles.CopyRightP}>
                 © Freeskout{" "}
                 <span className={Styles.CRyearCont} id="CRyear">
-                  {yr}
+                  {getYear()}
                 </span>
               </p>
             </div>
             {popUp ? (
               <InformationPopUp
                 {...errorObj}
-                b={(val) => {
-                  renderHome(val);
-                }}
+                b={(val) => setpopUp(val)}
               ></InformationPopUp>
             ) : (
               ""

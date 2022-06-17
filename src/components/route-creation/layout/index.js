@@ -6,15 +6,12 @@ const UniqueIDgenerator = async () => {
   let a = nanoid(5);
   let r = await fetch("http://localhost:8000/route/uniqueID/a");
   let b = await r.json();
-  console.log("b outside", b);
   let unique_ID = a;
   while (b.length) {
     unique_ID = nanoid(5);
-    console.log(unique_ID);
     let r = await fetch("http://localhost:8000/route/uniqueID/unique_ID");
     let r1 = await r.json();
     b = r1.length;
-    console.log("value of b", b);
   }
   return unique_ID;
 };
@@ -47,15 +44,7 @@ const RouteCreationDesign = (props) => {
     // dispatch({ type: "ADD_ROUTE", payload: a });
   };
 
-  useEffect(() => {
-    console.log(" useEffect props", props);
-    console.log("nanoid", nanoid(5));
-    let arr = [];
-    console.log(Object.keys(props));
-    console.log(Object.values(props));
-    console.log(Object.entries(props));
-    setData(Object.values(props));
-  }, []);
+  useEffect(() => setData(Object.values(props)), []);
 
   return (
     <div>
@@ -96,20 +85,14 @@ const RouteCreationDesign = (props) => {
       </div>
       <button onClick={() => handleValue()}>create</button>
       <div>
-        {console.log(
-          "checking data inside return in layout of route creation",
-          Data
-        )}
         {Data.length ? (
           Data.map((item, index) => {
-            {
-              console.log(
-                "inside map of layout of route creation",
-                item,
-                index
-              );
-            }
-            return <h3 key={index}> Route = {item.path}</h3>;
+            return (
+              <h3 key={index}>
+                <span>Route =</span>
+                <span> {item.path}</span>
+              </h3>
+            );
           })
         ) : (
           <h1>No Routes Found {Data.length}</h1>

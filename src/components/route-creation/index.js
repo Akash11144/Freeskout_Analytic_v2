@@ -12,11 +12,9 @@ export const RouteCreation = () => {
   const [Data, setData] = useState("");
 
   useEffect(() => {
-    console.log("inside route creation home usefetch..");
     const getAllRoutes = async () => {
       let r = await fetch("http://localhost:8000/route/allRoutes");
       let r1 = await r.json();
-      console.log("data from route creation home in useFetch", r1);
       setData(r1);
     };
     getAllRoutes();
@@ -45,7 +43,6 @@ export const RouteCreation = () => {
   return (
     // <ValueContext.Provider value={{ state, dispatch }}>
     <Routes>
-      {console.log("inside home routes..")}
       <Route
         path="/"
         element={
@@ -61,10 +58,9 @@ export const RouteCreation = () => {
       />
       {Data.length &&
         Data.map((item, index) => {
-          console.log("inside route creation home map function", item);
           return (
             <Route
-              index={index}
+              key={index}
               path={item.path}
               // element={<h1>Success {item.path}</h1>}
               element={<Redir />}
