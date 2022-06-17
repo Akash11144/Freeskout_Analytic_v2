@@ -1,6 +1,23 @@
 import { useContext, useEffect, useRef, useState } from "react";
 // import { ValueContext } from "..";
+import { nanoid } from "nanoid";
 
+const UniqueIDgenerator = async () => {
+  let a = nanoid(5);
+  let r = await fetch("http://localhost:8000/route/uniqueID/a");
+  let b = await r.json();
+  console.log("b outside", b);
+  let unique_ID = a;
+  while (b.length) {
+    unique_ID = nanoid(5);
+    console.log(unique_ID);
+    let r = await fetch("http://localhost:8000/route/uniqueID/unique_ID");
+    let r1 = await r.json();
+    b = r1.length;
+    console.log("value of b", b);
+  }
+  return unique_ID;
+};
 const RouteCreationDesign = (props) => {
   const [Data, setData] = useState("");
   const route_inp = useRef(null);
@@ -29,8 +46,10 @@ const RouteCreationDesign = (props) => {
     // console.log("result of post", r1);
     // dispatch({ type: "ADD_ROUTE", payload: a });
   };
+
   useEffect(() => {
     console.log(" useEffect props", props);
+    console.log("nanoid", nanoid(5));
     let arr = [];
     console.log(Object.keys(props));
     console.log(Object.values(props));
@@ -67,6 +86,13 @@ const RouteCreationDesign = (props) => {
           placeholder="enter route"
           required={true}
         />
+        <button
+          onClick={async () =>
+            (route_inp.current.value = await UniqueIDgenerator())
+          }
+        >
+          generate
+        </button>
       </div>
       <button onClick={() => handleValue()}>create</button>
       <div>
