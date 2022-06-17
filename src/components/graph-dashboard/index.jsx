@@ -11,19 +11,28 @@ import Loader from "../loadingAnimation";
 import MainGraph from "../graph-dashboard/mainGraph";
 import Styles from "../graph-dashboard/index.module.css";
 import DivDivider from "../divDivider";
+import InformationPopUp from "../popUps/information";
+
+let errorObj = {
+  desc: "",
+  navigation: true,
+  navigationRoute: "",
+};
 
 const GraphDashboard = () => {
   const navi1 = useNavigate();
   const [data, setdata] = useState([]);
   const [person, setperson] = useState("");
+  const [loggedIn, setloggedIn] = useState(false);
   useEffect(() => {
     const checkPersistent = async () => {
       let ls = JSON.parse(localStorage.getItem("Freeskout-session"));
       if (ls === null) {
-        alert("you logout before login again");
         console.log("token not found in local storage", ls);
-        navi1("/");
+        errorObj.desc = "token not found in local storage";
+        errorObj.navigationRoute = "/";
       } else {
+        setloggedIn(true);
         let r1 = await fetch("http://localhost:8000/validate/persistLogin", {
           method: "GET",
           headers: {
@@ -35,7 +44,8 @@ const GraphDashboard = () => {
         console.log(r2);
         if (r2.issue) {
           alert(r2.issueDetail);
-          navi1("/");
+          errorObj.desc = r2.issueDetail;
+          errorObj.navigationRoute = "/";
         } else {
           setperson(r2.output.name);
           // let link =
@@ -52,8 +62,7 @@ const GraphDashboard = () => {
 
   return (
     <React.Fragment>
-      {console.log(person)}
-      {person ? (
+      {loggedIn ? (
         <div className={Styles.mainGcont}>
           <Topbar></Topbar>
           <div className={Styles.sidePlusMain}>
@@ -146,7 +155,7 @@ const GraphDashboard = () => {
           </div>
         </div>
       ) : (
-        <div>login again{person.issueDetail}</div>
+        <InformationPopUp {...errorObj}></InformationPopUp>
       )}
     </React.Fragment>
     //

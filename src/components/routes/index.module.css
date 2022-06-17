@@ -35,14 +35,18 @@ body {
   height: 100vh;
   background: url(../assets/starryNight.jpeg);
   transition: 0.4s linear;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .box {
   width: 400px;
-  position: absolute;
+  /* position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
   background: rgba(0, 0, 0, 0.8);
   padding: 40px;
   box-sizing: border-box;
@@ -105,4 +109,28 @@ body {
   border-radius: 5px;
   width: max-content;
   margin-top: 10%;
+}
+.FsImgCont {
+  width: 20%;
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+.logo {
+  width: 30%;
+}
+.copyRightCont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2%;
+}
+.CopyRightP {
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.5px;
 }
