@@ -114,16 +114,21 @@ function Redir() {
     //     </div>
     //   </div>
     // </div>
-    <div className={Styles.section_loading}>
-      <ul className={Styles.list_bars}>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
+    <div className={Styles.mainCont}>
+      <div className={Styles.section_loading}>
+        <ul className={Styles.list_bars}>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+      <div className={Styles.redirHold}>
+        <h2>Redirecting</h2>
+      </div>
     </div>
   );
 }
