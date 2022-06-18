@@ -9,17 +9,16 @@ const hamClick = () => {
   let BottomLine = document.getElementById("endLine");
   let sidebar = document.getElementById("sideMenu");
   var a = topLine.classList;
-  console.log("classnames", a);
   if (a.length == 1) {
-    topLine.classList.add("topbar_lineTop__XeFdq");
-    middleLine.classList.add("topbar_lineMiddle__-nx1W");
-    BottomLine.classList.add("topbar_lineBottom__-Kpkv");
-    sidebar.classList.add("topbar_sideBarShow__47ziK");
+    topLine.classList.add("topbar_lineTop__TDCfZ");
+    middleLine.classList.add("topbar_lineMiddle__4ek6s");
+    BottomLine.classList.add("topbar_lineBottom__o2Lqx");
+    sidebar.classList.add("topbar_sideBarShow__PYSKJ");
   } else {
-    topLine.classList.remove("topbar_lineTop__XeFdq");
-    middleLine.classList.remove("topbar_lineMiddle__-nx1W");
-    BottomLine.classList.remove("topbar_lineBottom__-Kpkv");
-    sidebar.classList.remove("topbar_sideBarShow__47ziK");
+    topLine.classList.remove("topbar_lineTop__TDCfZ");
+    middleLine.classList.remove("topbar_lineMiddle__4ek6s");
+    BottomLine.classList.remove("topbar_lineBottom__o2Lqx");
+    sidebar.classList.remove("topbar_sideBarShow__PYSKJ");
   }
 };
 
@@ -36,9 +35,9 @@ const topbar = (props) => {
               hamClick();
             }}
           >
-            <span className={Styles.line} id="topLine"></span>
-            <span className={Styles.line} id="bottomLine"></span>
-            <span className={Styles.line} id="endLine"></span>
+            <span className={`${Styles.line}`} id="topLine"></span>
+            <span className={`${Styles.line}`} id="bottomLine"></span>
+            <span className={`${Styles.line}`} id="endLine"></span>
           </div>
         </div>
         <div className={Styles.pageName}>
@@ -57,7 +56,10 @@ const topbar = (props) => {
           </div>
         </div>
       </div>
-      <div className={Styles.sideBarCont} id="sideMenu">
+      <div
+        className={`${Styles.sideBarCont} ${Styles.sideBarShow}`}
+        id="sideMenu"
+      >
         <div className={Styles.sideBar}>
           <div className={Styles.stars}></div>
           <div className={Styles.stars2}></div>
