@@ -26,7 +26,6 @@ const hamClick = () => {
     sidebar.style.opacity='0';
     sidebar.style.top='-80vh'
   }
-  alert(a)
 };
 
 const topbar = (props) => {
