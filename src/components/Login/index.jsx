@@ -12,6 +12,8 @@ import SmallLoading from "../extras/loading-animation/small-loading";
 import Home from "../homepage";
 import RedirectingRoutes from "../redirection/redirecting-routes";
 
+// login
+
 let localLink = "http://localhost:8000";
 let mainLink = "https://freeskout-analytic-v2-backend.herokuapp.com";
 let route = "/validate/login";

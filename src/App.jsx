@@ -3,6 +3,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import MainRoutes from "./components/login";
 
+// ---
 function App() {
   return (
     <div className="App">
