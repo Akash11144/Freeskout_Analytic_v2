@@ -4,6 +4,7 @@ import { fetchR } from "../utlis";
 import Topbar from "./topbar";
 import Styles from "../graph-dashboard/index.module.css";
 import InformationPopUp from "../popUps/information";
+import RouteCreation from "../route-creation";
 
 let errorObj = {
   desc: "",
@@ -57,6 +58,7 @@ const GraphDashboard = () => {
       {loggedIn ? (
         <div className={Styles.mainGcont}>
           <Topbar></Topbar>
+          <RouteCreation></RouteCreation>
         </div>
       ) : (
         <InformationPopUp {...errorObj}></InformationPopUp>

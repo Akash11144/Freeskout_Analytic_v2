@@ -20,35 +20,13 @@ export const RouteCreation = () => {
     getAllRoutes();
   }, []);
 
-  // const handleSet = (a) => {
-  //   console.log("inside main page", a);
-  // };
-
-  // const reducer = (state = initialState, action) => {
-  //   let { value, value1 } = state;
-  //   switch (action.type) {
-  //     case "ADD_ROUTE":
-  //       value1 = handleSet(action.payload);
-  //       break;
-  //     case "REMOVE_ROUTE":
-  //       value = "";
-  //       break;
-  //     default:
-  //       throw new Error("Not valid type");
-  //   }
-  //   return { value, value1 };
-  // };
-  // const [state, dispatch] = useReducer(reducer, initialState);
-
   return (
-    // <ValueContext.Provider value={{ state, dispatch }}>
     <Routes>
       <Route
         path="/"
         element={
           Data.length ? (
             <div>
-              Hello try home
               <RouteCreationDesign {...Data} />
             </div>
           ) : (
