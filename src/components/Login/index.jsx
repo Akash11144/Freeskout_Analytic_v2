@@ -1,6 +1,5 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Route, Routes, useNavigate } from "react-router";
-import { useState } from "react";
 import Dash from "../dashboard";
 import Redir from "../redirection/redirection-page";
 import Trial from "../try";
@@ -11,6 +10,8 @@ import InformationPopUp from "../extras/pop-ups/information";
 import SmallLoading from "../extras/loading-animation/small-loading";
 import Home from "../homepage";
 import RedirectingRoutes from "../redirection/redirecting-routes";
+import PageNotFound from "../redirection/page-not-found";
+import FUM from "../homepage/freeskout-user-management";
 
 // login
 
@@ -85,6 +86,8 @@ const MainRoutes = () => {
       <Route path="/rc/*" element={<RedirectingRoutes />} />
       <Route path="/influencer-maketing/*" element={<RedirectingRoutes />} />
       <Route path="/redirect/*" element={<RedirectingRoutes />} />
+      <Route path="/cfu/*" element={<FUM />} />
+
       <Route
         path="/"
         element={
@@ -144,6 +147,7 @@ const MainRoutes = () => {
           </div>
         }
       />
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 };
