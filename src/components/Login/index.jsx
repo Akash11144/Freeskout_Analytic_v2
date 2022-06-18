@@ -2,15 +2,15 @@ import React, { useEffect, useRef } from "react";
 import { Route, Routes, useNavigate } from "react-router";
 import { useState } from "react";
 import Dash from "../Dashboard";
-import Redir from "../Redirection";
+import Redir from "../Redirection/redirection-page";
 import Trial from "../Try";
 import { postR } from "../Utlis";
 import Styles from "./index.module.css";
 import companyLogo from "../Assets/FsnoBg.gif";
-import RouteCreation from "../Homepage/route-creation";
 import InformationPopUp from "../Extras/popUps/information";
 import SmallLoading from "../Extras/loadingAnimation/small-loading";
 import Home from "../Homepage";
+import RedirectingRoutes from "../Redirection/redirecting-routes";
 
 let localLink = "http://localhost:8000";
 let mainLink = "https://freeskout-analytic-v2-backend.herokuapp.com";
@@ -79,8 +79,10 @@ const MainRoutes = () => {
       <Route path="/rd" element={<Redir />} />
       <Route path="/da" element={<Dash />} />
       <Route path="/tr" element={<Trial />} />
-      <Route path="/home" element={<Home />} />
-      <Route path="/rc/*" element={<RouteCreation />} />
+      <Route path="/home/*" element={<Home />} />
+      <Route path="/rc/*" element={<RedirectingRoutes />} />
+      <Route path="/influencer-maketing/*" element={<RedirectingRoutes />} />
+      <Route path="/redirect/*" element={<RedirectingRoutes />} />
       <Route
         path="/"
         element={

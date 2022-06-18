@@ -23,9 +23,10 @@ const hamClick = () => {
   }
 };
 
-const topbar = () => {
+const topbar = (props) => {
   return (
     <div className={Styles.allCont}>
+      {console.log("topbar props", props)}
       <div className={Styles.mainCont}>
         <div className={Styles.leftMain}>
           <div
@@ -40,7 +41,9 @@ const topbar = () => {
             <span className={Styles.line} id="endLine"></span>
           </div>
         </div>
-        <div className={Styles.pageName}>Create link</div>
+        <div className={Styles.pageName}>
+          Create link <span>{props.a}</span>
+        </div>
         <div className={Styles.dateTimeCont}>
           <div className={Styles.secDiv}>
             <p className={Styles.dateCont}>

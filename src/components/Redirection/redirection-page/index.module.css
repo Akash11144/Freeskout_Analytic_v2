@@ -2,7 +2,7 @@
 .mainCont {
   width: 100%;
   height: 100vh;
-  background: url(../Assets/starryNight.jpeg);
+  background: url(../../Assets/starryNight.jpeg);
   display: flex;
   justify-content: center;
   align-items: center;

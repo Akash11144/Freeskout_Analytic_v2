@@ -4,7 +4,8 @@ import { fetchR } from "../Utlis";
 import Topbar from "./topbar";
 import Styles from "./index.module.css";
 import InformationPopUp from "../Extras/popUps/information";
-import RouteCreation from "./route-creation";
+import RouteCreationDesign from "./route-creation";
+import SmallLoading from "../Extras/loadingAnimation/small-loading";
 
 let errorObj = {
   desc: "",
@@ -14,10 +15,13 @@ let errorObj = {
 
 const Home = () => {
   const navi1 = useNavigate();
-  const [data, setdata] = useState([]);
   const [person, setperson] = useState("");
   const [loggedIn, setloggedIn] = useState(false);
+  const [pageLoading, setpageLoading] = useState(true);
+  const [pageStart, setpageStart] = useState(false);
+
   useEffect(() => {
+    setpageStart(true);
     const checkPersistent = async () => {
       let ls = JSON.parse(localStorage.getItem("Freeskout-session"));
       if (ls === null) {
@@ -36,32 +40,33 @@ const Home = () => {
         let r2 = await r1.json();
         console.log(r2);
         if (r2.issue) {
-          alert(r2.issueDetail);
           errorObj.desc = r2.issueDetail;
           errorObj.navigationRoute = "/";
         } else {
           setperson(r2.output.name);
-          // let link =
-          // "https://freeskout-analytic-v2-backend.herokuapp.com/user/getAll";
-          let link = "http://localhost:8000/user/getAll";
-          let r = await fetchR(link);
-          console.log("main page", r);
-          setdata(r);
         }
       }
     };
     checkPersistent();
+    setpageLoading(false);
   }, []);
 
   return (
     <React.Fragment>
-      {loggedIn ? (
-        <div className={Styles.mainGcont}>
-          <Topbar></Topbar>
-          <RouteCreation></RouteCreation>
+      {pageLoading && <SmallLoading />}
+      {pageStart ? (
+        <div>
+          {loggedIn ? (
+            <div className={Styles.mainGcont}>
+              <Topbar a={person} />
+              <RouteCreationDesign />
+            </div>
+          ) : (
+            <InformationPopUp {...errorObj} />
+          )}
         </div>
       ) : (
-        <InformationPopUp {...errorObj}></InformationPopUp>
+        ""
       )}
     </React.Fragment>
     //
