@@ -74,12 +74,13 @@ body {
   border-radius: 1rem;
   box-shadow: 0 5px 20px 2px rgb(170 221 238 / 13%);
   background-color: #fdffff;
-  padding: 3% 0;
+  padding: 1% 0;
+  box-sizing: border-box;
 }
 
 .inputFields {
   width: 80%;
-  margin: 2% 0;
+  margin: 1% 0;
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
   font-weight: 500;
@@ -95,6 +96,9 @@ body {
   caret-color: #1adb80;
   border-radius: 0.25rem;
   transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.desc {
+  resize: none;
 }
 .inputFields:focus {
   color: #212529;
@@ -119,14 +123,17 @@ body {
   height: 60vh;
   background-color: grey;
 }
-.formPartTwo {
-  width: 48%;
+.genLinkCont {
+  width: 90%;
+  margin: 0 auto;
+}
+.generatedLink {
+  word-wrap: break-word;
   text-align: center;
 }
 .copyRightCont {
-  position: absolute;
   width: 100%;
-  bottom: 3%;
+  margin-top: 5%;
   text-align: center;
 }
 .CopyRightP {

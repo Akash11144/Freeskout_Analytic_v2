@@ -114,9 +114,11 @@ const RouteCreationDesign = (props) => {
         </div>
         <div className={Styles.dividerDiv}></div>
         <div className={Styles.formPartTwo}>
-          <p className={Styles.generatedLink}>
-            www.Freeskout.com/rc/ShubhamUpadhyay
-          </p>
+          <div className={Styles.genLinkCont}>
+            <p className={Styles.generatedLink}>
+              www.Freeskout.com/rc/ShubhamUpadhyay
+            </p>
+          </div>
           <div className={Styles.btn} id="sendmailBtn">
             Send
           </div>

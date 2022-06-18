@@ -23,7 +23,7 @@ const hamClick = () => {
     middleLine.style.opacity = "1";
     middleLine.style.transform = "unset";
     BottomLine.style.transform = "unset";
-    sidebar.style.opacity = "0";
+    sidebar.style.opacity = "0.8";
     sidebar.style.top = "-100vh";
   }
 };
@@ -46,9 +46,7 @@ const topbar = (props) => {
             <span className={`${Styles.line}`} id="endLine"></span>
           </div>
         </div>
-        <div className={Styles.pageName}>
-          Create link <span>{props.a}</span>
-        </div>
+        <div className={Styles.pageName}>Create link</div>
         <div className={Styles.dateTimeCont}>
           <div className={Styles.secDiv}>
             <p className={Styles.dateCont}>
@@ -69,7 +67,7 @@ const topbar = (props) => {
           <div className={Styles.stars3}></div>
           <div className={Styles.userNameCont}>
             <p>
-              Hi <span>Skouter</span>
+              Hi <span>{props.a}</span>
               <span>,</span>
             </p>
           </div>
