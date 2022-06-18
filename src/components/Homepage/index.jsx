@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { fetchR } from "../Utlis";
+import { fetchR } from "../utlis";
 import Topbar from "./topbar";
-import Styles from "./index.module.css";
-import InformationPopUp from "../Extras/popUps/information";
+import Styles from "../homepage/index.module.css";
+import InformationPopUp from "../extras/pop-ups/information";
 import RouteCreationDesign from "./route-creation";
-import SmallLoading from "../Extras/loadingAnimation/small-loading";
+import SmallLoading from "../extras/loading-animation/small-loading";
 
 let errorObj = {
   desc: "",

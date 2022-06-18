@@ -1,6 +1,6 @@
 import Styles from "./index.module.css";
-import Calendar from "../../Extras/Calendar/DateFile";
-import Time from "../../Extras/Calendar/TimeFile";
+import Calendar from "../../extras/calendar/date-file";
+import Time from "../../extras/calendar/time-file";
 import { useEffect } from "react";
 
 const hamClick = () => {

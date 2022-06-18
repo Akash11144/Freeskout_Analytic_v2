@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import dstyles from "./index.module.css";
 import { useNavigate } from "react-router";
 // import Loader from "../loadingAnimation";
-import InformationPopUp from "../Extras/popUps/information";
+import InformationPopUp from "../extras/pop-ups/information";
 const Dash = () => {
   const navi1 = useNavigate();
   const [data, setData] = useState({

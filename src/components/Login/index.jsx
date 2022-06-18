@@ -1,16 +1,16 @@
 import React, { useEffect, useRef } from "react";
 import { Route, Routes, useNavigate } from "react-router";
 import { useState } from "react";
-import Dash from "../Dashboard";
-import Redir from "../Redirection/redirection-page";
-import Trial from "../Try";
-import { postR } from "../Utlis";
+import Dash from "../dashboard";
+import Redir from "../redirection/redirection-page";
+import Trial from "../try";
+import { postR } from "../utlis";
 import Styles from "./index.module.css";
-import companyLogo from "../Assets/FsnoBg.gif";
-import InformationPopUp from "../Extras/popUps/information";
-import SmallLoading from "../Extras/loadingAnimation/small-loading";
-import Home from "../Homepage";
-import RedirectingRoutes from "../Redirection/redirecting-routes";
+import companyLogo from "../assets/FsnoBg.gif";
+import InformationPopUp from "../extras/pop-ups/information";
+import SmallLoading from "../extras/loading-animation/small-loading";
+import Home from "../homepage";
+import RedirectingRoutes from "../redirection/redirecting-routes";
 
 let localLink = "http://localhost:8000";
 let mainLink = "https://freeskout-analytic-v2-backend.herokuapp.com";

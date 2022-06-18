@@ -9,7 +9,7 @@ import {
   getAddress as GA,
   ipFetch as IPF,
   postR,
-} from "../../Utlis";
+} from "../../utlis";
 
 let ud = {
   browser_name: "",

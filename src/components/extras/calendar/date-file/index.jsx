@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Styles from "../DateFile/index.module.css";
+import Styles from "./index.module.css";
 function Calendar() {
   const [cDate, setcDate] = useState(new Date());
   function refreshCalendar() {
