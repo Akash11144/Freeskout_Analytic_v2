@@ -11,10 +11,12 @@
   height: 10vh;
 }
 .leftMain {
-  display: flex;
-  width: 15%;
-  text-align: left;
+  width: max-content;
+  text-align: center;
   box-sizing: border-box;
+  background-color: transparent;
+  z-index: 1;
+  cursor: pointer;
 }
 .hamCont {
   position: relative;
@@ -23,7 +25,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
 }
 .line {
   margin: 9%;
@@ -75,25 +76,29 @@
 /* ----------------SideBAr--------------- */
 .sideBarCont {
   position: absolute;
-  top: -80vh;
-  left: 0vh;
+  top: -100vh;
+  left: 0;
+  width: 0%;
   opacity: 0;
   transition-duration: 0.4s;
   transition-timing-function: ease-in;
 }
 .sideBarShow {
   opacity: 1;
-  top: 10vh;
+  left: 0;
 }
 .sideBar {
-  width: 30vh;
-  min-height: 70vh;
+  width: 15vw;
+  min-height: 90vh;
   text-align: center;
   padding: 10% 20%;
   background-color: #000536;
   overflow: hidden;
-  box-sizing: content-box;
+  box-sizing: border-box;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .stars {
