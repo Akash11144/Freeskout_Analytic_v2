@@ -8,18 +8,18 @@ body {
 }
 ::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0, 0.45);
   opacity: 1; /* Firefox */
 }
 
 :-ms-input-placeholder {
   /* Internet Explorer 10-11 */
-  color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0, 0.45);
 }
 
 ::-ms-input-placeholder {
   /* Microsoft Edge */
-  color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0, 0.45);
 }
 .mainCont {
   width: 100%;
@@ -35,21 +35,36 @@ body {
   padding: 0 3%;
 }
 
-.routeDesc {
-  resize: none;
-}
 .btn {
   background: transparent;
   background: #1adb80;
   color: #fff;
   font-weight: 600;
-  padding: 10px 20px;
+  padding: 6px 20px;
   cursor: pointer;
   border-radius: 5px;
   width: max-content;
+  transition: 0.3px;
+  border: 1px solid transparent;
+  letter-spacing: 1px;
+  font-weight: 600;
 }
-.formPartOne {
+.btn:hover {
+  border: 1px solid #1adb80;
+  background-color: transparent;
+  color: #1adb45;
+}
+.btn:active {
+  transform: translateY(2px);
+}
+.createBtn {
+  padding: 10px 40px;
+  margin-top: 3%;
+}
+.formPartOne,
+.formPartTwo {
   width: 48%;
+  height: 65vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -61,24 +76,43 @@ body {
   background-color: #fdffff;
   padding: 3% 0;
 }
-.inputHolder {
-  width: 70%;
-  padding: 1% 0;
-}
-.inputFields {
-  width: 100%;
-  outline: none;
-  border: none;
-}
 
+.inputFields {
+  width: 80%;
+  margin: 2% 0;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  caret-color: #1adb80;
+  border-radius: 0.25rem;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.inputFields:focus {
+  color: #212529;
+  background-color: #fff;
+  border-color: #1adb80;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem #1adb4464;
+}
 .slugHolder {
-  width: 70%;
+  width: 80%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 .slug {
   width: 70%;
+}
+.desc {
+  resize: none;
 }
 .dividerDiv {
   width: 3px;
@@ -91,8 +125,9 @@ body {
 }
 .copyRightCont {
   position: absolute;
+  width: 100%;
   bottom: 3%;
-  left: 43%;
+  text-align: center;
 }
 .CopyRightP {
   margin: unset;

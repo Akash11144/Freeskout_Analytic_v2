@@ -49,52 +49,43 @@ const RouteCreationDesign = (props) => {
       {/* {generateLoading && <SmallLoading />} */}
       <div className={Styles.secondaryDiv}>
         <div className={Styles.formPartOne}>
-          <div className={Styles.inputHolder}>
-            {" "}
-            <input
-              className={Styles.inputFields}
-              id="Name"
-              ref={name_inp}
-              type="text"
-              placeholder="Name"
-              required={true}
-            />
-          </div>
-          <div className={Styles.inputHolder}>
-            {" "}
-            <input
-              className={Styles.inputFields}
-              id="email"
-              ref={mail_inp}
-              type="email"
-              placeholder="Email"
-              required={true}
-            />
-          </div>
-          <div className={Styles.inputHolder}>
-            <textarea
-              className={Styles.inputFields}
-              id="desc"
-              ref={desc_inp}
-              type="textarea"
-              rows={5}
-              cols={15}
-              placeholder="Description"
-              required={true}
-            />
-          </div>
-          <div className={Styles.inputHolder}>
-            {" "}
-            <input
-              className={Styles.inputFields}
-              id="linkTotrack"
-              ref={website_inp}
-              type="text"
-              placeholder="Link to track"
-              required={true}
-            />
-          </div>
-          <div className={`${Styles.slugHolder} ${Styles.inputHolder}`}>
+          <input
+            className={Styles.inputFields}
+            id="Name"
+            ref={name_inp}
+            type="text"
+            placeholder="Name"
+            required={true}
+          />
+
+          <input
+            className={Styles.inputFields}
+            id="email"
+            ref={mail_inp}
+            type="email"
+            placeholder="Email"
+            required={true}
+          />
+          <textarea
+            className={`${Styles.inputFields} ${Styles.desc}`}
+            id="desc"
+            ref={desc_inp}
+            type="textarea"
+            rows={5}
+            cols={15}
+            placeholder="Description"
+            required={true}
+          />
+
+          <input
+            className={Styles.inputFields}
+            id="linkTotrack"
+            ref={website_inp}
+            type="text"
+            placeholder="Link to visit"
+            required={true}
+          />
+          <div className={`${Styles.slugHolder}`}>
             <input
               className={`${Styles.inputFields} ${Styles.slug}`}
               id="slug"
@@ -114,7 +105,7 @@ const RouteCreationDesign = (props) => {
             </div>
           </div>
           <div
-            className={Styles.btn}
+            className={`${Styles.btn} ${Styles.createBtn}`}
             id="generateBtn"
             onClick={() => handleValue()}
           >
