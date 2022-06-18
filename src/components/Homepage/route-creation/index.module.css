@@ -64,7 +64,7 @@ body {
 .formPartOne,
 .formPartTwo {
   width: 48%;
-  height: 65vh;
+  min-height: 65vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -103,6 +103,7 @@ body {
   outline: 0;
   box-shadow: 0 0 0 0.25rem #1adb4464;
 }
+
 .slugHolder {
   width: 80%;
   display: flex;
@@ -112,9 +113,7 @@ body {
 .slug {
   width: 70%;
 }
-.desc {
-  resize: none;
-}
+
 .dividerDiv {
   width: 3px;
   height: 60vh;
