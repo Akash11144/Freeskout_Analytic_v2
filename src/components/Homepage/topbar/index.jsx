@@ -10,16 +10,23 @@ const hamClick = () => {
   let sidebar = document.getElementById("sideMenu");
   var a = topLine.classList;
   if (a.length == 1) {
-    topLine.classList.add("topbar_lineTop__TDCfZ");
-    middleLine.classList.add("topbar_lineMiddle__4ek6s");
-    BottomLine.classList.add("topbar_lineBottom__o2Lqx");
-    sidebar.classList.add("topbar_sideBarShow__PYSKJ");
+    topLine.classList.add("temp");
+    topLine.style.transform="translateY(13px) rotate(45deg)"
+    middleLine.style.opacity='0'
+    middleLine.style.transform='translateX(16px)'
+    BottomLine.style.transform='translateY(-11px) rotate(-45deg)'
+    sidebar.style.opacity='1';
+    sidebar.style.top='10vh'
   } else {
-    topLine.classList.remove("topbar_lineTop__TDCfZ");
-    middleLine.classList.remove("topbar_lineMiddle__4ek6s");
-    BottomLine.classList.remove("topbar_lineBottom__o2Lqx");
-    sidebar.classList.remove("topbar_sideBarShow__PYSKJ");
+    topLine.classList.remove("temp");
+    topLine.style.transform="unset"
+    middleLine.style.opacity='1'
+    middleLine.style.transform='unset'
+    BottomLine.style.transform='unset'
+    sidebar.style.opacity='0';
+    sidebar.style.top='-80vh'
   }
+  alert(a)
 };
 
 const topbar = (props) => {
