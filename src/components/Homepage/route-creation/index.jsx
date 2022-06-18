@@ -31,12 +31,12 @@ const RouteCreationDesign = (props) => {
   const UniqueIDgenerator = async () => {
     setgenerateLoading(true);
     let a = nanoid(5);
-    let r = await fetch("http://localhost:8000/route/uniqueID/a");
+    let r = await fetch("http://localhost:1111/route/uniqueID/a");
     let b = await r.json();
     let unique_ID = a;
     while (b.length) {
       unique_ID = nanoid(5);
-      let r = await fetch("http://localhost:8000/route/uniqueID/unique_ID");
+      let r = await fetch("http://localhost:1111/route/uniqueID/unique_ID");
       let r1 = await r.json();
       b = r1.length;
     }

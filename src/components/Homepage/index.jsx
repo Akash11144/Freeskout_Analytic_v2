@@ -30,7 +30,7 @@ const Home = () => {
         errorObj.navigationRoute = "/";
       } else {
         setloggedIn(true);
-        let r1 = await fetch("http://localhost:8000/validate/persistLogin", {
+        let r1 = await fetch("http://localhost:1111/validate/persistLogin", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

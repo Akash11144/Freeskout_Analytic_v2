@@ -14,7 +14,7 @@ import RedirectingRoutes from "../redirection/redirecting-routes";
 
 // login
 
-let localLink = "http://localhost:8000";
+let localLink = "http://localhost:1111";
 let mainLink = "https://freeskout-analytic-v2-backend.herokuapp.com";
 let route = "/validate/login";
 

@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { postR, monthNumberObserver as MNO } from "../utlis";
 
-let link = "not using/http://localhost:8000";
+let link = "not using/http://localhost:1111";
 let route = "not using/user/setUser";
 
 const Trial = () => {
   const [data, setdata] = useState([]);
   useEffect(async () => {
     // try {
-    //   let y = await fetch("http://localhost:8000/user/getAll");
+    //   let y = await fetch("http://localhost:1111/user/getAll");
     //   let y1 = await y.json();
     //   console.log(y1);
     //   setdata(y1);
@@ -18,7 +18,7 @@ const Trial = () => {
   }, []);
 
   const setData = async () => {
-    let localLink = "http://localhost:8000";
+    let localLink = "http://localhost:1111";
     let mainLink = "https://freeskout-analytic-v2-backend.herokuapp.com";
     let route = "/valid/login";
     let cred = { name: "Freeskout", password: "Freeskout_rajesh" };

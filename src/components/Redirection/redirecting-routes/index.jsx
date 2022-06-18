@@ -7,7 +7,7 @@ const RedirectingRoutes = () => {
   const [Data, setData] = useState("");
   useEffect(() => {
     const getAllRoutes = async () => {
-      let r = await fetch("http://localhost:8000/route/allRoutes");
+      let r = await fetch("http://localhost:1111/route/allRoutes");
       setData(await r.json());
     };
     getAllRoutes();
