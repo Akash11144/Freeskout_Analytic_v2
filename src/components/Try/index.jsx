@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { postR, monthNumberObserver as MNO } from "../utlis";
+import { postR, monthNumberObserver as MNO } from "../Utlis";
 
 let link = "not using/http://localhost:8000";
 let route = "not using/user/setUser";

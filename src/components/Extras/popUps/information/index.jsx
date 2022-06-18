@@ -3,9 +3,12 @@ import { useNavigate } from "react-router";
 import { useEffect } from "react";
 const InformationPopUp = (props) => {
   const navi1 = useNavigate();
-  useEffect(() => {
-    document.getElementById("popUpdiv").style.display = "block";
-  }, []);
+
+  useEffect(
+    () => (document.getElementById("popUpdiv").style.display = "block"),
+    []
+  );
+
   return (
     <div className={Styles.mainCont} id="popUpdiv">
       {console.log("props from component popup", props)}

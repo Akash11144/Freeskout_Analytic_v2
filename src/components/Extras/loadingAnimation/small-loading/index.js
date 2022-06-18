@@ -1,4 +1,4 @@
-import companyLogo from "../../assets/FsnoBg.gif";
+import companyLogo from "../../../Assets/FsnoBg.gif";
 const SmallLoading = () => {
   return (
     <div

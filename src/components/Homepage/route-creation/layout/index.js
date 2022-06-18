@@ -1,22 +1,19 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { nanoid } from "nanoid";
-import Styles from '../layout/index.module.css'
-import SmallLoading from "../../loadingAnimation/small-loading";
-
+import Styles from "../layout/index.module.css";
 
 const getYear = () => {
   var dt = new Date();
   return dt.getFullYear();
 };
 const RouteCreationDesign = (props) => {
-  const [generateLoading, setgenerateLoading] = useState(false)
+  const [generateLoading, setgenerateLoading] = useState(false);
   const [Data, setData] = useState("");
   const name_inp = useRef(null);
   const mail_inp = useRef(null);
   const route_inp = useRef(null);
   const desc_inp = useRef(null);
   const website_inp = useRef(null);
-
 
   const handleValue = async () => {
     let a = name_inp.current.value;
@@ -26,13 +23,12 @@ const RouteCreationDesign = (props) => {
     let dt = new Date();
     let d = dt;
     console.log(a, b, c, d, w);
-
   };
 
   useEffect(() => setData(Object.values(props)), []);
 
   const UniqueIDgenerator = async () => {
-    setgenerateLoading(true)
+    setgenerateLoading(true);
     let a = nanoid(5);
     let r = await fetch("http://localhost:8000/route/uniqueID/a");
     let b = await r.json();
@@ -43,7 +39,7 @@ const RouteCreationDesign = (props) => {
       let r1 = await r.json();
       b = r1.length;
     }
-    setgenerateLoading(false)
+    setgenerateLoading(false);
     return unique_ID;
   };
 
@@ -54,7 +50,7 @@ const RouteCreationDesign = (props) => {
         <div className={Styles.formPartOne}>
           <input
             className={Styles.inputFields}
-            id='Name'
+            id="Name"
             ref={name_inp}
             type="text"
             placeholder="Name"
@@ -62,7 +58,7 @@ const RouteCreationDesign = (props) => {
           />
           <input
             className={Styles.inputFields}
-            id='email'
+            id="email"
             ref={mail_inp}
             type="email"
             placeholder="Email"
@@ -70,7 +66,7 @@ const RouteCreationDesign = (props) => {
           />
           <textarea
             className={Styles.inputFields}
-            id='desc'
+            id="desc"
             ref={desc_inp}
             type="textarea"
             rows={5}
@@ -80,7 +76,7 @@ const RouteCreationDesign = (props) => {
           />
           <input
             className={Styles.inputFields}
-            id='linkTotrack'
+            id="linkTotrack"
             ref={website_inp}
             type="text"
             placeholder="Link to track"
@@ -89,14 +85,15 @@ const RouteCreationDesign = (props) => {
           <div className={Styles.slugHolder}>
             <input
               className={`${Styles.inputFields} ${Styles.slug}`}
-              id='slug'
+              id="slug"
               ref={route_inp}
               type="text"
               placeholder="Enter/Generate Slug"
               required={true}
             />
-            <div className={Styles.btn}
-              id='slugBtn'
+            <div
+              className={Styles.btn}
+              id="slugBtn"
               onClick={async () =>
                 (route_inp.current.value = await UniqueIDgenerator())
               }
@@ -104,17 +101,20 @@ const RouteCreationDesign = (props) => {
               Generate
             </div>
           </div>
-          <div className={Styles.btn}
-            id='generateBtn'
-            onClick={() => handleValue()}>Create</div>
+          <div
+            className={Styles.btn}
+            id="generateBtn"
+            onClick={() => handleValue()}
+          >
+            Create
+          </div>
         </div>
-        <div className={Styles.dividerDiv}>
-        </div>
+        <div className={Styles.dividerDiv}></div>
         <div className={Styles.formPartTwo}>
           <p className={Styles.generatedLink}>
             www.Freeskout.com/rc/ShubhamUpadhyay
           </p>
-          <div className={Styles.btn} id='sendmailBtn'>
+          <div className={Styles.btn} id="sendmailBtn">
             Send
           </div>
         </div>

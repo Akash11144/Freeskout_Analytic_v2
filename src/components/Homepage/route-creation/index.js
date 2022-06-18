@@ -1,12 +1,7 @@
-import React, { createContext, useEffect, useReducer, useState } from "react";
-import { Route, Routes, useNavigate } from "react-router";
-import Redir from "../redirection";
+import React, { useEffect, useState } from "react";
+import { Route, Routes } from "react-router";
+import Redir from "../route-creation";
 import RouteCreationDesign from "./layout";
-
-// const initialState = {
-//   value: "Hello World!!!",
-//   value1: "",
-// };
 
 export const RouteCreation = () => {
   const [Data, setData] = useState("");
@@ -36,23 +31,10 @@ export const RouteCreation = () => {
       />
       {Data.length &&
         Data.map((item, index) => {
-          return (
-            <Route
-              key={index}
-              path={item.path}
-              // element={<h1>Success {item.path}</h1>}
-              element={<Redir />}
-            />
-          );
+          return <Route key={index} path={item.path} element={<Redir />} />;
         })}
     </Routes>
-    // </ValueContext.Provider>
   );
 };
 
 export default RouteCreation;
-
-// export const ValueContext = createContext({
-//   state: initialState,
-//   dispatch: null,
-// });

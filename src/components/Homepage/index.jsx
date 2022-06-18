@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { fetchR } from "../utlis";
+import { fetchR } from "../Utlis";
 import Topbar from "./topbar";
-import Styles from "../graph-dashboard/index.module.css";
-import InformationPopUp from "../popUps/information";
-import RouteCreation from "../route-creation";
+import Styles from "./index.module.css";
+import InformationPopUp from "../Extras/popUps/information";
+import RouteCreation from "./route-creation";
 
 let errorObj = {
   desc: "",
@@ -12,7 +12,7 @@ let errorObj = {
   navigationRoute: "",
 };
 
-const GraphDashboard = () => {
+const Home = () => {
   const navi1 = useNavigate();
   const [data, setdata] = useState([]);
   const [person, setperson] = useState("");
@@ -68,4 +68,4 @@ const GraphDashboard = () => {
   );
 };
 
-export default GraphDashboard;
+export default Home;

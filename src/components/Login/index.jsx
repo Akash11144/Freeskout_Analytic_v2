@@ -1,16 +1,16 @@
 import React, { useEffect, useRef } from "react";
 import { Route, Routes, useNavigate } from "react-router";
 import { useState } from "react";
-import Dash from "../dashboard";
-import GraphDashboard from "../graph-dashboard";
-import Redir from "../redirection";
-import Trial from "../trial";
-import { postR } from "../utlis";
-import Styles from "../routes/index.module.css";
-import companyLogo from "../assets/FsnoBg.gif";
-import RouteCreation from "../route-creation";
-import InformationPopUp from "../popUps/information";
-import SmallLoading from "../loadingAnimation/small-loading";
+import Dash from "../Dashboard";
+import Redir from "../Redirection";
+import Trial from "../Try";
+import { postR } from "../Utlis";
+import Styles from "./index.module.css";
+import companyLogo from "../Assets/FsnoBg.gif";
+import RouteCreation from "../Homepage/route-creation";
+import InformationPopUp from "../Extras/popUps/information";
+import SmallLoading from "../Extras/loadingAnimation/small-loading";
+import Home from "../Homepage";
 
 let localLink = "http://localhost:8000";
 let mainLink = "https://freeskout-analytic-v2-backend.herokuapp.com";
@@ -57,13 +57,19 @@ const MainRoutes = () => {
         ""
       );
       console.log("output from login page post", r);
-      if (r.issue) {
-        errorObj.desc = r.issueDetail;
+      if (r.FetchIssue) {
+        errorObj.desc = r.FetchIssueDetail;
         setLoading(false);
         setpopUp(true);
-      } else if (r.output) {
-        setLoading(false);
-        localStorage.setItem("Freeskout-session", JSON.stringify(r.output));
+      } else {
+        if (r.issue) {
+          errorObj.desc = r.issueDetail;
+          setLoading(false);
+          setpopUp(true);
+        } else if (r.output) {
+          setLoading(false);
+          localStorage.setItem("Freeskout-session", JSON.stringify(r.output));
+        }
       }
     }
   };
@@ -73,7 +79,7 @@ const MainRoutes = () => {
       <Route path="/rd" element={<Redir />} />
       <Route path="/da" element={<Dash />} />
       <Route path="/tr" element={<Trial />} />
-      <Route path="/gda" element={<GraphDashboard />} />
+      <Route path="/home" element={<Home />} />
       <Route path="/rc/*" element={<RouteCreation />} />
       <Route
         path="/"
