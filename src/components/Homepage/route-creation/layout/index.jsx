@@ -1,7 +1,7 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { nanoid } from "nanoid";
 import Styles from "../layout/index.module.css";
-import SmallLoading from "../../loadingAnimation/small-loading";
+import SmallLoading from "../../../Extras/loadingAnimation/small-loading";
 
 const getYear = () => {
   var dt = new Date();
