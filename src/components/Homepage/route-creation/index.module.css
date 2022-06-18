@@ -1,5 +1,25 @@
 body {
   position: relative;
+  background-color: rgba(170, 223, 224, 0.13725490196078433);
+}
+
+* {
+  font-family: "Open Sans", sans-serif;
+}
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(0, 0, 0);
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: rgb(0, 0, 0);
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: rgb(0, 0, 0);
 }
 .mainCont {
   width: 100%;
@@ -12,6 +32,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 3%;
 }
 
 .routeDesc {
@@ -33,11 +54,21 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-clip: border-box;
+  border: 1px solid rgba(170, 221, 238, 0.3333333333333333);
+  border-radius: 1rem;
+  box-shadow: 0 5px 20px 2px rgb(170 221 238 / 13%);
+  background-color: #fdffff;
+  padding: 3% 0;
 }
-
-.inputFields {
-  margin: 7px 0;
+.inputHolder {
   width: 70%;
+  padding: 1% 0;
+}
+.inputFields {
+  width: 100%;
+  outline: none;
+  border: none;
 }
 
 .slugHolder {
@@ -46,7 +77,9 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-
+.slug {
+  width: 70%;
+}
 .dividerDiv {
   width: 3px;
   height: 60vh;

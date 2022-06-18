@@ -56,10 +56,7 @@ const topbar = (props) => {
           </div>
         </div>
       </div>
-      <div
-        className={`${Styles.sideBarCont} ${Styles.sideBarShow}`}
-        id="sideMenu"
-      >
+      <div className={`${Styles.sideBarCont}`} id="sideMenu">
         <div className={Styles.sideBar}>
           <div className={Styles.stars}></div>
           <div className={Styles.stars2}></div>
