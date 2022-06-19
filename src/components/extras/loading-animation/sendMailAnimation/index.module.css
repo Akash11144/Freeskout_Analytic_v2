@@ -1,0 +1,8 @@
+.mainCont {
+  width: 45px;
+  height: 50px;
+  box-sizing: border-box;
+}
+.mainCont > img {
+  width: 100%;
+}

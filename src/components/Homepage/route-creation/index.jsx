@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { nanoid } from "nanoid";
 import Styles from "./index.module.css";
 import SmallLoading from "../../extras/loading-animation/small-loading";
+import SendMail from "../../extras/loading-animation/sendMailAnimation";
 
 const getYear = () => {
   var dt = new Date();
@@ -120,6 +121,7 @@ const RouteCreationDesign = (props) => {
             </p>
           </div>
           <div className={Styles.btn} id="sendmailBtn">
+            <SendMail />
             Send
           </div>
         </div>
