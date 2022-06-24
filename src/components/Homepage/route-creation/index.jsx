@@ -3,6 +3,7 @@ import { nanoid } from "nanoid";
 import Styles from "./index.module.css";
 import SmallLoading from "../../extras/loading-animation/small-loading";
 import SendMail from "../../extras/loading-animation/sendMailAnimation";
+import { postR } from "../../utlis";
 
 const getYear = () => {
   var dt = new Date();
@@ -11,23 +12,71 @@ const getYear = () => {
 const RouteCreationDesign = (props) => {
   const [generateLoading, setgenerateLoading] = useState(false);
   const [Data, setData] = useState("");
+
   const name_inp = useRef(null);
   const mail_inp = useRef(null);
   const route_inp = useRef(null);
   const desc_inp = useRef(null);
   const website_inp = useRef(null);
 
-  const handleValue = async () => {
-    let a = name_inp.current.value;
-    let b = desc_inp.current.value;
-    let c = route_inp.current.value;
-    let w = website_inp.current.value;
-    let dt = new Date();
-    let d = dt;
-    console.log(a, b, c, d, w);
-  };
+  useEffect(() => {
+    setData(props);
+  }, []);
 
-  useEffect(() => setData(Object.values(props)), []);
+  const handleValue = async () => {
+    setgenerateLoading(true);
+    let name = props.name;
+    let email = props.email;
+    let for_name = name_inp.current.value;
+    let for_email = mail_inp.current.value;
+    let description = desc_inp.current.value;
+    let path = route_inp.current.value;
+    let website = website_inp.current.value;
+    let dt = new Date();
+    let time = dt;
+    let ls = localStorage.getItem("Freeskout-session");
+    if (
+      name === "" ||
+      email === "" ||
+      for_name === "" ||
+      for_email === "" ||
+      description === "" ||
+      path === "" ||
+      website === "" ||
+      time === ""
+    )
+      console.log("please fill all fields in route creation form");
+    else {
+      console.log(
+        name,
+        email,
+        for_name,
+        for_email,
+        description,
+        path,
+        website,
+        time
+      );
+      let r = await postR(
+        "http://localhost:1111",
+        "/route/addRoute",
+        {
+          name,
+          email,
+          for_name,
+          for_email,
+          description,
+          path: `/${path}`,
+          website,
+          time,
+        },
+        `Bearer ${JSON.parse(localStorage.getItem("Freeskout-session"))}`
+      );
+      console.log("route creation post result -->", r);
+      route_inp.current.value = "";
+    }
+    setgenerateLoading(false);
+  };
 
   const UniqueIDgenerator = async () => {
     setgenerateLoading(true);
@@ -47,7 +96,7 @@ const RouteCreationDesign = (props) => {
 
   return (
     <div className={Styles.mainCont}>
-      {/* {generateLoading && <SmallLoading />} */}
+      {generateLoading && <SmallLoading />}
       <div className={Styles.secondaryDiv}>
         <div className={Styles.formPartOne}>
           <input

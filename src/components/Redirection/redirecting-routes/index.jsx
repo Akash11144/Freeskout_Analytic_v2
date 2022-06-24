@@ -14,6 +14,7 @@ const RedirectingRoutes = () => {
   }, []);
   return (
     <Routes>
+      {console.log(Data)}
       <Route path="/" element={<h1>Redirecting...</h1>} />
       {Data.length &&
         Data.map((item, index) => {
