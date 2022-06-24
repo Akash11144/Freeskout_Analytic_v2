@@ -30,51 +30,63 @@ const RouteCreationDesign = (props) => {
     let for_name = name_inp.current.value;
     let for_email = mail_inp.current.value;
     let description = desc_inp.current.value;
-    let path = route_inp.current.value;
+    let slug = route_inp.current.value;
     let website = website_inp.current.value;
     let dt = new Date();
     let time = dt;
     let ls = localStorage.getItem("Freeskout-session");
+    let email_regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
+    var url_exp =
+      /[-a-zA-Z0-9@:%_\+.~#?&//=]{1,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+    let url_regex = new RegExp(url_exp);
+    let slug_exp = /([A-Za-z0-9\-\_])+/gi;
+    let slug_regex = new RegExp(slug_exp);
     if (
-      name === "" ||
-      email === "" ||
       for_name === "" ||
       for_email === "" ||
       description === "" ||
-      path === "" ||
-      website === "" ||
-      time === ""
-    )
-      console.log("please fill all fields in route creation form");
-    else {
-      console.log(
-        name,
-        email,
-        for_name,
-        for_email,
-        description,
-        path,
-        website,
-        time
-      );
-      let r = await postR(
-        "http://localhost:1111",
-        "/route/addRoute",
-        {
-          name,
-          email,
-          for_name,
-          for_email,
-          description,
-          path: `/${path}`,
-          website,
-          time,
-        },
-        `Bearer ${JSON.parse(localStorage.getItem("Freeskout-session"))}`
-      );
-      console.log("route creation post result -->", r);
-      route_inp.current.value = "";
+      slug === "" ||
+      website === ""
+    ) {
+      alert("fill all the fileds");
+    } else if (email_regex.test(for_email.toLowerCase()) == false) {
+      alert("invalid email");
+    } else if (url_regex.test(website.toLowerCase()) == false) {
+      alert("invalid website");
+    } else if (slug_regex.test(slug) == false) {
+      alert("invalid Slug");
+    } else {
+      alert("all set");
     }
+    // else {
+    //   console.log(
+    //     name,
+    //     email,
+    //     for_name,
+    //     for_email,
+    //     description,
+    //     slug,
+    //     website,
+    //     time
+    //   );
+    //   let r = await postR(
+    //     "http://localhost:1111",
+    //     "/route/addRoute",
+    //     {
+    //       name,
+    //       email,
+    //       for_name,
+    //       for_email,
+    //       description,
+    //       path: `/${slug}`,
+    //       website,
+    //       time,
+    //     },
+    //     `Bearer ${JSON.parse(localStorage.getItem("Freeskout-session"))}`
+    //   );
+    //   console.log("route creation post result -->", r);
+    //   route_inp.current.value = "";
+    // }
     setgenerateLoading(false);
   };
 
@@ -164,15 +176,35 @@ const RouteCreationDesign = (props) => {
         </div>
         <div className={Styles.dividerDiv}></div>
         <div className={Styles.formPartTwo}>
-          {/* div.generatedLink */}
-          <div className={Styles.genLinkCont}>
-            <p className={Styles.generatedLink}>
-              www.Freeskout.com/rc/ShubhamUpadhyay
-            </p>
-          </div>
-          <div className={Styles.btn} id="sendmailBtn">
-            <SendMail />
-            Send
+          <div className={Styles.genDetailsCont}>
+            <div className={Styles.genLinkCont}>
+              <p className={Styles.generatedLink}>
+                <span>Generated Link:</span>{" "}
+                www.freeskout.com/rc/ShubhamUpadhyay
+              </p>
+            </div>
+            <div className={Styles.otherDetails}>
+              <p>
+                <span>Name: </span> Shubham Upadhyay
+              </p>
+              <p>
+                <span>Email: </span>akashsinghGupta@outlook.com
+              </p>
+              <p>
+                <span>Desc:</span> Lorem Ipsum Dolor Lorem Ipsum Dolor Lorem
+                Ipsum Dolor Lorem Ipsum Dolor
+              </p>
+              <p>
+                <span>Landing Page: </span>
+                <a href="freeskout.com/blogs">
+                  www.freeskout.com/blogs/link/abc/xyz/sbc
+                </a>
+              </p>
+            </div>
+            <div className={Styles.btn} id="sendmailBtn">
+              {/* <SendMail /> */}
+              Send
+            </div>
           </div>
         </div>
       </div>

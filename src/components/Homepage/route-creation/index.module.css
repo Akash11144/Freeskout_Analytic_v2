@@ -64,7 +64,7 @@ body {
 .formPartOne,
 .formPartTwo {
   width: 48%;
-  min-height: 65vh;
+  height: 65vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -125,6 +125,40 @@ body {
   height: 60vh;
   background-color: grey;
 }
+
+.genDetailsCont {
+  width: 95%;
+  min-height: calc(60vh);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.genLinkCont > p {
+  font-size: 18px;
+  font-weight: 400;
+  color: #1adb80;
+}
+.genLinkCont > p > span {
+  color: rgba(0, 0, 0, 0.91);
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  font-size: 16px;
+}
+.otherDetails > p {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+  font-weight: 400;
+  display: flex;
+  margin: 3% 0;
+}
+.otherDetails > p > span {
+  color: rgba(0, 0, 0, 0.91);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-right: 3%;
+}
 .genLinkCont {
   width: 90%;
   margin: 0 auto;
@@ -132,6 +166,19 @@ body {
 .generatedLink {
   word-wrap: break-word;
   text-align: center;
+}
+.otherDetails {
+  background-clip: border-box;
+  border: 1px solid rgba(170, 221, 238, 0.3333333333333333);
+  border-radius: 1rem;
+  box-shadow: 0 5px 20px 2px rgb(170 221 238 / 13%);
+  background-color: #fdffff;
+  padding: 2% 3%;
+  box-sizing: border-box;
+}
+.otherDetails > p > a {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.6);
 }
 .copyRightCont {
   width: 100%;
