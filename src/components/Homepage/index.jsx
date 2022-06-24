@@ -29,7 +29,7 @@ const Home = () => {
       let ls = JSON.parse(localStorage.getItem("Freeskout-session"));
       if (ls === null) {
         console.log("token not found in local storage", ls);
-        errorObj.desc = "token not found in local storage";
+        errorObj.desc = "not logged in";
         errorObj.navigationRoute = "/";
         setpageError(true);
       } else {
