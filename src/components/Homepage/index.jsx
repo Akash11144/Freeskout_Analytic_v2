@@ -6,6 +6,7 @@ import Styles from "../homepage/index.module.css";
 import InformationPopUp from "../extras/pop-ups/information";
 import RouteCreationDesign from "./route-creation";
 import SmallLoading from "../extras/loading-animation/small-loading";
+import FUM from "./freeskout-user-management";
 
 let errorObj = {
   desc: "",
