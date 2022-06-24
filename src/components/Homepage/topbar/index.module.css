@@ -107,6 +107,9 @@
 }
 
 .stars {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 1px;
   height: 1px;
   background: transparent;
@@ -294,6 +297,7 @@
   content: " ";
   position: absolute;
   top: 2000px;
+  /* left: -200px; */
   width: 1px;
   height: 1px;
   background: transparent;
@@ -478,6 +482,9 @@
 }
 
 .stars2 {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 2px;
   height: 2px;
   background: transparent;
@@ -538,6 +545,7 @@
   content: " ";
   position: absolute;
   top: 2000px;
+  /* left: -300px; */
   width: 2px;
   height: 2px;
   background: transparent;
@@ -595,6 +603,9 @@
 }
 
 .stars3 {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 3px;
   height: 3px;
   background: transparent;
@@ -630,6 +641,7 @@
   content: " ";
   position: absolute;
   top: 2000px;
+  /* left: -400px; */
   width: 3px;
   height: 3px;
   background: transparent;
@@ -674,7 +686,6 @@
   margin-top: 20%;
   padding: 2% 0%;
   box-sizing: content-box;
-  font-weight: 500;
   text-align: left;
 }
 .userNameCont > p {
@@ -683,11 +694,13 @@
   color: white;
   font-size: 24px;
   letter-spacing: 1px;
+  font-weight: 500;
 }
 .userNameCont > p > span {
   margin: unset;
   padding: unset;
   color: #1adb80;
+  font-weight: 700;
 }
 .optionsContainer {
   margin: 25% 0;
@@ -701,7 +714,7 @@
   text-align: left;
   color: white;
   font-size: 17px;
-  font-weight: 400;
+  font-weight: 600;
   letter-spacing: 0.5px;
   transition: 0.3s;
   cursor: pointer;
