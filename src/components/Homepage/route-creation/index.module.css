@@ -109,10 +109,12 @@ body {
 }
 
 .slugHolder {
-  width: 80%;
+  width: 84%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 1% 0;
+  padding: unset;
 }
 .slug {
   width: 70%;

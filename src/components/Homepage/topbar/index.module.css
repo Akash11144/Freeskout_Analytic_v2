@@ -77,16 +77,20 @@
 /* ----------------SideBAr--------------- */
 .sideBarCont {
   position: absolute;
-  top: -100vh;
-  left: 0;
+  top: 10vh;
+  left: -20vh;
   width: 0%;
-  opacity: 0.8;
-  transition-duration: 0.4s;
+  opacity: 0;
+  transition-duration: 0.2s;
   transition-timing-function: ease-in;
 }
 .sideBarShow {
+  position: absolute;
+  top: 10vh;
   opacity: 1;
   left: 0;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in;
 }
 .sideBar {
   width: 20vw;
@@ -701,6 +705,7 @@
   letter-spacing: 0.5px;
   transition: 0.3s;
   cursor: pointer;
+  margin: 10% auto;
 }
 .optionsContainer > p:hover {
   font-size: 19px;

@@ -4,31 +4,6 @@ import Time from "../../extras/calendar/time-file";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
-const hamClick = () => {
-  let topLine = document.getElementById("topLine");
-  let middleLine = document.getElementById("bottomLine");
-  let BottomLine = document.getElementById("endLine");
-  let sidebar = document.getElementById("sideMenu");
-  var a = topLine.classList;
-  if (a.length == 1) {
-    topLine.classList.add("temp");
-    topLine.style.transform = "translateY(13px) rotate(45deg)";
-    middleLine.style.opacity = "0";
-    middleLine.style.transform = "translateX(16px)";
-    BottomLine.style.transform = "translateY(-11px) rotate(-45deg)";
-    sidebar.style.opacity = "1";
-    sidebar.style.top = "10vh";
-  } else {
-    topLine.classList.remove("temp");
-    topLine.style.transform = "unset";
-    middleLine.style.opacity = "1";
-    middleLine.style.transform = "unset";
-    BottomLine.style.transform = "unset";
-    sidebar.style.opacity = "0.8";
-    sidebar.style.top = "-100vh";
-  }
-};
-
 const Topbar = (props) => {
   const navi1 = useNavigate();
   const [admin, setadmin] = useState(false);
@@ -55,6 +30,35 @@ const Topbar = (props) => {
     console.log(r1);
   };
 
+  const [isActive, setisActive] = useState(false);
+  const hamClick = () => {
+    let topLine = document.getElementById("topLine");
+    let middleLine = document.getElementById("bottomLine");
+    let BottomLine = document.getElementById("endLine");
+    let sidebar = document.getElementById("sideMenu");
+    var a = topLine.classList;
+    setisActive(!isActive);
+    // if (a.length == 1) {
+    //   topLine.classList.add("temp");
+    //   topLine.style.transform = "translateY(13px) rotate(45deg)";
+    //   middleLine.style.opacity = "1";
+    //   middleLine.style.transform = "translateX(16px)";
+    //   middleLine.style.visibility = "hidden";
+    //   BottomLine.style.transform = "translateY(-11px) rotate(-45deg)";
+    //   sidebar.style.opacity = "1";
+    //   sidebar.style.top = "10vh";
+    // } else {
+    //   topLine.classList.remove("temp");
+    //   topLine.style.transform = "unset";
+    //   middleLine.style.opacity = "1";
+    //   middleLine.style.transform = "unset";
+    //   middleLine.style.visibility = "visible";
+    //   BottomLine.style.transform = "unset";
+    //   sidebar.style.opacity = "0.8";
+    //   sidebar.style.top = "-100vh";
+    // }
+  };
+
   return (
     <div className={Styles.allCont}>
       <div className={Styles.mainCont}>
@@ -64,9 +68,24 @@ const Topbar = (props) => {
           onClick={() => hamClick()}
         >
           <div className={Styles.hamCont}>
-            <span className={`${Styles.line}`} id="topLine"></span>
-            <span className={`${Styles.line}`} id="bottomLine"></span>
-            <span className={`${Styles.line}`} id="endLine"></span>
+            <span
+              className={`${Styles.line} ${
+                isActive ? Styles.lineTop : Styles.line
+              }`}
+              id="topLine"
+            ></span>
+            <span
+              className={`${Styles.line}  ${
+                isActive ? Styles.lineMiddle : Styles.line
+              }`}
+              id="bottomLine"
+            ></span>
+            <span
+              className={`${Styles.line} ${
+                isActive ? Styles.lineBottom : Styles.line
+              }`}
+              id="endLine"
+            ></span>
           </div>
         </div>
         <div className={Styles.pageName}>Create link</div>
@@ -83,7 +102,12 @@ const Topbar = (props) => {
           </div>
         </div>
       </div>
-      <div className={`${Styles.sideBarCont}`} id="sideMenu">
+      <div
+        className={`${Styles.sideBarCont} ${
+          isActive ? Styles.sideBarShow : Styles.sideBarCont
+        }`}
+        id="sideMenu"
+      >
         <div className={Styles.sideBar}>
           <div className={Styles.stars}></div>
           <div className={Styles.stars2}></div>
