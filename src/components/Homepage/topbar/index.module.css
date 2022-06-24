@@ -1,20 +1,26 @@
 .mainCont {
   width: 100%;
-  float: right;
   background: linear-gradient(to right, #00031d, #000536);
-  color: white;
+  /* color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-  padding-left: 2%;
+  padding-left: 2%; */
   user-select: none;
   height: 10vh;
   z-index: 2;
 }
+.topBarSecCont {
+  width: 95%;
+  height: 10vh;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .leftMain {
   width: 15%;
-  width: max-content;
   text-align: center;
   box-sizing: border-box;
   background-color: transparent;
@@ -22,11 +28,13 @@
 }
 .hamCont {
   position: relative;
+  width: max-content;
   padding: 2%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  transition: 0.2s;
 }
 .line {
   margin: 9%;
@@ -35,7 +43,6 @@
   background-color: #fff;
   border-radius: 3px;
   transition: transform 0.25s, opacity 0.35s;
-  transition-delay: 0.25s;
 }
 .lineTop {
   transform: translateY(13px) rotate(45deg);
@@ -62,6 +69,7 @@
   justify-content: flex-end;
   align-items: flex-end;
   flex-direction: column;
+  color: white;
 }
 .secDiv {
   width: 100%;

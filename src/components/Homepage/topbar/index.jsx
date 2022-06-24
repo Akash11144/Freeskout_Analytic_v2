@@ -38,67 +38,50 @@ const Topbar = (props) => {
     let sidebar = document.getElementById("sideMenu");
     var a = topLine.classList;
     setisActive(!isActive);
-    // if (a.length == 1) {
-    //   topLine.classList.add("temp");
-    //   topLine.style.transform = "translateY(13px) rotate(45deg)";
-    //   middleLine.style.opacity = "1";
-    //   middleLine.style.transform = "translateX(16px)";
-    //   middleLine.style.visibility = "hidden";
-    //   BottomLine.style.transform = "translateY(-11px) rotate(-45deg)";
-    //   sidebar.style.opacity = "1";
-    //   sidebar.style.top = "10vh";
-    // } else {
-    //   topLine.classList.remove("temp");
-    //   topLine.style.transform = "unset";
-    //   middleLine.style.opacity = "1";
-    //   middleLine.style.transform = "unset";
-    //   middleLine.style.visibility = "visible";
-    //   BottomLine.style.transform = "unset";
-    //   sidebar.style.opacity = "0.8";
-    //   sidebar.style.top = "-100vh";
-    // }
   };
 
   return (
     <div className={Styles.allCont}>
       <div className={Styles.mainCont}>
-        <div
-          className={Styles.leftMain}
-          id="hamburger"
-          onClick={() => hamClick()}
-        >
-          <div className={Styles.hamCont}>
-            <span
-              className={`${Styles.line} ${
-                isActive ? Styles.lineTop : Styles.line
-              }`}
-              id="topLine"
-            ></span>
-            <span
-              className={`${Styles.line}  ${
-                isActive ? Styles.lineMiddle : Styles.line
-              }`}
-              id="bottomLine"
-            ></span>
-            <span
-              className={`${Styles.line} ${
-                isActive ? Styles.lineBottom : Styles.line
-              }`}
-              id="endLine"
-            ></span>
+        <div className={Styles.topBarSecCont}>
+          <div
+            className={Styles.leftMain}
+            id="hamburger"
+            onClick={() => hamClick()}
+          >
+            <div className={Styles.hamCont}>
+              <span
+                className={`${Styles.line} ${
+                  isActive ? Styles.lineTop : Styles.line
+                }`}
+                id="topLine"
+              ></span>
+              <span
+                className={`${Styles.line}  ${
+                  isActive ? Styles.lineMiddle : Styles.line
+                }`}
+                id="bottomLine"
+              ></span>
+              <span
+                className={`${Styles.line} ${
+                  isActive ? Styles.lineBottom : Styles.line
+                }`}
+                id="endLine"
+              ></span>
+            </div>
           </div>
-        </div>
-        <div className={Styles.pageName}>Create link</div>
-        <div className={Styles.dateTimeCont}>
-          <div className={Styles.secDiv}>
-            <p className={Styles.dateCont}>
-              Date:
-              <Calendar></Calendar>
-            </p>
-            <p className={Styles.timeCont}>
-              Time:
-              <Time></Time>
-            </p>
+          <div className={Styles.pageName}>Create link</div>
+          <div className={Styles.dateTimeCont}>
+            <div className={Styles.secDiv}>
+              <p className={Styles.dateCont}>
+                Date:
+                <Calendar></Calendar>
+              </p>
+              <p className={Styles.timeCont}>
+                Time:
+                <Time></Time>
+              </p>
+            </div>
           </div>
         </div>
       </div>
