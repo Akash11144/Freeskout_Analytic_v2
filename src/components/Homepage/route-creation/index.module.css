@@ -189,3 +189,9 @@ body {
   margin: unset;
   padding: unset;
 }
+
+/* Media Queries */
+@media (max-width: 1300px) {
+}
+@media (max-width: ) {
+}

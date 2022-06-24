@@ -36,8 +36,7 @@ const RouteCreationDesign = (props) => {
     let time = dt;
     let ls = localStorage.getItem("Freeskout-session");
     let email_regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
-    var url_exp =
-      /[-a-zA-Z0-9@:%_\+.~#?&//=]{1,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+    var url_exp = /^(https\:\/\/freeskout.com)/gi;
     let url_regex = new RegExp(url_exp);
     let slug_exp = /([A-Za-z0-9\-\_])+/gi;
     let slug_regex = new RegExp(slug_exp);
