@@ -27,7 +27,7 @@ let ud = {
   os_name: "",
   os_version: "",
   time: "",
-  route_name: "",
+  route: "",
   year: 0,
 };
 
@@ -59,7 +59,7 @@ const userData = async (location_pathname) => {
   ud.day = dayObserver((deo.Datee % 7) + 1);
   ud.hours = +deo.Hours;
   ud.minutes = +deo.Minutes;
-  ud.route_name = location_pathname;
+  ud.route = location_pathname;
   console.log(ud);
   // _________________________________________________________
   let localLink = "http://localhost:1111";

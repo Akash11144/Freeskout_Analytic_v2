@@ -1,7 +1,8 @@
 import Styles from "./index.module.css";
 import Calendar from "../../extras/calendar/date-file";
 import Time from "../../extras/calendar/time-file";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
 const hamClick = () => {
   let topLine = document.getElementById("topLine");
@@ -28,17 +29,39 @@ const hamClick = () => {
   }
 };
 
-const topbar = (props) => {
+const Topbar = (props) => {
+  const navi1 = useNavigate();
+  const [admin, setadmin] = useState(false);
+  useEffect(() => {
+    console.log("topbar props useeffect", props);
+    if (props.email === "info@freeskout.com") {
+      console.log("hello freeskout admin: ", props.name);
+      setadmin(true);
+    } else console.log("hello freeskout user", props.name);
+  }, []);
+
+  const handleLogout = async () => {
+    navi1("/");
+    let dt = localStorage.getItem("Freeskout-session");
+    localStorage.removeItem("Freeskout-session");
+    let r = await fetch("http://localhost:1111/validate/logout", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ delToken: dt }),
+    });
+    let r1 = await r.json();
+    console.log(r1);
+  };
+
   return (
     <div className={Styles.allCont}>
-      {console.log("topbar props", props)}
       <div className={Styles.mainCont}>
         <div
           className={Styles.leftMain}
           id="hamburger"
-          onClick={() => {
-            hamClick();
-          }}
+          onClick={() => hamClick()}
         >
           <div className={Styles.hamCont}>
             <span className={`${Styles.line}`} id="topLine"></span>
@@ -67,22 +90,24 @@ const topbar = (props) => {
           <div className={Styles.stars3}></div>
           <div className={Styles.userNameCont}>
             <p>
-              Hi <span>{props.a}</span>
+              Hi <span>{props.name}</span>
               <span>,</span>
             </p>
           </div>
           <div className={Styles.optionsContainer}>
             <p>Create Link</p>
             <p>Manage Links</p>
-            <p>Manage Users</p>
+            {admin && <p>Manage Users</p>}
             <p>Dashboard</p>
           </div>
           <div className={Styles.logoutContainer}>
-            <div className={Styles.logoutBtn}>Logout</div>
+            <div className={Styles.logoutBtn} onClick={() => handleLogout()}>
+              Logout
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
 };
-export default topbar;
+export default Topbar;

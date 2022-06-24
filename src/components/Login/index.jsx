@@ -42,7 +42,7 @@ const MainRoutes = () => {
 
   useEffect(() => {
     let t = JSON.parse(localStorage.getItem("Freeskout-session"));
-    // if (t !== null) navi("/gda");
+    if (t !== null) navi("/home");
     setPageLoading(false);
   }, []);
 
@@ -72,6 +72,7 @@ const MainRoutes = () => {
         } else if (r.output) {
           setLoading(false);
           localStorage.setItem("Freeskout-session", JSON.stringify(r.output));
+          navi("/home");
         }
       }
     }

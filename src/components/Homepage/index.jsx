@@ -19,6 +19,8 @@ const Home = () => {
   const [loggedIn, setloggedIn] = useState(false);
   const [pageLoading, setpageLoading] = useState(true);
   const [pageStart, setpageStart] = useState(false);
+  const [admin, setadmin] = useState(false);
+  const [pageError, setpageError] = useState(false);
 
   useEffect(() => {
     setpageStart(true);
@@ -28,8 +30,8 @@ const Home = () => {
         console.log("token not found in local storage", ls);
         errorObj.desc = "token not found in local storage";
         errorObj.navigationRoute = "/";
+        setpageError(true);
       } else {
-        setloggedIn(true);
         let r1 = await fetch("http://localhost:1111/validate/persistLogin", {
           method: "GET",
           headers: {
@@ -42,8 +44,11 @@ const Home = () => {
         if (r2.issue) {
           errorObj.desc = r2.issueDetail;
           errorObj.navigationRoute = "/";
+          setpageError(true);
         } else {
-          setperson(r2.output.name);
+          setloggedIn(true);
+          if (r2.output.email === "info@freeskout.com") setadmin(true);
+          setperson(r2.output);
         }
       }
     };
@@ -58,11 +63,11 @@ const Home = () => {
         <div>
           {loggedIn ? (
             <div className={Styles.mainGcont}>
-              <Topbar a={person} />
-              <RouteCreationDesign />
+              {person && <Topbar {...person} />}
+              {person && <RouteCreationDesign {...person} />}
             </div>
           ) : (
-            <InformationPopUp {...errorObj} />
+            pageError && <InformationPopUp {...errorObj} />
           )}
         </div>
       ) : (
