@@ -156,7 +156,7 @@ const RouteCreationDesign = (props) => {
               required={true}
             />
             <div
-              className={Styles.btn}
+              className={`${Styles.btn} ${Styles.createSlugBtn}`}
               id="slugBtn"
               onClick={async () =>
                 (route_inp.current.value = await UniqueIDgenerator())
@@ -187,10 +187,10 @@ const RouteCreationDesign = (props) => {
                 <span>Name: </span> Shubham Upadhyay
               </p>
               <p>
-                <span>Email: </span>akashsinghGupta@outlook.com
+                <span>Email: </span> akashsinghGupta@outlook.com
               </p>
               <p>
-                <span>Desc:</span> Lorem Ipsum Dolor Lorem Ipsum Dolor Lorem
+                <span>Desc: </span> Lorem Ipsum Dolor Lorem Ipsum Dolor Lorem
                 Ipsum Dolor Lorem Ipsum Dolor
               </p>
               <p>
