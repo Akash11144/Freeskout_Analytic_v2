@@ -7,10 +7,9 @@ const FUM = () => {
   let email = useRef(null);
   let pass = useRef(null);
   let confirmpass = useRef(null);
-  // let email_regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
   let email_regex = new RegExp("[a-z0-9]+@freeskout+.[a-z]{2,3}");
-  let phone_regex = new RegExp("[0-9]{10}");
-
+  let passPattern = /^([A-Za-z0-9\-\_\@\#\$\%\&\*\\]{6,12})*$/;
+  let password_regex = new RegExp(passPattern);
   const handleClick = () => {
     if (
       name.current.value === "" ||
@@ -21,6 +20,8 @@ const FUM = () => {
       alert("Fill all field");
     } else if (email_regex.test(email.current.value) == false) {
       alert("invalid email");
+    } else if (password_regex.test(pass.current.value) == false) {
+      alert("invalid password Pattern");
     } else if (pass.current.value != confirmpass.current.value) {
       alert("password dont match");
     } else {
@@ -54,6 +55,7 @@ const FUM = () => {
               ref={pass}
               placeholder="Enter Password"
               type={"password"}
+              minLength="8"
             />
             <input
               className={Styles.inputFields}
@@ -144,24 +146,6 @@ const User = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
-};
-const InfoDiv = () => {
-  return (
-    <div className={Styles.userDataCont}>
-      <p className={Styles.selectedUserEmail}>
-        E-Mail:{" "}
-        <span className={Styles.userInfo}>
-          akashsinghkumargupta@freeskout.com
-        </span>
-      </p>
-      <p className={Styles.selectedUsePassword}>
-        Password: <span className={Styles.userInfo}>Helllo12345</span>
-      </p>
-      <p className="linksCreated">
-        Links Created : <span className={Styles.userInfo}>5</span>
-      </p>
     </div>
   );
 };
