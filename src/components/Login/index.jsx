@@ -42,8 +42,6 @@ const MainRoutes = () => {
   const loc = useLocation();
 
   useEffect(() => {
-    console.log("navigation object:", navi);
-    console.log("location object: ", loc);
     if (loc.pathname === "/") {
       let t = JSON.parse(localStorage.getItem("Freeskout-session"));
       if (t !== null) navi("/home");
