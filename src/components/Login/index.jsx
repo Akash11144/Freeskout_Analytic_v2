@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Route, Routes, useNavigate } from "react-router";
+import { Outlet, Route, Routes, useNavigate, useLocation } from "react-router";
 import Dash from "../dashboard";
 import Redir from "../redirection/redirection-page";
 import Trial from "../try";
@@ -39,10 +39,15 @@ const MainRoutes = () => {
   let password = useRef(null);
 
   const navi = useNavigate();
+  const loc = useLocation();
 
   useEffect(() => {
-    let t = JSON.parse(localStorage.getItem("Freeskout-session"));
-    if (t !== null) navi("/home");
+    console.log("navigation object:", navi);
+    console.log("location object: ", loc);
+    if (loc.pathname === "/") {
+      let t = JSON.parse(localStorage.getItem("Freeskout-session"));
+      if (t !== null) navi("/home");
+    }
     setPageLoading(false);
   }, []);
 
@@ -88,10 +93,8 @@ const MainRoutes = () => {
       <Route path="/influencer-maketing/*" element={<RedirectingRoutes />} />
       <Route path="/redirect/*" element={<RedirectingRoutes />} />
       <Route path="/cfu" element={<FUM />} />
-
       <Route
         path="/"
-        exact
         element={
           <div id="main" className={Styles.main_container}>
             {PageLoading && <SmallLoading />}
@@ -146,6 +149,7 @@ const MainRoutes = () => {
               <InformationPopUp {...errorObj} b={(val) => setpopUp(val)} />
             )}
             {Loading && <SmallLoading />}
+            <Outlet />
           </div>
         }
       />
