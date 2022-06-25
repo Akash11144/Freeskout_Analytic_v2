@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Outlet, Route, Routes, useNavigate } from "react-router";
-import { fetchR } from "../utlis";
 import Topbar from "./topbar";
 import Styles from "../homepage/index.module.css";
 import InformationPopUp from "../extras/pop-ups/information";
@@ -66,13 +65,9 @@ const Home = () => {
           <>
             <Topbar {...person}></Topbar>
             <Routes>
-              <Route
-                path="/"
-                exact
-                element={<RouteCreationDesign {...person} />}
-              />
-              <Route path="/rc" element={<h1>Hello trying routing</h1>} />
-              <Route path="/*" element={<h1>Page not found....</h1>} />
+              <Route path="/" element={<RouteCreationDesign {...person} />} />
+              <Route path="rc" element={<h1>Hello trying routing</h1>} />
+              <Route path="*" element={<h1>Page not found....</h1>} />
             </Routes>
           </>
         ) : (
