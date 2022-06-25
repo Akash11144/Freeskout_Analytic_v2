@@ -87,10 +87,11 @@ const MainRoutes = () => {
       <Route path="/rc/*" element={<RedirectingRoutes />} />
       <Route path="/influencer-maketing/*" element={<RedirectingRoutes />} />
       <Route path="/redirect/*" element={<RedirectingRoutes />} />
-      <Route path="/cfu/*" element={<FUM />} />
+      <Route path="/cfu" element={<FUM />} />
 
       <Route
         path="/"
+        exact
         element={
           <div id="main" className={Styles.main_container}>
             {PageLoading && <SmallLoading />}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { Outlet, Route, Routes, useNavigate } from "react-router";
 import { fetchR } from "../utlis";
 import Topbar from "./topbar";
 import Styles from "../homepage/index.module.css";
@@ -23,36 +23,37 @@ const Home = () => {
   const [admin, setadmin] = useState(false);
   const [pageError, setpageError] = useState(false);
 
-  useEffect(() => {
-    setpageStart(true);
-    const checkPersistent = async () => {
-      let ls = JSON.parse(localStorage.getItem("Freeskout-session"));
-      if (ls === null) {
-        console.log("token not found in local storage", ls);
-        errorObj.desc = "not logged in";
+  const checkPersistent = async () => {
+    let ls = JSON.parse(localStorage.getItem("Freeskout-session"));
+    if (ls === null) {
+      console.log("token not found in local storage", ls);
+      errorObj.desc = "not logged in";
+      errorObj.navigationRoute = "/";
+      setpageError(true);
+    } else {
+      let r1 = await fetch("http://localhost:1111/validate/persistLogin", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${ls}`,
+        },
+      });
+      let r2 = await r1.json();
+      console.log(r2);
+      if (r2.issue) {
+        errorObj.desc = r2.issueDetail;
         errorObj.navigationRoute = "/";
         setpageError(true);
       } else {
-        let r1 = await fetch("http://localhost:1111/validate/persistLogin", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${ls}`,
-          },
-        });
-        let r2 = await r1.json();
-        console.log(r2);
-        if (r2.issue) {
-          errorObj.desc = r2.issueDetail;
-          errorObj.navigationRoute = "/";
-          setpageError(true);
-        } else {
-          setloggedIn(true);
-          if (r2.output.email === "info@freeskout.com") setadmin(true);
-          setperson(r2.output);
-        }
+        setloggedIn(true);
+        if (r2.output.email === "info@freeskout.com") setadmin(true);
+        setperson(r2.output);
       }
-    };
+    }
+  };
+
+  useEffect(() => {
+    setpageStart(true);
     checkPersistent();
     setpageLoading(false);
   }, []);
@@ -60,22 +61,24 @@ const Home = () => {
   return (
     <React.Fragment>
       {pageLoading && <SmallLoading />}
-      {pageStart ? (
-        <div>
-          {loggedIn ? (
-            <div className={Styles.mainGcont}>
-              {person && <Topbar {...person} />}
-              {person && <RouteCreationDesign {...person} />}
-            </div>
-          ) : (
-            pageError && <InformationPopUp {...errorObj} />
-          )}
-        </div>
-      ) : (
-        ""
-      )}
+      {pageStart &&
+        (loggedIn ? (
+          <>
+            <Topbar {...person}></Topbar>
+            <Routes>
+              <Route
+                path="/"
+                exact
+                element={<RouteCreationDesign {...person} />}
+              />
+              <Route path="/rc" element={<h1>Hello trying routing</h1>} />
+              <Route path="/*" element={<h1>Page not found....</h1>} />
+            </Routes>
+          </>
+        ) : (
+          pageError && <InformationPopUp {...errorObj} />
+        ))}
     </React.Fragment>
-    //
   );
 };
 
