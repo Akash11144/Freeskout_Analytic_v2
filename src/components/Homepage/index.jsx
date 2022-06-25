@@ -66,7 +66,7 @@ const Home = () => {
             <Topbar {...person}></Topbar>
             <Routes>
               <Route path="/" element={<RouteCreationDesign {...person} />} />
-              <Route path="rc" element={<h1>Hello trying routing</h1>} />
+              <Route path="mfu" element={<FUM></FUM>} />
               <Route path="*" element={<h1>Page not found....</h1>} />
             </Routes>
           </>
