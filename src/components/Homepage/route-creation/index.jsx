@@ -54,38 +54,39 @@ const RouteCreationDesign = (props) => {
       alert("invalid website");
     } else if (slug_regex.test(slug) == false) {
       alert("invalid Slug");
-    } else {
-      alert("all set");
     }
     // else {
-    //   console.log(
-    //     name,
-    //     email,
-    //     for_name,
-    //     for_email,
-    //     description,
-    //     slug,
-    //     website,
-    //     time
-    //   );
-    //   let r = await postR(
-    //     "http://localhost:1111",
-    //     "/route/addRoute",
-    //     {
-    //       name,
-    //       email,
-    //       for_name,
-    //       for_email,
-    //       description,
-    //       path: `/${slug}`,
-    //       website,
-    //       time,
-    //     },
-    //     `Bearer ${JSON.parse(localStorage.getItem("Freeskout-session"))}`
-    //   );
-    //   console.log("route creation post result -->", r);
-    //   route_inp.current.value = "";
+    //   alert("all set");
     // }
+    else {
+      console.log(
+        name,
+        email,
+        for_name,
+        for_email,
+        description,
+        slug,
+        website,
+        time
+      );
+      let r = await postR(
+        "http://localhost:1111",
+        "/route/addRoute",
+        {
+          name,
+          email,
+          for_name,
+          for_email,
+          description,
+          path: `/${slug}`,
+          website,
+          time,
+        },
+        `Bearer ${JSON.parse(localStorage.getItem("Freeskout-session"))}`
+      );
+      console.log("route creation post result -->", r);
+      route_inp.current.value = "";
+    }
     setgenerateLoading(false);
   };
 
