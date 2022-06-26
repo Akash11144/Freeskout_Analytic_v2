@@ -6,19 +6,32 @@ import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 
 const Topbar = (props) => {
-  const navi1 = useNavigate();
   const [admin, setadmin] = useState(false);
+
   useEffect(() => {
     console.log("topbar props useeffect", props);
     if (props.email === "info@freeskout.com") {
       console.log("hello freeskout admin: ", props.name);
       setadmin(true);
     } else console.log("hello freeskout user", props.name);
-  }, []);
+  }, [props]);
+
+  return <TopbarLayout admin={admin} person={props.name} />;
+};
+export default Topbar;
+
+// --------------------------------------------------------------
+
+const TopbarLayout = ({ admin, person }) => {
+  const [isActive, setisActive] = useState(false);
+
+  const navi1 = useNavigate();
+
+  const hamClick = () => setisActive(!isActive);
 
   const handleLogout = async () => {
     navi1("/");
-    let dt = localStorage.getItem("Freeskout-session");
+    let dt = JSON.parse(localStorage.getItem("Freeskout-session"));
     localStorage.removeItem("Freeskout-session");
     let r = await fetch("http://localhost:1111/validate/logout", {
       method: "DELETE",
@@ -31,12 +44,9 @@ const Topbar = (props) => {
     console.log(r1);
   };
 
-  const [isActive, setisActive] = useState(false);
-  const hamClick = () => {
-    setisActive(!isActive);
-  };
   return (
     <div className={Styles.allCont}>
+      {console.log("inside topbar render props: ", person, "admin: ", admin)}
       <div className={Styles.mainCont}>
         <div className={Styles.topBarSecCont}>
           <div
@@ -92,7 +102,7 @@ const Topbar = (props) => {
           <div className={Styles.stars3}></div>
           <div className={Styles.userNameCont}>
             <p>
-              Hi <span>{props.name}</span>
+              Hi <span>{person}</span>
               <span>,</span>
             </p>
           </div>
@@ -122,4 +132,3 @@ const Topbar = (props) => {
     </div>
   );
 };
-export default Topbar;
