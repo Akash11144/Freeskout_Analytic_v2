@@ -91,6 +91,7 @@
   opacity: 1;
   transition-duration: 0.2s;
   transition-timing-function: ease-in;
+  z-index: 5;
 }
 .sideBarShow {
   position: absolute;
@@ -693,16 +694,19 @@
 .userNameCont {
   margin-top: 20%;
   padding: 2% 0%;
-  box-sizing: content-box;
-  text-align: left;
+  box-sizing: border-box;
+  width: 100%;
 }
 .userNameCont > p {
+  width: 60%;
   margin: unset;
+  margin: 0 auto;
   padding: unset;
   color: white;
   font-size: 24px;
   letter-spacing: 1px;
   font-weight: 500;
+  text-align: left;
 }
 .userNameCont > p > span {
   margin: unset;
@@ -711,7 +715,7 @@
   font-weight: 700;
 }
 .optionsContainer {
-  margin: 25% 0;
+  margin: 10% 0;
   width: 100%;
   box-sizing: border-box;
 }
@@ -750,9 +754,11 @@
   font-size: 17px;
 }
 .logoutBtn:hover {
+  color: rgba(255, 0, 0, 0.645);
   font-size: 19px;
-  text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6,
-    0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.9),
+    0 0 15px rgba(255, 255, 255, 1);
 }
 .logoutBtn:active {
   color: #1adb30;
@@ -777,6 +783,29 @@
   }
   .dateTimeCont {
     font-size: 14px;
+  }
+  .sideBarCont {
+    left: -30vw;
+  }
+  .sideBarShow {
+    left: 0;
+  }
+  .sideBar {
+    width: 30vw;
+  }
+  .userNameCont {
+    width: 100%;
+    text-align: left;
+    padding-left: 40%;
+  }
+  .optionsContainer {
+    width: 100%;
+    margin: 8% auto 5% auto;
+  }
+  .optionsContainer > .linky > p {
+    text-align: left;
+    margin: unset;
+    margin: 8% auto;
   }
 }
 @media (max-width: 1000px) {
@@ -822,12 +851,21 @@
     left: 0;
   }
 }
-@media (max-width: 580px) {
+@media (max-width: 600px) {
   .leftMain {
     width: 30%;
   }
   .pageName {
     width: 40%;
+  }
+  .sideBar {
+    width: 50vw;
+  }
+  .sideBarCont {
+    left: -50vw;
+  }
+  .sideBarShow {
+    left: 0;
   }
 }
 @media (max-width: 540px) {
@@ -844,17 +882,8 @@
     margin: unset;
     padding-right: 3px;
   }
-  .sideBar {
-    width: 50vw;
-  }
-  .sideBarCont {
-    left: -50vw;
-  }
-  .sideBarShow {
-    left: 0;
-  }
 }
-@media (max-width: 401px) {
+@media (max-width: 421px) {
   .sideBar {
     width: 100vw;
   }
@@ -871,5 +900,10 @@
     text-align: center;
     margin: unset;
     margin: 5% auto;
+  }
+  .userNameCont {
+    width: 100%;
+    text-align: center;
+    padding-left: unset;
   }
 }

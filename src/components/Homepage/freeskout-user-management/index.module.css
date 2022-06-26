@@ -2,7 +2,6 @@ body {
   position: relative;
   background-color: rgba(170, 223, 224, 0.13725490196078433);
 }
-
 * {
   font-family: "Open Sans", sans-serif;
 }
@@ -11,41 +10,31 @@ body {
   color: rgb(0, 0, 0, 0.45);
   opacity: 1; /* Firefox */
 }
-
 :-ms-input-placeholder {
   /* Internet Explorer 10-11 */
   color: rgb(0, 0, 0, 0.45);
 }
-
 ::-ms-input-placeholder {
   /* Microsoft Edge */
   color: rgb(0, 0, 0, 0.45);
 }
-/* width */
 ::-webkit-scrollbar {
   width: 3px;
   display: none;
 }
-
-/* Track */
 ::-webkit-scrollbar-track {
   background: transparent;
 }
-
-/* Handle */
 ::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 5px;
 }
-
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
-
 .mainCont {
   width: 100%;
-  height: 90vh;
+  height: 80vh;
   padding-top: 10vh;
   display: flex;
   flex-direction: column;
@@ -157,7 +146,7 @@ body {
   border: 1px solid rgba(170, 221, 238, 0.3333333333333333);
   border-radius: 1rem;
   box-shadow: 0 5px 20px 2px rgb(170 221 238 / 13%);
-  width: 100%;
+  /* width: 100%; */
   padding: 5% 3%;
   text-align: left;
   display: flex;
@@ -175,11 +164,10 @@ body {
 .userActionBtnsCont {
   display: flex;
   justify-content: space-evenly;
-  align-items: flex-start;
+  align-items: center;
   width: 20%;
   margin-top: 3px;
 }
-
 .HoverNotification {
   border: 1px solid rgba(170, 221, 238, 0.3333333333333333);
   border-radius: 3px;
@@ -205,6 +193,9 @@ body {
 .delIcon:hover {
   filter: drop-shadow(0 0 1.5px rgba(255, 0, 0, 0.645));
 }
+.TbMinusVertical {
+  font-size: 20px;
+}
 .viewHover,
 .delHover {
   position: absolute;
@@ -221,7 +212,6 @@ body {
 .delIconCont:hover .delHover {
   display: block;
 }
-
 .userDataCont {
   border: 1px solid rgba(170, 221, 238, 0.3333333333333333);
   border-radius: 10px;
@@ -234,6 +224,8 @@ body {
   height: 54vh;
   display: grid;
   place-items: center;
+  display: none;
+  /* qwerty */
 }
 .userDataSecondaryDiv {
   width: max-content;
@@ -288,4 +280,61 @@ body {
 }
 .disp {
   display: none;
+}
+
+/* Media Queries */
+@media (max-width: 1100px) {
+  .createUserPart,
+  .presentUsersDiv {
+    width: calc(50% - 2px);
+  }
+  .activeUserName > p {
+    font-size: 12px;
+  }
+}
+@media (max-width: 768px) {
+  .mainCont {
+    padding-top: 5vh;
+  }
+  .secondaryDiv {
+    flex-direction: column;
+  }
+  .createUserPart,
+  .presentUsersDiv {
+    width: 98%;
+    margin: 2% auto;
+  }
+  .activeUserName > p {
+    font-size: 16px;
+    margin-bottom: 3%;
+  }
+}
+@media (max-width: 510px) {
+  .activeUserName > p {
+    font-size: 12px;
+    margin-bottom: 1.5%;
+  }
+  .userActionBtnsCont {
+    margin-left: 4%;
+  }
+  .viewIcon,
+  .delIcon,
+  .TbMinusVertical {
+    font-size: 14px;
+  }
+}
+@media (max-width: 410px) {
+  .activeUsersCont {
+    padding: 2%;
+  }
+  .secondCont {
+    width: 98%;
+    margin: 2% auto;
+  }
+  .userDiv {
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 2% 1%;
+  }
 }

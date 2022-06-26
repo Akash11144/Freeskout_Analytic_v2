@@ -2,6 +2,7 @@ import { useRef } from "react";
 import Styles from "../freeskout-user-management/index.module.css";
 import { FaRegEye } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
+import { TbMinusVertical } from 'react-icons/tb'
 const FUM = () => {
   let name = useRef(null);
   let email = useRef(null);
@@ -128,7 +129,7 @@ const User = () => {
     <div className={Styles.secondCont}>
       <div className={Styles.userDiv}>
         <div className={Styles.activeUserName}>
-          <p>Akash Singh Kumar Gupta</p>
+          <p>Akash Singh Kumar GuptaSingh Kumar GuptaSingh Kumar Gupta</p>
         </div>
         <div className={Styles.userActionBtnsCont}>
           <div className={Styles.viewIconCont}>
@@ -137,7 +138,9 @@ const User = () => {
               View
             </p>
           </div>
-          |
+          <div className={Styles.TbMinusVertical}>
+            <TbMinusVertical className={Styles.TbMinusVertical} />
+          </div>
           <div className={`${Styles.delIconCont}`}>
             <AiOutlineDelete className={Styles.delIcon} />
             <p className={`${Styles.HoverNotification} ${Styles.delHover}`}>
