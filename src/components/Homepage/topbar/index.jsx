@@ -3,6 +3,7 @@ import Calendar from "../../extras/calendar/date-file";
 import Time from "../../extras/calendar/time-file";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 const Topbar = (props) => {
   const navi1 = useNavigate();
@@ -32,14 +33,8 @@ const Topbar = (props) => {
 
   const [isActive, setisActive] = useState(false);
   const hamClick = () => {
-    let topLine = document.getElementById("topLine");
-    let middleLine = document.getElementById("bottomLine");
-    let BottomLine = document.getElementById("endLine");
-    let sidebar = document.getElementById("sideMenu");
-    var a = topLine.classList;
     setisActive(!isActive);
   };
-
   return (
     <div className={Styles.allCont}>
       <div className={Styles.mainCont}>
@@ -102,10 +97,20 @@ const Topbar = (props) => {
             </p>
           </div>
           <div className={Styles.optionsContainer}>
-            <p>Create Link</p>
-            <p>Manage Links</p>
-            {admin && <p>Manage Users</p>}
-            <p>Dashboard</p>
+            <Link to={"/home"}>
+              <p>Create Link</p>
+            </Link>
+            <Link to={"/home"}>
+              <p>Manage Links</p>
+            </Link>
+            {admin && (
+              <Link to={"/home/fum"}>
+                <p>Manage Users</p>
+              </Link>
+            )}
+            <Link to={"/home"}>
+              <p>Dashboard</p>
+            </Link>
           </div>
           <div className={Styles.logoutContainer}>
             <div className={Styles.logoutBtn} onClick={() => handleLogout()}>
