@@ -715,7 +715,10 @@
   width: 100%;
   box-sizing: border-box;
 }
-.optionsContainer > p {
+.linky {
+  text-decoration: none;
+}
+.optionsContainer > .linky > p {
   width: 60%;
   margin-left: auto;
   margin-right: auto;
@@ -728,7 +731,7 @@
   cursor: pointer;
   margin: 10% auto;
 }
-.optionsContainer > p:hover {
+.optionsContainer > .linky > p:hover {
   font-size: 19px;
   color: #1adb30;
 }
@@ -864,7 +867,7 @@
   .optionsContainer {
     margin: 5% auto;
   }
-  .optionsContainer > p {
+  .optionsContainer > .linky > p {
     text-align: center;
     margin: unset;
     margin: 5% auto;

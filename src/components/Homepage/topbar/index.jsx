@@ -107,18 +107,18 @@ const TopbarLayout = ({ admin, person }) => {
             </p>
           </div>
           <div className={Styles.optionsContainer}>
-            <Link to={"/home"}>
+            <Link className={Styles.linky} to={"/home"}>
               <p>Create Link</p>
             </Link>
-            <Link to={"/home"}>
+            <Link className={Styles.linky} to={"/home"}>
               <p>Manage Links</p>
             </Link>
             {admin && (
-              <Link to={"/home/fum"}>
+              <Link className={Styles.linky} to={"/home/fum"}>
                 <p>Manage Users</p>
               </Link>
             )}
-            <Link to={"/home"}>
+            <Link className={Styles.linky} to={"/home"}>
               <p>Dashboard</p>
             </Link>
           </div>
