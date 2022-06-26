@@ -795,8 +795,8 @@
   }
   .userNameCont {
     width: 100%;
-    text-align: left;
-    padding-left: 40%;
+    /* text-align: left; */
+    /* padding-left: 40%; */
   }
   .optionsContainer {
     width: 100%;
@@ -905,5 +905,8 @@
     width: 100%;
     text-align: center;
     padding-left: unset;
+  }
+  .userNameCont > p {
+    text-align: center;
   }
 }

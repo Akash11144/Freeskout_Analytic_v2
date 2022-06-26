@@ -189,9 +189,11 @@ body {
 }
 .viewIcon:hover {
   filter: drop-shadow(0 0 1.5px rgb(63, 63, 252, 0.5));
+  transform: scale(1.3);
 }
 .delIcon:hover {
   filter: drop-shadow(0 0 1.5px rgba(255, 0, 0, 0.645));
+  transform: scale(1.3);
 }
 .TbMinusVertical {
   font-size: 20px;
