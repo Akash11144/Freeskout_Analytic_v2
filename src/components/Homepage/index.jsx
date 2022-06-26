@@ -60,6 +60,8 @@ const Home = () => {
   return (
     <React.Fragment>
       {pageLoading && <SmallLoading />}
+      {console.log("person inside render home: ", person)}
+
       {pageStart &&
         (loggedIn ? (
           <>
