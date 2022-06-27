@@ -24,9 +24,23 @@ export default Topbar;
 
 const TopbarLayout = ({ admin, person }) => {
   const [isActive, setisActive] = useState(false);
+  const [pageName, setpageName] = useState("Create Link");
 
+  const handelCreateLink = () => {
+    setpageName("Create Link");
+    console.log(pageName);
+  };
+  const handelManageLink = () => {
+    setpageName("Manage Links");
+  };
+  const handelManageUsers = () => {
+    setpageName("Manage Users");
+  };
+  const handelDashboard = () => {
+    setpageName("Dashboard");
+  };
   const navi1 = useNavigate();
-const hamClick = () => setisActive(!isActive);
+  const hamClick = () => setisActive(!isActive);
 
   const handleLogout = async () => {
     navi1("/");
@@ -74,7 +88,7 @@ const hamClick = () => setisActive(!isActive);
               ></span>
             </div>
           </div>
-          <div className={Styles.pageName}>Create link</div>
+          <div className={Styles.pageName}>{pageName}</div>
           <div className={Styles.dateTimeCont}>
             <div className={Styles.secDiv}>
               <p className={Styles.dateCont}>
@@ -109,14 +123,20 @@ const hamClick = () => setisActive(!isActive);
             <Link
               className={Styles.linky}
               to={"/home"}
-              onClick={() => hamClick()}
+              onClick={() => {
+                hamClick();
+                handelCreateLink();
+              }}
             >
               <p>Create Link</p>
             </Link>
             <Link
               className={Styles.linky}
               to={"/home/lm"}
-              onClick={() => hamClick()}
+              onClick={() => {
+                hamClick();
+                handelManageLink();
+              }}
             >
               <p>Manage Links</p>
             </Link>
@@ -124,7 +144,10 @@ const hamClick = () => setisActive(!isActive);
               <Link
                 className={Styles.linky}
                 to={"/home/fum"}
-                onClick={() => hamClick()}
+                onClick={() => {
+                  hamClick();
+                  handelManageUsers();
+                }}
               >
                 <p>Manage Users</p>
               </Link>

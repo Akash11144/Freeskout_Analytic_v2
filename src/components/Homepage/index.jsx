@@ -51,7 +51,6 @@ const Home = () => {
       }
     }
   };
-
   useEffect(() => {
     setpageStart(true);
     checkPersistent();
@@ -69,9 +68,9 @@ const Home = () => {
             <Topbar {...person}></Topbar>
             <Routes>
               <Route path="/" element={<RouteCreationDesign {...person} />} />
-              <Route path="fum" element={<FUM></FUM>} />
+              <Route path="fum" element={<FUM />} />
               <Route path="*" element={<h1>Page not found....</h1>} />
-              <Route path="lm" element={<LinkManement></LinkManement>} />
+              <Route path="lm" element={<LinkManement />} />
             </Routes>
           </>
         ) : (
