@@ -6,6 +6,7 @@ import InformationPopUp from "../extras/pop-ups/information";
 import RouteCreationDesign from "./route-creation";
 import SmallLoading from "../extras/loading-animation/small-loading";
 import FUM from "./freeskout-user-management";
+import LinkManement from "./linkManagement";
 
 let errorObj = {
   desc: "",
@@ -70,6 +71,7 @@ const Home = () => {
               <Route path="/" element={<RouteCreationDesign {...person} />} />
               <Route path="fum" element={<FUM></FUM>} />
               <Route path="*" element={<h1>Page not found....</h1>} />
+              <Route path="lm" element={<LinkManement></LinkManement>} />
             </Routes>
           </>
         ) : (
