@@ -26,8 +26,7 @@ const TopbarLayout = ({ admin, person }) => {
   const [isActive, setisActive] = useState(false);
 
   const navi1 = useNavigate();
-
-  const hamClick = () => setisActive(!isActive);
+const hamClick = () => setisActive(!isActive);
 
   const handleLogout = async () => {
     navi1("/");
