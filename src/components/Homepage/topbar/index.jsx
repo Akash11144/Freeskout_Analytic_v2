@@ -8,16 +8,19 @@ import { Link } from "react-router-dom";
 const Topbar = (props) => {
   const [admin, setadmin] = useState(false);
 
+  let i = false;
   useEffect(() => {
-    console.log("topbar props useeffect", props);
-    if (props.email === "info@freeskout.com") {
-      console.log("hello freeskout admin: ", props.name);
-      setadmin(true);
-    } else console.log("hello freeskout user", props.name);
+    if (!i) {
+      if (props.email === "info@freeskout.com") {
+        setadmin(true);
+      }
+    }
+    return () => (i = true);
   }, [props]);
 
   return <TopbarLayout admin={admin} person={props.name} />;
 };
+
 export default Topbar;
 
 // --------------------------------------------------------------
@@ -28,7 +31,6 @@ const TopbarLayout = ({ admin, person }) => {
 
   const handelCreateLink = () => {
     setpageName("Create Link");
-    console.log(pageName);
   };
   const handelManageLink = () => {
     setpageName("Manage Links");
@@ -59,7 +61,6 @@ const TopbarLayout = ({ admin, person }) => {
 
   return (
     <div className={Styles.allCont}>
-      {console.log("inside topbar render props: ", person, "admin: ", admin)}
       <div className={Styles.mainCont}>
         <div className={Styles.topBarSecCont}>
           <div

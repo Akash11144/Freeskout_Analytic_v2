@@ -186,7 +186,7 @@ const RouteCreationDesign = (props) => {
                 www.freeskout.com/rc/ShubhamUpadhyay
               </p>
             </div>
-            <div className={Styles.otherDetails}>
+            {/* <div className={Styles.otherDetails}>
               <p>
                 <span>Name: </span> Shubham Upadhyay
               </p>
@@ -203,7 +203,7 @@ const RouteCreationDesign = (props) => {
                   www.freeskout.com/blogs/link/abc/xyz/sbc
                 </a>
               </p>
-            </div>
+            </div> */}
             <div className={Styles.btn} id="sendmailBtn">
               {/* <SendMail /> */}
               Send

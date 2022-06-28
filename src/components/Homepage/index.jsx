@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Outlet, Route, Routes, useNavigate } from "react-router";
-import Topbar from "./topbar";
+import { useRoutes } from "react-router";
 import Styles from "../homepage/index.module.css";
-import InformationPopUp from "../extras/pop-ups/information";
+import Topbar from "./topbar";
 import RouteCreationDesign from "./route-creation";
-import SmallLoading from "../extras/loading-animation/small-loading";
 import FUM from "./freeskout-user-management";
 import LinkManement from "./linkManagement";
+import PageNotFound from "../redirection/page-not-found";
+import InformationPopUp from "../extras/pop-ups/information";
+import SmallLoading from "../extras/loading-animation/small-loading";
 
 let errorObj = {
   desc: "",
@@ -15,18 +16,15 @@ let errorObj = {
 };
 
 const Home = () => {
-  const navi1 = useNavigate();
   const [person, setperson] = useState("");
   const [loggedIn, setloggedIn] = useState(false);
   const [pageLoading, setpageLoading] = useState(true);
   const [pageStart, setpageStart] = useState(false);
-  const [admin, setadmin] = useState(false);
   const [pageError, setpageError] = useState(false);
 
   const checkPersistent = async () => {
     let ls = JSON.parse(localStorage.getItem("Freeskout-session"));
     if (ls === null) {
-      console.log("token not found in local storage", ls);
       errorObj.desc = "not logged in";
       errorObj.navigationRoute = "/";
       setpageError(true);
@@ -46,32 +44,30 @@ const Home = () => {
         setpageError(true);
       } else {
         setloggedIn(true);
-        if (r2.output.email === "info@freeskout.com") setadmin(true);
         setperson(r2.output);
       }
     }
   };
+
+  let i = false;
+
   useEffect(() => {
-    setpageStart(true);
-    checkPersistent();
-    setpageLoading(false);
+    if (!i) {
+      setpageStart(true);
+      checkPersistent();
+      setpageLoading(false);
+    }
+    return () => (i = true);
   }, []);
 
   return (
     <React.Fragment>
       {pageLoading && <SmallLoading />}
-      {console.log("person inside render home: ", person)}
-
       {pageStart &&
         (loggedIn ? (
           <>
             <Topbar {...person}></Topbar>
-            <Routes>
-              <Route path="/" element={<RouteCreationDesign {...person} />} />
-              <Route path="fum" element={<FUM />} />
-              <Route path="*" element={<h1>Page not found....</h1>} />
-              <Route path="lm" element={<LinkManement />} />
-            </Routes>
+            <HomeRoutes />
           </>
         ) : (
           pageError && <InformationPopUp {...errorObj} />
@@ -81,3 +77,27 @@ const Home = () => {
 };
 
 export default Home;
+
+const HomeRoutes = () => {
+  const arr = [
+    {
+      path: "/",
+      element: <RouteCreationDesign />,
+    },
+    {
+      path: "/fum",
+      element: <FUM />,
+    },
+    {
+      path: "/lm",
+      element: <LinkManement />,
+    },
+    {
+      path: "*",
+      element: <PageNotFound />,
+    },
+  ];
+
+  const element = useRoutes(arr);
+  return element;
+};

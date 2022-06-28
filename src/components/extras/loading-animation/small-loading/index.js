@@ -8,6 +8,7 @@ const SmallLoading = () => {
         backgroundColor: "rgba(0, 0, 0, 0.449)",
         position: "absolute",
         top: "0",
+        zIndex: "10",
       }}
     >
       <div
