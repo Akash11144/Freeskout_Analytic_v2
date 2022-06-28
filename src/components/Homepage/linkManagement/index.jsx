@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Styles from "../linkManagement/index.module.css";
-
+import { AiFillCaretDown } from "react-icons/ai";
 const getYear = () => {
   var dt = new Date();
   return dt.getFullYear();
@@ -28,28 +28,15 @@ const LinkManement = () => {
       {/* {generateLoading && <SmallLoading />} */}
       <div className={Styles.secondaryDiv}>
         <div className={Styles.selectors}>
-          <div className={Styles.togggleBtnHolder}>
-            <div className={Styles.switches_container}>
-              <input
-                type="radio"
-                id="switchActive"
-                name="switchBtn"
-                value="active"
-                checked="checked"
-              />
-              <input
-                type="radio"
-                id="switchDeleted"
-                name="switchBtn"
-                value="deleted"
-              />
-              <label for="switchMonthly">Monthly</label>
-              <label for="switchYearly">Yearly</label>
-              <div className={Styles.switch_wrapper}>
-                <div className={Styles.switch}>
-                  <div>Monthly</div>
-                  <div>Yearly</div>
-                </div>
+          <div className={Styles.selectedOption}>
+            <p>Deleted</p>
+            <AiFillCaretDown className={Styles.downIcon} />
+            <div className={Styles.otherOptionsCont}>
+              <div className={Styles.otherOptions}>
+                <p>Active Liks</p>
+              </div>
+              <div className={Styles.otherOptions}>
+                <p>Deleted Liks</p>
               </div>
             </div>
           </div>
