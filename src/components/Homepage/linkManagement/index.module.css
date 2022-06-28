@@ -1,6 +1,6 @@
 .mainCont {
   width: 100%;
-  padding-top: 10vh;
+  padding-top: 2vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -9,7 +9,7 @@
   padding: 0 3%;
 }
 .selectors {
-  width: 95%;
+  width: 98%;
   margin: 0 auto;
   justify-content: space-between;
   align-items: center;
@@ -18,24 +18,35 @@
   border-radius: 1rem;
   box-shadow: 0 5px 20px 2px rgb(170 221 238 / 13%);
   background-color: #fdffff;
-  padding: 1% 0;
+  padding: 1% 2%;
   box-sizing: border-box;
 }
 .selectedOption {
-  border: 1px solid red;
+  border: 1px solid #1adb80;
   border-radius: 10px;
   width: max-content;
   padding: 5px 15px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  cursor: pointer;
 }
 .selectedOption > p {
   margin: unset;
   padding: unset;
+  color: rgba(0, 0, 0, 0.4);
+  font-weight: 600;
+}
+.dropholder {
+  display: grid;
+  place-items: center;
+  padding: 2px 3px;
 }
 .otherOptionsCont {
   display: none;
+}
+.downIcon {
+  color: rgba(0, 0, 0, 0.7);
 }
 .otherOptions {
 }

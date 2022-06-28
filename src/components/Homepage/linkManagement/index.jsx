@@ -30,7 +30,9 @@ const LinkManement = () => {
         <div className={Styles.selectors}>
           <div className={Styles.selectedOption}>
             <p>Deleted</p>
-            <AiFillCaretDown className={Styles.downIcon} />
+            <div className={Styles.dropholder}>
+              <AiFillCaretDown className={Styles.downIcon} />
+            </div>
             <div className={Styles.otherOptionsCont}>
               <div className={Styles.otherOptions}>
                 <p>Active Liks</p>
