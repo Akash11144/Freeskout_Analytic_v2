@@ -1,82 +1,56 @@
-import pt from "platform";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Styles from "./index.module.css";
-import {
-  timeGenerator as TG,
-  dateObserver as DO,
-  dayObserver,
-  getAddress as GA,
-  ipFetch as IPF,
-  postR,
-} from "../../utlis";
-
-let ud = {
-  browser_name: "",
-  browser_version: "",
-  date: 0,
-  day: 0,
-  hours: 0,
-  id: "",
-  ip: "",
-  minutes: 0,
-  month: 0,
-  product_manufacturer: "",
-  product_name: "",
-  os_architecture: "",
-  os_name: "",
-  os_version: "",
-  time: "",
-  route: "",
-  year: 0,
-};
+import { ipFetch, postR } from "../../utlis";
+import pt from "platform";
 
 const userData = async (location_pathname) => {
-  let ipf = await IPF();
-  let deo = DO();
+  let dr = new Date();
+  let ud = {
+    browser_name: pt.name,
+    browser_version: pt.version,
+    id: dr.getTime(),
+    ip: await ipFetch(),
+    product_manufacturer: pt.manufacturer ? pt.manufacturer : "not available",
+    product_name: pt.product ? pt.product : "desktop",
+    os_architecture: pt.os.architecture,
+    os_name: pt.os.family,
+    os_version: pt.os.version,
+    time: dr.toDateString() + " " + dr.toTimeString(),
+    route: location_pathname,
+  };
 
-  ud.ip = ipf;
-  ud.id =
-    " " +
-    deo.Full_Year +
-    deo.Month +
-    deo.Datee +
-    deo.Hours +
-    deo.Minutes +
-    deo.Seconds +
-    deo.Mili_Seconds;
-  ud.browser_name = pt.name;
-  ud.browser_version = pt.version;
-  ud.product_name = pt.product ? pt.product : "desktop";
-  ud.product_manufacturer = pt.manufacturer ? pt.manufacturer : "not available";
-  ud.os_name = pt.os.family;
-  ud.os_version = pt.os.version;
-  ud.os_architecture = pt.os.architecture;
-  ud.time = TG();
-  ud.year = deo.Full_Year;
-  ud.month = +deo.Month;
-  ud.date = +deo.Datee;
-  ud.day = dayObserver((deo.Datee % 7) + 1);
-  ud.hours = +deo.Hours;
-  ud.minutes = +deo.Minutes;
-  ud.route = location_pathname;
   console.log(ud);
-  // _________________________________________________________
   let localLink = "http://localhost:1111";
-  let mainLink = "https://freeskout-analytic-v2-backend.herokuapp.com";
   let route = "/user/setUser";
-  await postR(mainLink, route, ud);
-
-  // ________________________________________________________
+  // await postR(localLink, route, ud);
 };
 
 // --------------------------------------------------------------------
+let i = false;
 
-function Redir() {
+function Redir(props) {
   let uloc = useLocation();
-  useEffect(async () => {
-    await userData(uloc.pathname);
-    // window.open("https://freeskout.com/", "_self");
+
+  useEffect(() => {
+    if (!i) {
+      let data = Object.values(props);
+      let updatedwebsite = "";
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].path === uloc.pathname) {
+          updatedwebsite = data[i].website;
+          break;
+        }
+      }
+      const dataSetter = async () => {
+        await userData(uloc.pathname);
+        // window.open(updatedwebsite, "_self");
+      };
+      dataSetter();
+    }
+    return () => {
+      i = true;
+    };
   }, []);
 
   return (
@@ -93,7 +67,7 @@ function Redir() {
         </ul>
       </div>
       <div className={Styles.redirHold}>
-        <h2>Redirecting</h2>
+        <h2>Redirecting...</h2>
       </div>
     </div>
   );

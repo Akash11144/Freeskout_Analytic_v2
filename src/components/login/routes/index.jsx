@@ -18,7 +18,7 @@ export default function MainRoutes() {
       element: <Home />,
     },
     {
-      path: "/redirect",
+      path: "/redirect/*",
       element: <RedirectingRoutes />,
     },
     {
