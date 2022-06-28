@@ -20,10 +20,10 @@ const userData = async (location_pathname) => {
     route: location_pathname,
   };
 
-  console.log(ud);
   let localLink = "http://localhost:1111";
   let route = "/user/setUser";
-  // await postR(localLink, route, ud);
+  let r = await postR(localLink, route, ud);
+  console.log("post result: ", r);
 };
 
 // --------------------------------------------------------------------
@@ -31,14 +31,15 @@ let i = false;
 
 function Redir(props) {
   let uloc = useLocation();
-
+  console.log("location", uloc);
   useEffect(() => {
     if (!i) {
       let data = Object.values(props);
       let updatedwebsite = "";
       for (let i = 0; i < data.length; i++) {
-        if (data[i].path === uloc.pathname) {
+        if (data[i].path.split("/")[1] === uloc.pathname.split("/")[2]) {
           updatedwebsite = data[i].website;
+          console.log("if", updatedwebsite);
           break;
         }
       }
