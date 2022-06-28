@@ -25,6 +25,7 @@ const RouteCreationDesign = (props) => {
 
   const handleValue = async () => {
     setgenerateLoading(true);
+
     let name = props.name;
     let email = props.email;
     let for_name = name_inp.current.value;
@@ -33,13 +34,15 @@ const RouteCreationDesign = (props) => {
     let slug = route_inp.current.value;
     let website = website_inp.current.value;
     let dt = new Date();
-    let time = dt;
+    let time = dt.toDateString() + " " + dt.toTimeString();
     let ls = localStorage.getItem("Freeskout-session");
+
     let email_regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
     var url_exp = /^(https\:\/\/freeskout.com)/gi;
     let url_regex = new RegExp(url_exp);
     let slug_exp = /([A-Za-z0-9\-\_])+/gi;
     let slug_regex = new RegExp(slug_exp);
+
     if (
       for_name === "" ||
       for_email === "" ||
