@@ -20,8 +20,12 @@
   background-color: #fdffff;
   padding: 1% 2%;
   box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.selectedOption {
+.selectedOption,
+.selectedUserOption {
   border: 1px solid #1adb80;
   border-radius: 10px;
   width: max-content;
@@ -32,7 +36,8 @@
   cursor: pointer;
   position: relative;
 }
-.selectedOption > p {
+.selectedOption > p,
+.selectedUserOption > p {
   margin: unset;
   padding: unset;
   color: rgba(0, 0, 0, 0.4);
