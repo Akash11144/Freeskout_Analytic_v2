@@ -67,7 +67,7 @@ const Home = () => {
         (loggedIn ? (
           <>
             <Topbar {...person}></Topbar>
-            <HomeRoutes />
+            <HomeRoutes {...person} />
           </>
         ) : (
           pageError && <InformationPopUp {...errorObj} />
@@ -78,11 +78,11 @@ const Home = () => {
 
 export default Home;
 
-const HomeRoutes = () => {
+const HomeRoutes = (props) => {
   const arr = [
     {
       path: "/",
-      element: <RouteCreationDesign />,
+      element: <RouteCreationDesign {...props} />,
     },
     {
       path: "/fum",

@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 import Styles from "./index.module.css";
 import SmallLoading from "../../extras/loading-animation/small-loading";
 import SendMail from "../../extras/loading-animation/sendMailAnimation";
-import { postR } from "../../utlis";
+import { lLink, postAuth } from "../../utlis";
 
 const getYear = () => {
   var dt = new Date();
@@ -35,7 +35,6 @@ const RouteCreationDesign = (props) => {
     let website = website_inp.current.value;
     let dt = new Date();
     let time = dt.toDateString() + " " + dt.toTimeString();
-    let ls = localStorage.getItem("Freeskout-session");
 
     let email_regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
     var url_exp = /^(https\:\/\/freeskout.com)/gi;
@@ -72,21 +71,16 @@ const RouteCreationDesign = (props) => {
         website,
         time
       );
-      let r = await postR(
-        "http://localhost:1111",
-        "/route/addRoute",
-        {
-          name,
-          email,
-          for_name,
-          for_email,
-          description,
-          path: `/${slug}`,
-          website,
-          time,
-        },
-        `Bearer ${JSON.parse(localStorage.getItem("Freeskout-session"))}`
-      );
+      let r = await postAuth(lLink, "/route/addRoute", {
+        name,
+        email,
+        for_name,
+        for_email,
+        description,
+        path: `/${slug}`,
+        website,
+        time,
+      });
       console.log("route creation post result -->", r);
       route_inp.current.value = "";
     }
@@ -186,7 +180,7 @@ const RouteCreationDesign = (props) => {
                 www.freeskout.com/rc/ShubhamUpadhyay
               </p>
             </div>
-            {/* <div className={Styles.otherDetails}>
+            <div className={Styles.otherDetails}>
               <p>
                 <span>Name: </span> Shubham Upadhyay
               </p>
@@ -203,7 +197,7 @@ const RouteCreationDesign = (props) => {
                   www.freeskout.com/blogs/link/abc/xyz/sbc
                 </a>
               </p>
-            </div> */}
+            </div>
             <div className={Styles.btn} id="sendmailBtn">
               {/* <SendMail /> */}
               Send

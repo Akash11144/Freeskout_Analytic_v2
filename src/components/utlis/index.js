@@ -1,3 +1,81 @@
+export const lLink = "http://localhost:1111";
+
+// --------------------------------------------------------------------
+
+export const ipFetch = async () => {
+  try {
+    let r = await fetch("https://www.cloudflare.com/cdn-cgi/trace").then(
+      (res) => res.text()
+    );
+    return r.split("ts")[0].split("ip=")[1].split("\n")[0];
+  } catch (error) {
+    console.log(error);
+    return "unable to fetch ip due to some error from outside";
+  }
+};
+
+//   --------------------------------------------------------------------------------
+
+export const postR = async (mainLink, route, pdata, Auth) => {
+  try {
+    console.log(mainLink, route, pdata, Auth);
+    let r = await fetch(mainLink + route, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: Auth,
+      },
+      body: JSON.stringify(pdata),
+    });
+    let r1 = await r.json();
+    return r1;
+  } catch (error) {
+    console.log("error in post request", error);
+    return {
+      FetchIssue: true,
+      FetchIssueDetail: "Server error, try again later",
+    };
+  }
+};
+
+// ----------------------------------------------------------------------------------------------
+
+export const postAuth = async (mainLink, route, pdata) => {
+  try {
+    console.log(mainLink, route, pdata);
+    let r = await fetch(mainLink + route, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${JSON.parse(
+          localStorage.getItem("Freeskout-session")
+        )}`,
+      },
+      body: JSON.stringify(pdata),
+    });
+    let r1 = await r.json();
+    return r1;
+  } catch (error) {
+    console.log("error in post request", error);
+    return {
+      FetchIssue: true,
+      FetchIssueDetail: "Server error, try again later",
+    };
+  }
+};
+
+// --------------------------------------------------------------------------------------------------
+
+export const fetchR = async (a) => {
+  try {
+    let t = await fetch(a);
+    let t1 = await t.json();
+    return t1;
+  } catch (error) {
+    console.log("error while fetching in frontend", error);
+  }
+};
+
 // ------------------------------------------------------------------------------
 
 // const getCoordinates = () => {
@@ -46,53 +124,7 @@
 //   return y;
 // };
 
-// --------------------------------------------------------------------
-
-export const ipFetch = async () => {
-  try {
-    let r = await fetch("https://www.cloudflare.com/cdn-cgi/trace").then(
-      (res) => res.text()
-    );
-    return r.split("ts")[0].split("ip=")[1].split("\n")[0];
-  } catch (error) {
-    console.log(error);
-    return "unable to fetch ip due to some error from outside";
-  }
-};
-
-//   --------------------------------------------------------------------------------
-
-export const postR = async (mainLink, route, pdata, Auth) => {
-  try {
-    console.log(mainLink, route, pdata, Auth);
-    let r = await fetch(mainLink + route, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: Auth,
-      },
-      body: JSON.stringify(pdata),
-    });
-    let r1 = await r.json();
-    return r1;
-  } catch (error) {
-    console.log("error in post request", error);
-    return {
-      FetchIssue: true,
-      FetchIssueDetail: "Server error, try again later",
-    };
-  }
-};
-
-export const fetchR = async (a) => {
-  try {
-    let t = await fetch(a);
-    let t1 = await t.json();
-    return t1;
-  } catch (error) {
-    console.log("error while fetching in frontend", error);
-  }
-};
+// ------------------------------------------------------------------------------------------------
 
 // const response = await fetch(url, {
 //   method: 'POST', // *GET, POST, PUT, DELETE, etc.
