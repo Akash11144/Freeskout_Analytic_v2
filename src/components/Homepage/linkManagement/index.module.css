@@ -25,32 +25,64 @@
   border: 1px solid #1adb80;
   border-radius: 10px;
   width: max-content;
-  padding: 5px 15px;
+  padding: 5px 10px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   cursor: pointer;
+  position: relative;
 }
 .selectedOption > p {
   margin: unset;
   padding: unset;
   color: rgba(0, 0, 0, 0.4);
   font-weight: 600;
+  font-size: 14px;
 }
 .dropholder {
   display: grid;
   place-items: center;
-  padding: 2px 3px;
+  padding: 2px 0px 2px 5px;
 }
-.otherOptionsCont {
+.otherOptionsContShow {
+  border-radius: 10px;
+  width: max-content;
+  padding: 5px;
+  position: absolute;
+  top: 110%;
+  left: 0%;
+  transition: 0.3s;
+}
+.otherOptionsContHide {
   display: none;
 }
 .downIcon {
   color: rgba(0, 0, 0, 0.7);
+  padding: unset;
+  margin: unset;
+  transition: 0.3s;
+}
+.rotatedIcon {
+  transform: rotateZ(180deg);
 }
 .otherOptions {
 }
 .otherOptions > p {
+  padding: 0 2px;
+  margin: 2% auto;
+  background-color: #1adb80;
+  color: #fdffff;
+  font-weight: 500;
+  padding: 3% 0% 3% 10%;
+  width: 120px;
+  border-radius: 10px;
+  text-align: left;
+  border: 1px solid transparent;
+}
+.otherOptions:hover > p {
+  border: 1px solid #1adb80;
+  color: rgba(0, 0, 0, 0.4);
+  background-color: #fdffff;
 }
 .copyRightCont {
   width: 100%;
