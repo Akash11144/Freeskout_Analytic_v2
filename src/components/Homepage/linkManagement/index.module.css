@@ -1,6 +1,6 @@
 .mainCont {
   width: 100%;
-  padding-top: 10vh;
+  padding-top: 2vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -9,7 +9,7 @@
   padding: 0 3%;
 }
 .selectors {
-  width: 95%;
+  width: 98%;
   margin: 0 auto;
   justify-content: space-between;
   align-items: center;
@@ -18,28 +18,71 @@
   border-radius: 1rem;
   box-shadow: 0 5px 20px 2px rgb(170 221 238 / 13%);
   background-color: #fdffff;
-  padding: 1% 0;
+  padding: 1% 2%;
   box-sizing: border-box;
 }
 .selectedOption {
-  border: 1px solid red;
+  border: 1px solid #1adb80;
   border-radius: 10px;
   width: max-content;
-  padding: 5px 15px;
+  padding: 5px 10px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
+  cursor: pointer;
+  position: relative;
 }
 .selectedOption > p {
   margin: unset;
   padding: unset;
+  color: rgba(0, 0, 0, 0.4);
+  font-weight: 600;
+  font-size: 14px;
 }
-.otherOptionsCont {
+.dropholder {
+  display: grid;
+  place-items: center;
+  padding: 2px 0px 2px 5px;
+}
+.otherOptionsContShow {
+  border-radius: 10px;
+  width: max-content;
+  padding: 5px;
+  position: absolute;
+  top: 110%;
+  left: 0%;
+  transition: 0.3s;
+}
+.otherOptionsContHide {
   display: none;
+}
+.downIcon {
+  color: rgba(0, 0, 0, 0.7);
+  padding: unset;
+  margin: unset;
+  transition: 0.3s;
+}
+.rotatedIcon {
+  transform: rotateZ(180deg);
 }
 .otherOptions {
 }
 .otherOptions > p {
+  padding: 0 2px;
+  margin: 2% auto;
+  background-color: #1adb80;
+  color: #fdffff;
+  font-weight: 500;
+  padding: 3% 0% 3% 10%;
+  width: 120px;
+  border-radius: 10px;
+  text-align: left;
+  border: 1px solid transparent;
+}
+.otherOptions:hover > p {
+  border: 1px solid #1adb80;
+  color: rgba(0, 0, 0, 0.4);
+  background-color: #fdffff;
 }
 .copyRightCont {
   width: 100%;

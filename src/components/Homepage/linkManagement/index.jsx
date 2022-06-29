@@ -6,7 +6,11 @@ const getYear = () => {
   return dt.getFullYear();
 };
 const LinkManement = () => {
+  const [isActive, setisActive] = useState(false);
   const [Data, setData] = useState([]);
+  const handleStatusSelector = () => {
+    setisActive(!isActive);
+  };
   let i = false;
   useEffect(() => {
     if (!i) {
@@ -29,14 +33,49 @@ const LinkManement = () => {
       <div className={Styles.secondaryDiv}>
         <div className={Styles.selectors}>
           <div className={Styles.selectedOption}>
-            <p>Deleted</p>
-            <AiFillCaretDown className={Styles.downIcon} />
-            <div className={Styles.otherOptionsCont}>
-              <div className={Styles.otherOptions}>
-                <p>Active Liks</p>
+            <p>All Links</p>
+            <div
+              className={Styles.dropholder}
+              onClick={() => {
+                handleStatusSelector();
+              }}
+            >
+              <AiFillCaretDown
+                className={`${Styles.downIcon}
+              ${isActive ? Styles.rotatedIcon : Styles.downIcon}`}
+              />
+            </div>
+            <div
+              className={`${Styles.otherOptionsContShow}
+            ${
+              isActive
+                ? Styles.otherOptionsContShow
+                : Styles.otherOptionsContHide
+            }`}
+            >
+              <div
+                className={Styles.otherOptions}
+                onClick={() => {
+                  handleStatusSelector();
+                }}
+              >
+                <p>All Links</p>
               </div>
-              <div className={Styles.otherOptions}>
-                <p>Deleted Liks</p>
+              <div
+                className={Styles.otherOptions}
+                onClick={() => {
+                  handleStatusSelector();
+                }}
+              >
+                <p>Active Links</p>
+              </div>
+              <div
+                className={Styles.otherOptions}
+                onClick={() => {
+                  handleStatusSelector();
+                }}
+              >
+                <p>Deleted Links</p>
               </div>
             </div>
           </div>
