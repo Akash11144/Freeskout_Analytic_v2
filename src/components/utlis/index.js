@@ -1,4 +1,4 @@
-export const lLink = "http://localhost:1111";
+export const L_LINK = "http://localhost:1111";
 
 // --------------------------------------------------------------------
 

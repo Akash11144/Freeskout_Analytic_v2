@@ -1,14 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate, useLocation } from "react-router";
-import { postR } from "../../utlis";
+import { useNavigate } from "react-router";
+import { postR, L_LINK } from "../../utlis";
 import Styles from "./index.module.css";
 import companyLogo from "../../assets/FsnoBg.gif";
 import InformationPopUp from "../../extras/pop-ups/information";
 import SmallLoading from "../../extras/loading-animation/small-loading";
-
-let localLink = "http://localhost:1111";
-let mainLink = "https://freeskout-analytic-v2-backend.herokuapp.com";
-let route = "/validate/login";
 
 let errorObj = {
   desc: "",
@@ -30,15 +26,10 @@ const Login = () => {
   let password = useRef(null);
 
   const navi = useNavigate();
-  const loc = useLocation();
 
   useEffect(() => {
-    // if (loc.pathname === "/") {
-    //   let t = JSON.parse(localStorage.getItem("Freeskout-session"));
-    //   if (t !== null) navi("/home");
-    // }
-    let t = JSON.parse(localStorage.getItem("Freeskout-session"));
-    if (t !== null) navi("/home");
+    if (JSON.parse(localStorage.getItem("Freeskout-session")) !== null)
+      navi("/home");
     setPageLoading(false);
   }, []);
 
@@ -49,12 +40,10 @@ const Login = () => {
       setLoading(false);
       setpopUp(true);
     } else {
-      let r = await postR(
-        localLink,
-        route,
-        { name: username.current.value, password: password.current.value },
-        ""
-      );
+      let r = await postR(L_LINK, "/validate/login", {
+        name: username.current.value,
+        password: password.current.value,
+      });
       console.log("output from login page post", r);
       if (r.FetchIssue) {
         errorObj.desc = r.FetchIssueDetail;

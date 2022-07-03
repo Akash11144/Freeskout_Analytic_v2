@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 import Styles from "./index.module.css";
 import SmallLoading from "../../extras/loading-animation/small-loading";
 import SendMail from "../../extras/loading-animation/sendMailAnimation";
-import { lLink, postAuth } from "../../utlis";
+import { L_LINK, postAuth } from "../../utlis";
 
 const getYear = () => {
   var dt = new Date();
@@ -71,7 +71,7 @@ const RouteCreationDesign = (props) => {
         website,
         time
       );
-      let r = await postAuth(lLink, "/route/addRoute", {
+      let r = await postAuth(L_LINK, "/route/addRoute", {
         name,
         email,
         for_name,
