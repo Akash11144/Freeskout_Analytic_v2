@@ -73,6 +73,34 @@ export const fetchR = async (a) => {
     return t1;
   } catch (error) {
     console.log("error while fetching in frontend", error);
+    return {
+      FetchIssue: true,
+      FetchIssueDetail: "error getting data",
+    };
+  }
+};
+
+// ------------------------------------------------------------------------------
+
+export const fetchAuth = async (a) => {
+  try {
+    let r1 = await fetch(a, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${JSON.parse(
+          localStorage.getItem("Freeskout-session")
+        )}`,
+      },
+    });
+    let r2 = await r1.json();
+    return r2;
+  } catch (error) {
+    console.log("error while fetching in frontend", error);
+    return {
+      FetchIssue: true,
+      FetchIssueDetail: "error getting data",
+    };
   }
 };
 

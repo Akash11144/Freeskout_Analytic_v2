@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { nanoid } from "nanoid";
 import Styles from "./index.module.css";
 import SmallLoading from "../../extras/loading-animation/small-loading";
 import SendMail from "../../extras/loading-animation/sendMailAnimation";
@@ -9,6 +8,7 @@ const getYear = () => {
   var dt = new Date();
   return dt.getFullYear();
 };
+
 const RouteCreationDesign = (props) => {
   const [generateLoading, setgenerateLoading] = useState(false);
   const [Data, setData] = useState("");
@@ -87,22 +87,6 @@ const RouteCreationDesign = (props) => {
     setgenerateLoading(false);
   };
 
-  const UniqueIDgenerator = async () => {
-    setgenerateLoading(true);
-    let a = nanoid(5);
-    let r = await fetch("http://localhost:1111/route/uniqueID/a");
-    let b = await r.json();
-    let unique_ID = a;
-    while (b.length) {
-      unique_ID = nanoid(5);
-      let r = await fetch("http://localhost:1111/route/uniqueID/unique_ID");
-      let r1 = await r.json();
-      b = r1.length;
-    }
-    setgenerateLoading(false);
-    return unique_ID;
-  };
-
   return (
     <div className={Styles.mainCont}>
       {generateLoading && <SmallLoading />}
@@ -153,15 +137,6 @@ const RouteCreationDesign = (props) => {
               placeholder="Enter/Generate Slug"
               required={true}
             />
-            <div
-              className={`${Styles.btn} ${Styles.createSlugBtn}`}
-              id="slugBtn"
-              onClick={async () =>
-                (route_inp.current.value = await UniqueIDgenerator())
-              }
-            >
-              Generate
-            </div>
           </div>
           <div
             className={`${Styles.btn} ${Styles.createBtn}`}

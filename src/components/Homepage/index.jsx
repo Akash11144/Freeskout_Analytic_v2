@@ -8,6 +8,7 @@ import LinkManement from "./linkManagement";
 import PageNotFound from "../redirection/page-not-found";
 import InformationPopUp from "../extras/pop-ups/information";
 import SmallLoading from "../extras/loading-animation/small-loading";
+import { fetchAuth, L_LINK } from "../utlis";
 
 let errorObj = {
   desc: "",
@@ -29,22 +30,15 @@ const Home = () => {
       errorObj.navigationRoute = "/";
       setpageError(true);
     } else {
-      let r1 = await fetch("http://localhost:1111/validate/persistLogin", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${ls}`,
-        },
-      });
-      let r2 = await r1.json();
-      console.log(r2);
-      if (r2.issue) {
-        errorObj.desc = r2.issueDetail;
+      let r = await fetchAuth(`${L_LINK}/validate/persistLogin`);
+      console.log(r);
+      if (r.issue) {
+        errorObj.desc = r.issueDetail;
         errorObj.navigationRoute = "/";
         setpageError(true);
       } else {
         setloggedIn(true);
-        setperson(r2.output);
+        setperson(r.output);
       }
     }
   };
