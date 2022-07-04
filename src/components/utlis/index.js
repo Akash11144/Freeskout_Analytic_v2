@@ -16,14 +16,12 @@ export const ipFetch = async () => {
 
 //   --------------------------------------------------------------------------------
 
-export const postR = async (mainLink, route, pdata, Auth) => {
+export const postR = async (mainLink, route, pdata) => {
   try {
-    console.log(mainLink, route, pdata, Auth);
     let r = await fetch(mainLink + route, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: Auth,
       },
       body: JSON.stringify(pdata),
     });
@@ -42,7 +40,6 @@ export const postR = async (mainLink, route, pdata, Auth) => {
 
 export const postAuth = async (mainLink, route, pdata) => {
   try {
-    console.log(mainLink, route, pdata);
     let r = await fetch(mainLink + route, {
       method: "POST",
       headers: {

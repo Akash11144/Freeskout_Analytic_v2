@@ -6,6 +6,7 @@ import PageNotFound from "../page-not-found";
 function RedirectingRoutes() {
   const [Data, setData] = useState([]);
   const loc = useLocation();
+
   let arr = [
     {
       path: "/",
@@ -20,21 +21,43 @@ function RedirectingRoutes() {
       element: <PageNotFound />,
     },
   ];
+
+  const getData = async () => {
+    console.time();
+    try {
+      let r = await fetch("http://localhost:1111/route/allRoutesRedis", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer freeskout_personal_data`,
+        },
+      });
+      let r1 = await r.json();
+      const newloc = loc.pathname.split("/redirect");
+      if (newloc[1]) {
+        for (let i = 0; i < r1.length; i++) {
+          if (newloc[1] === r1[i].path) {
+            arr.push({ path: r1[i].path, element: <Redir {...r1[i]} /> });
+            break;
+          }
+        }
+      }
+    } catch (error) {
+      console.log("error while fetching in frontend", error);
+      return {
+        FetchIssue: true,
+        FetchIssueDetail: "error getting data",
+      };
+    }
+
+    setData(arr);
+    console.timeEnd();
+  };
+
   let i = false;
   useEffect(() => {
-    console.log("location", loc);
-    if (!i) {
-      const getData = async () => {
-        let r = await fetch("http://localhost:1111/route/allRoutesRedis");
-        let r1 = await r.json();
-        const newloc = loc.pathname.split("/");
-        console.log(newloc);
-        for (let i = 0; i < r1.length; i++)
-          arr.push({ path: r1[i].path, element: <Redir {...r1} /> });
-        setData(arr);
-      };
-      getData();
-    }
+    if (!i) getData();
+
     return () => (i = true);
   }, []);
 
