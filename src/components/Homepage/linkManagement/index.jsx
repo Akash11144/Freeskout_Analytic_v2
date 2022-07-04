@@ -2,11 +2,34 @@ import { useState, useEffect } from "react";
 import Styles from "../linkManagement/index.module.css";
 import { AiFillCaretDown } from "react-icons/ai";
 import { useRef } from "react";
+import { FaRegEye } from "react-icons/fa";
+import { AiOutlineDelete } from "react-icons/ai";
+import { TbMinusVertical } from "react-icons/tb";
 const getYear = () => {
   var dt = new Date();
   return dt.getFullYear();
 };
-const users = [{ user: "A" }, { user: "B" }, { user: "C" }];
+const users = [
+  { user: "All Users" },
+  { user: "Akash Gupta" },
+  { user: "Shubham Upadhyay" },
+  { user: "Shashank Sehrawat" },
+  { user: "Ashish Bhambhani" },
+  { user: "Akshay Chopra" },
+  { user: "Rajesh Thakur" },
+  { user: "Neha Sharma" },
+  { user: "Lakshay Bhambhani" },
+  { user: "Rishabh Gulla" },
+  { user: "Ashish Bhambhani" },
+  { user: "Akshay Chopra" },
+  { user: "Rajesh Thakur" },
+  { user: "Neha Sharma" },
+  { user: "Lakshay Bhambhani" },
+  { user: "Rishabh Gulla" },
+  { user: "test user1" },
+  { user: "test user 2" },
+  { user: "lorem ipsum dollar lorem ipsdum" },
+];
 const LinkManement = (props) => {
   const [isActive, setisActive] = useState(false);
   const [isUserActive, setisUserActive] = useState(false);
@@ -34,6 +57,9 @@ const LinkManement = (props) => {
     selected_status.current.innerText = dlIt;
   };
   const selected_user = useRef();
+  const handelSelctUser = (item) => {
+    selected_user.current.innerText = item;
+  };
   let i = false;
   useEffect(() => {
     if (!i) {
@@ -111,7 +137,6 @@ const LinkManement = (props) => {
               <div
                 className={Styles.dropholder}
                 onClick={() => {
-                  // handleStatusSelector();
                   handleUserSelector();
                 }}
               >
@@ -128,7 +153,6 @@ const LinkManement = (props) => {
                 : Styles.otherOptionsContHide
             }`}
               >
-                {/* <Users searchV={(d) => handleUserSelector()}></Users> */}
                 {users.length &&
                   users.map((item, index) => {
                     return (
@@ -136,6 +160,7 @@ const LinkManement = (props) => {
                         className={Styles.otherOptions}
                         onClick={() => {
                           handleUserSelector();
+                          handelSelctUser(item.user);
                         }}
                       >
                         <p>{item.user}</p>
@@ -145,9 +170,1586 @@ const LinkManement = (props) => {
               </div>
             </div>
           </div>
+          <div className={Styles.selectDate}>
+            <p>From: </p>
+            <input type="date" required="required">
+              {/* Start Date */}
+            </input>
+          </div>
+          <div className={Styles.selectDate}>
+            <p>To:</p>
+            <input type="date" required="required">
+              {/* End Date */}
+            </input>
+          </div>
+          <div className={Styles.showBtn}>
+            <p>Show Results</p>
+          </div>
         </div>
-
-        <div className={Styles.linkList}></div>
+        <div className={Styles.linkList}>
+          <div className={Styles.linksContainer}>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={Styles.cont}>
+              <p>
+                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
+              </p>
+              <div className={Styles.userActionBtnsCont}>
+                <div className={Styles.viewIconCont}>
+                  <FaRegEye className={Styles.viewIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                  >
+                    View
+                  </p>
+                </div>
+                {/* <div className={Styles.TbMinusVertical}>
+                  <TbMinusVertical className={Styles.TbMinusVertical} />
+                </div> */}
+                <div className={`${Styles.delIconCont}`}>
+                  <AiOutlineDelete className={Styles.delIcon} />
+                  <p
+                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                  >
+                    Delete
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div className={Styles.copyRightCont}>
         <p className={Styles.CopyRightP}>
