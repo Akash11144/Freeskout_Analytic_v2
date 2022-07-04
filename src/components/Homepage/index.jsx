@@ -24,8 +24,7 @@ const Home = () => {
   const [pageError, setpageError] = useState(false);
 
   const checkPersistent = async () => {
-    let ls = JSON.parse(localStorage.getItem("Freeskout-session"));
-    if (ls === null) {
+    if (JSON.parse(localStorage.getItem("Freeskout-session")) === null) {
       errorObj.desc = "not logged in";
       errorObj.navigationRoute = "/";
       setpageError(true);

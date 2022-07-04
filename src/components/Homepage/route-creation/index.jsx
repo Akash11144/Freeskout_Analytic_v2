@@ -15,7 +15,7 @@ const getYear = () => {
 
 const RouteCreationDesign = (props) => {
   const [generateLoading, setgenerateLoading] = useState(false);
-  const [Data, setData] = useState("");
+  // const [Data, setData] = useState("");
 
   const name_inp = useRef(null);
   const mail_inp = useRef(null);
@@ -28,10 +28,12 @@ const RouteCreationDesign = (props) => {
   const gen_mail = useRef();
   const gen_desc = useRef();
   const gen_ref = useRef();
-
+  let i = false;
   useEffect(() => {
-    setData(props);
-  }, []);
+    console.log("create link props: ", props);
+    // if (!i) setData(props);
+    return () => (i = true);
+  }, [props]);
 
   const handleValue = async () => {
     setgenerateLoading(true);
@@ -66,11 +68,7 @@ const RouteCreationDesign = (props) => {
       alert("invalid website");
     } else if (slug_regex.test(slug) == false) {
       alert("invalid Slug");
-    }
-    // else {
-    //   alert("all set");
-    // }
-    else {
+    } else {
       console.log(
         name,
         email,
