@@ -7,16 +7,16 @@ body {
 }
 ::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: rgb(0, 0, 0, 0.45);
-  opacity: 1; /* Firefox */
+  /* color: rgb(0, 0, 0, 0.45); */
+  /* opacity: 1; Firefox */
 }
 :-ms-input-placeholder {
   /* Internet Explorer 10-11 */
-  color: rgb(0, 0, 0, 0.45);
+  /* color: rgb(0, 0, 0, 0.45); */
 }
 ::-ms-input-placeholder {
   /* Microsoft Edge */
-  color: rgb(0, 0, 0, 0.45);
+  /* color: rgb(0, 0, 0, 0.45); */
 }
 ::-webkit-scrollbar {
   width: 3px;

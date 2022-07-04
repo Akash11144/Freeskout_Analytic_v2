@@ -3,6 +3,10 @@ import Styles from "./index.module.css";
 import SmallLoading from "../../extras/loading-animation/small-loading";
 import SendMail from "../../extras/loading-animation/sendMailAnimation";
 import { L_LINK, postAuth } from "../../utlis";
+import { IoLogoInstagram } from "react-icons/io";
+import { IoLogoYoutube } from "react-icons/io";
+import { IoLogoTwitter } from "react-icons/io";
+import { IoLogoLinkedin } from "react-icons/io";
 
 const getYear = () => {
   var dt = new Date();
@@ -18,6 +22,12 @@ const RouteCreationDesign = (props) => {
   const route_inp = useRef(null);
   const desc_inp = useRef(null);
   const website_inp = useRef(null);
+
+  const gen_link = useRef();
+  const gen_name = useRef();
+  const gen_mail = useRef();
+  const gen_desc = useRef();
+  const gen_ref = useRef();
 
   useEffect(() => {
     setData(props);
@@ -128,15 +138,44 @@ const RouteCreationDesign = (props) => {
             placeholder="Link to visit"
             required={true}
           />
-          <div className={`${Styles.slugHolder}`}>
-            <input
-              className={`${Styles.inputFields} ${Styles.slug}`}
-              id="slug"
-              ref={route_inp}
-              type="text"
-              placeholder="Enter/Generate Slug"
-              required={true}
-            />
+          <input
+            className={`${Styles.inputFields}`}
+            id="slug"
+            ref={route_inp}
+            type="text"
+            placeholder="Enter/Generate Slug"
+            required={true}
+          />
+          <div className={Styles.socialSelectorCont}>
+            <label className={Styles.container}>
+              <IoLogoInstagram className={Styles.instalogo} />
+              <input type="checkbox" id="instaCheck" />
+              <span className={Styles.checkmark}></span>
+            </label>
+
+            <label className={Styles.container}>
+              <IoLogoLinkedin className={Styles.linlogo} />
+              <input type="checkbox" id="linkedinCheck" />
+              <span className={Styles.checkmark}></span>
+            </label>
+
+            <label className={Styles.container}>
+              <IoLogoYoutube className={Styles.utlogo} />
+              <input type="checkbox" id="utChecked" />
+              <span className={Styles.checkmark}></span>
+            </label>
+
+            <label className={Styles.container}>
+              <IoLogoTwitter className={Styles.twlogo} />
+              <input type="checkbox" />
+              <span className={Styles.checkmark}></span>
+            </label>
+
+            <label className={Styles.container}>
+              <p className={Styles.otlogo}> others</p>
+              <input type="checkbox" />
+              <span className={Styles.checkmark}></span>
+            </label>
           </div>
           <div
             className={`${Styles.btn} ${Styles.createBtn}`}
@@ -151,24 +190,29 @@ const RouteCreationDesign = (props) => {
           <div className={Styles.genDetailsCont}>
             <div className={Styles.genLinkCont}>
               <p className={Styles.generatedLink}>
-                <span>Generated Link:</span>{" "}
+                <span ref={gen_link}>Generated Link:</span>{" "}
                 www.freeskout.com/rc/ShubhamUpadhyay
               </p>
             </div>
             <div className={Styles.otherDetails}>
               <p>
-                <span>Name: </span> Shubham Upadhyay
+                <span>Name: </span>{" "}
+                <span ref={gen_name}> Shubham Upadhyay</span>
               </p>
               <p>
-                <span>Email: </span> akashsinghGupta@outlook.com
+                <span>Email: </span>
+                <span ref={gen_mail}> akashsinghGupta@outlook.com</span>
               </p>
               <p>
-                <span>Desc: </span> Lorem Ipsum Dolor Lorem Ipsum Dolor Lorem
-                Ipsum Dolor Lorem Ipsum Dolor
+                <span>Desc: </span>
+                <span ref={gen_desc}>
+                  Lorem Ipsum Dolor Lorem Ipsum Dolor Lorem Ipsum Dolor Lorem
+                  Ipsum Dolor
+                </span>
               </p>
               <p>
                 <span>Landing Page: </span>
-                <a href="freeskout.com/blogs">
+                <a ref={gen_ref} href="freeskout.com/blogs">
                   www.freeskout.com/blogs/link/abc/xyz/sbc
                 </a>
               </p>

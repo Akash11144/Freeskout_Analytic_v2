@@ -65,6 +65,9 @@ const Login = () => {
 
   return (
     <div id="main" className={Styles.main_container}>
+      <div className={Styles.stars}></div>
+      <div className={Styles.stars2}></div>
+      <div className={Styles.stars3}></div>
       {PageLoading && <SmallLoading />}
       <div className={Styles.FsImgCont}>
         <img src={companyLogo} alt="Company Logo" className={Styles.logo} />
