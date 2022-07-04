@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Styles from "./index.module.css";
-import { ipFetch, postR } from "../../utlis";
+import { ipFetch, postR, L_LINK } from "../../utlis";
 import pt from "platform";
 
 const userData = async (location_pathname) => {
@@ -20,32 +20,21 @@ const userData = async (location_pathname) => {
     route: location_pathname,
   };
 
-  let localLink = "http://localhost:1111";
-  let route = "/user/setUser";
-  let r = await postR(localLink, route, ud);
+  let r = await postR(L_LINK, "/user/setUser", ud);
   console.log("post result: ", r);
 };
 
 // --------------------------------------------------------------------
-let i = false;
 
-function Redir(props) {
+function Redir({ website }) {
   let uloc = useLocation();
-  console.log("location", uloc);
+
+  let i = false;
   useEffect(() => {
     if (!i) {
-      let data = Object.values(props);
-      let updatedwebsite = "";
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].path.split("/")[1] === uloc.pathname.split("/")[2]) {
-          updatedwebsite = data[i].website;
-          console.log("if", updatedwebsite);
-          break;
-        }
-      }
       const dataSetter = async () => {
         await userData(uloc.pathname);
-        // window.open(updatedwebsite, "_self");
+        // window.open(website, "_self");
       };
       dataSetter();
     }
