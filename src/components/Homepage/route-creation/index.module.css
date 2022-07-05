@@ -229,16 +229,17 @@ body {
   align-items: center;
   box-sizing: border-box;
 }
-.genLinkCont > p {
-  font-size: 18px;
-  font-weight: 400;
-  color: #1adb80;
-}
-.genLinkCont > p > span {
+
+.generatedLink > span:nth-of-type(1) {
   color: rgba(0, 0, 0, 0.91);
   font-weight: 900;
   letter-spacing: 0.5px;
   font-size: 16px;
+}
+.generatedLink > span:nth-of-type(2) {
+  font-size: 18px;
+  font-weight: 400;
+  color: #1adb80;
 }
 .otherDetails {
 }

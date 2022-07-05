@@ -28,6 +28,21 @@ const RouteCreationDesign = (props) => {
   const gen_mail = useRef();
   const gen_desc = useRef();
   const gen_ref = useRef();
+  const handleCreateBtn = () => {
+    let finalName = name_inp.current.value;
+    let finalMail = mail_inp.current.value;
+    let finalDesc = desc_inp.current.value;
+    let finalRoute = route_inp.current.value;
+    let finalWebsite = website_inp.current.value;
+    let genLink = finalWebsite + "/" + finalRoute;
+
+    gen_link.current.innerText = genLink;
+    gen_name.current.innerText = finalName;
+    gen_desc.current.innerText = finalDesc;
+    gen_mail.current.innerText = finalMail;
+    gen_ref.current.innerText = finalWebsite;
+    gen_ref.current.href = finalWebsite;
+  };
   let i = false;
   useEffect(() => {
     console.log("create link props: ", props);
@@ -141,7 +156,7 @@ const RouteCreationDesign = (props) => {
             id="slug"
             ref={route_inp}
             type="text"
-            placeholder="Enter/Generate Slug"
+            placeholder="Enter Slug"
             required={true}
           />
           <div className={Styles.socialSelectorCont}>
@@ -165,20 +180,20 @@ const RouteCreationDesign = (props) => {
 
             <label className={Styles.container}>
               <IoLogoTwitter className={Styles.twlogo} />
-              <input type="checkbox" />
+              <input type="checkbox" id="twChecked" />
               <span className={Styles.checkmark}></span>
             </label>
 
             <label className={Styles.container}>
               <p className={Styles.otlogo}> others</p>
-              <input type="checkbox" />
+              <input type="checkbox" id="others Checked" />
               <span className={Styles.checkmark}></span>
             </label>
           </div>
           <div
             className={`${Styles.btn} ${Styles.createBtn}`}
             id="generateBtn"
-            onClick={() => handleValue()}
+            onClick={() => handleCreateBtn()}
           >
             Create
           </div>
@@ -188,8 +203,8 @@ const RouteCreationDesign = (props) => {
           <div className={Styles.genDetailsCont}>
             <div className={Styles.genLinkCont}>
               <p className={Styles.generatedLink}>
-                <span ref={gen_link}>Generated Link:</span>{" "}
-                www.freeskout.com/rc/ShubhamUpadhyay
+                <span>Generated Link: </span>
+                <span ref={gen_link}>www.freeskout.com/rc/ShubhamUpadhyay</span>
               </p>
             </div>
             <div className={Styles.otherDetails}>
@@ -211,7 +226,7 @@ const RouteCreationDesign = (props) => {
               <p>
                 <span>Landing Page: </span>
                 <a ref={gen_ref} href="freeskout.com/blogs">
-                  www.freeskout.com/blogs/link/abc/xyz/sbc
+                  https://freeskout.com/blogs/
                 </a>
               </p>
             </div>
