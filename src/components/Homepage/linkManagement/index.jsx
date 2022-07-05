@@ -5,10 +5,13 @@ import { useRef } from "react";
 import { FaRegEye } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
 import { TbMinusVertical } from "react-icons/tb";
+import { fetchAuth, fetchR, L_LINK } from "../../utlis";
+
 const getYear = () => {
   var dt = new Date();
   return dt.getFullYear();
 };
+
 const users = [
   { user: "All Users" },
   { user: "Akash Gupta" },
@@ -33,17 +36,21 @@ const users = [
 const LinkManement = (props) => {
   const [isActive, setisActive] = useState(false);
   const [isUserActive, setisUserActive] = useState(false);
-  const [Data, setData] = useState([]);
+  const [routeData, setrouteData] = useState([]);
+  const [userData, setuserData] = useState([]);
   const handleStatusSelector = () => {
     setisActive(!isActive);
   };
-  const handleUserSelector = () => {
-    setisUserActive(!isUserActive);
-  };
+
   const selected_status = useRef(null);
   const all_links = useRef(null);
   const active_links = useRef(null);
   const deleted_links = useRef(null);
+
+  const handleUserSelector = () => {
+    setisUserActive(!isUserActive);
+  };
+
   const allClick = () => {
     let allLiIt = all_links.current.innerText;
     selected_status.current.innerText = allLiIt;
@@ -64,9 +71,12 @@ const LinkManement = (props) => {
   useEffect(() => {
     if (!i) {
       const DataFetch = async () => {
-        let r = await fetch("http://localhost:1111/route/allRoutes");
-        let r1 = await r.json();
-        console.log("link management route data", r1);
+        let r = await fetchR(`${L_LINK}/route/allRoutes`);
+        console.log("link management route data", r);
+        let r1 = await fetchAuth(`${L_LINK}/validate/allFUser`);
+        console.log("link management user data", r1);
+        setrouteData(r);
+        setuserData(r1);
       };
       DataFetch();
     }
@@ -74,7 +84,7 @@ const LinkManement = (props) => {
     return () => {
       i = true;
     };
-  }, [Data]);
+  }, []);
 
   return (
     <div className={Styles.mainCont}>
