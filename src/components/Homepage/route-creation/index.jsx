@@ -22,26 +22,74 @@ const RouteCreationDesign = (props) => {
   const route_inp = useRef(null);
   const desc_inp = useRef(null);
   const website_inp = useRef(null);
+  const instaCheck = useRef(null);
+  const linkedinCheck = useRef(null);
+  const utChecked = useRef(null);
+  const twChecked = useRef(null);
+  const othersChecked = useRef(null);
 
   const gen_link = useRef();
   const gen_name = useRef();
   const gen_mail = useRef();
   const gen_desc = useRef();
   const gen_ref = useRef();
+  const gen_slug = useRef();
+  const gen_platforms = useRef();
   const handleCreateBtn = () => {
     let finalName = name_inp.current.value;
     let finalMail = mail_inp.current.value;
     let finalDesc = desc_inp.current.value;
     let finalRoute = route_inp.current.value;
     let finalWebsite = website_inp.current.value;
-    let genLink = finalWebsite + "/" + finalRoute;
+    let genLink = "localHost" + "/redirect/" + finalRoute;
+    let instaSts = instaCheck.current.checked;
+    let linkedinSts = linkedinCheck.current.checked;
+    let utSts = utChecked.current.checked;
+    let twSts = twChecked.current.checked;
+    let otherSts = othersChecked.current.checked;
+    let platforms = "";
 
-    gen_link.current.innerText = genLink;
-    gen_name.current.innerText = finalName;
-    gen_desc.current.innerText = finalDesc;
-    gen_mail.current.innerText = finalMail;
-    gen_ref.current.innerText = finalWebsite;
-    gen_ref.current.href = finalWebsite;
+    if (
+      finalName == "" ||
+      finalMail == "" ||
+      finalRoute == "" ||
+      finalDesc == "" ||
+      finalWebsite == ""
+    ) {
+      alert("Fill all fileds");
+    } else if (
+      instaSts == false &&
+      linkedinSts == false &&
+      utSts == false &&
+      twSts == false &&
+      otherSts == false
+    ) {
+      alert("select atleast one platform");
+    } else {
+      if (instaSts) {
+        platforms += "instagram,";
+      }
+      if (linkedinSts) {
+        platforms += "LinkedIn,";
+      }
+      if (utSts) {
+        platforms += "YouTube,";
+      }
+      if (twSts) {
+        platforms += "Twitter,";
+      }
+      if (otherSts) {
+        platforms += "Others";
+      }
+      gen_link.current.innerText = genLink;
+      gen_name.current.innerText = finalName;
+      gen_desc.current.innerText = finalDesc;
+      gen_mail.current.innerText = finalMail;
+      gen_slug.current.innerText = finalRoute;
+      gen_ref.current.innerText = finalWebsite;
+      gen_ref.current.href = finalWebsite;
+      gen_platforms.current.innerText = platforms;
+    }
   };
   let i = false;
   useEffect(() => {
@@ -55,10 +103,10 @@ const RouteCreationDesign = (props) => {
 
     let name = props.name;
     let email = props.email;
-    let for_name = name_inp.current.value;
-    let for_email = mail_inp.current.value;
-    let description = desc_inp.current.value;
-    let slug = route_inp.current.value;
+    let for_name = gen_name.current.value;
+    let for_email = gen_mail.current.value;
+    let description = gen_desc.current.value;
+    let slug = gen_slug.current.value;
     let website = website_inp.current.value;
     let dt = new Date();
     let time = dt.toDateString() + " " + dt.toTimeString();
@@ -162,31 +210,31 @@ const RouteCreationDesign = (props) => {
           <div className={Styles.socialSelectorCont}>
             <label className={Styles.container}>
               <IoLogoInstagram className={Styles.instalogo} />
-              <input type="checkbox" id="instaCheck" />
+              <input type="checkbox" ref={instaCheck} />
               <span className={Styles.checkmark}></span>
             </label>
 
             <label className={Styles.container}>
               <IoLogoLinkedin className={Styles.linlogo} />
-              <input type="checkbox" id="linkedinCheck" />
+              <input type="checkbox" ref={linkedinCheck} />
               <span className={Styles.checkmark}></span>
             </label>
 
             <label className={Styles.container}>
               <IoLogoYoutube className={Styles.utlogo} />
-              <input type="checkbox" id="utChecked" />
+              <input type="checkbox" ref={utChecked} />
               <span className={Styles.checkmark}></span>
             </label>
 
             <label className={Styles.container}>
               <IoLogoTwitter className={Styles.twlogo} />
-              <input type="checkbox" id="twChecked" />
+              <input type="checkbox" ref={twChecked} />
               <span className={Styles.checkmark}></span>
             </label>
 
             <label className={Styles.container}>
               <p className={Styles.otlogo}> others</p>
-              <input type="checkbox" id="others Checked" />
+              <input type="checkbox" ref={othersChecked} />
               <span className={Styles.checkmark}></span>
             </label>
           </div>
@@ -217,6 +265,11 @@ const RouteCreationDesign = (props) => {
                 <span ref={gen_mail}> akashsinghGupta@outlook.com</span>
               </p>
               <p>
+                <span>Slug: </span>
+                <span ref={gen_slug}> akashsinghGupta@outlook.com</span>
+              </p>
+
+              <p>
                 <span>Desc: </span>
                 <span ref={gen_desc}>
                   Lorem Ipsum Dolor Lorem Ipsum Dolor Lorem Ipsum Dolor Lorem
@@ -228,6 +281,10 @@ const RouteCreationDesign = (props) => {
                 <a ref={gen_ref} href="freeskout.com/blogs">
                   https://freeskout.com/blogs/
                 </a>
+              </p>
+              <p>
+                <span>Platforms: </span>
+                <span ref={gen_platforms}></span>
               </p>
             </div>
             <div className={Styles.btn} id="sendmailBtn">
