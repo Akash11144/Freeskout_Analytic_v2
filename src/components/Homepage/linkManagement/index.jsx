@@ -12,27 +12,6 @@ const getYear = () => {
   return dt.getFullYear();
 };
 
-const users = [
-  { user: "All Users" },
-  { user: "Akash Gupta" },
-  { user: "Shubham Upadhyay" },
-  { user: "Shashank Sehrawat" },
-  { user: "Ashish Bhambhani" },
-  { user: "Akshay Chopra" },
-  { user: "Rajesh Thakur" },
-  { user: "Neha Sharma" },
-  { user: "Lakshay Bhambhani" },
-  { user: "Rishabh Gulla" },
-  { user: "Ashish Bhambhani" },
-  { user: "Akshay Chopra" },
-  { user: "Rajesh Thakur" },
-  { user: "Neha Sharma" },
-  { user: "Lakshay Bhambhani" },
-  { user: "Rishabh Gulla" },
-  { user: "test user1" },
-  { user: "test user 2" },
-  { user: "lorem ipsum dollar lorem ipsdum" },
-];
 const LinkManement = (props) => {
   const [isActive, setisActive] = useState(false);
   const [isUserActive, setisUserActive] = useState(false);
@@ -71,10 +50,13 @@ const LinkManement = (props) => {
   useEffect(() => {
     if (!i) {
       const DataFetch = async () => {
+        console.time();
         let r = await fetchR(`${L_LINK}/route/allRoutes`);
         console.log("link management route data", r);
         let r1 = await fetchAuth(`${L_LINK}/validate/allFUser`);
         console.log("link management user data", r1);
+        console.timeEnd();
+
         setrouteData(r);
         setuserData(r1);
       };
@@ -85,6 +67,15 @@ const LinkManement = (props) => {
       i = true;
     };
   }, []);
+
+  const handleSortedData = async () => {
+    console.log(selected_user.current.innerText);
+    let r = await fetchR(
+      `${L_LINK}/route/userRoute/${selected_user.current.innerText}`
+    );
+    setrouteData(r);
+    console.log(r);
+  };
 
   return (
     <div className={Styles.mainCont}>
@@ -163,17 +154,18 @@ const LinkManement = (props) => {
                 : Styles.otherOptionsContHide
             }`}
               >
-                {users.length &&
-                  users.map((item, index) => {
+                {userData.length &&
+                  userData.map((item, index) => {
                     return (
                       <div
+                        key={index}
                         className={Styles.otherOptions}
                         onClick={() => {
                           handleUserSelector();
-                          handelSelctUser(item.user);
+                          handelSelctUser(item.name);
                         }}
                       >
-                        <p>{item.user}</p>
+                        <p>{item.name}</p>
                       </div>
                     );
                   })}
@@ -192,38 +184,41 @@ const LinkManement = (props) => {
               {/* End Date */}
             </input>
           </div>
-          <div className={Styles.showBtn}>
+          <div onClick={() => handleSortedData()} className={Styles.showBtn}>
             <p>Show Results</p>
           </div>
         </div>
         <div className={Styles.linkList}>
           <div className={Styles.linksContainer}>
-            <div className={Styles.cont}>
-              <p>
-                www.freeskout.com/brands/influncers/linkedin/instagraam/youtube/meadata/mySlug
-              </p>
-              <div className={Styles.userActionBtnsCont}>
-                <div className={Styles.viewIconCont}>
-                  <FaRegEye className={Styles.viewIcon} />
-                  <p
-                    className={`${Styles.HoverNotification} ${Styles.viewHover}`}
-                  >
-                    View
-                  </p>
-                </div>
-                {/* <div className={Styles.TbMinusVertical}>
-                  <TbMinusVertical className={Styles.TbMinusVertical} />
-                </div> */}
-                <div className={`${Styles.delIconCont}`}>
-                  <AiOutlineDelete className={Styles.delIcon} />
-                  <p
-                    className={`${Styles.HoverNotification} ${Styles.delHover}`}
-                  >
-                    Delete
-                  </p>
-                </div>
-              </div>
-            </div>
+            {routeData.length &&
+              routeData.map((item, index) => {
+                return (
+                  <div key={index} className={Styles.cont}>
+                    <p>www.freeskout.com/redirect{item.path}</p>
+                    <div className={Styles.userActionBtnsCont}>
+                      <div className={Styles.viewIconCont}>
+                        <FaRegEye className={Styles.viewIcon} />
+                        <p
+                          className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                        >
+                          View
+                        </p>
+                      </div>
+                      {/* <div className={Styles.TbMinusVertical}>
+                    <TbMinusVertical className={Styles.TbMinusVertical} />
+                  </div> */}
+                      <div className={`${Styles.delIconCont}`}>
+                        <AiOutlineDelete className={Styles.delIcon} />
+                        <p
+                          className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                        >
+                          Delete
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
           </div>
         </div>
       </div>
