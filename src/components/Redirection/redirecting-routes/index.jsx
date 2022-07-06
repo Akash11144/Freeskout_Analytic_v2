@@ -50,7 +50,7 @@ function RedirectingRoutes() {
         FetchIssueDetail: "error getting data",
       };
     }
-
+    console.log("route Array: ", arr);
     setData(arr);
     console.timeEnd();
   };
