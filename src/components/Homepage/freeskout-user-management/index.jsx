@@ -4,7 +4,7 @@ import { FaRegEye } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
 import { TbMinusVertical } from "react-icons/tb";
 import SmallLoading from "../../extras/loading-animation/small-loading";
-
+import { L_LINK, postAuth } from "../../utlis";
 const getYear = () => {
   var dt = new Date();
   return dt.getFullYear();
@@ -45,7 +45,7 @@ const FUM = () => {
     return () => (i = true);
   }, []);
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (
       name.current.value === "" ||
       email.current.value === "" ||
@@ -60,8 +60,21 @@ const FUM = () => {
     } else if (pass.current.value != confirmpass.current.value) {
       alert("password dont match");
     } else {
-      alert("ready to login");
+      // alert("ready to login");
+      console.log("ready to login");
     }
+    const url = new URL(L_LINK);
+    // url.host = L_LINK;
+    url.pathname = "/validate/addFUser";
+    console.log("url: ", url);
+    const dt = new Date();
+    let r = await postAuth(url, "", {
+      name: name.current.value,
+      email: email.current.value,
+      password: pass.current.value,
+      time: dt.toDateString() + " " + dt.toTimeString(),
+    });
+    console.log("res: ", r);
   };
 
   return (
