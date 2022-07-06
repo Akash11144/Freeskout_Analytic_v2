@@ -109,10 +109,10 @@ const RouteCreationDesign = (props) => {
 
     let name = props.name;
     let email = props.email;
-    let for_name = gen_name.current.value;
-    let for_email = gen_mail.current.value;
-    let description = gen_desc.current.value;
-    let slug = gen_slug.current.value;
+    let for_name = name_inp.current.value;
+    let for_email = mail_inp.current.value;
+    let description = desc_inp.current.value;
+    let slug = route_inp.current.value;
     let website = website_inp.current.value;
     let dt = new Date();
     let time = dt.toDateString() + " " + dt.toTimeString();
@@ -148,17 +148,17 @@ const RouteCreationDesign = (props) => {
         website,
         time
       );
-      // let r = await postAuth(L_LINK, "/route/addRoute", {
-      //   name,
-      //   email,
-      //   for_name,
-      //   for_email,
-      //   description,
-      //   path: `/${slug}`,
-      //   website,
-      //   time,
-      // });
-      // console.log("route creation post result -->", r);
+      let r = await postAuth(L_LINK, "/route/addRoute", {
+        name,
+        email,
+        for_name,
+        for_email,
+        description,
+        path: `/${slug}`,
+        website,
+        time,
+      });
+      console.log("route creation post result -->", r);
       route_inp.current.value = "";
     }
     setgenerateLoading(false);
@@ -247,7 +247,10 @@ const RouteCreationDesign = (props) => {
           <div
             className={`${Styles.btn} ${Styles.createBtn}`}
             id="generateBtn"
-            onClick={() => handleCreateBtn()}
+            onClick={() => {
+              // handleCreateBtn();
+              handleValue();
+            }}
           >
             Create
           </div>
