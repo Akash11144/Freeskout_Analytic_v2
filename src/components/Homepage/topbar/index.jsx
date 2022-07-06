@@ -28,6 +28,7 @@ export default Topbar;
 const TopbarLayout = ({ admin, person }) => {
   const [isActive, setisActive] = useState(false);
   const [pageName, setpageName] = useState("Create Link");
+  const [sideFormLoader, setsideFormLoader] = useState(true);
 
   const handelCreateLink = () => {
     setpageName("Create Link");
@@ -90,7 +91,7 @@ const TopbarLayout = ({ admin, person }) => {
             </div>
           </div>
           <div className={Styles.pageName}>{pageName}</div>
-          <div className={Styles.dateTimeCont}>
+          {/* <div className={Styles.dateTimeCont}>
             <div className={Styles.secDiv}>
               <p className={Styles.dateCont}>
                 Date:
@@ -101,6 +102,11 @@ const TopbarLayout = ({ admin, person }) => {
                 <Time></Time>
               </p>
             </div>
+          </div> */}
+          <div className={Styles.LoggerHolder}>
+            <p className={Styles.loggerName}>
+              <q>{person}</q>
+            </p>
           </div>
         </div>
       </div>
@@ -114,12 +120,12 @@ const TopbarLayout = ({ admin, person }) => {
           <div className={Styles.stars}></div>
           <div className={Styles.stars2}></div>
           <div className={Styles.stars3}></div>
-          <div className={Styles.userNameCont}>
+          {/* <div className={Styles.userNameCont}>
             <p>
               Hi <span>{person}</span>
               <span>,</span>
             </p>
-          </div>
+          </div> */}
           <div className={Styles.optionsContainer}>
             <Link
               className={Styles.linky}

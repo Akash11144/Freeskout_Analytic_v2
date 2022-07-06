@@ -63,24 +63,37 @@
   font-size: 30px;
   letter-spacing: 1px;
 }
-.dateTimeCont {
+.LoggerHolder {
+  width: 15%;
+  text-align: end;
+  color: #1adb80;
+  padding: 8px;
+  font-size: 20px;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+.loggerName {
+  padding: unset;
+  margin: unset;
+}
+/* .dateTimeCont {
   width: 15%;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
   flex-direction: column;
   color: white;
-}
+} */
 .secDiv {
   width: 100%;
   float: right;
 }
-.dateCont {
+/* .dateCont {
   margin: unset;
 }
 .timeCont {
   margin: unset;
-}
+} */
 
 /* ----------------SideBAr--------------- */
 .sideBarCont {
@@ -691,7 +704,7 @@
   }
 }
 
-.userNameCont {
+/* .userNameCont {
   margin-top: 20%;
   padding: 2% 0%;
   box-sizing: border-box;
@@ -713,9 +726,9 @@
   padding: unset;
   color: #1adb80;
   font-weight: 700;
-}
+} */
 .optionsContainer {
-  margin: 10% 0;
+  margin: 50% 0 0 0;
   width: 100%;
   box-sizing: border-box;
 }
@@ -773,17 +786,17 @@
   .pageName {
     width: 60%;
   }
-  .dateTimeCont {
+  /* .dateTimeCont {
     width: 20%;
-  }
+  } */
 }
 @media (max-width: 1150px) {
   .pageName {
     font-size: 24px;
   }
-  .dateTimeCont {
+  /* .dateTimeCont {
     font-size: 14px;
-  }
+  } */
   .sideBarCont {
     left: -30vw;
   }
@@ -837,10 +850,10 @@
   .leftMain {
     width: 25%;
   }
-  .dateTimeCont {
+  /* .dateTimeCont {
     font-size: 12px;
     width: 25%;
-  }
+  } */
   .sideBar {
     width: 40vw;
   }
@@ -869,9 +882,9 @@
   }
 }
 @media (max-width: 540px) {
-  .dateTimeCont {
+  /* .dateTimeCont {
     display: none;
-  }
+  } */
   .leftMain {
     width: max-content;
   }

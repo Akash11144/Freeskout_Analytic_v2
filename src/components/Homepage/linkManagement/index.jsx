@@ -204,9 +204,6 @@ const LinkManement = (props) => {
                           View
                         </p>
                       </div>
-                      {/* <div className={Styles.TbMinusVertical}>
-                    <TbMinusVertical className={Styles.TbMinusVertical} />
-                  </div> */}
                       <div className={`${Styles.delIconCont}`}>
                         <AiOutlineDelete className={Styles.delIcon} />
                         <p

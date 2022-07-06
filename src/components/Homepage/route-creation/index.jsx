@@ -15,6 +15,8 @@ const getYear = () => {
 
 const RouteCreationDesign = (props) => {
   const [generateLoading, setgenerateLoading] = useState(false);
+  const [sideloader, setsideloader] = useState(true);
+  const [sideForm, setsideForm] = useState(false);
   // const [Data, setData] = useState("");
 
   const name_inp = useRef(null);
@@ -91,6 +93,8 @@ const RouteCreationDesign = (props) => {
       gen_ref.current.href = finalWebsite;
       gen_platforms.current.innerText = platforms;
     }
+    setsideForm(true);
+    setsideloader(false);
   };
 
   let i = false;
@@ -254,41 +258,38 @@ const RouteCreationDesign = (props) => {
             <div className={Styles.genLinkCont}>
               <p className={Styles.generatedLink}>
                 <span>Generated Link: </span>
-                <span ref={gen_link}>www.freeskout.com/rc/ShubhamUpadhyay</span>
+                <span ref={gen_link}></span>
               </p>
             </div>
-            <div className={Styles.otherDetails}>
-              <p>
-                <span>Name: </span>{" "}
-                <span ref={gen_name}> Shubham Upadhyay</span>
-              </p>
-              <p>
-                <span>Email: </span>
-                <span ref={gen_mail}> akashsinghGupta@outlook.com</span>
-              </p>
-              <p>
-                <span>Slug: </span>
-                <span ref={gen_slug}> akashsinghGupta@outlook.com</span>
-              </p>
+            {sideloader && <div className={Styles.otherDetails}>Hello</div>}
+            {sideForm && (
+              <div className={Styles.otherDetails}>
+                <p>
+                  <span>Name: </span> <span ref={gen_name}></span>
+                </p>
+                <p>
+                  <span>Email: </span>
+                  <span ref={gen_mail}></span>
+                </p>
+                <p>
+                  <span>Slug: </span>
+                  <span ref={gen_slug}></span>
+                </p>
 
-              <p>
-                <span>Desc: </span>
-                <span ref={gen_desc}>
-                  Lorem Ipsum Dolor Lorem Ipsum Dolor Lorem Ipsum Dolor Lorem
-                  Ipsum Dolor
-                </span>
-              </p>
-              <p>
-                <span>Landing Page: </span>
-                <a ref={gen_ref} href="freeskout.com/blogs">
-                  https://freeskout.com/blogs/
-                </a>
-              </p>
-              <p>
-                <span>Platforms: </span>
-                <span ref={gen_platforms}></span>
-              </p>
-            </div>
+                <p>
+                  <span>Desc: </span>
+                  <span ref={gen_desc}></span>
+                </p>
+                <p>
+                  <span>Landing Page: </span>
+                  <a ref={gen_ref} href=""></a>
+                </p>
+                <p>
+                  <span>Platforms: </span>
+                  <span ref={gen_platforms}></span>
+                </p>
+              </div>
+            )}
             <div className={Styles.btn} id="sendmailBtn">
               {/* <SendMail /> */}
               Send
