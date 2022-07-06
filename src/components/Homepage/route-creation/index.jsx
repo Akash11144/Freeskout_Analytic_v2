@@ -35,6 +35,7 @@ const RouteCreationDesign = (props) => {
   const gen_ref = useRef();
   const gen_slug = useRef();
   const gen_platforms = useRef();
+
   const handleCreateBtn = () => {
     let finalName = name_inp.current.value;
     let finalMail = mail_inp.current.value;
@@ -91,6 +92,7 @@ const RouteCreationDesign = (props) => {
       gen_platforms.current.innerText = platforms;
     }
   };
+
   let i = false;
   useEffect(() => {
     console.log("create link props: ", props);
@@ -142,17 +144,17 @@ const RouteCreationDesign = (props) => {
         website,
         time
       );
-      let r = await postAuth(L_LINK, "/route/addRoute", {
-        name,
-        email,
-        for_name,
-        for_email,
-        description,
-        path: `/${slug}`,
-        website,
-        time,
-      });
-      console.log("route creation post result -->", r);
+      // let r = await postAuth(L_LINK, "/route/addRoute", {
+      //   name,
+      //   email,
+      //   for_name,
+      //   for_email,
+      //   description,
+      //   path: `/${slug}`,
+      //   website,
+      //   time,
+      // });
+      // console.log("route creation post result -->", r);
       route_inp.current.value = "";
     }
     setgenerateLoading(false);
