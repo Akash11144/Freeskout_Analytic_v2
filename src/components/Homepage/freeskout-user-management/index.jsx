@@ -19,7 +19,7 @@ const FUM = () => {
   let pass = useRef(null);
   let confirmpass = useRef(null);
   let email_regex = new RegExp("[a-z0-9]+@freeskout+.[a-z]{2,3}");
-  let passPattern = /^([A-Za-z0-9\-\_\@\#\$\%\&\*\\]{6,12})*$/;
+  let passPattern = /^([A-Za-z0-9\-\_\@\#\$\%\&\*\\]{4,12})*$/;
   let password_regex = new RegExp(passPattern);
 
   let i = false;
