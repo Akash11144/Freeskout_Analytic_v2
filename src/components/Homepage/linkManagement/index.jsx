@@ -47,14 +47,27 @@ const LinkManement = (props) => {
     if (!i) {
       const DataFetch = async () => {
         console.time();
-        let r = await fetchR(`${L_LINK}/route/allRoutes`);
+        let r = await fetchAuth(`${L_LINK}/route/allRoutes`);
+        let r1 = "";
         console.log("link management route data", r);
-        let r1 = await fetchAuth(`${L_LINK}/validate/allFUser`);
-        console.log("link management user data", r1);
+        if (r.issue) {
+          r.storageClear && localStorage.removeItem("Freeskout-session");
+          // errorObj.desc = r.issueDetail;
+          // errorObj.navigationRoute = "/";
+          // setpageError(true);
+        } else {
+          // setloggedIn(true);
+          // setperson(r.output);
+          r1 = await fetchAuth(`${L_LINK}/validate/allFUser`);
+          console.log("link management user data", r1);
+          if (r1.issue) {
+            r1.storageClear && localStorage.removeItem("Freeskout-session");
+          } else {
+            setrouteData(r);
+            setuserData(r1);
+          }
+        }
         console.timeEnd();
-
-        setrouteData(r);
-        setuserData(r1);
       };
       DataFetch();
     }
@@ -66,11 +79,15 @@ const LinkManement = (props) => {
 
   const handleSortedData = async () => {
     console.log(selected_user.current.innerText);
-    let r = await fetchR(
+    let r = await fetchAuth(
       `${L_LINK}/route/userRoute/${selected_user.current.innerText}`
     );
-    setrouteData(r);
-    console.log(r);
+    if (r.issue) {
+      r.storageClear && localStorage.removeItem("Freeskout-session");
+    } else {
+      setrouteData(r);
+      console.log(r);
+    }
   };
 
   return (

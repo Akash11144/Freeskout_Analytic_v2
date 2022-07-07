@@ -155,6 +155,15 @@ const RouteCreationDesign = (props) => {
         time,
       });
       console.log("route creation post result -->", r);
+      if (r.issue) {
+        r.storageClear && localStorage.removeItem("Freeskout-session");
+        // errorObj.desc = r.issueDetail;
+        // errorObj.navigationRoute = "/";
+        // setpageError(true);
+      } else {
+        // setloggedIn(true);
+        // setperson(r.output);
+      }
       route_inp.current.value = "";
     }
     setgenerateLoading(false);

@@ -4,7 +4,7 @@ import { FaRegEye } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
 import { TbMinusVertical } from "react-icons/tb";
 import SmallLoading from "../../extras/loading-animation/small-loading";
-import { L_LINK, postAuth } from "../../utlis";
+import { fetchAuth, L_LINK, postAuth } from "../../utlis";
 
 const FUM = () => {
   const [Data, setData] = useState([]);
@@ -22,7 +22,7 @@ const FUM = () => {
   useEffect(() => {
     if (!i) {
       const dataFetch = async () => {
-        let r = await fetch("http://localhost:1111/validate/allFUser", {
+        let r = await fetchAuth("http://localhost:1111/validate/allFUser", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -31,9 +31,17 @@ const FUM = () => {
             )}`,
           },
         });
-        let r1 = await r.json();
-        console.log("user data from manage user: ", r1);
-        setData(r1);
+        if (r.issue) {
+          r.storageClear && localStorage.removeItem("Freeskout-session");
+          // errorObj.desc = r.issueDetail;
+          // errorObj.navigationRoute = "/";
+          // setpageError(true);
+        } else {
+          // setloggedIn(true);
+          // setperson(r.output);
+          console.log("user data from manage user: ", r);
+          setData(r);
+        }
       };
       dataFetch();
     }
@@ -70,7 +78,16 @@ const FUM = () => {
       password: pass.current.value,
       time: dt.toDateString() + " " + dt.toTimeString(),
     });
-    console.log("res: ", r);
+    if (r.issue) {
+      r.storageClear && localStorage.removeItem("Freeskout-session");
+      // errorObj.desc = r.issueDetail;
+      // errorObj.navigationRoute = "/";
+      // setpageError(true);
+    } else {
+      // setloggedIn(true);
+      // setperson(r.output);
+      console.log("res: ", r);
+    }
   };
 
   return (
