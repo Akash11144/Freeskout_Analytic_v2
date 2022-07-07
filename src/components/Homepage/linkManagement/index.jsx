@@ -13,10 +13,13 @@ const LinkManement = (props) => {
   const [isUserActive, setisUserActive] = useState(false);
   const [routeData, setrouteData] = useState([]);
   const [userData, setuserData] = useState([]);
+  const [isSelectorsActive, setisSelectorsActive] = useState(false);
   const handleStatusSelector = () => {
     setisActive(!isActive);
   };
-
+  const handelMobileSelectors = () => {
+    setisSelectorsActive(!isSelectorsActive);
+  };
   const selected_status = useRef(null);
   const all_links = useRef(null);
   const active_links = useRef(null);
@@ -95,22 +98,33 @@ const LinkManement = (props) => {
       {/* {generateLoading && <SmallLoading />} */}
       <div className={Styles.secondaryDiv}>
         <div className={Styles.filtersOnMobile}>
-          <div className={Styles.filterIconHolder}>
+          <div
+            className={Styles.filterIconHolder}
+            onClick={() => {
+              handelMobileSelectors();
+            }}
+          >
             <FaFilter></FaFilter>
           </div>
-          <div className={Styles.selectors}>
+          <div
+            className={`${Styles.selectors} ${
+              isSelectorsActive ? Styles.selectorsShow : Styles.selectors
+            }`}
+          >
             <div className={Styles.selectedOption}>
-              <p ref={selected_status}>All Links</p>
-              <div
-                className={Styles.dropholder}
-                onClick={() => {
-                  handleStatusSelector();
-                }}
-              >
-                <AiFillCaretDown
-                  className={`${Styles.downIcon}
+              <div className={Styles.initialDiv}>
+                <p ref={selected_status}>All Links</p>
+                <div
+                  className={Styles.dropholder}
+                  onClick={() => {
+                    handleStatusSelector();
+                  }}
+                >
+                  <AiFillCaretDown
+                    className={`${Styles.downIcon}
               ${isActive ? Styles.rotatedIcon : Styles.downIcon}`}
-                />
+                  />
+                </div>
               </div>
               <div
                 className={`${Styles.otherOptionsContShow}
@@ -150,17 +164,19 @@ const LinkManement = (props) => {
               </div>
             </div>
             <div className={Styles.selectedUserOption}>
-              <p ref={selected_user}>All Users</p>
-              <div
-                className={Styles.dropholder}
-                onClick={() => {
-                  handleUserSelector();
-                }}
-              >
-                <AiFillCaretDown
-                  className={`${Styles.downIcon}
+              <div className={Styles.initialDiv}>
+                <p ref={selected_user}>All Users</p>
+                <div
+                  className={Styles.dropholder}
+                  onClick={() => {
+                    handleUserSelector();
+                  }}
+                >
+                  <AiFillCaretDown
+                    className={`${Styles.downIcon}
               ${isUserActive ? Styles.rotatedIcon : Styles.downIcon}`}
-                />
+                  />
+                </div>
               </div>
               <div
                 className={`${Styles.otherOptionsContShow}
@@ -174,10 +190,10 @@ const LinkManement = (props) => {
                   className={Styles.otherOptions}
                   onClick={() => {
                     handleUserSelector();
-                    handelSelctUser("All Links");
+                    handelSelctUser("All Users");
                   }}
                 >
-                  <p>All Links</p>
+                  <p>All Users</p>
                 </div>
                 {userData.length &&
                   userData.map((item, index) => {
@@ -209,7 +225,10 @@ const LinkManement = (props) => {
             </div>
             <div
               onClick={() => {
-                handleSortedData();
+                {
+                  handleSortedData();
+                  handelMobileSelectors();
+                }
               }}
               className={Styles.showBtn}
             >
