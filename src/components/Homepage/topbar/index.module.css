@@ -66,35 +66,50 @@
 .LoggerHolder {
   width: 15%;
   text-align: end;
+  position: relative;
+}
+.LoggerHolder:hover > .LogOutBtn {
+  display: block;
+  top: 90%;
+  opacity: 1;
+}
+.loggerName {
+  padding: unset;
+  margin: unset;
   color: #1adb80;
   padding: 8px;
   font-size: 20px;
   letter-spacing: 0.5px;
   font-weight: 600;
+  z-index: 2;
 }
-.loggerName {
-  padding: unset;
+.LogOutBtn {
+  position: absolute;
+  width: max-content;
+  z-index: 1;
+  padding: 2% 8%;
   margin: unset;
+  top: 50%;
+  left: 45%;
+  color: #e8ebf7;
+  background-color: #de1a1a;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  letter-spacing: 1px;
+  transition: 0.3s;
+  font-size: 14px;
+  opacity: 0;
+  transition: all 0.3s;
 }
-/* .dateTimeCont {
-  width: 15%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  flex-direction: column;
-  color: white;
-} */
+.LogOutBtn:active {
+  color: #1adb30;
+  transform: translateY(3px);
+}
 .secDiv {
   width: 100%;
   float: right;
 }
-/* .dateCont {
-  margin: unset;
-}
-.timeCont {
-  margin: unset;
-} */
-
 /* ----------------SideBAr--------------- */
 .sideBarCont {
   position: absolute;
@@ -704,29 +719,6 @@
   }
 }
 
-/* .userNameCont {
-  margin-top: 20%;
-  padding: 2% 0%;
-  box-sizing: border-box;
-  width: 100%;
-}
-.userNameCont > p {
-  width: 60%;
-  margin: unset;
-  margin: 0 auto;
-  padding: unset;
-  color: white;
-  font-size: 24px;
-  letter-spacing: 1px;
-  font-weight: 500;
-  text-align: left;
-}
-.userNameCont > p > span {
-  margin: unset;
-  padding: unset;
-  color: #1adb80;
-  font-weight: 700;
-} */
 .optionsContainer {
   margin: 50% 0 0 0;
   width: 100%;
@@ -751,31 +743,6 @@
 .optionsContainer > .linky > p:hover {
   font-size: 19px;
   color: #1adb30;
-}
-.logoutContainer {
-  position: absolute;
-  bottom: 7%;
-  left: 0;
-  width: 100%;
-}
-.logoutBtn {
-  color: white;
-  cursor: pointer;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  transition: 0.3s;
-  font-size: 17px;
-}
-.logoutBtn:hover {
-  color: rgba(255, 0, 0, 0.645);
-  font-size: 19px;
-  font-weight: 700;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.9),
-    0 0 15px rgba(255, 255, 255, 1);
-}
-.logoutBtn:active {
-  color: #1adb30;
-  transform: translateY(3px);
 }
 
 /* Media Queries */

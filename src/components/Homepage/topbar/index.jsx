@@ -91,21 +91,12 @@ const TopbarLayout = ({ admin, person }) => {
             </div>
           </div>
           <div className={Styles.pageName}>{pageName}</div>
-          {/* <div className={Styles.dateTimeCont}>
-            <div className={Styles.secDiv}>
-              <p className={Styles.dateCont}>
-                Date:
-                <Calendar></Calendar>
-              </p>
-              <p className={Styles.timeCont}>
-                Time:
-                <Time></Time>
-              </p>
-            </div>
-          </div> */}
           <div className={Styles.LoggerHolder}>
             <p className={Styles.loggerName}>
-              <q>{person}</q>
+              <q>Hi {person}</q>
+            </p>
+            <p className={Styles.LogOutBtn} onClick={() => handleLogout()}>
+              Logout
             </p>
           </div>
         </div>
@@ -120,12 +111,6 @@ const TopbarLayout = ({ admin, person }) => {
           <div className={Styles.stars}></div>
           <div className={Styles.stars2}></div>
           <div className={Styles.stars3}></div>
-          {/* <div className={Styles.userNameCont}>
-            <p>
-              Hi <span>{person}</span>
-              <span>,</span>
-            </p>
-          </div> */}
           <div className={Styles.optionsContainer}>
             <Link
               className={Styles.linky}
@@ -166,11 +151,6 @@ const TopbarLayout = ({ admin, person }) => {
             >
               <p>Dashboard</p>
             </Link>
-          </div>
-          <div className={Styles.logoutContainer}>
-            <div className={Styles.logoutBtn} onClick={() => handleLogout()}>
-              Logout
-            </div>
           </div>
         </div>
       </div>

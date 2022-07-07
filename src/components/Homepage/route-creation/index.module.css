@@ -11,8 +11,7 @@ body {
   color: rgb(0, 0, 0, 0.45);
   opacity: 1; /* Firefox */
 }
-
-:-ms-input-placeholder {
+F :-ms-input-placeholder {
   /* Internet Explorer 10-11 */
   color: rgb(0, 0, 0, 0.45);
 }
@@ -62,7 +61,8 @@ body {
   margin-top: 3%;
 }
 .formPartOne,
-.formPartTwo {
+.formPartTwo,
+.companyGifHolder {
   width: 48%;
   height: 65vh;
   display: flex;
@@ -244,6 +244,10 @@ body {
 .otherDetails {
   min-width: 90%;
   margin: 0 auto;
+}
+.companyGif {
+  width: 70px;
+  height: 70px;
 }
 .otherDetails > p {
   margin: 3% auto;

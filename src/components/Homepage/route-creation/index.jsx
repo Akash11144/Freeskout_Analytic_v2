@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Styles from "./index.module.css";
 import SmallLoading from "../../extras/loading-animation/small-loading";
 import SendMail from "../../extras/loading-animation/sendMailAnimation";
+import companyGif from "../../assets/FsnoBg.gif";
 import { L_LINK, postAuth } from "../../utlis";
 import { IoLogoInstagram } from "react-icons/io";
 import { IoLogoYoutube } from "react-icons/io";
@@ -256,16 +257,16 @@ const RouteCreationDesign = (props) => {
           </div>
         </div>
         <div className={Styles.dividerDiv}></div>
-        <div className={Styles.formPartTwo}>
-          <div className={Styles.genDetailsCont}>
-            <div className={Styles.genLinkCont}>
-              <p className={Styles.generatedLink}>
-                <span>Generated Link: </span>
-                <span ref={gen_link}></span>
-              </p>
-            </div>
-            {sideloader && <div className={Styles.otherDetails}>Hello</div>}
-            {sideForm && (
+        {sideForm && (
+          <div className={Styles.formPartTwo}>
+            <div className={Styles.genDetailsCont}>
+              <div className={Styles.genLinkCont}>
+                <p className={Styles.generatedLink}>
+                  <span>Generated Link: </span>
+                  <span ref={gen_link}></span>
+                </p>
+              </div>
+
               <div className={Styles.otherDetails}>
                 <p>
                   <span>Name: </span> <span ref={gen_name}></span>
@@ -292,13 +293,21 @@ const RouteCreationDesign = (props) => {
                   <span ref={gen_platforms}></span>
                 </p>
               </div>
-            )}
-            <div className={Styles.btn} id="sendmailBtn">
-              {/* <SendMail /> */}
-              Send
+              <div className={Styles.btn} id="sendmailBtn">
+                Send
+              </div>
             </div>
           </div>
-        </div>
+        )}
+        {sideloader && (
+          <div className={Styles.companyGifHolder}>
+            <img
+              src={companyGif}
+              alt="Company Logo"
+              className={Styles.companyGif}
+            />
+          </div>
+        )}
       </div>
       <div className={Styles.copyRightCont}>
         <p className={Styles.CopyRightP}>
