@@ -5,10 +5,6 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { TbMinusVertical } from "react-icons/tb";
 import SmallLoading from "../../extras/loading-animation/small-loading";
 import { L_LINK, postAuth } from "../../utlis";
-const getYear = () => {
-  var dt = new Date();
-  return dt.getFullYear();
-};
 
 const FUM = () => {
   const [Data, setData] = useState([]);
@@ -151,14 +147,6 @@ const FUM = () => {
               </div>
             </div>
           </div>
-        </div>
-        <div className={Styles.copyRightCont}>
-          <p className={Styles.CopyRightP}>
-            © Freeskout{" "}
-            <span className={Styles.CRyearCont} id="CRyear">
-              {getYear()}
-            </span>
-          </p>
         </div>
       </div>
     </>

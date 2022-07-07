@@ -9,11 +9,6 @@ import { IoLogoYoutube } from "react-icons/io";
 import { IoLogoTwitter } from "react-icons/io";
 import { IoLogoLinkedin } from "react-icons/io";
 
-const getYear = () => {
-  var dt = new Date();
-  return dt.getFullYear();
-};
-
 const RouteCreationDesign = (props) => {
   const [generateLoading, setgenerateLoading] = useState(false);
   const [sideloader, setsideloader] = useState(true);
@@ -308,14 +303,6 @@ const RouteCreationDesign = (props) => {
             />
           </div>
         )}
-      </div>
-      <div className={Styles.copyRightCont}>
-        <p className={Styles.CopyRightP}>
-          © Freeskout{" "}
-          <span className={Styles.CRyearCont} id="CRyear">
-            {getYear()}
-          </span>
-        </p>
       </div>
     </div>
   );

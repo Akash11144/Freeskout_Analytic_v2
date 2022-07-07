@@ -4,7 +4,10 @@ import Time from "../../extras/calendar/time-file";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-
+const getYear = () => {
+  var dt = new Date();
+  return dt.getFullYear();
+};
 const Topbar = (props) => {
   const [admin, setadmin] = useState(false);
 
@@ -151,6 +154,14 @@ const TopbarLayout = ({ admin, person }) => {
             >
               <p>Dashboard</p>
             </Link>
+          </div>
+          <div className={Styles.copyRightCont}>
+            <p className={Styles.CopyRightP}>
+              © Freeskout{" "}
+              <span className={Styles.CRyearCont} id="CRyear">
+                {getYear()}
+              </span>
+            </p>
           </div>
         </div>
       </div>

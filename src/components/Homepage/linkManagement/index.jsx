@@ -7,11 +7,6 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { TbMinusVertical } from "react-icons/tb";
 import { fetchAuth, fetchR, L_LINK } from "../../utlis";
 
-const getYear = () => {
-  var dt = new Date();
-  return dt.getFullYear();
-};
-
 const LinkManement = (props) => {
   const [isActive, setisActive] = useState(false);
   const [isUserActive, setisUserActive] = useState(false);
@@ -218,14 +213,6 @@ const LinkManement = (props) => {
               })}
           </div>
         </div>
-      </div>
-      <div className={Styles.copyRightCont}>
-        <p className={Styles.CopyRightP}>
-          © Freeskout{" "}
-          <span className={Styles.CRyearCont} id="CRyear">
-            {getYear()}
-          </span>
-        </p>
       </div>
     </div>
   );

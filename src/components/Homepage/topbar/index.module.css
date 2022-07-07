@@ -141,6 +141,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
 }
 
 .stars {
@@ -743,6 +744,16 @@
 .optionsContainer > .linky > p:hover {
   font-size: 19px;
   color: #1adb30;
+}
+.copyRightCont {
+  width: 100%;
+  color: #1adb80;
+  margin-bottom: 3%;
+  text-align: center;
+}
+.CopyRightP {
+  margin: unset;
+  padding: unset;
 }
 
 /* Media Queries */
