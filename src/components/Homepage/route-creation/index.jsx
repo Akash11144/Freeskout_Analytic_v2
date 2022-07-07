@@ -8,11 +8,19 @@ import { IoLogoInstagram } from "react-icons/io";
 import { IoLogoYoutube } from "react-icons/io";
 import { IoLogoTwitter } from "react-icons/io";
 import { IoLogoLinkedin } from "react-icons/io";
+import InformationPopUp from "../../extras/pop-ups/information";
+
+let errorObj = {
+  desc: "",
+  navigation: true,
+  navigationRoute: "",
+};
 
 const RouteCreationDesign = (props) => {
   const [generateLoading, setgenerateLoading] = useState(false);
   const [sideloader, setsideloader] = useState(true);
   const [sideForm, setsideForm] = useState(false);
+  const [pageError, setpageError] = useState(false);
   // const [Data, setData] = useState("");
 
   const name_inp = useRef(null);
@@ -157,9 +165,9 @@ const RouteCreationDesign = (props) => {
       console.log("route creation post result -->", r);
       if (r.issue) {
         r.storageClear && localStorage.removeItem("Freeskout-session");
-        // errorObj.desc = r.issueDetail;
-        // errorObj.navigationRoute = "/";
-        // setpageError(true);
+        errorObj.desc = r.issueDetail;
+        errorObj.navigationRoute = "/";
+        setpageError(true);
       } else {
         // setloggedIn(true);
         // setperson(r.output);
@@ -170,150 +178,154 @@ const RouteCreationDesign = (props) => {
   };
 
   return (
-    <div className={Styles.mainCont}>
-      {generateLoading && <SmallLoading />}
-      <div className={Styles.secondaryDiv}>
-        <div className={Styles.formPartOne}>
-          <input
-            className={Styles.inputFields}
-            id="Name"
-            ref={name_inp}
-            type="text"
-            placeholder="Name"
-            required={true}
-          />
+    <>
+      {pageError && <InformationPopUp {...errorObj} />}(
+      <div className={Styles.mainCont}>
+        {generateLoading && <SmallLoading />}
+        <div className={Styles.secondaryDiv}>
+          <div className={Styles.formPartOne}>
+            <input
+              className={Styles.inputFields}
+              id="Name"
+              ref={name_inp}
+              type="text"
+              placeholder="Name"
+              required={true}
+            />
 
-          <input
-            className={Styles.inputFields}
-            id="email"
-            ref={mail_inp}
-            type="email"
-            placeholder="Email"
-            required={true}
-          />
-          <textarea
-            className={`${Styles.inputFields} ${Styles.desc}`}
-            id="desc"
-            ref={desc_inp}
-            type="textarea"
-            rows={5}
-            cols={15}
-            placeholder="Description"
-            required={true}
-          />
+            <input
+              className={Styles.inputFields}
+              id="email"
+              ref={mail_inp}
+              type="email"
+              placeholder="Email"
+              required={true}
+            />
+            <textarea
+              className={`${Styles.inputFields} ${Styles.desc}`}
+              id="desc"
+              ref={desc_inp}
+              type="textarea"
+              rows={5}
+              cols={15}
+              placeholder="Description"
+              required={true}
+            />
 
-          <input
-            className={Styles.inputFields}
-            id="linkTotrack"
-            ref={website_inp}
-            type="text"
-            placeholder="Link to visit"
-            required={true}
-          />
-          <input
-            className={`${Styles.inputFields}`}
-            id="slug"
-            ref={route_inp}
-            type="text"
-            placeholder="Enter Slug"
-            required={true}
-          />
-          <div className={Styles.socialSelectorCont}>
-            <label className={Styles.container}>
-              <IoLogoInstagram className={Styles.instalogo} />
-              <input type="checkbox" ref={instaCheck} />
-              <span className={Styles.checkmark}></span>
-            </label>
+            <input
+              className={Styles.inputFields}
+              id="linkTotrack"
+              ref={website_inp}
+              type="text"
+              placeholder="Link to visit"
+              required={true}
+            />
+            <input
+              className={`${Styles.inputFields}`}
+              id="slug"
+              ref={route_inp}
+              type="text"
+              placeholder="Enter Slug"
+              required={true}
+            />
+            <div className={Styles.socialSelectorCont}>
+              <label className={Styles.container}>
+                <IoLogoInstagram className={Styles.instalogo} />
+                <input type="checkbox" ref={instaCheck} />
+                <span className={Styles.checkmark}></span>
+              </label>
 
-            <label className={Styles.container}>
-              <IoLogoLinkedin className={Styles.linlogo} />
-              <input type="checkbox" ref={linkedinCheck} />
-              <span className={Styles.checkmark}></span>
-            </label>
+              <label className={Styles.container}>
+                <IoLogoLinkedin className={Styles.linlogo} />
+                <input type="checkbox" ref={linkedinCheck} />
+                <span className={Styles.checkmark}></span>
+              </label>
 
-            <label className={Styles.container}>
-              <IoLogoYoutube className={Styles.utlogo} />
-              <input type="checkbox" ref={utChecked} />
-              <span className={Styles.checkmark}></span>
-            </label>
+              <label className={Styles.container}>
+                <IoLogoYoutube className={Styles.utlogo} />
+                <input type="checkbox" ref={utChecked} />
+                <span className={Styles.checkmark}></span>
+              </label>
 
-            <label className={Styles.container}>
-              <IoLogoTwitter className={Styles.twlogo} />
-              <input type="checkbox" ref={twChecked} />
-              <span className={Styles.checkmark}></span>
-            </label>
+              <label className={Styles.container}>
+                <IoLogoTwitter className={Styles.twlogo} />
+                <input type="checkbox" ref={twChecked} />
+                <span className={Styles.checkmark}></span>
+              </label>
 
-            <label className={Styles.container}>
-              <p className={Styles.otlogo}> others</p>
-              <input type="checkbox" ref={othersChecked} />
-              <span className={Styles.checkmark}></span>
-            </label>
-          </div>
-          <div
-            className={`${Styles.btn} ${Styles.createBtn}`}
-            id="generateBtn"
-            onClick={() => {
-              // handleCreateBtn();
-              handleValue();
-            }}
-          >
-            Create
-          </div>
-        </div>
-        <div className={Styles.dividerDiv}></div>
-        {sideForm && (
-          <div className={Styles.formPartTwo}>
-            <div className={Styles.genDetailsCont}>
-              <div className={Styles.genLinkCont}>
-                <p className={Styles.generatedLink}>
-                  <span>Generated Link: </span>
-                  <span ref={gen_link}></span>
-                </p>
-              </div>
-
-              <div className={Styles.otherDetails}>
-                <p>
-                  <span>Name: </span> <span ref={gen_name}></span>
-                </p>
-                <p>
-                  <span>Email: </span>
-                  <span ref={gen_mail}></span>
-                </p>
-                <p>
-                  <span>Slug: </span>
-                  <span ref={gen_slug}></span>
-                </p>
-
-                <p>
-                  <span>Desc: </span>
-                  <span ref={gen_desc}></span>
-                </p>
-                <p>
-                  <span>Landing Page: </span>
-                  <a ref={gen_ref} href=""></a>
-                </p>
-                <p>
-                  <span>Platforms: </span>
-                  <span ref={gen_platforms}></span>
-                </p>
-              </div>
-              <div className={Styles.btn} id="sendmailBtn">
-                Send
-              </div>
+              <label className={Styles.container}>
+                <p className={Styles.otlogo}> others</p>
+                <input type="checkbox" ref={othersChecked} />
+                <span className={Styles.checkmark}></span>
+              </label>
+            </div>
+            <div
+              className={`${Styles.btn} ${Styles.createBtn}`}
+              id="generateBtn"
+              onClick={() => {
+                // handleCreateBtn();
+                handleValue();
+              }}
+            >
+              Create
             </div>
           </div>
-        )}
-        {sideloader && (
-          <div className={Styles.companyGifHolder}>
-            <img
-              src={companyGif}
-              alt="Company Logo"
-              className={Styles.companyGif}
-            />
-          </div>
-        )}
+          <div className={Styles.dividerDiv}></div>
+          {sideForm && (
+            <div className={Styles.formPartTwo}>
+              <div className={Styles.genDetailsCont}>
+                <div className={Styles.genLinkCont}>
+                  <p className={Styles.generatedLink}>
+                    <span>Generated Link: </span>
+                    <span ref={gen_link}></span>
+                  </p>
+                </div>
+
+                <div className={Styles.otherDetails}>
+                  <p>
+                    <span>Name: </span> <span ref={gen_name}></span>
+                  </p>
+                  <p>
+                    <span>Email: </span>
+                    <span ref={gen_mail}></span>
+                  </p>
+                  <p>
+                    <span>Slug: </span>
+                    <span ref={gen_slug}></span>
+                  </p>
+
+                  <p>
+                    <span>Desc: </span>
+                    <span ref={gen_desc}></span>
+                  </p>
+                  <p>
+                    <span>Landing Page: </span>
+                    <a ref={gen_ref} href=""></a>
+                  </p>
+                  <p>
+                    <span>Platforms: </span>
+                    <span ref={gen_platforms}></span>
+                  </p>
+                </div>
+                <div className={Styles.btn} id="sendmailBtn">
+                  Send
+                </div>
+              </div>
+            </div>
+          )}
+          {sideloader && (
+            <div className={Styles.companyGifHolder}>
+              <img
+                src={companyGif}
+                alt="Company Logo"
+                className={Styles.companyGif}
+              />
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+      )
+    </>
   );
 };
 
