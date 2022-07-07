@@ -13,8 +13,6 @@
   height: inherit;
   width: 98%;
   margin: 0 auto;
-  justify-content: space-between;
-  align-items: center;
   background-clip: border-box;
   border: 1px solid rgba(170, 221, 238, 0.3333333333333333);
   border-radius: 1rem;
@@ -244,11 +242,45 @@ focus {
 .delIconCont:hover .delHover {
   display: block;
 }
-.copyRightCont {
-  width: 100%;
-  text-align: center;
+.filtersOnMobile {
+  position: relative;
+  display: none;
 }
-.CopyRightP {
-  margin: unset;
-  padding: unset;
+@media (max-width: 768px) {
+  .filtersOnMobile {
+    display: block;
+  }
+  .selectors {
+    flex-direction: column;
+    justify-content: unset;
+    width: 40vw;
+    position: absolute;
+    top: 100%;
+    left: 0%;
+    height: 70vh;
+    padding: 15% 0 10% 0;
+    box-sizing: border-boxxs;
+  }
+  .selectedOption,
+  .selectedUserOption,
+  .selectDate,
+  .showBtn,
+  .selectedUser {
+    border: 1px solid #1adb80;
+    border-radius: 10px;
+    width: 70%;
+    margin: 4% auto;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+  }
+  .selectedUserOption {
+    min-width: unset;
+    max-width: unset;
+    width: 70% !important;
+    margin: 0 auto;
+  }
 }

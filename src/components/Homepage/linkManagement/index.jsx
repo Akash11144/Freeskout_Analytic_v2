@@ -4,7 +4,8 @@ import { AiFillCaretDown } from "react-icons/ai";
 import { useRef } from "react";
 import { FaRegEye } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
-import { TbMinusVertical } from "react-icons/tb";
+import { FaFilter } from "react-icons/fa";
+
 import { fetchAuth, fetchR, L_LINK } from "../../utlis";
 
 const LinkManement = (props) => {
@@ -76,58 +77,61 @@ const LinkManement = (props) => {
     <div className={Styles.mainCont}>
       {/* {generateLoading && <SmallLoading />} */}
       <div className={Styles.secondaryDiv}>
-        <div className={Styles.selectors}>
-          <div className={Styles.selectedOption}>
-            <p ref={selected_status}>All Links</p>
-            <div
-              className={Styles.dropholder}
-              onClick={() => {
-                handleStatusSelector();
-              }}
-            >
-              <AiFillCaretDown
-                className={`${Styles.downIcon}
+        <div className={Styles.filtersOnMobile}>
+          <div className={Styles.filterIconHolder}>
+            <FaFilter></FaFilter>
+          </div>
+          <div className={Styles.selectors}>
+            <div className={Styles.selectedOption}>
+              <p ref={selected_status}>All Links</p>
+              <div
+                className={Styles.dropholder}
+                onClick={() => {
+                  handleStatusSelector();
+                }}
+              >
+                <AiFillCaretDown
+                  className={`${Styles.downIcon}
               ${isActive ? Styles.rotatedIcon : Styles.downIcon}`}
-              />
-            </div>
-            <div
-              className={`${Styles.otherOptionsContShow}
+                />
+              </div>
+              <div
+                className={`${Styles.otherOptionsContShow}
             ${
               isActive
                 ? Styles.otherOptionsContShow
                 : Styles.otherOptionsContHide
             }`}
-            >
-              <div
-                className={Styles.otherOptions}
-                onClick={() => {
-                  handleStatusSelector();
-                  allClick();
-                }}
               >
-                <p ref={all_links}>All Links</p>
-              </div>
-              <div
-                className={Styles.otherOptions}
-                onClick={() => {
-                  handleStatusSelector();
-                  activeClick();
-                }}
-              >
-                <p ref={active_links}>Active Links</p>
-              </div>
-              <div
-                className={Styles.otherOptions}
-                onClick={() => {
-                  handleStatusSelector();
-                  deletedClick();
-                }}
-              >
-                <p ref={deleted_links}>Deleted Links</p>
+                <div
+                  className={Styles.otherOptions}
+                  onClick={() => {
+                    handleStatusSelector();
+                    allClick();
+                  }}
+                >
+                  <p ref={all_links}>All Links</p>
+                </div>
+                <div
+                  className={Styles.otherOptions}
+                  onClick={() => {
+                    handleStatusSelector();
+                    activeClick();
+                  }}
+                >
+                  <p ref={active_links}>Active Links</p>
+                </div>
+                <div
+                  className={Styles.otherOptions}
+                  onClick={() => {
+                    handleStatusSelector();
+                    deletedClick();
+                  }}
+                >
+                  <p ref={deleted_links}>Deleted Links</p>
+                </div>
               </div>
             </div>
-          </div>
-          <div className={Styles.selectUser}>
             <div className={Styles.selectedUserOption}>
               <p ref={selected_user}>All Users</p>
               <div
@@ -149,6 +153,15 @@ const LinkManement = (props) => {
                 : Styles.otherOptionsContHide
             }`}
               >
+                <div
+                  className={Styles.otherOptions}
+                  onClick={() => {
+                    handleUserSelector();
+                    handelSelctUser("All Links");
+                  }}
+                >
+                  <p>All Links</p>
+                </div>
                 {userData.length &&
                   userData.map((item, index) => {
                     return (
@@ -166,21 +179,27 @@ const LinkManement = (props) => {
                   })}
               </div>
             </div>
-          </div>
-          <div className={Styles.selectDate}>
-            <p>From: </p>
-            <input type="date" required="required">
-              {/* Start Date */}
-            </input>
-          </div>
-          <div className={Styles.selectDate}>
-            <p>To:</p>
-            <input type="date" required="required">
-              {/* End Date */}
-            </input>
-          </div>
-          <div onClick={() => handleSortedData()} className={Styles.showBtn}>
-            <p>Show Results</p>
+
+            <div className={Styles.selectDate}>
+              <p>From: </p>
+              <input type="date" required="required">
+                {/* Start Date */}
+              </input>
+            </div>
+            <div className={Styles.selectDate}>
+              <p>To:</p>
+              <input type="date" required="required">
+                {/* End Date */}
+              </input>
+            </div>
+            <div
+              onClick={() => {
+                handleSortedData();
+              }}
+              className={Styles.showBtn}
+            >
+              <p>Show Results</p>
+            </div>
           </div>
         </div>
         <div className={Styles.linkList}>
