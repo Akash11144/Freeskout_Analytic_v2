@@ -205,9 +205,7 @@ const LinkManement = (props) => {
             </div>
             <div className={Styles.selectDate}>
               <p>To:</p>
-              <input type="date" required="required">
-                {/* End Date */}
-              </input>
+              <input type="date" required="required"></input>
             </div>
             <div
               onClick={() => {

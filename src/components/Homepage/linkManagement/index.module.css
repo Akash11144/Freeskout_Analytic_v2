@@ -244,7 +244,6 @@ focus {
 }
 .filtersOnMobile {
   position: relative;
-  display: none;
 }
 @media (max-width: 768px) {
   .filtersOnMobile {
@@ -258,8 +257,9 @@ focus {
     top: 100%;
     left: 0%;
     height: 70vh;
-    padding: 15% 0 10% 0;
-    box-sizing: border-boxxs;
+    padding: 15% 1%;
+    box-sizing: border-box;
+    z-index: 3;
   }
   .selectedOption,
   .selectedUserOption,
@@ -282,5 +282,16 @@ focus {
     max-width: unset;
     width: 70% !important;
     margin: 0 auto;
+  }
+  .showBtn {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+  }
+  .showBtn > p {
+    text-align: center;
+  }
+  .showBtn:hover {
+    transform: scale(1);
   }
 }
