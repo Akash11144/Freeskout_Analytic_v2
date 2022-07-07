@@ -265,7 +265,7 @@ focus {
   .linkList {
     height: 80vh;
   }
-  .filtersOnMobile {
+  .filterIconHolder {
     display: block;
     background-clip: border-box;
     border: 1px solid rgba(170, 221, 238, 0.3333333333333333);
