@@ -70,7 +70,6 @@ const FUM = () => {
     const url = new URL(L_LINK);
     // url.host = L_LINK;
     url.pathname = "/validate/addFUser";
-    console.log("url: ", url);
     const dt = new Date();
     let r = await postAuth(url, "", {
       name: name.current.value,
