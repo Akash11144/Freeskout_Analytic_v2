@@ -32,9 +32,15 @@ const Home = () => {
       let r = await fetchAuth(`${L_LINK}/validate/persistLogin`);
       console.log(r);
       if (r.issue) {
-        r.storageClear && localStorage.removeItem("Freeskout-session");
-        errorObj.desc = r.issueDetail;
-        errorObj.navigationRoute = "/";
+        if (r.storageClear) {
+          r.storageClear && localStorage.removeItem("Freeskout-session");
+          errorObj.desc = r.issueDetail;
+          errorObj.navigationRoute = "/";
+        } else {
+          console.log("inside else");
+          errorObj.desc = r.issueDetail;
+          errorObj.navigation = false;
+        }
         setpageError(true);
       } else {
         setloggedIn(true);

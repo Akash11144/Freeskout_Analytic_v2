@@ -70,9 +70,15 @@ const UserForm = ({ setnewUser }) => {
       time: dt.toDateString() + " " + dt.toTimeString(),
     });
     if (r.issue) {
-      r.storageClear && localStorage.removeItem("Freeskout-session");
-      errorObj.desc = r.issueDetail;
-      errorObj.navigationRoute = "/";
+      if (r.storageClear) {
+        r.storageClear && localStorage.removeItem("Freeskout-session");
+        errorObj.desc = r.issueDetail;
+        errorObj.navigationRoute = "/";
+      } else {
+        console.log("inside else");
+        errorObj.desc = r.issueDetail;
+        errorObj.navigation = false;
+      }
       setpageError(true);
     } else {
       console.log("res: ", r);
