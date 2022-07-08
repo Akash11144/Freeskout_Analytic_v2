@@ -30,8 +30,8 @@ export const postR = async (mainLink, route, pdata) => {
   } catch (error) {
     console.log("error in post request", error);
     return {
-      FetchIssue: true,
-      FetchIssueDetail: "Server error, try again later",
+      issue: true,
+      issueDetail: "Server error, try again later",
     };
   }
 };
@@ -55,8 +55,8 @@ export const postAuth = async (mainLink, route, pdata) => {
   } catch (error) {
     console.log("error in post request", error);
     return {
-      FetchIssue: true,
-      FetchIssueDetail: "Server error, try again later",
+      issue: true,
+      issueDetail: "Server error, try again later",
     };
   }
 };
@@ -71,8 +71,8 @@ export const fetchR = async (a) => {
   } catch (error) {
     console.log("error while fetching in frontend", error);
     return {
-      FetchIssue: true,
-      FetchIssueDetail: "error getting data",
+      issue: true,
+      issueDetail: "error getting data",
     };
   }
 };
@@ -95,8 +95,8 @@ export const fetchAuth = async (a) => {
   } catch (error) {
     console.log("error while fetching in frontend", error);
     return {
-      FetchIssue: true,
-      FetchIssueDetail: "error getting data",
+      issue: true,
+      issueDetail: "error getting data",
     };
   }
 };

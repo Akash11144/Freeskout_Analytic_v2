@@ -1,23 +1,19 @@
 import Styles from "./index.module.css";
-import Calendar from "../../extras/calendar/date-file";
-import Time from "../../extras/calendar/time-file";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useEffect, useState, useRef } from "react";
+import { useLocation, useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+
 const getYear = () => {
   var dt = new Date();
   return dt.getFullYear();
 };
+
 const Topbar = (props) => {
   const [admin, setadmin] = useState(false);
 
   let i = false;
   useEffect(() => {
-    if (!i) {
-      if (props.email === "info@freeskout.com") {
-        setadmin(true);
-      }
-    }
+    !i && props.email === "info@freeskout.com" && setadmin(true);
     return () => (i = true);
   }, [props]);
 
@@ -30,22 +26,25 @@ export default Topbar;
 
 const TopbarLayout = ({ admin, person }) => {
   const [isActive, setisActive] = useState(false);
-  const [pageName, setpageName] = useState("Create Link");
-  const [sideFormLoader, setsideFormLoader] = useState(true);
 
-  const handelCreateLink = () => {
-    setpageName("Create Link");
-  };
-  const handelManageLink = () => {
-    setpageName("Manage Links");
-  };
-  const handelManageUsers = () => {
-    setpageName("Manage Users");
-  };
-  const handelDashboard = () => {
-    setpageName("Dashboard");
-  };
+  const pageNameRef = useRef(null);
+  const loc = useLocation();
   const navi1 = useNavigate();
+
+  let i = false;
+  useEffect(() => {
+    if (!i) {
+      console.log("hello", loc);
+      if (loc.pathname === "/home")
+        pageNameRef.current.innerText = "CREATE LINK";
+      if (loc.pathname === "/home/lm")
+        pageNameRef.current.innerText = "MANAGE LINK";
+      if (loc.pathname === "/home/fum")
+        pageNameRef.current.innerText = "MANAGE USER";
+    }
+    return () => (i = true);
+  }, [loc.pathname]);
+
   const hamClick = () => setisActive(!isActive);
 
   const handleLogout = async () => {
@@ -64,7 +63,7 @@ const TopbarLayout = ({ admin, person }) => {
   };
 
   return (
-    <div className={Styles.allCont}>
+    <nav className={Styles.allCont}>
       <div className={Styles.mainCont}>
         <div className={Styles.topBarSecCont}>
           <div
@@ -93,7 +92,9 @@ const TopbarLayout = ({ admin, person }) => {
               ></span>
             </div>
           </div>
-          <div className={Styles.pageName}>{pageName}</div>
+          <div ref={pageNameRef} className={Styles.pageName}>
+            {"hello"}
+          </div>
           <div className={Styles.LoggerHolder}>
             <p className={Styles.loggerName}>
               <q>Hi {person}</q>
@@ -120,7 +121,6 @@ const TopbarLayout = ({ admin, person }) => {
               to={"/home"}
               onClick={() => {
                 hamClick();
-                handelCreateLink();
               }}
             >
               <p>Create Link</p>
@@ -130,7 +130,6 @@ const TopbarLayout = ({ admin, person }) => {
               to={"/home/lm"}
               onClick={() => {
                 hamClick();
-                handelManageLink();
               }}
             >
               <p>Manage Links</p>
@@ -141,7 +140,6 @@ const TopbarLayout = ({ admin, person }) => {
                 to={"/home/fum"}
                 onClick={() => {
                   hamClick();
-                  handelManageUsers();
                 }}
               >
                 <p>Manage Users</p>
@@ -165,6 +163,6 @@ const TopbarLayout = ({ admin, person }) => {
           </div>
         </div>
       </div>
-    </div>
+    </nav>
   );
 };

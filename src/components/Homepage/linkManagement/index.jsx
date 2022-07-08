@@ -1,12 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Styles from "../linkManagement/index.module.css";
 import { AiFillCaretDown } from "react-icons/ai";
-import { useRef } from "react";
 import { FaRegEye } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FaFilter } from "react-icons/fa";
+import { fetchAuth, L_LINK } from "../../utlis";
+import InformationPopUp from "../../extras//pop-ups/information";
 
-import { fetchAuth, fetchR, L_LINK } from "../../utlis";
+let errorObj = {
+  desc: "",
+  navigation: true,
+  navigationRoute: "",
+};
 
 const LinkManement = (props) => {
   const [isActive, setisActive] = useState(false);
@@ -14,16 +19,55 @@ const LinkManement = (props) => {
   const [routeData, setrouteData] = useState([]);
   const [userData, setuserData] = useState([]);
   const [isSelectorsActive, setisSelectorsActive] = useState(false);
-  const handleStatusSelector = () => {
-    setisActive(!isActive);
-  };
-  const handelMobileSelectors = () => {
-    setisSelectorsActive(!isSelectorsActive);
-  };
+  const [pageError, setpageError] = useState(false);
+
   const selected_status = useRef(null);
   const all_links = useRef(null);
   const active_links = useRef(null);
   const deleted_links = useRef(null);
+
+  let i = false;
+  useEffect(() => {
+    if (!i) {
+      const DataFetch = async () => {
+        console.time();
+        let r = await fetchAuth(`${L_LINK}/route/allRoutes`);
+        let r1 = "";
+        console.log("link management route data", r);
+        if (r.issue) {
+          r.storageClear && localStorage.removeItem("Freeskout-session");
+          errorObj.desc = r.issueDetail;
+          errorObj.navigationRoute = "/";
+          setpageError(true);
+        } else {
+          r1 = await fetchAuth(`${L_LINK}/validate/allFUser`);
+          console.log("link management user data", r1);
+          if (r1.issue) {
+            r1.storageClear && localStorage.removeItem("Freeskout-session");
+            errorObj.desc = r.issueDetail;
+            errorObj.navigationRoute = "/";
+          } else {
+            setrouteData(r);
+            setuserData(r1);
+          }
+        }
+        console.timeEnd();
+      };
+      DataFetch();
+    }
+
+    return () => {
+      i = true;
+    };
+  }, []);
+
+  const handleStatusSelector = () => {
+    setisActive(!isActive);
+  };
+
+  const handelMobileSelectors = () => {
+    setisSelectorsActive(!isSelectorsActive);
+  };
 
   const handleUserSelector = () => {
     setisUserActive(!isUserActive);
@@ -45,40 +89,6 @@ const LinkManement = (props) => {
   const handelSelctUser = (item) => {
     selected_user.current.innerText = item;
   };
-  let i = false;
-  useEffect(() => {
-    if (!i) {
-      const DataFetch = async () => {
-        console.time();
-        let r = await fetchAuth(`${L_LINK}/route/allRoutes`);
-        let r1 = "";
-        console.log("link management route data", r);
-        if (r.issue) {
-          r.storageClear && localStorage.removeItem("Freeskout-session");
-          // errorObj.desc = r.issueDetail;
-          // errorObj.navigationRoute = "/";
-          // setpageError(true);
-        } else {
-          // setloggedIn(true);
-          // setperson(r.output);
-          r1 = await fetchAuth(`${L_LINK}/validate/allFUser`);
-          console.log("link management user data", r1);
-          if (r1.issue) {
-            r1.storageClear && localStorage.removeItem("Freeskout-session");
-          } else {
-            setrouteData(r);
-            setuserData(r1);
-          }
-        }
-        console.timeEnd();
-      };
-      DataFetch();
-    }
-
-    return () => {
-      i = true;
-    };
-  }, []);
 
   const handleSortedData = async () => {
     console.log(selected_user.current.innerText);
@@ -94,180 +104,183 @@ const LinkManement = (props) => {
   };
 
   return (
-    <div className={Styles.mainCont}>
-      {/* {generateLoading && <SmallLoading />} */}
-      <div className={Styles.secondaryDiv}>
-        <div className={Styles.filtersOnMobile}>
-          <div
-            className={Styles.filterIconHolder}
-            onClick={() => {
-              handelMobileSelectors();
-            }}
-          >
-            <FaFilter></FaFilter>
-          </div>
-          <div
-            className={`${Styles.selectors} ${
-              isSelectorsActive ? Styles.selectorsShow : Styles.selectors
-            }`}
-          >
-            <div className={Styles.selectedOption}>
-              <div className={Styles.initialDiv}>
-                <p ref={selected_status}>All Links</p>
-                <div
-                  className={Styles.dropholder}
-                  onClick={() => {
-                    handleStatusSelector();
-                  }}
-                >
-                  <AiFillCaretDown
-                    className={`${Styles.downIcon}
+    <>
+      {pageError && <InformationPopUp {...errorObj} />}
+      <div className={Styles.mainCont}>
+        {/* {generateLoading && <SmallLoading />} */}
+        <div className={Styles.secondaryDiv}>
+          <div className={Styles.filtersOnMobile}>
+            <div
+              className={Styles.filterIconHolder}
+              onClick={() => {
+                handelMobileSelectors();
+              }}
+            >
+              <FaFilter></FaFilter>
+            </div>
+            <div
+              className={`${Styles.selectors} ${
+                isSelectorsActive ? Styles.selectorsShow : Styles.selectors
+              }`}
+            >
+              <div className={Styles.selectedOption}>
+                <div className={Styles.initialDiv}>
+                  <p ref={selected_status}>All Links</p>
+                  <div
+                    className={Styles.dropholder}
+                    onClick={() => {
+                      handleStatusSelector();
+                    }}
+                  >
+                    <AiFillCaretDown
+                      className={`${Styles.downIcon}
               ${isActive ? Styles.rotatedIcon : Styles.downIcon}`}
-                  />
+                    />
+                  </div>
                 </div>
-              </div>
-              <div
-                className={`${Styles.otherOptionsContShow}
+                <div
+                  className={`${Styles.otherOptionsContShow}
             ${
               isActive
                 ? Styles.otherOptionsContShow
                 : Styles.otherOptionsContHide
             }`}
-              >
-                <div
-                  className={Styles.otherOptions}
-                  onClick={() => {
-                    handleStatusSelector();
-                    allClick();
-                  }}
                 >
-                  <p ref={all_links}>All Links</p>
-                </div>
-                <div
-                  className={Styles.otherOptions}
-                  onClick={() => {
-                    handleStatusSelector();
-                    activeClick();
-                  }}
-                >
-                  <p ref={active_links}>Active Links</p>
-                </div>
-                <div
-                  className={Styles.otherOptions}
-                  onClick={() => {
-                    handleStatusSelector();
-                    deletedClick();
-                  }}
-                >
-                  <p ref={deleted_links}>Deleted Links</p>
+                  <div
+                    className={Styles.otherOptions}
+                    onClick={() => {
+                      handleStatusSelector();
+                      allClick();
+                    }}
+                  >
+                    <p ref={all_links}>All Links</p>
+                  </div>
+                  <div
+                    className={Styles.otherOptions}
+                    onClick={() => {
+                      handleStatusSelector();
+                      activeClick();
+                    }}
+                  >
+                    <p ref={active_links}>Active Links</p>
+                  </div>
+                  <div
+                    className={Styles.otherOptions}
+                    onClick={() => {
+                      handleStatusSelector();
+                      deletedClick();
+                    }}
+                  >
+                    <p ref={deleted_links}>Deleted Links</p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className={Styles.selectedUserOption}>
-              <div className={Styles.initialDiv}>
-                <p ref={selected_user}>All Users</p>
-                <div
-                  className={Styles.dropholder}
-                  onClick={() => {
-                    handleUserSelector();
-                  }}
-                >
-                  <AiFillCaretDown
-                    className={`${Styles.downIcon}
+              <div className={Styles.selectedUserOption}>
+                <div className={Styles.initialDiv}>
+                  <p ref={selected_user}>All Users</p>
+                  <div
+                    className={Styles.dropholder}
+                    onClick={() => {
+                      handleUserSelector();
+                    }}
+                  >
+                    <AiFillCaretDown
+                      className={`${Styles.downIcon}
               ${isUserActive ? Styles.rotatedIcon : Styles.downIcon}`}
-                  />
+                    />
+                  </div>
                 </div>
-              </div>
-              <div
-                className={`${Styles.otherOptionsContShow}
+                <div
+                  className={`${Styles.otherOptionsContShow}
             ${
               isUserActive
                 ? Styles.otherOptionsContShow
                 : Styles.otherOptionsContHide
             }`}
-              >
-                <div
-                  className={Styles.otherOptions}
-                  onClick={() => {
-                    handleUserSelector();
-                    handelSelctUser("All Users");
-                  }}
                 >
-                  <p>All Users</p>
+                  <div
+                    className={Styles.otherOptions}
+                    onClick={() => {
+                      handleUserSelector();
+                      handelSelctUser("All Users");
+                    }}
+                  >
+                    <p>All Users</p>
+                  </div>
+                  {userData.length &&
+                    userData.map((item, index) => {
+                      return (
+                        <div
+                          key={index}
+                          className={Styles.otherOptions}
+                          onClick={() => {
+                            handleUserSelector();
+                            handelSelctUser(item.name);
+                          }}
+                        >
+                          <p>{item.name}</p>
+                        </div>
+                      );
+                    })}
                 </div>
-                {userData.length &&
-                  userData.map((item, index) => {
-                    return (
-                      <div
-                        key={index}
-                        className={Styles.otherOptions}
-                        onClick={() => {
-                          handleUserSelector();
-                          handelSelctUser(item.name);
-                        }}
-                      >
-                        <p>{item.name}</p>
-                      </div>
-                    );
-                  })}
+              </div>
+
+              <div className={Styles.selectDate}>
+                <p>From: </p>
+                <input type="date" required="required">
+                  {/* Start Date */}
+                </input>
+              </div>
+              <div className={Styles.selectDate}>
+                <p>To:</p>
+                <input type="date" required="required"></input>
+              </div>
+              <div
+                onClick={() => {
+                  {
+                    handleSortedData();
+                    handelMobileSelectors();
+                  }
+                }}
+                className={Styles.showBtn}
+              >
+                <p>Show Results</p>
               </div>
             </div>
-
-            <div className={Styles.selectDate}>
-              <p>From: </p>
-              <input type="date" required="required">
-                {/* Start Date */}
-              </input>
-            </div>
-            <div className={Styles.selectDate}>
-              <p>To:</p>
-              <input type="date" required="required"></input>
-            </div>
-            <div
-              onClick={() => {
-                {
-                  handleSortedData();
-                  handelMobileSelectors();
-                }
-              }}
-              className={Styles.showBtn}
-            >
-              <p>Show Results</p>
-            </div>
           </div>
-        </div>
-        <div className={Styles.linkList}>
-          <div className={Styles.linksContainer}>
-            {routeData.length &&
-              routeData.map((item, index) => {
-                return (
-                  <div key={index} className={Styles.cont}>
-                    <p>www.freeskout.com/redirect{item.path}</p>
-                    <div className={Styles.userActionBtnsCont}>
-                      <div className={Styles.viewIconCont}>
-                        <FaRegEye className={Styles.viewIcon} />
-                        <p
-                          className={`${Styles.HoverNotification} ${Styles.viewHover}`}
-                        >
-                          View
-                        </p>
-                      </div>
-                      <div className={`${Styles.delIconCont}`}>
-                        <AiOutlineDelete className={Styles.delIcon} />
-                        <p
-                          className={`${Styles.HoverNotification} ${Styles.delHover}`}
-                        >
-                          Delete
-                        </p>
+          <div className={Styles.linkList}>
+            <div className={Styles.linksContainer}>
+              {routeData.length &&
+                routeData.map((item, index) => {
+                  return (
+                    <div key={index} className={Styles.cont}>
+                      <p>www.freeskout.com/redirect{item.path}</p>
+                      <div className={Styles.userActionBtnsCont}>
+                        <div className={Styles.viewIconCont}>
+                          <FaRegEye className={Styles.viewIcon} />
+                          <p
+                            className={`${Styles.HoverNotification} ${Styles.viewHover}`}
+                          >
+                            View
+                          </p>
+                        </div>
+                        <div className={`${Styles.delIconCont}`}>
+                          <AiOutlineDelete className={Styles.delIcon} />
+                          <p
+                            className={`${Styles.HoverNotification} ${Styles.delHover}`}
+                          >
+                            Delete
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
