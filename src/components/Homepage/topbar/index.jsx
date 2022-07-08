@@ -36,11 +36,11 @@ const TopbarLayout = ({ admin, person }) => {
     if (!i) {
       console.log("hello", loc);
       if (loc.pathname === "/home")
-        pageNameRef.current.innerText = "CREATE LINK";
+        pageNameRef.current.innerText = "Create Link";
       if (loc.pathname === "/home/lm")
-        pageNameRef.current.innerText = "MANAGE LINK";
+        pageNameRef.current.innerText = "Manage Link";
       if (loc.pathname === "/home/fum")
-        pageNameRef.current.innerText = "MANAGE USER";
+        pageNameRef.current.innerText = "Manage Users";
     }
     return () => (i = true);
   }, [loc.pathname]);

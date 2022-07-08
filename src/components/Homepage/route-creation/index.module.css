@@ -1,6 +1,6 @@
 body {
   position: relative;
-  background-color: rgba(170, 223, 224, 0.13725490196078433);
+  /* background-color: rgba(170, 223, 224, 0.13725490196078433); */
 }
 
 * {
@@ -73,6 +73,7 @@ F :-ms-input-placeholder {
   border-radius: 1rem;
   box-shadow: 0 5px 20px 2px rgb(170 221 238 / 13%);
   background-color: #fdffff;
+  background: linear-gradient(to left, #d0dae0, #e2ebf0);
   padding: 1% 0;
   box-sizing: border-box;
 }
@@ -86,9 +87,9 @@ F :-ms-input-placeholder {
   line-height: 1.5;
   letter-spacing: 0.5px;
   color: rgba(0, 0, 0, 0.4);
-  background-color: #fff;
+  background-color: transparent;
   background-clip: padding-box;
-  border: 1px solid #ced4da;
+  border: 1px solid #aaa;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -105,7 +106,7 @@ F :-ms-input-placeholder {
   background-color: #fff;
   border-color: #1adb80;
   outline: 0;
-  box-shadow: 0 0 0 0.25rem #1adb4464;
+  box-shadow: 0 0 0 0.5px #1adb4464;
 }
 .socialSelectorCont {
   width: 80%;

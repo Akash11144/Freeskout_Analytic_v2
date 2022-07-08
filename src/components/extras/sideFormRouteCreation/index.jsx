@@ -32,6 +32,7 @@ const UserCreationSideForm = (props) => {
     console.log("side form", props);
     gen_link.current.innerText = props.a.link;
     finalCopiedLink.current.innerText = props.a.link;
+    finalCopiedLink.current.href = props.a.link;
     b = props.a.link;
     gen_name.current.innerText = props.a.routeName;
     gen_mail.current.innerText = props.a.mail;
@@ -54,12 +55,26 @@ const UserCreationSideForm = (props) => {
     console.log("routeData", routeObject);
     // setgenerateLoading(false);
   };
+  const handelHomeBtn = () => {
+    navigator.clipboard.writeText(b);
+    window.location.reload();
+  };
   return (
     <div className={Styles.genDetailsCont}>
       <div className={Styles.afterSend}>
         <div className={Styles.notiCont}>
-          <p ref={finalCopiedLink}></p>
-          <p>Link successfully created and copied to clipboard</p>
+          <a href="" ref={finalCopiedLink} target="_blank"></a>
+          <p>
+            <q>Link successfully created and copied to clipboard</q>
+          </p>
+          <div
+            className={Styles.btn}
+            onClick={() => {
+              handelHomeBtn();
+            }}
+          >
+            Home
+          </div>
         </div>
       </div>
       <div className={Styles.genLinkCont}>
