@@ -182,6 +182,7 @@ const RouteCreationDesign = (props) => {
         <div className={Styles.secondaryDiv}>
           <div className={Styles.formPartOne}>
             <input
+              autoComplete="off"
               className={Styles.inputFields}
               id="Name"
               ref={name_inp}
@@ -191,6 +192,7 @@ const RouteCreationDesign = (props) => {
             />
 
             <input
+              autoComplete="off"
               className={Styles.inputFields}
               id="email"
               ref={mail_inp}
@@ -210,6 +212,7 @@ const RouteCreationDesign = (props) => {
             />
 
             <input
+              autoComplete="off"
               className={Styles.inputFields}
               id="linkTotrack"
               ref={website_inp}
@@ -218,6 +221,7 @@ const RouteCreationDesign = (props) => {
               required={true}
             />
             <input
+              autoComplete="off"
               className={`${Styles.inputFields}`}
               id="slug"
               ref={route_inp}

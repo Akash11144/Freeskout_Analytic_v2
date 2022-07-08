@@ -3,33 +3,32 @@ body {
   background-color: rgba(170, 223, 224, 0.13725490196078433);
 }
 * {
-  font-family: "Open Sans", sans-serif;
-}
-::placeholder {
-  /* Chrome, Firefox, Opera, Safari 10.1+ */
-  /* color: rgb(0, 0, 0, 0.45); */
-  /* opacity: 1; Firefox */
-}
-:-ms-input-placeholder {
-  /* Internet Explorer 10-11 */
-  /* color: rgb(0, 0, 0, 0.45); */
-}
-::-ms-input-placeholder {
-  /* Microsoft Edge */
-  /* color: rgb(0, 0, 0, 0.45); */
+  font-family: "Nunito Sans", sans-serif;
 }
 ::-webkit-scrollbar {
   width: 3px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
+  padding: 100px 0;
 }
 ::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 5px;
+  background-clip: padding-box;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+::-webkit-scrollbar-track-piece:end {
+  background: transparent;
+  margin-bottom: 50px;
+}
+
+::-webkit-scrollbar-track-piece:start {
+  background: transparent;
+  margin-top: 50px;
 }
 .mainCont {
   width: 100%;
@@ -57,10 +56,12 @@ body {
   border: 1px solid rgba(170, 221, 238, 0.3333333333333333);
   border-radius: 1rem;
   box-shadow: 0 5px 20px 2px rgb(170 221 238 / 13%);
-  background-color: #fdffff;
+  /* background-color: #fdffff; */
   padding: 1% 0;
   box-sizing: border-box;
+  background: linear-gradient(to left, #d0dae0, #e2ebf0);
 }
+
 .presentUsersDiv {
   position: relative;
 }
@@ -74,19 +75,23 @@ body {
   font-weight: 700;
   font-size: 30px;
   letter-spacing: 1px;
+  background-image: linear-gradient(to bottom, #5a6170ca, #1c1018d1);
+
+  background-clip: text;
+  color: transparent;
 }
 .inputFields {
   width: 80%;
-  margin: 2% 0;
+  margin: 1% 0;
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.5;
   letter-spacing: 0.5px;
-  color: #212529;
-  background-color: #fff;
+  color: rgba(0, 0, 0, 0.4);
+  background-color: transparent;
   background-clip: padding-box;
-  border: 1px solid #ced4da;
+  border: 1px solid rgba(170, 170, 170, 0.192);
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -95,15 +100,16 @@ body {
   transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 .inputFields:focus {
-  color: #212529;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 700;
   background-color: #fff;
   border-color: #1adb80;
   outline: 0;
-  box-shadow: 0 0 0 0.25rem #1adb4464;
+  box-shadow: 0 0 0 0.5px #1adb4464;
 }
 .createUserBtn {
   border: 1px solid #1adb80;
-  color: #1adb45;
+  color: #1adb80;
   font-weight: 600;
   padding: 6px 20px;
   cursor: pointer;
@@ -122,14 +128,14 @@ body {
   transform: translateY(2px);
 }
 .activeUsersCont {
-  background-color: #fdffff;
+  background-color: transparent;
   height: 50vh;
   width: 90%;
   margin: 0 auto;
   padding: 2% 3%;
-  border: 1px solid rgba(170, 221, 238, 0.3333333333333333);
+  /* border: 1px solid rgba(170, 221, 238, 0.3333333333333333); */
   border-radius: 1rem;
-  box-shadow: 0 5px 20px 2px rgb(170 221 238 / 13%);
+  /* box-shadow: 0 5px 20px 2px rgb(170 221 238 / 13%); */
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -149,16 +155,20 @@ body {
   padding: 5% 3%;
   text-align: left;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: space-between;
   background-color: #fdffff;
+  background: linear-gradient(to right, #c0c0c0, #ebebeb);
 }
 .activeUserName > p {
-  color: rgba(0, 0, 0, 0.642);
+  /* color: rgba(0, 0, 0, 0.642); */
   font-size: 16px;
   font-weight: 600;
   margin: unset;
   padding: unset;
+  color: #5a6170;
+  letter-spacing: 0.4px;
 }
 .userActionBtnsCont {
   display: flex;
@@ -181,10 +191,10 @@ body {
   cursor: pointer;
 }
 .viewIcon {
-  color: cadetblue;
+  color: rgb(77, 150, 152);
 }
 .delIcon {
-  color: rgb(254, 100, 125);
+  color: #de1a1a;
 }
 .viewIcon:hover {
   filter: drop-shadow(0 0 1.5px rgb(63, 63, 252, 0.5));
@@ -204,7 +214,7 @@ body {
   left: -40%;
   display: none;
   z-index: 1;
-  background-color: #1adb80;
+  background-color: rgba(0, 0, 0, 0.728);
   color: white;
 }
 .viewIconCont:hover .viewHover {

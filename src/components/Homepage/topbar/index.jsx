@@ -92,9 +92,7 @@ const TopbarLayout = ({ admin, person }) => {
               ></span>
             </div>
           </div>
-          <div ref={pageNameRef} className={Styles.pageName}>
-            {"hello"}
-          </div>
+          <div ref={pageNameRef} className={Styles.pageName}></div>
           <div className={Styles.LoggerHolder}>
             <p className={Styles.loggerName}>
               <q>Hi {person}</q>

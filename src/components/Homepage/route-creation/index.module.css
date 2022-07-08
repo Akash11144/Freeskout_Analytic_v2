@@ -4,14 +4,14 @@ body {
 }
 
 * {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Nunito Sans", sans-serif;
 }
 ::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: rgb(0, 0, 0, 0.45);
   opacity: 1; /* Firefox */
 }
-F :-ms-input-placeholder {
+:-ms-input-placeholder {
   /* Internet Explorer 10-11 */
   color: rgb(0, 0, 0, 0.45);
 }
@@ -26,6 +26,7 @@ F :-ms-input-placeholder {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  user-select: none;
 }
 .secondaryDiv {
   display: flex;
@@ -36,22 +37,22 @@ F :-ms-input-placeholder {
 
 .btn {
   background: transparent;
-  background: #1adb80;
-  color: #fff;
+  background: transparent;
+  color: #1adb80;
   font-weight: 600;
   padding: 6px 20px;
   cursor: pointer;
   border-radius: 5px;
   width: max-content;
   transition: 0.3px;
-  border: 1px solid transparent;
+  border: 1px solid #1adb80;
   letter-spacing: 1px;
   font-weight: 600;
 }
 .btn:hover {
-  border: 1px solid #1adb80;
-  background-color: transparent;
-  color: #1adb45;
+  border: 1px solid transparent;
+  background-color: #1adb80;
+  color: #fdffff;
 }
 .btn:active {
   transform: translateY(2px);
@@ -89,7 +90,7 @@ F :-ms-input-placeholder {
   color: rgba(0, 0, 0, 0.4);
   background-color: transparent;
   background-clip: padding-box;
-  border: 1px solid #aaa;
+  border: 1px solid rgba(170, 170, 170, 0.192);
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -101,7 +102,7 @@ F :-ms-input-placeholder {
   resize: none;
 }
 .inputFields:focus {
-  color: rgba(0, 0, 0, 0.7);
+  color: rgba(0, 0, 0, 0.6);
   font-weight: 700;
   background-color: #fff;
   border-color: #1adb80;

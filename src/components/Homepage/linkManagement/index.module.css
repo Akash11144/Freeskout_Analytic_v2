@@ -17,7 +17,7 @@
   border: 1px solid rgba(170, 221, 238, 0.3333333333333333);
   border-radius: 1rem;
   box-shadow: 0 5px 20px 2px rgb(170 221 238 / 13%);
-  background-color: #fdffff;
+  /* background-color: #fdffff; */
   padding: 1% 2%;
   box-sizing: border-box;
   display: flex;
@@ -25,6 +25,7 @@
   align-items: center;
   transition: all 500ms;
   margin-bottom: 1%;
+  background: linear-gradient(to left, #d0dae0, #e2ebf0);
 }
 .initialDiv {
   display: flex;
@@ -221,11 +222,11 @@ focus {
   cursor: pointer;
 }
 .viewIcon {
-  color: cadetblue;
+  color: rgb(77, 150, 152);
   font-size: 14px;
 }
 .delIcon {
-  color: rgb(254, 100, 125);
+  color: #de1a1a;
   font-size: 14px;
 }
 .viewIcon:hover {
@@ -246,7 +247,7 @@ focus {
   left: -40%;
   display: none;
   z-index: 1;
-  background-color: #1adb80;
+  background-color: rgba(0, 0, 0, 0.728);
   color: white;
 }
 .viewIconCont:hover .viewHover {

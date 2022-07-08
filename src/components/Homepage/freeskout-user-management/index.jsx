@@ -84,24 +84,24 @@ const UserForm = ({ setnewUser }) => {
     <>
       {pageError && <InformationPopUp />}
       <div className={Styles.createUserPart}>
-        <p className={Styles.createNewUserHead}>New User</p>
+        <p className={Styles.createNewUserHead}>Create User</p>
         <div className={Styles.formContainer}>
           <input
             className={Styles.inputFields}
             ref={name}
-            placeholder="Enter Name"
+            placeholder="Name"
             type={"text"}
           />
           <input
             className={Styles.inputFields}
             ref={email}
-            placeholder="Enter MailID"
+            placeholder="Email"
             type={"text"}
           />
           <input
             className={Styles.inputFields}
             ref={pass}
-            placeholder="Enter Password"
+            placeholder="Password"
             type={"password"}
             minLength="8"
           />
