@@ -22,6 +22,7 @@ const RouteCreationDesign = (props) => {
   const [sideloader, setsideloader] = useState(true);
   const [sideForm, setsideForm] = useState(false);
   const [pageError, setpageError] = useState(false);
+  const [sendBtn, setsendBtn] = useState(true);
   // const [Data, setData] = useState("");
 
   const name_inp = useRef(null);
@@ -109,7 +110,7 @@ const RouteCreationDesign = (props) => {
     let utSts = utChecked.current.checked;
     let twSts = twChecked.current.checked;
     let otherSts = othersChecked.current.checked;
-    let platforms;
+    let platforms = "";
     emailChecker(finalMail);
     urlChecker(finalWebsite);
     if (
@@ -134,7 +135,7 @@ const RouteCreationDesign = (props) => {
       alert("select atleast one platform");
     } else {
       if (instaSts) {
-        platforms += <IoLogoInstagram></IoLogoInstagram>;
+        platforms += "Instagram,";
       }
       if (linkedinSts) {
         platforms += "LinkedIn,";
@@ -169,6 +170,9 @@ const RouteCreationDesign = (props) => {
     // if (!i) setData(props);
     return () => (i = true);
   }, [props]);
+  const handelSendBtnShow = () => {
+    setsendBtn(false);
+  };
 
   return (
     <>
@@ -252,19 +256,26 @@ const RouteCreationDesign = (props) => {
                 <span className={Styles.checkmark}></span>
               </label>
             </div>
-            <div
-              className={`${Styles.btn} ${Styles.createBtn}`}
-              id="generateBtn"
-              onClick={() => {
-                handleCreateBtn();
-              }}
-            >
-              Create
-            </div>
+            {sendBtn && (
+              <div
+                className={`${Styles.btn} ${Styles.createBtn}`}
+                id="generateBtn"
+                onClick={() => {
+                  handleCreateBtn();
+                }}
+              >
+                Create
+              </div>
+            )}
           </div>
           <div className={Styles.dividerDiv}></div>
           <div className={Styles.formPartTwo}>
-            {sideForm && <UserCreationSideForm a={sideForm} />}
+            {sideForm && (
+              <UserCreationSideForm
+                a={sideForm}
+                searchV={(d) => handelSendBtnShow()}
+              />
+            )}
             {sideloader && (
               <div className={Styles.companyGifHolder}>
                 <img

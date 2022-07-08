@@ -50,9 +50,12 @@ const UserCreationSideForm = (props) => {
     routeObject.website = gen_ref.current.innerText;
   }, [props]);
 
-  const handleSendBtn = () => {
+  const [homeDiv, sethomeDiv] = useState(false);
+
+  const handleSaveBtn = (props) => {
     setgenerateLoading(true);
     console.log("routeData", routeObject);
+    sethomeDiv(true);
     // setgenerateLoading(false);
   };
   const handelHomeBtn = () => {
@@ -61,7 +64,11 @@ const UserCreationSideForm = (props) => {
   };
   return (
     <div className={Styles.genDetailsCont}>
-      <div className={Styles.afterSend}>
+      <div
+        className={`${Styles.afterSend} ${
+          homeDiv ? Styles.afterSendShow : Styles.afterSend
+        }`}
+      >
         <div className={Styles.notiCont}>
           <a href="" ref={finalCopiedLink} target="_blank"></a>
           <p>
@@ -73,7 +80,7 @@ const UserCreationSideForm = (props) => {
               handelHomeBtn();
             }}
           >
-            Home
+            Create New
           </div>
         </div>
       </div>
@@ -113,10 +120,9 @@ const UserCreationSideForm = (props) => {
       <div
         className={Styles.btn}
         onClick={() => {
-          {
-            copyLink();
-            handleSendBtn();
-          }
+          props.searchV("hello");
+          copyLink();
+          handleSaveBtn();
         }}
         id="sendmailBtn"
       >
