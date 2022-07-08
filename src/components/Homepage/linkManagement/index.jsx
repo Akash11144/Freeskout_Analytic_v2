@@ -6,6 +6,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { FaFilter } from "react-icons/fa";
 import { fetchAuth, L_LINK } from "../../utlis";
 import InformationPopUp from "../../extras//pop-ups/information";
+import SmallLoading from "../../extras/loading-animation/small-loading";
 
 let errorObj = {
   desc: "",
@@ -20,6 +21,7 @@ const LinkManement = (props) => {
   const [userData, setuserData] = useState([]);
   const [isSelectorsActive, setisSelectorsActive] = useState(false);
   const [pageError, setpageError] = useState(false);
+  const [Loading, setLoading] = useState(false);
 
   const selected_status = useRef(null);
   const all_links = useRef(null);
@@ -28,6 +30,7 @@ const LinkManement = (props) => {
 
   let i = false;
   useEffect(() => {
+    setLoading(true);
     if (!i) {
       const DataFetch = async () => {
         console.time();
@@ -43,9 +46,15 @@ const LinkManement = (props) => {
           r1 = await fetchAuth(`${L_LINK}/validate/allFUser`);
           console.log("link management user data", r1);
           if (r1.issue) {
-            r1.storageClear && localStorage.removeItem("Freeskout-session");
-            errorObj.desc = r.issueDetail;
-            errorObj.navigationRoute = "/";
+            if (r.storageClear) {
+              r.storageClear && localStorage.removeItem("Freeskout-session");
+              errorObj.desc = r.issueDetail;
+              errorObj.navigationRoute = "/";
+            } else {
+              console.log("inside else");
+              errorObj.desc = r.issueDetail;
+              errorObj.navigation = false;
+            }
           } else {
             setrouteData(r);
             setuserData(r1);
@@ -55,7 +64,7 @@ const LinkManement = (props) => {
       };
       DataFetch();
     }
-
+    setLoading(false);
     return () => {
       i = true;
     };
@@ -91,20 +100,33 @@ const LinkManement = (props) => {
   };
 
   const handleSortedData = async () => {
+    setLoading(true);
     console.log(selected_user.current.innerText);
     let r = await fetchAuth(
       `${L_LINK}/route/userRoute/${selected_user.current.innerText}`
     );
     if (r.issue) {
-      r.storageClear && localStorage.removeItem("Freeskout-session");
+      if (r.storageClear) {
+        r.storageClear && localStorage.removeItem("Freeskout-session");
+        errorObj.desc = r.issueDetail;
+        errorObj.navigationRoute = "/";
+      } else {
+        console.log("inside else");
+        errorObj.desc = r.issueDetail;
+        errorObj.navigation = false;
+      }
+      setLoading(false);
+      setpageError(true);
     } else {
       setrouteData(r);
       console.log(r);
+      setLoading(false);
     }
   };
 
   return (
     <>
+      {Loading && <SmallLoading />}
       {pageError && <InformationPopUp {...errorObj} />}
       <div className={Styles.mainCont}>
         {/* {generateLoading && <SmallLoading />} */}
@@ -207,7 +229,7 @@ const LinkManement = (props) => {
                   >
                     <p>All Users</p>
                   </div>
-                  {userData.length &&
+                  {userData ? (
                     userData.map((item, index) => {
                       return (
                         <div
@@ -221,7 +243,10 @@ const LinkManement = (props) => {
                           <p>{item.name}</p>
                         </div>
                       );
-                    })}
+                    })
+                  ) : (
+                    <h1>Loading...</h1>
+                  )}
                 </div>
               </div>
 
