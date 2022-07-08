@@ -274,6 +274,7 @@ focus {
     background-color: #fdffff;
     padding: 15px 15px 10px 15px;
     width: max-content;
+    margin-bottom: 0.5%;
   }
   .filterIconHolder {
     color: #1adb80;
@@ -284,7 +285,7 @@ focus {
     justify-content: unset;
     width: 40vw;
     position: absolute;
-    top: 100%;
+    top: 110%;
     left: -50vw;
     height: 80vh;
     padding: 4% 1%;
@@ -297,7 +298,7 @@ focus {
     justify-content: unset;
     width: 40vw;
     position: absolute;
-    top: 100%;
+    top: 115%;
     left: 0vw;
     height: 80vh;
     padding: 3% 1%;
@@ -312,7 +313,7 @@ focus {
     border: 1px solid #1adb80;
     border-radius: 10px;
     width: 70%;
-    margin: 5% auto;
+    margin: 2% auto;
     padding: 5px 10px;
     display: flex;
     justify-content: space-between;
@@ -335,7 +336,7 @@ focus {
     display: grid;
     justify-content: center;
     align-items: center;
-    margin-top: 100%;
+    margin-top: 10%;
     border-color: transparent;
     background-color: #1adb80;
     color: white;
@@ -369,5 +370,8 @@ focus {
   }
   .selectedUserOption {
     flex-direction: column;
+  }
+  .selectDate:nth-of-type(even) {
+    /* margin-top: -0.7%; */
   }
 }

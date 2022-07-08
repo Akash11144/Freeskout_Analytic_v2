@@ -9,6 +9,7 @@ import { IoLogoYoutube } from "react-icons/io";
 import { IoLogoTwitter } from "react-icons/io";
 import { IoLogoLinkedin } from "react-icons/io";
 import InformationPopUp from "../../extras/pop-ups/information";
+import UserCreationSideForm from "../../extras/sideFormRouteCreation";
 
 let errorObj = {
   desc: "",
@@ -34,14 +35,68 @@ const RouteCreationDesign = (props) => {
   const twChecked = useRef(null);
   const othersChecked = useRef(null);
 
-  const gen_link = useRef();
-  const gen_name = useRef();
-  const gen_mail = useRef();
-  const gen_desc = useRef();
-  const gen_ref = useRef();
-  const gen_slug = useRef();
-  const gen_platforms = useRef();
+  let newData = {
+    creatorName: "",
+    creatorEmail: "",
+    link: "",
+    routeName: "",
+    mail: "",
+    desc: "",
+    ref: "",
+    slug: "",
+    platform: "",
+  };
 
+  let allowedDomain = [
+    "gmail",
+    "outlook",
+    "icloud",
+    "yahoo",
+    "hotmail",
+    "proton",
+    "zoho",
+    "freeskout",
+  ];
+  let allowedEnds = ["com", "in", "io", "net"];
+  let sts = false;
+  let urlSts = false;
+  const emailChecker = (email) => {
+    let atChecker = email.split("@");
+    let dotChecker = email.split("..");
+    let spaceChecker = email.split(" ");
+    let firstSecondSplit;
+    if (
+      atChecker.length === 2 &&
+      spaceChecker.length == 1 &&
+      dotChecker.length == 1
+    ) {
+      firstSecondSplit = atChecker[1].split(".");
+      if (firstSecondSplit.length === 2) {
+        for (let i = 0; i <= allowedDomain.length; i++) {
+          let result = firstSecondSplit[0]
+            .toLowerCase()
+            .includes(allowedDomain[i]);
+          if (result == true) {
+            for (let i = 0; i <= allowedEnds.length; i++) {
+              let result = firstSecondSplit[1]
+                .toLowerCase()
+                .includes(allowedEnds[i]);
+              if (result == true) {
+                sts = true;
+              }
+            }
+          }
+        }
+      }
+    }
+    return sts;
+  };
+  const urlChecker = (site) => {
+    let spaceChecker = site.split(" ");
+    if (spaceChecker.length === 1) {
+      urlSts = true;
+    }
+  };
   const handleCreateBtn = () => {
     let finalName = name_inp.current.value;
     let finalMail = mail_inp.current.value;
@@ -54,8 +109,9 @@ const RouteCreationDesign = (props) => {
     let utSts = utChecked.current.checked;
     let twSts = twChecked.current.checked;
     let otherSts = othersChecked.current.checked;
-    let platforms = "";
-
+    let platforms;
+    emailChecker(finalMail);
+    urlChecker(finalWebsite);
     if (
       finalName == "" ||
       finalMail == "" ||
@@ -64,6 +120,10 @@ const RouteCreationDesign = (props) => {
       finalWebsite == ""
     ) {
       alert("Fill all fileds");
+    } else if (sts === false) {
+      alert("Invaild Mail");
+    } else if (urlSts === false) {
+      alert("Inavlid landing url, Space not allowed");
     } else if (
       instaSts == false &&
       linkedinSts == false &&
@@ -74,7 +134,7 @@ const RouteCreationDesign = (props) => {
       alert("select atleast one platform");
     } else {
       if (instaSts) {
-        platforms += "instagram,";
+        platforms += <IoLogoInstagram></IoLogoInstagram>;
       }
       if (linkedinSts) {
         platforms += "LinkedIn,";
@@ -88,17 +148,19 @@ const RouteCreationDesign = (props) => {
       if (otherSts) {
         platforms += "Others";
       }
-      gen_link.current.innerText = genLink;
-      gen_name.current.innerText = finalName;
-      gen_desc.current.innerText = finalDesc;
-      gen_mail.current.innerText = finalMail;
-      gen_slug.current.innerText = finalRoute;
-      gen_ref.current.innerText = finalWebsite;
-      gen_ref.current.href = finalWebsite;
-      gen_platforms.current.innerText = platforms;
+      newData.creatorName = props.name;
+      newData.creatorEmail = props.email;
+      newData.link = genLink;
+      newData.routeName = finalName;
+      newData.desc = finalDesc;
+      newData.mail = finalMail;
+      newData.slug = finalRoute;
+      newData.ref = finalWebsite;
+      newData.platform = platforms;
+      console.log("newData", newData);
+      setsideForm(newData);
+      setsideloader(false);
     }
-    setsideForm(true);
-    setsideloader(false);
   };
 
   let i = false;
@@ -108,78 +170,9 @@ const RouteCreationDesign = (props) => {
     return () => (i = true);
   }, [props]);
 
-  const handleValue = async () => {
-    setgenerateLoading(true);
-
-    let name = props.name;
-    let email = props.email;
-    let for_name = name_inp.current.value;
-    let for_email = mail_inp.current.value;
-    let description = desc_inp.current.value;
-    let slug = route_inp.current.value;
-    let website = website_inp.current.value;
-    let dt = new Date();
-    let time = dt.toDateString() + " " + dt.toTimeString();
-
-    let email_regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
-    var url_exp = /^(https\:\/\/freeskout.com)/gi;
-    let url_regex = new RegExp(url_exp);
-    let slug_exp = /([A-Za-z0-9\-\_])+/gi;
-    let slug_regex = new RegExp(slug_exp);
-
-    if (
-      for_name === "" ||
-      for_email === "" ||
-      description === "" ||
-      slug === "" ||
-      website === ""
-    ) {
-      alert("fill all the fileds");
-    } else if (email_regex.test(for_email.toLowerCase()) == false) {
-      alert("invalid email");
-    } else if (url_regex.test(website.toLowerCase()) == false) {
-      alert("invalid website");
-    } else if (slug_regex.test(slug) == false) {
-      alert("invalid Slug");
-    } else {
-      console.log(
-        name,
-        email,
-        for_name,
-        for_email,
-        description,
-        slug,
-        website,
-        time
-      );
-      let r = await postAuth(L_LINK, "/route/addRoute", {
-        name,
-        email,
-        for_name,
-        for_email,
-        description,
-        path: `/${slug}`,
-        website,
-        time,
-      });
-      console.log("route creation post result -->", r);
-      if (r.issue) {
-        r.storageClear && localStorage.removeItem("Freeskout-session");
-        errorObj.desc = r.issueDetail;
-        errorObj.navigationRoute = "/";
-        setpageError(true);
-      } else {
-        // setloggedIn(true);
-        // setperson(r.output);
-      }
-      route_inp.current.value = "";
-    }
-    setgenerateLoading(false);
-  };
-
   return (
     <>
-      {pageError && <InformationPopUp {...errorObj} />}(
+      {pageError && <InformationPopUp {...errorObj} />}
       <div className={Styles.mainCont}>
         {generateLoading && <SmallLoading />}
         <div className={Styles.secondaryDiv}>
@@ -263,65 +256,25 @@ const RouteCreationDesign = (props) => {
               className={`${Styles.btn} ${Styles.createBtn}`}
               id="generateBtn"
               onClick={() => {
-                // handleCreateBtn();
-                handleValue();
+                handleCreateBtn();
               }}
             >
               Create
             </div>
           </div>
           <div className={Styles.dividerDiv}></div>
-          {sideForm && (
-            <div className={Styles.formPartTwo}>
-              <div className={Styles.genDetailsCont}>
-                <div className={Styles.genLinkCont}>
-                  <p className={Styles.generatedLink}>
-                    <span>Generated Link: </span>
-                    <span ref={gen_link}></span>
-                  </p>
-                </div>
-
-                <div className={Styles.otherDetails}>
-                  <p>
-                    <span>Name: </span> <span ref={gen_name}></span>
-                  </p>
-                  <p>
-                    <span>Email: </span>
-                    <span ref={gen_mail}></span>
-                  </p>
-                  <p>
-                    <span>Slug: </span>
-                    <span ref={gen_slug}></span>
-                  </p>
-
-                  <p>
-                    <span>Desc: </span>
-                    <span ref={gen_desc}></span>
-                  </p>
-                  <p>
-                    <span>Landing Page: </span>
-                    <a ref={gen_ref} href=""></a>
-                  </p>
-                  <p>
-                    <span>Platforms: </span>
-                    <span ref={gen_platforms}></span>
-                  </p>
-                </div>
-                <div className={Styles.btn} id="sendmailBtn">
-                  Send
-                </div>
+          <div className={Styles.formPartTwo}>
+            {sideForm && <UserCreationSideForm a={sideForm} />}
+            {sideloader && (
+              <div className={Styles.companyGifHolder}>
+                <img
+                  src={companyGif}
+                  alt="Company Logo"
+                  className={Styles.companyGif}
+                />
               </div>
-            </div>
-          )}
-          {sideloader && (
-            <div className={Styles.companyGifHolder}>
-              <img
-                src={companyGif}
-                alt="Company Logo"
-                className={Styles.companyGif}
-              />
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
       )

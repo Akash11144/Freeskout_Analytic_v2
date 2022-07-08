@@ -61,8 +61,7 @@ F :-ms-input-placeholder {
   margin-top: 3%;
 }
 .formPartOne,
-.formPartTwo,
-.companyGifHolder {
+.formPartTwo {
   width: 48%;
   height: 65vh;
   display: flex;
@@ -219,86 +218,9 @@ F :-ms-input-placeholder {
   background-color: grey;
 }
 
-.genDetailsCont {
-  width: 95%;
-  min-height: calc(60vh);
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  box-sizing: border-box;
-}
-
-.generatedLink > span:nth-of-type(1) {
-  color: rgba(0, 0, 0, 0.91);
-  font-weight: 900;
-  letter-spacing: 0.5px;
-  font-size: 16px;
-}
-.generatedLink > span:nth-of-type(2) {
-  font-size: 18px;
-  font-weight: 400;
-  color: #1adb80;
-}
-.otherDetails {
-  min-width: 90%;
-  margin: 0 auto;
-}
 .companyGif {
   width: 70px;
   height: 70px;
-}
-.otherDetails > p {
-  margin: 3% auto;
-  font-style: normal;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  word-break: break-all;
-}
-.otherDetails > p > span:nth-of-type(2) {
-  color: rgba(0, 0, 0, 0.6);
-  font-size: 14px;
-  font-weight: 400;
-}
-.otherDetails > p > span {
-  color: rgba(0, 0, 0, 0.91);
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  margin-right: 1%;
-  font-style: normal;
-}
-.genLinkCont {
-  width: 90%;
-  margin: 0 auto;
-}
-.generatedLink {
-  word-wrap: break-word;
-  text-align: center;
-}
-.otherDetails {
-  background-clip: border-box;
-  border: 1px solid rgba(170, 221, 238, 0.3333333333333333);
-  border-radius: 1rem;
-  box-shadow: 0 5px 20px 2px rgb(170 221 238 / 13%);
-  background-color: #fdffff;
-  padding: 2% 3%;
-  box-sizing: border-box;
-}
-.otherDetails > p > a {
-  text-decoration: none;
-  color: rgba(0, 0, 0, 0.6);
-}
-.copyRightCont {
-  width: 100%;
-  margin-top: 5%;
-  text-align: center;
-}
-.CopyRightP {
-  margin: unset;
-  padding: unset;
 }
 
 /* Media Queries */

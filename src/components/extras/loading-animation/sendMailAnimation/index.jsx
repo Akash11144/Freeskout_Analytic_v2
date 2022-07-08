@@ -1,6 +1,6 @@
 import React from "react";
 import Styles from "../sendMailAnimation/index.module.css";
-import sendmail from "../../../assets/sendMailnimation.gif";
+import sendmail from "../../../assets/sendMailanimation.gif";
 const SendMail = () => {
   return (
     <div className={Styles.mainCont}>
