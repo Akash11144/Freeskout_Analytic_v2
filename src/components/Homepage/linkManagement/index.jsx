@@ -287,7 +287,12 @@ const LinkManement = (props) => {
                       key={index}
                       id={item.path}
                       className={Styles.cont}
-                      onClick={(e) => handleDelete(e.currentTarget.id)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (e.target.id === "deletion")
+                          handleDelete(e.currentTarget.id);
+                      }}
                     >
                       <p>www.freeskout.com/redirect{item.path}</p>
                       <div className={Styles.userActionBtnsCont}>
@@ -299,11 +304,12 @@ const LinkManement = (props) => {
                             View
                           </p>
                         </div>
-                        <div
-                          onClick={() => {}}
-                          className={`${Styles.delIconCont}`}
-                        >
-                          <AiOutlineDelete className={Styles.delIcon} />
+                        <div className={`${Styles.delIconCont}`}>
+                          <AiOutlineDelete
+                            id={"deletion"}
+                            onClick={() => {}}
+                            className={Styles.delIcon}
+                          />
                           <p
                             className={`${Styles.HoverNotification} ${Styles.delHover}`}
                           >
