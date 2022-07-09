@@ -303,6 +303,45 @@ const LinkManement = (props) => {
                 ))}
             </div>
           </div>
+          <div className={Styles.linkDeatilsCont}>
+            <p className={Styles.link}>
+              localhost:3000/redirect/myhome@_-qa123456789
+            </p>
+            <div className={Styles.moreDetails}>
+              <p className={Styles.createdBy}>
+                Created by:{" "}
+                <span className={Styles.createdByName}> Akash Gupta</span>
+              </p>
+              <p className={Styles.createdBy}>
+                Created at:
+                <span className={Styles.createdDay}>
+                  Sunday{" "}
+                  <span className={Styles.createdDate}>26/july/2022</span>{" "}
+                  <span className={Styles.createdAt}>at:</span>
+                  <span className={Styles.createdTime}> 18:30</span>
+                </span>
+              </p>
+              <p className={Styles.createdBy}>
+                Created for:{" "}
+                <span className={Styles.createdByName}>Shubham Upadhyay</span>
+              </p>
+              <p className={Styles.createdBy}>
+                Platforms :
+                <span className={Styles.createdByName}>
+                  LinkedIn, Youtube, Instagram, Twitter, Others
+                </span>
+              </p>
+              <p className={Styles.createdBy}>
+                Status: <span className={Styles.active}>Active</span> since{" "}
+                <span className={Styles.createdDate}>26/july/2022</span>{" "}
+                <span className={Styles.createdTime}>18:30hrs</span>
+              </p>
+              <p className={Styles.createdBy}>
+                Hits: <span className={Styles.hits}> 350</span>
+              </p>
+            </div>
+            <div className={Styles.okayBtn}>Close</div>
+          </div>
         </div>
       </div>
     </>

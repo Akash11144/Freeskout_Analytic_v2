@@ -262,6 +262,54 @@ focus {
 .filterIconHolder {
   display: none;
 }
+
+.linkDeatilsCont {
+  background-color: #fdffff;
+  width: max-content;
+  padding: 2% 3%;
+  border: 1px solid rgba(170, 221, 238, 0.8333333333333333);
+  border-radius: 1rem;
+  box-shadow: 0 5px 20px 2px rgb(170 221 238 / 13%);
+}
+.link {
+  color: #fdffff;
+  font-weight: 800;
+  font-size: 14px;
+  margin-bottom: 5%;
+  letter-spacing: 0.5px;
+  background-color: #0a3556dd;
+  padding: 2% 3%;
+  border-radius: 10px;
+  transition: all 0.3s;
+  text-decoration: none;
+  text-align: center;
+}
+.link:hover {
+  color: #1adb45;
+}
+
+.okayBtn {
+  background: transparent;
+  color: #1adb80;
+  font-weight: 600;
+  padding: 6px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: max-content;
+  margin: 0 auto;
+  transition: 0.3px;
+  border: 1px solid #1adb80;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+.okayBtn:hover {
+  border: 1px solid transparent;
+  background-color: #1adb80;
+  color: #fdffff;
+}
+.okayBtn:active {
+  transform: translateY(2px);
+}
 @media (max-width: 768px) {
   .linkList {
     height: 80vh;
@@ -371,8 +419,5 @@ focus {
   }
   .selectedUserOption {
     flex-direction: column;
-  }
-  .selectDate:nth-of-type(even) {
-    /* margin-top: -0.7%; */
   }
 }
