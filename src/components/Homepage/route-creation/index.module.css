@@ -64,18 +64,18 @@ body {
 .formPartOne,
 .formPartTwo {
   width: 48%;
-  height: 65vh;
+  height: 70vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-clip: border-box;
-  border: 1px solid rgba(170, 221, 238, 0.3333333333333333);
+  border: 1px solid rgba(170, 221, 238, 0.8333333333333333);
   border-radius: 1rem;
-  box-shadow: 0 5px 20px 2px rgb(170 221 238 / 13%);
+  box-shadow: 0 5px 20px 2px rgb(170 221 238 / 63%);
   background-color: #fdffff;
-  background: linear-gradient(to left, #d0dae0, #e2ebf0);
-  padding: 1% 0;
+  background: linear-gradient(270deg, #fdffff, #c8e6f3);
+  padding: 2% 0;
   box-sizing: border-box;
 }
 
@@ -90,7 +90,7 @@ body {
   color: rgba(0, 0, 0, 0.4);
   background-color: transparent;
   background-clip: padding-box;
-  border: 1px solid rgba(170, 170, 170, 0.192);
+  border: 1px solid rgba(170, 170, 170, 0.599);
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -289,9 +289,7 @@ body {
   }
 }
 
-
 /* ---------------------------------------------------------------------- */
-
 
 .genDetailsCont {
   width: 95%;
@@ -311,10 +309,11 @@ body {
   font-weight: 900;
   letter-spacing: 0.5px;
   font-size: 16px;
+  color: rgba(255, 0, 0, 0.775);
 }
 .generatedLink > span:nth-of-type(2) {
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 600;
   color: #1adb80;
 }
 .otherDetails {
@@ -351,6 +350,7 @@ body {
 .generatedLink {
   word-wrap: break-word;
   text-align: center;
+  margin-bottom: 3%;
 }
 .otherDetails {
   background-clip: border-box;

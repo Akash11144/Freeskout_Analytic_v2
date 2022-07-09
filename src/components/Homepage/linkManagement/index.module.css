@@ -14,7 +14,7 @@
   width: 98%;
   margin: 0 auto;
   background-clip: border-box;
-  border: 1px solid rgba(170, 221, 238, 0.3333333333333333);
+  border: 1px solid rgba(170, 221, 238, 0.8333333333333333);
   border-radius: 1rem;
   box-shadow: 0 5px 20px 2px rgb(170 221 238 / 13%);
   /* background-color: #fdffff; */
@@ -25,7 +25,7 @@
   align-items: center;
   transition: all 500ms;
   margin-bottom: 1%;
-  background: linear-gradient(to left, #d0dae0, #e2ebf0);
+  background: linear-gradient(270deg, #fdffff, #c8e6f3);
 }
 .initialDiv {
   display: flex;
