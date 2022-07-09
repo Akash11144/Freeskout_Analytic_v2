@@ -3,7 +3,13 @@ import Styles from "./index.module.css";
 import SmallLoading from "../../extras/loading-animation/small-loading";
 import SendMail from "../../extras/loading-animation/sendMailAnimation";
 import companyGif from "../../assets/FsnoBg.gif";
-import { urlChecker, emailChecker, L_LINK, postAuth } from "../../utlis";
+import {
+  urlChecker,
+  emailChecker,
+  L_LINK,
+  postAuth,
+  slugchecker,
+} from "../../utlis";
 import { IoLogoInstagram } from "react-icons/io";
 import { IoLogoYoutube } from "react-icons/io";
 import { IoLogoTwitter } from "react-icons/io";
@@ -21,7 +27,6 @@ const RouteCreationDesign = (props) => {
   const [sideloader, setsideloader] = useState(true);
   const [sideForm, setsideForm] = useState(false);
   const [sendBtn, setsendBtn] = useState(true);
-
   const name_inp = useRef(null);
   const mail_inp = useRef(null);
   const route_inp = useRef(null);
@@ -56,11 +61,12 @@ const RouteCreationDesign = (props) => {
 
     let sts = emailChecker(finalMail);
     let urlSts = urlChecker(finalWebsite);
+    let slugSts = slugchecker(route_inp.current.value);
 
     if (
       finalName == "" ||
       finalMail == "" ||
-      finalRoute == "" ||
+      route_inp.current.value == "" ||
       finalDesc == "" ||
       finalWebsite == ""
     ) {
@@ -69,6 +75,8 @@ const RouteCreationDesign = (props) => {
       alert("Invaild Mail");
     } else if (urlSts === false) {
       alert("Inavlid landing url, Space not allowed");
+    } else if (slugSts === false) {
+      alert("Invalid slug format");
     } else if (
       instaSts == false &&
       linkedinSts == false &&
@@ -122,7 +130,7 @@ const RouteCreationDesign = (props) => {
             />
 
             <input
-              autoComplete="off"
+              // autoComplete="off"
               className={Styles.inputFields}
               id="email"
               ref={mail_inp}
