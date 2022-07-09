@@ -30,6 +30,7 @@ const Login = () => {
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("Freeskout-session")) !== null)
       navi("/home");
+
     setPageLoading(false);
   }, []);
 
