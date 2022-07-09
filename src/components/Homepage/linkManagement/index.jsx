@@ -125,8 +125,21 @@ const LinkManement = (props) => {
     }
   };
 
-  const handleDelete = (a) => {
-    console.log(a);
+  const handleDelete = async (value) => {
+    console.log("deleting route: ", value);
+    try {
+      let r = await fetch(`${L_LINK}/route/deleteRoute`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ path: value }),
+      });
+      let r1 = await r.json();
+      console.log(r1);
+    } catch (error) {
+      console.log("error while deleting route in catch", error);
+    }
   };
 
   return (
@@ -281,45 +294,13 @@ const LinkManement = (props) => {
           <div className={Styles.linkList}>
             <div className={Styles.linksContainer}>
               {routeData.length &&
-                routeData.map((item, index) => {
-                  return (
-                    <div
-                      key={index}
-                      id={item.path}
-                      className={Styles.cont}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        if (e.target.id === "deletion")
-                          handleDelete(e.currentTarget.id);
-                      }}
-                    >
-                      <p>www.freeskout.com/redirect{item.path}</p>
-                      <div className={Styles.userActionBtnsCont}>
-                        <div className={Styles.viewIconCont}>
-                          <FaRegEye className={Styles.viewIcon} />
-                          <p
-                            className={`${Styles.HoverNotification} ${Styles.viewHover}`}
-                          >
-                            View
-                          </p>
-                        </div>
-                        <div className={`${Styles.delIconCont}`}>
-                          <AiOutlineDelete
-                            id={"deletion"}
-                            onClick={() => {}}
-                            className={Styles.delIcon}
-                          />
-                          <p
-                            className={`${Styles.HoverNotification} ${Styles.delHover}`}
-                          >
-                            Delete
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
+                routeData.map((item, index) => (
+                  <LinkLayout
+                    index={index}
+                    {...item}
+                    linkCallBack={(val) => handleDelete(val)}
+                  />
+                ))}
             </div>
           </div>
         </div>
@@ -329,3 +310,41 @@ const LinkManement = (props) => {
 };
 
 export default LinkManement;
+
+// ------------------------------------------------------------------------------------------------
+
+const LinkLayout = ({
+  name,
+  email,
+  for_name,
+  for_email,
+  description,
+  path,
+  website,
+  time,
+  index,
+  linkCallBack,
+}) => {
+  return (
+    <div key={path + index} className={Styles.cont}>
+      <p>www.freeskout.com/redirect{path}</p>
+      <div className={Styles.userActionBtnsCont}>
+        <div className={Styles.viewIconCont}>
+          <FaRegEye className={Styles.viewIcon} />
+          <p className={`${Styles.HoverNotification} ${Styles.viewHover}`}>
+            View
+          </p>
+        </div>
+        <div className={`${Styles.delIconCont}`}>
+          <AiOutlineDelete
+            onClick={() => linkCallBack(path)}
+            className={Styles.delIcon}
+          />
+          <p className={`${Styles.HoverNotification} ${Styles.delHover}`}>
+            Delete
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};

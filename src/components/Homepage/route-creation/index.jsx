@@ -44,7 +44,7 @@ const RouteCreationDesign = (props) => {
     let finalName = name_inp.current.value;
     let finalMail = mail_inp.current.value;
     let finalDesc = desc_inp.current.value;
-    let finalRoute = route_inp.current.value;
+    let finalRoute = "/" + route_inp.current.value;
     let finalWebsite = website_inp.current.value;
     let genLink = "http://localhost:3000" + "/redirect/" + finalRoute;
     let instaSts = instaCheck.current.checked;
@@ -290,6 +290,8 @@ const UserCreationSideForm = ({ a, searchV }) => {
       website,
       platform,
       time: dt.toDateString() + " " + dt.toTimeString(),
+      deleted: false,
+      deleted_time: "",
     });
     console.log("result: ", r);
     if (r.issue) {
