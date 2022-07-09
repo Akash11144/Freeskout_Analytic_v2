@@ -34,7 +34,6 @@ export default FUM;
 
 const UserForm = ({ setnewUser }) => {
   const [pageError, setpageError] = useState(false);
-
   let name = useRef(null);
   let email = useRef(null);
   let pass = useRef(null);
@@ -136,6 +135,8 @@ const UserForm = ({ setnewUser }) => {
 const ActiveUser = ({ newUser }) => {
   const [Data, setData] = useState([]);
   const [pageError, setpageError] = useState(false);
+  const [viewDetails, setviewDetails] = useState(false);
+
   //
 
   const dataFetch = async () => {
@@ -171,6 +172,14 @@ const ActiveUser = ({ newUser }) => {
     };
   }, [newUser]);
 
+  const handelViewDetails = () => {
+    setviewDetails(true);
+  };
+
+  const handelOKay = () => {
+    setviewDetails(false);
+  };
+
   return (
     <>
       {pageError && <InformationPopUp {...errorObj} />}
@@ -180,35 +189,18 @@ const ActiveUser = ({ newUser }) => {
         </div>
         <div className={Styles.activeUsersCont}>
           {Data.length ? (
-            Data.map((item, index) => <User key={index} {...item} />)
+            Data.map((item, index) => (
+              <User
+                key={index}
+                {...item}
+                viewDetailTrigger={() => handelViewDetails()}
+              />
+            ))
           ) : (
             <h1>NO user available</h1>
           )}
         </div>
-        <div className={Styles.userDataCont}>
-          <div className={Styles.userDataSecondaryDiv}>
-            <p className={Styles.selectedUserEmail}>
-              E-Mail:{" "}
-              <span className={Styles.userInfo}>
-                akashsinghkumargupta@freeskout.com
-              </span>
-            </p>
-            <p className={Styles.selectedUsePassword}>
-              Password: <span className={Styles.userInfo}>Helllo12345</span>
-            </p>
-            <div className={Styles.dataSecondaryDiv}>
-              <p className={Styles.linksCreated}>
-                Links Created : <span className={Styles.userInfo}>5</span>
-              </p>
-              <p className={Styles.hitsGenerated}>
-                Hits Generated: <span className={Styles.userInfo}>500</span>
-              </p>
-            </div>
-            <div className={Styles.okHolder}>
-              <p>Okay</p>
-            </div>
-          </div>
-        </div>
+        {viewDetails && <ViewUserDetails okayTrigger={() => handelOKay()} />}
       </div>
     </>
   );
@@ -225,7 +217,10 @@ const User = (props) => {
             <p>{props.name}</p>
           </div>
           <div className={Styles.userActionBtnsCont}>
-            <div className={Styles.viewIconCont}>
+            <div
+              className={Styles.viewIconCont}
+              onClick={() => props.viewDetailTrigger()}
+            >
               <FaRegEye className={Styles.viewIcon} />
               <p className={`${Styles.HoverNotification} ${Styles.viewHover}`}>
                 View
@@ -240,6 +235,38 @@ const User = (props) => {
                 Delete
               </p>
             </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+//-------------------------------
+const ViewUserDetails = (props) => {
+  return (
+    <>
+      <div className={Styles.userDataCont}>
+        <div className={Styles.userDataSecondaryDiv}>
+          <p className={Styles.selectedUserEmail}>
+            E-Mail:{" "}
+            <span className={Styles.userInfo}>
+              akashsinghkumargupta@freeskout.com
+            </span>
+          </p>
+          <p className={Styles.selectedUsePassword}>
+            Password: <span className={Styles.userInfo}>Helllo12345</span>
+          </p>
+          <div className={Styles.dataSecondaryDiv}>
+            <p className={Styles.linksCreated}>
+              Links Created : <span className={Styles.userInfo}>5</span>
+            </p>
+            <p className={Styles.hitsGenerated}>
+              Hits Generated: <span className={Styles.userInfo}>500</span>
+            </p>
+          </div>
+          <div className={Styles.okHolder} onClick={() => props.okayTrigger()}>
+            <p>Okay</p>
           </div>
         </div>
       </div>

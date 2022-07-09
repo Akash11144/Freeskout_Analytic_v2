@@ -235,7 +235,7 @@ body {
   height: 54vh;
   display: grid;
   place-items: center;
-  display: none;
+  /* display: none; */
   /* qwerty */
 }
 .userDataSecondaryDiv {
