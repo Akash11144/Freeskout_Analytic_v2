@@ -27,6 +27,7 @@ const LinkManement = (props) => {
   const all_links = useRef(null);
   const active_links = useRef(null);
   const deleted_links = useRef(null);
+  const linkContRef = useRef(null);
 
   let i = false;
   useEffect(() => {
@@ -122,6 +123,10 @@ const LinkManement = (props) => {
       console.log(r);
       setLoading(false);
     }
+  };
+
+  const handleDelete = (a) => {
+    console.log(a);
   };
 
   return (
@@ -278,7 +283,12 @@ const LinkManement = (props) => {
               {routeData.length &&
                 routeData.map((item, index) => {
                   return (
-                    <div key={index} className={Styles.cont}>
+                    <div
+                      key={index}
+                      id={item.path}
+                      className={Styles.cont}
+                      onClick={(e) => handleDelete(e.currentTarget.id)}
+                    >
                       <p>www.freeskout.com/redirect{item.path}</p>
                       <div className={Styles.userActionBtnsCont}>
                         <div className={Styles.viewIconCont}>
@@ -289,7 +299,10 @@ const LinkManement = (props) => {
                             View
                           </p>
                         </div>
-                        <div className={`${Styles.delIconCont}`}>
+                        <div
+                          onClick={() => {}}
+                          className={`${Styles.delIconCont}`}
+                        >
                           <AiOutlineDelete className={Styles.delIcon} />
                           <p
                             className={`${Styles.HoverNotification} ${Styles.delHover}`}

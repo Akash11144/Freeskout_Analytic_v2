@@ -37,6 +37,7 @@ function RedirectingRoutes() {
       const newloc = loc.pathname.split("/redirect");
       if (newloc[1]) {
         for (let i = 0; i < r1.length; i++) {
+          // console.log(newloc[1], "--", r1[i].path);
           if (newloc[1] === r1[i].path) {
             arr.push({ path: r1[i].path, element: <Redir {...r1[i]} /> });
             break;
