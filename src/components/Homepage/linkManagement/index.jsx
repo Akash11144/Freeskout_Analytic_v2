@@ -128,12 +128,16 @@ const LinkManement = (props) => {
   const handleDelete = async (value) => {
     console.log("deleting route: ", value);
     try {
+      let dt = new Date();
       let r = await fetch(`${L_LINK}/route/deleteRoute`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ path: value }),
+        body: JSON.stringify({
+          path: value,
+          deleted_time: dt.toDateString() + " " + dt.toTimeString(),
+        }),
       });
       let r1 = await r.json();
       console.log(r1);
