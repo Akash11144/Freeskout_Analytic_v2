@@ -3,13 +3,12 @@ import Styles from "./index.module.css";
 import SmallLoading from "../../extras/loading-animation/small-loading";
 import SendMail from "../../extras/loading-animation/sendMailAnimation";
 import companyGif from "../../assets/FsnoBg.gif";
-import { L_LINK, postAuth } from "../../utlis";
+import { urlChecker, emailChecker, L_LINK, postAuth } from "../../utlis";
 import { IoLogoInstagram } from "react-icons/io";
 import { IoLogoYoutube } from "react-icons/io";
 import { IoLogoTwitter } from "react-icons/io";
 import { IoLogoLinkedin } from "react-icons/io";
 import InformationPopUp from "../../extras/pop-ups/information";
-import UserCreationSideForm from "../../extras/sideFormRouteCreation";
 
 let errorObj = {
   desc: "",
@@ -21,9 +20,7 @@ const RouteCreationDesign = (props) => {
   const [generateLoading, setgenerateLoading] = useState(false);
   const [sideloader, setsideloader] = useState(true);
   const [sideForm, setsideForm] = useState(false);
-  const [pageError, setpageError] = useState(false);
   const [sendBtn, setsendBtn] = useState(true);
-  // const [Data, setData] = useState("");
 
   const name_inp = useRef(null);
   const mail_inp = useRef(null);
@@ -36,83 +33,30 @@ const RouteCreationDesign = (props) => {
   const twChecked = useRef(null);
   const othersChecked = useRef(null);
 
-  let newData = {
-    creatorName: "",
-    creatorEmail: "",
-    link: "",
-    routeName: "",
-    mail: "",
-    desc: "",
-    ref: "",
-    slug: "",
-    platform: "",
-  };
+  let i = false;
+  useEffect(() => {
+    if (!i) console.log("create link props: ", props);
+    return () => (i = true);
+  }, [props]);
 
-  let allowedDomain = [
-    "gmail",
-    "outlook",
-    "icloud",
-    "yahoo",
-    "hotmail",
-    "proton",
-    "zoho",
-    "freeskout",
-  ];
-  let allowedEnds = ["com", "in", "io", "net"];
-  let sts = false;
-  let urlSts = false;
-  const emailChecker = (email) => {
-    let atChecker = email.split("@");
-    let dotChecker = email.split("..");
-    let spaceChecker = email.split(" ");
-    let firstSecondSplit;
-    if (
-      atChecker.length === 2 &&
-      spaceChecker.length == 1 &&
-      dotChecker.length == 1
-    ) {
-      firstSecondSplit = atChecker[1].split(".");
-      if (firstSecondSplit.length === 2) {
-        for (let i = 0; i <= allowedDomain.length; i++) {
-          let result = firstSecondSplit[0]
-            .toLowerCase()
-            .includes(allowedDomain[i]);
-          if (result == true) {
-            for (let i = 0; i <= allowedEnds.length; i++) {
-              let result = firstSecondSplit[1]
-                .toLowerCase()
-                .includes(allowedEnds[i]);
-              if (result == true) {
-                sts = true;
-              }
-            }
-          }
-        }
-      }
-    }
-    return sts;
-  };
-  const urlChecker = (site) => {
-    let spaceChecker = site.split(" ");
-    if (spaceChecker.length === 1) {
-      urlSts = true;
-    }
-  };
   const handleCreateBtn = () => {
+    setgenerateLoading(true);
     let finalName = name_inp.current.value;
     let finalMail = mail_inp.current.value;
     let finalDesc = desc_inp.current.value;
     let finalRoute = route_inp.current.value;
     let finalWebsite = website_inp.current.value;
-    let genLink = "localHost" + "/redirect/" + finalRoute;
+    let genLink = "http://localhost:3000" + "/redirect/" + finalRoute;
     let instaSts = instaCheck.current.checked;
     let linkedinSts = linkedinCheck.current.checked;
     let utSts = utChecked.current.checked;
     let twSts = twChecked.current.checked;
     let otherSts = othersChecked.current.checked;
-    let platforms = "";
-    emailChecker(finalMail);
-    urlChecker(finalWebsite);
+    let platform = "";
+
+    let sts = emailChecker(finalMail);
+    let urlSts = urlChecker(finalWebsite);
+
     if (
       finalName == "" ||
       finalMail == "" ||
@@ -134,49 +78,35 @@ const RouteCreationDesign = (props) => {
     ) {
       alert("select atleast one platform");
     } else {
-      if (instaSts) {
-        platforms += "Instagram,";
-      }
-      if (linkedinSts) {
-        platforms += "LinkedIn,";
-      }
-      if (utSts) {
-        platforms += "YouTube,";
-      }
-      if (twSts) {
-        platforms += "Twitter,";
-      }
-      if (otherSts) {
-        platforms += "Others";
-      }
-      newData.creatorName = props.name;
-      newData.creatorEmail = props.email;
-      newData.link = genLink;
-      newData.routeName = finalName;
-      newData.desc = finalDesc;
-      newData.mail = finalMail;
-      newData.slug = finalRoute;
-      newData.ref = finalWebsite;
-      newData.platform = platforms;
-      console.log("newData", newData);
-      setsideForm(newData);
+      if (instaSts) platform += "Instagram,";
+      if (linkedinSts) platform += "LinkedIn,";
+      if (utSts) platform += "YouTube,";
+      if (twSts) platform += "Twitter,";
+      if (otherSts) platform += "Others";
+
+      setsideForm({
+        name: props.name,
+        email: props.email,
+        for_name: finalName,
+        for_email: finalMail,
+        description: finalDesc,
+        path: finalRoute,
+        website: finalWebsite,
+        platform,
+        genLink,
+      });
       setsideloader(false);
     }
+    setgenerateLoading(false);
   };
 
-  let i = false;
-  useEffect(() => {
-    console.log("create link props: ", props);
-    // if (!i) setData(props);
-    return () => (i = true);
-  }, [props]);
   const handelSendBtnShow = () => {
     setsendBtn(false);
   };
 
   return (
     <>
-      {pageError && <InformationPopUp {...errorObj} />}
+      {/* {pageError && <InformationPopUp {...errorObj} />} */}
       <div className={Styles.mainCont}>
         {generateLoading && <SmallLoading />}
         <div className={Styles.secondaryDiv}>
@@ -277,7 +207,7 @@ const RouteCreationDesign = (props) => {
             {sideForm && (
               <UserCreationSideForm
                 a={sideForm}
-                searchV={(d) => handelSendBtnShow()}
+                searchV={() => handelSendBtnShow()}
               />
             )}
             {sideloader && (
@@ -297,3 +227,161 @@ const RouteCreationDesign = (props) => {
 };
 
 export default RouteCreationDesign;
+
+// ---------------------------------------------------------------------------------------------
+
+const UserCreationSideForm = ({ a, searchV }) => {
+  const [homeDiv, sethomeDiv] = useState(false);
+  const [saveBtnLoading, setsaveBtnLoading] = useState(false);
+  const [pageLoading, setpageLoading] = useState(false);
+  const [pageError, setpageError] = useState(false);
+
+  const {
+    name,
+    email,
+    for_name,
+    for_email,
+    description,
+    path,
+    website,
+    platform,
+    genLink,
+  } = a;
+
+  const finalCopiedLink = useRef(null);
+  const gen_link = useRef(null);
+  const gen_name = useRef(null);
+  const gen_mail = useRef(null);
+  const gen_desc = useRef(null);
+  const gen_ref = useRef(null);
+  const gen_slug = useRef(null);
+  const gen_platforms = useRef(null);
+  let b;
+  let dt = new Date();
+
+  useEffect(() => {
+    setpageLoading(true);
+    gen_link.current.innerText = genLink;
+    finalCopiedLink.current.innerText = genLink;
+    finalCopiedLink.current.href = genLink;
+    gen_name.current.innerText = for_name;
+    gen_mail.current.innerText = for_email;
+    gen_desc.current.innerText = description;
+    gen_ref.current.innerText = website;
+    gen_ref.current.href = website;
+    gen_slug.current.innerText = path;
+    gen_platforms.current.innerText = platform;
+    setpageLoading(false);
+  }, [a, searchV]);
+
+  const copyLink = () => navigator.clipboard.writeText(genLink);
+
+  const handleSaveBtn = async () => {
+    setsaveBtnLoading(true);
+    // let url = new URL(L_LINK);
+    // url.pathname("/route/addRoute");
+    let r = await postAuth(`${L_LINK}/route/addRoute`, "", {
+      name,
+      email,
+      for_name,
+      for_email,
+      description,
+      path,
+      website,
+      platform,
+      time: dt.toDateString() + " " + dt.toTimeString(),
+    });
+    console.log("result: ", r);
+    if (r.issue) {
+      if (r.storageClear) {
+        localStorage.removeItem("Freeskout-session");
+        errorObj.desc = r.issueDetail;
+        errorObj.navigationRoute = "/";
+      } else {
+        console.log("inside else");
+        errorObj.desc = r.issueDetail;
+        errorObj.navigation = false;
+      }
+      setpageError(true);
+    } else {
+      console.log("adding route success!!!");
+    }
+    sethomeDiv(true);
+    setsaveBtnLoading(false);
+  };
+  const handelHomeBtn = () => {
+    navigator.clipboard.writeText(b);
+    window.location.reload();
+  };
+  return (
+    <>
+      {pageLoading && <SmallLoading />}
+      <div className={Styles.genDetailsCont}>
+        <div
+          className={`${Styles.afterSend} ${
+            homeDiv ? Styles.afterSendShow : Styles.afterSend
+          }`}
+        >
+          <div className={Styles.notiCont}>
+            <a href="" ref={finalCopiedLink} target="_blank"></a>
+            <p>
+              <q>Link successfully created and copied to clipboard</q>
+            </p>
+            <div
+              className={Styles.btn}
+              onClick={() => {
+                handelHomeBtn();
+              }}
+            >
+              Create New
+            </div>
+          </div>
+        </div>
+        <div className={Styles.genLinkCont}>
+          <p className={Styles.generatedLink}>
+            <span>Generated Link: </span>
+            <span ref={gen_link}></span>
+          </p>
+        </div>
+
+        <div className={Styles.otherDetails}>
+          <p>
+            <span>Name: </span> <span ref={gen_name}></span>
+          </p>
+          <p>
+            <span>Email: </span>
+            <span ref={gen_mail}></span>
+          </p>
+          <p>
+            <span>Slug: </span>
+            <span ref={gen_slug}></span>
+          </p>
+
+          <p>
+            <span>Desc: </span>
+            <span ref={gen_desc}></span>
+          </p>
+          <p>
+            <span>Landing Page: </span>
+            <a ref={gen_ref} href="" target="_blank"></a>
+          </p>
+          <p>
+            <span>Platforms: </span>
+            <span ref={gen_platforms}></span>
+          </p>
+        </div>
+        <div
+          className={Styles.btn}
+          onClick={() => {
+            searchV("hello");
+            copyLink();
+            handleSaveBtn();
+          }}
+          id="sendmailBtn"
+        >
+          {saveBtnLoading ? <SendMail /> : "Save"}
+        </div>
+      </div>
+    </>
+  );
+};

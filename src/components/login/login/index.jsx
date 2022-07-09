@@ -45,7 +45,7 @@ const Login = () => {
         password: password.current.value,
       });
       console.log("output from login page post", r);
-      if (r.FetchIssue) {
+      if (r.issue) {
         errorObj.desc = r.FetchIssueDetail;
         setLoading(false);
         setpopUp(true);

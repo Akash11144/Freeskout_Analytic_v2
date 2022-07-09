@@ -103,6 +103,63 @@ export const fetchAuth = async (a) => {
 
 // ------------------------------------------------------------------------------
 
+export const emailChecker = (email) => {
+  let sts = false;
+  let allowedDomain = [
+    "gmail",
+    "outlook",
+    "icloud",
+    "yahoo",
+    "hotmail",
+    "proton",
+    "zoho",
+    "freeskout",
+  ];
+
+  let allowedEnds = ["com", "in", "io", "net"];
+
+  let atChecker = email.split("@");
+  let dotChecker = email.split("..");
+  let spaceChecker = email.split(" ");
+  let firstSecondSplit;
+  if (
+    atChecker.length === 2 &&
+    spaceChecker.length === 1 &&
+    dotChecker.length === 1
+  ) {
+    firstSecondSplit = atChecker[1].split(".");
+    if (firstSecondSplit.length === 2) {
+      for (let i = 0; i <= allowedDomain.length; i++) {
+        let result = firstSecondSplit[0]
+          .toLowerCase()
+          .includes(allowedDomain[i]);
+        if (result) {
+          for (let i = 0; i <= allowedEnds.length; i++) {
+            let result = firstSecondSplit[1]
+              .toLowerCase()
+              .includes(allowedEnds[i]);
+            if (result) sts = true;
+          }
+        }
+      }
+    }
+  }
+  return sts;
+};
+
+// ----------------------------------------------------------------------------
+
+export const urlChecker = (site) => {
+  let urlSts = false;
+  let spaceChecker = site.split(" ");
+  if (spaceChecker.length === 1) {
+    urlSts = true;
+  }
+  return urlSts;
+};
+
+// ------------------------------------------------------------------------------
+
 // const getCoordinates = () => {
 //   return new Promise((resolve, reject) =>
 //     navigator.geolocation.getCurrentPosition(resolve, reject)
