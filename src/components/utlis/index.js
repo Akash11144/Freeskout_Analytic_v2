@@ -159,6 +159,26 @@ export const urlChecker = (site) => {
 };
 
 // ------------------------------------------------------------------------------
+export const slugchecker = (slug) => {
+  let slugSts = true;
+  for (let i = 0; i < slug.length; i++) {
+    let a = slug[i].charCodeAt();
+    if (
+      (a > 96 && a < 123) ||
+      (a > 47 && a < 58) ||
+      a === 64 ||
+      a === 95 ||
+      a === 45
+    );
+    else {
+      slugSts = false;
+      break;
+    }
+  }
+  return slugSts
+}
+
+//-------------------------------------------------------------------------------
 
 // const getCoordinates = () => {
 //   return new Promise((resolve, reject) =>
