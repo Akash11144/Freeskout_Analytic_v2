@@ -179,7 +179,7 @@ const ActiveUser = ({ newUser }) => {
   const handelOKay = () => {
     setviewDetails(false);
   };
-
+  const [useDetails, setuseDetails] = useState();
   return (
     <>
       {pageError && <InformationPopUp {...errorObj} />}
@@ -193,14 +193,22 @@ const ActiveUser = ({ newUser }) => {
               <User
                 key={index}
                 {...item}
-                viewDetailTrigger={() => handelViewDetails()}
+                viewDetailTrigger={(d) => {
+                  setuseDetails(d);
+                  handelViewDetails();
+                }}
+                uniqueDelKey={(d) => {
+                  alert(d.name);
+                }}
               />
             ))
           ) : (
             <h1>NO user available</h1>
           )}
         </div>
-        {viewDetails && <ViewUserDetails okayTrigger={() => handelOKay()} />}
+        {viewDetails && (
+          <ViewUserDetails okayTrigger={() => handelOKay()} a={useDetails} />
+        )}
       </div>
     </>
   );
@@ -209,17 +217,24 @@ const ActiveUser = ({ newUser }) => {
 // -------------------------------------
 
 const User = (props) => {
+  const name = useRef();
+  let detailObj = {
+    name: props.name,
+    email: "hello@chalo.com",
+    linkNumber: 10,
+    hitNUmber: 566,
+  };
   return (
     <>
       <div className={Styles.secondCont}>
         <div className={Styles.userDiv}>
           <div className={Styles.activeUserName}>
-            <p>{props.name}</p>
+            <p ref={name}> {props.name}</p>
           </div>
           <div className={Styles.userActionBtnsCont}>
             <div
               className={Styles.viewIconCont}
-              onClick={() => props.viewDetailTrigger()}
+              onClick={() => props.viewDetailTrigger(detailObj)}
             >
               <FaRegEye className={Styles.viewIcon} />
               <p className={`${Styles.HoverNotification} ${Styles.viewHover}`}>
@@ -229,7 +244,10 @@ const User = (props) => {
             <div className={Styles.TbMinusVertical}>
               <TbMinusVertical className={Styles.TbMinusVertical} />
             </div>
-            <div className={`${Styles.delIconCont}`}>
+            <div
+              className={`${Styles.delIconCont}`}
+              onClick={() => props.uniqueDelKey(detailObj)}
+            >
               <AiOutlineDelete className={Styles.delIcon} />
               <p className={`${Styles.HoverNotification} ${Styles.delHover}`}>
                 Delete
@@ -246,23 +264,23 @@ const User = (props) => {
 const ViewUserDetails = (props) => {
   return (
     <>
+      {/* {alert(props.a.name)} */}
       <div className={Styles.userDataCont}>
         <div className={Styles.userDataSecondaryDiv}>
           <p className={Styles.selectedUserEmail}>
-            E-Mail:{" "}
-            <span className={Styles.userInfo}>
-              akashsinghkumargupta@freeskout.com
-            </span>
+            E-Mail: <span className={Styles.userInfo}>{props.a.email}</span>
           </p>
           <p className={Styles.selectedUsePassword}>
-            Password: <span className={Styles.userInfo}>Helllo12345</span>
+            Name: <span className={Styles.userInfo}>{props.a.name}</span>
           </p>
           <div className={Styles.dataSecondaryDiv}>
             <p className={Styles.linksCreated}>
-              Links Created : <span className={Styles.userInfo}>5</span>
+              Links Created :{" "}
+              <span className={Styles.userInfo}>{props.a.linkNumber}</span>
             </p>
             <p className={Styles.hitsGenerated}>
-              Hits Generated: <span className={Styles.userInfo}>500</span>
+              Hits Generated:{" "}
+              <span className={Styles.userInfo}>{props.a.hitNUmber}</span>
             </p>
           </div>
           <div className={Styles.okHolder} onClick={() => props.okayTrigger()}>
