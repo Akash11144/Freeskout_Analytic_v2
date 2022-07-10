@@ -275,13 +275,13 @@ focus {
   position: absolute;
   top: 0;
   left: 0;
-  padding: 1% 0;
+  padding: 5px 0;
   border-radius: 1rem;
 }
 .linkDeatilsCont {
   width: 50%;
   background-color: #fdffff;
-  padding: 2%;
+  padding: 1% 2%;
   border: 1px solid rgba(170, 221, 238, 0.8333333333333333);
   border-radius: 1rem;
   box-shadow: 0 5px 20px 2px rgb(170 221 238 / 13%);
@@ -290,10 +290,10 @@ focus {
   color: #fdffff;
   font-weight: 800;
   font-size: 14px;
-  margin-bottom: 5%;
+  margin-bottom: 3%;
   letter-spacing: 0.5px;
   background-color: #0a3556dd;
-  padding: 2%;
+  padding: 1% 2%;
   border-radius: 10px;
   transition: all 0.3s;
   text-decoration: none;
@@ -302,58 +302,64 @@ focus {
 .link:hover {
   color: #1adb45;
 }
-
 .createdBy {
+  width: 98%;
   margin: 2% auto;
-  font-style: normal;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  word-break: break-all;
-  padding-bottom: 1%;
+  padding: 4px 0;
   border-bottom: 1px solid rgba(170, 170, 170, 0.192);
+}
+.createdBy > p:nth-of-type(1) {
   color: rgba(0, 0, 0, 0.91);
   font-weight: 600;
   letter-spacing: 0.5px;
-  font-style: normal;
+  font-size: 16px;
+  width: 30%;
+  text-align: left;
 }
-.createdByName,
-.createdDateCont,
-.stsCont,
-.hits,
-.desc {
+.createdBy > p:nth-of-type(2) {
   color: rgba(0, 0, 0, 0.6);
   font-size: 14px;
   font-weight: 400;
   letter-spacing: 0.5px;
-  margin-right: 1%;
-  font-style: normal;
-  width: fit-content;
-}
-.desc {
-  width: 80%;
-  word-wrap: break-word;
+  width: 70%;
   text-align: right;
 }
-.createdAt {
-}
-.createdDay {
-}
-.hits {
-  background-color: #0a3556dd;
+.active {
   color: #fdffff;
+  background: rgb(100, 166, 168);
   font-weight: 900;
   padding: 1% 2%;
   border-radius: 10px;
+  transform: translateY(20px);
 }
-.active {
-  color: rgb(100, 166, 168);
-  font-weight: 900;
+/* .desc {
+  width: 80%;
+  word-wrap: break-word;
+  text-align: right;
+} */
+.hits {
+  background-color: #0a3556dd;
+  color: #fdffff !important;
+  font-weight: 900 !important;
+  padding: 1% 2%;
+  border-radius: 10px !important;
+  width: unset !important;
+}
+.deletedHolder {
+  background-color: turquoise;
+  width: max-content;
 }
 .deleted {
-  color: #de1a1a;
+  color: #fdffff;
+  background: #de1a1a;
   font-weight: 900;
+  padding: 1% 2%;
+  border-radius: 10px;
+  text-align: center;
+  width: max-content;
 }
 .okayBtn {
   background: transparent;

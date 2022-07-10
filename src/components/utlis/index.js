@@ -182,6 +182,7 @@ export const slugchecker = (slug) => {
 //-------------------------------------------------------------------------------
 export const dateTimegen = (inputString) => {
   let dateObj = {
+<<<<<<< HEAD
     setdate: "",
     time: "",
   };
@@ -196,6 +197,57 @@ export const dateTimegen = (inputString) => {
     dateInitialization[3];
   dateObj.date = date;
   let timeset = dateInitialization[4].split(":");
+=======
+    date: '',
+    time: '',
+    durationDate: ''
+  }
+  let monthNo;
+  let dateInitialization = inputString.split(' ')
+  switch (dateInitialization[1]) {
+    case "Jan":
+      monthNo = 1
+      break;
+    case "Feb":
+      monthNo = 2
+      break;
+    case "Mar":
+      monthNo = 3
+      break;
+    case "Apr":
+      monthNo = 4
+      break;
+    case "May":
+      monthNo = 5
+      break;
+    case "Jun":
+      monthNo = 6
+      break;
+    case "Jul":
+      monthNo = 7
+      break;
+    case "Aug":
+      monthNo = 8
+      break;
+    case "Sep":
+      monthNo = 9
+      break;
+    case "Oct":
+      monthNo = 10
+      break;
+    case "Nov":
+      monthNo = 11
+      break;
+    case "Dec":
+      monthNo = 12
+      break;
+  }
+  let date = dateInitialization[0] + ' ' + dateInitialization[1] + ' ' + dateInitialization[2] + ', ' + dateInitialization[3]
+  let durationDate = monthNo + "/" + dateInitialization[2] + '/' + dateInitialization[3]
+  dateObj.durationDate = durationDate
+  dateObj.date = date
+  let timeset = dateInitialization[4].split(':')
+>>>>>>> b7f47936aed1bb50c74ab62d502e816267a85c11
   if (timeset[0] < 12) {
     dateObj.time = timeset[0] + ":" + timeset[1] + " AM";
   } else if (timeset[0] === 12) {
@@ -203,9 +255,17 @@ export const dateTimegen = (inputString) => {
   } else {
     dateObj.time = timeset[0] - 12 + ":" + timeset[1] + " PM";
   }
+<<<<<<< HEAD
   return dateObj;
 };
 //-------------------------------------------------------------------------------------------------------------------------------
+=======
+  console.log(dateInitialization);
+  return dateObj
+}
+
+//-------------------------------------------------------------------------------
+>>>>>>> b7f47936aed1bb50c74ab62d502e816267a85c11
 export const durationGenerator = (initial, final) => {
   let a = initial;
   let b = final;
@@ -221,10 +281,15 @@ export const durationGenerator = (initial, final) => {
     let hours = Math.round(+("0." + d[1]) * 24);
     output = days + " Days" + " " + hours + " hrs";
   }
+<<<<<<< HEAD
   console.log(output);
 };
+=======
+  return (output)
+}
+>>>>>>> b7f47936aed1bb50c74ab62d502e816267a85c11
 
-//-------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
 
 // const getCoordinates = () => {
 //   return new Promise((resolve, reject) =>
