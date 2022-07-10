@@ -136,8 +136,8 @@ const ActiveUser = ({ newUser }) => {
   const [Data, setData] = useState([]);
   const [pageError, setpageError] = useState(false);
   const [viewDetails, setviewDetails] = useState(false);
-
-  //
+  const [userDel, setuserDel] = useState(0);
+  const [useDetails, setuseDetails] = useState();
 
   const dataFetch = async () => {
     let r = await fetchAuth("http://localhost:1111/validate/allFUser", {
@@ -179,11 +179,11 @@ const ActiveUser = ({ newUser }) => {
   const handelOKay = () => {
     setviewDetails(false);
   };
-  const [useDetails, setuseDetails] = useState();
   return (
     <>
       {pageError && <InformationPopUp {...errorObj} />}
       <div className={Styles.presentUsersDiv}>
+        {console.log("rendering: ", userDel, Data)}
         <div className={Styles.presntUsersHeadCont}>
           <p>Active Users</p>
         </div>
@@ -193,13 +193,11 @@ const ActiveUser = ({ newUser }) => {
               <User
                 key={index}
                 {...item}
-                viewDetailTrigger={(d) => {
+                DetailTrigger={(d) => {
                   setuseDetails(d);
                   handelViewDetails();
                 }}
-                uniqueDelKey={(d) => {
-                  alert(d.name);
-                }}
+                DeleteTrigger={() => setuserDel((v) => v + 1)}
               />
             ))
           ) : (
@@ -216,25 +214,59 @@ const ActiveUser = ({ newUser }) => {
 
 // -------------------------------------
 
-const User = (props) => {
-  const name = useRef();
+const User = ({
+  name,
+  email,
+  password,
+  time,
+  DetailTrigger,
+  DeleteTrigger,
+}) => {
   let detailObj = {
-    name: props.name,
-    email: "hello@chalo.com",
+    name,
+    email,
     linkNumber: 10,
     hitNUmber: 566,
   };
+
+  const handleUserDelete = async () => {
+    try {
+      let dt = new Date();
+      let r = await fetch(`${L_LINK}/validate/userDelete`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          deleted_time: dt.toDateString() + " " + dt.toTimeString(),
+        }),
+      });
+      let r1 = await r.json();
+      console.log(r1);
+      if (r1.issue) {
+        console.log(r1.issueDetail);
+        if (r1.issueDetail === "cannot delete ADMIN")
+          alert("HAHAHA YOU CAN't DELETE ME");
+      } else {
+        DeleteTrigger(email);
+      }
+    } catch (error) {
+      console.log("error while deleting route in catch", error);
+    }
+  };
+
   return (
     <>
       <div className={Styles.secondCont}>
         <div className={Styles.userDiv}>
           <div className={Styles.activeUserName}>
-            <p ref={name}> {props.name}</p>
+            <p> {name}</p>
           </div>
           <div className={Styles.userActionBtnsCont}>
             <div
               className={Styles.viewIconCont}
-              onClick={() => props.viewDetailTrigger(detailObj)}
+              onClick={() => DetailTrigger(detailObj)}
             >
               <FaRegEye className={Styles.viewIcon} />
               <p className={`${Styles.HoverNotification} ${Styles.viewHover}`}>
@@ -246,7 +278,7 @@ const User = (props) => {
             </div>
             <div
               className={`${Styles.delIconCont}`}
-              onClick={() => props.uniqueDelKey(detailObj)}
+              onClick={() => handleUserDelete()}
             >
               <AiOutlineDelete className={Styles.delIcon} />
               <p className={`${Styles.HoverNotification} ${Styles.delHover}`}>
