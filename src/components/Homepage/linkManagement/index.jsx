@@ -280,9 +280,7 @@ const LinkManement = (props) => {
 
               <div className={Styles.selectDate}>
                 <p>From: </p>
-                <input type="date" required="required">
-                  {/* Start Date */}
-                </input>
+                <input type="date" required="required"></input>
               </div>
               <div className={Styles.selectDate}>
                 <p>To:</p>
@@ -397,7 +395,7 @@ const DetailLayout = (props) => {
             <p className={Styles.createdBy}>
               Created at:
               <span className={Styles.createdDateCont}>
-                {/* <span className={Styles.createdDate}>{dateObj.setdate} </span> */}
+                <span className={Styles.createdDate}>{dateObj.date} </span>
                 {console.log(dateObj)}
                 at <span className={Styles.createdTime}>{dateObj.time}</span>
               </span>
@@ -415,23 +413,22 @@ const DetailLayout = (props) => {
             <p className={Styles.createdBy}>
               Status:
               <span className={Styles.stsCont}>
-                {linkSts ? (
+                {!linkSts ? (
                   <span>
-                    {" "}
                     <span className={Styles.active}>Active </span>
                     since
-                    {/* <span className={Styles.createdDate}>{dateObj.date}</span> */}
-                    <span className={Styles.createdTime}>{dateObj.time}</span>
+                    <span className={Styles.createdDate}> {dateObj.date}</span>
+                    <span className={Styles.createdTime}> {dateObj.time}</span>
                   </span>
                 ) : (
                   <span>
-                    <span className={Styles.deleted}>Deleted</span>
+                    <span className={Styles.deleted}>Deleted </span>
                     since{" "}
                     <span className={Styles.createdDate}>
-                      {/* {delDateObj.date} */}
+                      {delDateObj.date}
                     </span>
                     <span className={Styles.createdTime}>
-                      {/* {delDateObj.time} */}
+                      {delDateObj.time}
                     </span>
                   </span>
                 )}
