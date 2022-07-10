@@ -183,7 +183,7 @@ export const dateTimegen = (inputString) => {
   let dateObj = {
     date: '',
     time: '',
-    durationDate: ''
+    durationDate: '',
   }
   let monthNo;
   let dateInitialization = inputString.split(' ')
@@ -226,7 +226,9 @@ export const dateTimegen = (inputString) => {
       break;
   }
   let date = dateInitialization[0] + ' ' + dateInitialization[1] + ' ' + dateInitialization[2] + ', ' + dateInitialization[3]
-  let durationDate = monthNo + "/" + dateInitialization[2] + '/' + dateInitialization[3]
+  let timeLayout = dateInitialization[4].split(':')
+  let finalTime = timeLayout[0] + ":" + timeLayout[1]
+  let durationDate = monthNo + "/" + dateInitialization[2] + '/' + dateInitialization[3] + " " + finalTime
   dateObj.durationDate = durationDate
   dateObj.date = date
   let timeset = dateInitialization[4].split(':')
@@ -237,10 +239,10 @@ export const dateTimegen = (inputString) => {
   } else {
     dateObj.time = (timeset[0] - 12) + ':' + timeset[1] + ' PM'
   }
-  console.log(dateInitialization);
+  // console.log
+  // console.log(dateInitialization);
   return dateObj
 }
-
 //-------------------------------------------------------------------------------
 export const durationGenerator = (initial, final) => {
   let a = initial
