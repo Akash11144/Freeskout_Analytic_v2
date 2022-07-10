@@ -179,6 +179,44 @@ export const slugchecker = (slug) => {
 }
 
 //-------------------------------------------------------------------------------
+export const dateTimegen = (inputString) => {
+  let dateObj = {
+    setdate: '',
+    time: ''
+  }
+  let dateInitialization = inputString.split(' ')
+  let date = dateInitialization[0] + ' ' + dateInitialization[1] + ' ' + dateInitialization[2] + ', ' + dateInitialization[3]
+  dateObj.date = date
+  let timeset = dateInitialization[4].split(':')
+  if (timeset[0] < 12) {
+    dateObj.time = timeset[0] + ':' + timeset[1] + ' AM'
+  } else if (timeset[0] === 12) {
+    dateObj.time = timeset[0] + ':' + timeset[1]
+  } else {
+    dateObj.time = (timeset[0] - 12) + ':' + timeset[1] + ' PM'
+  }
+  return dateObj
+}
+//-------------------------------------------------------------------------------------------------------------------------------
+export const durationGenerator = (initial, final) => {
+  let a = initial
+  let b = final
+  let output;
+  let c = b - a
+  if (c == 0) {
+    output = 'Just now'
+  } else {
+    let duration = c / (1000 * 3600 * 24)
+    let e = duration.toString()
+    let d = e.split('.')
+    let days = d[0]
+    let hours = Math.round(+('0.' + d[1]) * 24)
+    output = days + ' Days' + ' ' + hours + ' hrs'
+  }
+  console.log(output)
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------
 
 // const getCoordinates = () => {
 //   return new Promise((resolve, reject) =>

@@ -4,7 +4,7 @@ import { AiFillCaretDown } from "react-icons/ai";
 import { FaRegEye } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FaFilter } from "react-icons/fa";
-import { fetchAuth, L_LINK } from "../../utlis";
+import { dateTimegen, fetchAuth, L_LINK } from "../../utlis";
 import InformationPopUp from "../../extras//pop-ups/information";
 import SmallLoading from "../../extras/loading-animation/small-loading";
 
@@ -22,6 +22,8 @@ const LinkManement = (props) => {
   const [isSelectorsActive, setisSelectorsActive] = useState(false);
   const [pageError, setpageError] = useState(false);
   const [Loading, setLoading] = useState(false);
+  const [viewDetails, setviewDetails] = useState(false);
+  const [linkData, setlinkData] = useState();
 
   const selected_status = useRef(null);
   const all_links = useRef(null);
@@ -34,7 +36,6 @@ const LinkManement = (props) => {
     setLoading(true);
     if (!i) {
       const DataFetch = async () => {
-        console.time();
         let r = await fetchAuth(`${L_LINK}/route/allRoutes`);
         let r1 = "";
         console.log("link management route data", r);
@@ -61,7 +62,6 @@ const LinkManement = (props) => {
             setuserData(r1);
           }
         }
-        console.timeEnd();
       };
       DataFetch();
     }
@@ -125,6 +125,12 @@ const LinkManement = (props) => {
     }
   };
 
+  const handleview = () => {
+    setviewDetails(true);
+  };
+  const handleCloseDetails = () => {
+    setviewDetails(false);
+  };
   const handleDelete = async (value) => {
     console.log("deleting route: ", value);
     try {
@@ -303,48 +309,19 @@ const LinkManement = (props) => {
                     index={index}
                     {...item}
                     linkCallBack={(val) => handleDelete(val)}
+                    viewLInkDetailsTRigger={(mylinkData) => {
+                      handleview();
+                      setlinkData(mylinkData);
+                    }}
                   />
                 ))}
             </div>
-          </div>
-          <div className={Styles.linkDeatilsCont}>
-            <p className={Styles.link}>
-              localhost:3000/redirect/myhome@_-qa123456789
-            </p>
-            <div className={Styles.moreDetails}>
-              <p className={Styles.createdBy}>
-                Created by:{" "}
-                <span className={Styles.createdByName}> Akash Gupta</span>
-              </p>
-              <p className={Styles.createdBy}>
-                Created at:
-                <span className={Styles.createdDay}>
-                  Sunday{" "}
-                  <span className={Styles.createdDate}>26/july/2022</span>{" "}
-                  <span className={Styles.createdAt}>at:</span>
-                  <span className={Styles.createdTime}> 18:30</span>
-                </span>
-              </p>
-              <p className={Styles.createdBy}>
-                Created for:{" "}
-                <span className={Styles.createdByName}>Shubham Upadhyay</span>
-              </p>
-              <p className={Styles.createdBy}>
-                Platforms :
-                <span className={Styles.createdByName}>
-                  LinkedIn, Youtube, Instagram, Twitter, Others
-                </span>
-              </p>
-              <p className={Styles.createdBy}>
-                Status: <span className={Styles.active}>Active</span> since{" "}
-                <span className={Styles.createdDate}>26/july/2022</span>{" "}
-                <span className={Styles.createdTime}>18:30hrs</span>
-              </p>
-              <p className={Styles.createdBy}>
-                Hits: <span className={Styles.hits}> 350</span>
-              </p>
-            </div>
-            <div className={Styles.okayBtn}>Close</div>
+            {viewDetails && (
+              <DetailLayout
+                closeInkDetailsTRigger={() => handleCloseDetails()}
+                {...linkData}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -356,23 +333,29 @@ export default LinkManement;
 
 // ------------------------------------------------------------------------------------------------
 
-const LinkLayout = ({
-  name,
-  email,
-  for_name,
-  for_email,
-  description,
-  path,
-  website,
-  time,
-  index,
-  linkCallBack,
-}) => {
+const LinkLayout = (props) => {
+  const {
+    name,
+    email,
+    for_name,
+    for_email,
+    description,
+    path,
+    website,
+    time,
+    index,
+    linkCallBack,
+  } = props;
   return (
     <div key={path + index} className={Styles.cont}>
       <p>www.freeskout.com/redirect{path}</p>
       <div className={Styles.userActionBtnsCont}>
-        <div className={Styles.viewIconCont}>
+        <div
+          className={Styles.viewIconCont}
+          onClick={() => {
+            props.viewLInkDetailsTRigger(props);
+          }}
+        >
           <FaRegEye className={Styles.viewIcon} />
           <p className={`${Styles.HoverNotification} ${Styles.viewHover}`}>
             View
@@ -389,5 +372,93 @@ const LinkLayout = ({
         </div>
       </div>
     </div>
+  );
+};
+const DetailLayout = (props) => {
+  let dateObj = dateTimegen(props.time);
+  let delDateObj;
+  let linkSts = props.deleted;
+  if (linkSts) {
+    delDateObj = dateTimegen(props.deleted_time);
+  }
+  return (
+    <>
+      {console.log(props)}
+      <div className={Styles.detHolder}>
+        <div className={Styles.linkDeatilsCont}>
+          <p className={Styles.link}>www.freeskout.com/redirect{props.path}</p>
+          <div className={Styles.moreDetails}>
+            <p className={Styles.createdBy}>
+              Created by:
+              <span className={Styles.createdByName}>
+                {props.name} (<span>{props.email}</span>)
+              </span>
+            </p>
+            <p className={Styles.createdBy}>
+              Created at:
+              <span className={Styles.createdDateCont}>
+                {/* <span className={Styles.createdDate}>{dateObj.setdate} </span> */}
+                {console.log(dateObj)}
+                at <span className={Styles.createdTime}>{dateObj.time}</span>
+              </span>
+            </p>
+            <p className={Styles.createdBy}>
+              Created for:
+              <span className={Styles.createdByName}>
+                {props.for_name} (<span>{props.for_email}</span>)
+              </span>
+            </p>
+            <p className={Styles.createdBy}>
+              Platforms :
+              <span className={Styles.createdByName}>{props.platform}</span>
+            </p>
+            <p className={Styles.createdBy}>
+              Status:
+              <span className={Styles.stsCont}>
+                {linkSts ? (
+                  <span>
+                    {" "}
+                    <span className={Styles.active}>Active </span>
+                    since
+                    {/* <span className={Styles.createdDate}>{dateObj.date}</span> */}
+                    <span className={Styles.createdTime}>{dateObj.time}</span>
+                  </span>
+                ) : (
+                  <span>
+                    <span className={Styles.deleted}>Deleted</span>
+                    since{" "}
+                    <span className={Styles.createdDate}>
+                      {/* {delDateObj.date} */}
+                    </span>
+                    <span className={Styles.createdTime}>
+                      {/* {delDateObj.time} */}
+                    </span>
+                  </span>
+                )}
+              </span>
+            </p>
+            <p className={Styles.createdBy}>
+              Duration: <span className={Styles.hits}> 35 Days</span>
+            </p>
+            <p className={Styles.createdBy}>
+              Details:{" "}
+              <span className={Styles.desc}>
+                lorem ipsum dollar lorem ipsum dollar lorem ipsum dollar lorem
+                ipsum dollar lorem ipsum dollar lorem ipsum dollar
+              </span>
+            </p>
+            <p className={Styles.createdBy}>
+              Hits: <span className={Styles.hits}> 350</span>
+            </p>
+          </div>
+          <div
+            className={Styles.okayBtn}
+            onClick={() => props.closeInkDetailsTRigger()}
+          >
+            Close
+          </div>
+        </div>
+      </div>
+    </>
   );
 };

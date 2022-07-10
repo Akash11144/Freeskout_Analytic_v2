@@ -27,6 +27,9 @@
   margin-bottom: 1%;
   background: linear-gradient(270deg, #fdffff, #c8e6f3);
 }
+.linkList {
+  position: relative;
+}
 .initialDiv {
   display: flex;
   justify-content: space-between;
@@ -263,10 +266,22 @@ focus {
   display: none;
 }
 
+.detHolder {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.132);
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 1% 0;
+  border-radius: 1rem;
+}
 .linkDeatilsCont {
+  width: 50%;
   background-color: #fdffff;
-  width: max-content;
-  padding: 2% 3%;
+  padding: 2%;
   border: 1px solid rgba(170, 221, 238, 0.8333333333333333);
   border-radius: 1rem;
   box-shadow: 0 5px 20px 2px rgb(170 221 238 / 13%);
@@ -278,7 +293,7 @@ focus {
   margin-bottom: 5%;
   letter-spacing: 0.5px;
   background-color: #0a3556dd;
-  padding: 2% 3%;
+  padding: 2%;
   border-radius: 10px;
   transition: all 0.3s;
   text-decoration: none;
@@ -288,6 +303,58 @@ focus {
   color: #1adb45;
 }
 
+.createdBy {
+  margin: 2% auto;
+  font-style: normal;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  word-break: break-all;
+  padding-bottom: 1%;
+  border-bottom: 1px solid rgba(170, 170, 170, 0.192);
+  color: rgba(0, 0, 0, 0.91);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  font-style: normal;
+}
+.createdByName,
+.createdDateCont,
+.stsCont,
+.hits,
+.desc {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  margin-right: 1%;
+  font-style: normal;
+  width: fit-content;
+}
+.desc {
+  width: 80%;
+  word-wrap: break-word;
+  text-align: right;
+}
+.createdAt {
+}
+.createdDay {
+}
+.hits {
+  background-color: #0a3556dd;
+  color: #fdffff;
+  font-weight: 900;
+  padding: 1% 2%;
+  border-radius: 10px;
+}
+.active {
+  color: rgb(100, 166, 168);
+  font-weight: 900;
+}
+.deleted {
+  color: #de1a1a;
+  font-weight: 900;
+}
 .okayBtn {
   background: transparent;
   color: #1adb80;
