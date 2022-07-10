@@ -4,7 +4,7 @@ import { AiFillCaretDown } from "react-icons/ai";
 import { FaRegEye } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FaFilter } from "react-icons/fa";
-import { dateTimegen, fetchAuth, L_LINK } from "../../utlis";
+import { dateTimegen, durationGenerator, fetchAuth, L_LINK } from "../../utlis";
 import InformationPopUp from "../../extras//pop-ups/information";
 import SmallLoading from "../../extras/loading-animation/small-loading";
 
@@ -374,10 +374,19 @@ const LinkLayout = (props) => {
 };
 const DetailLayout = (props) => {
   let dateObj = dateTimegen(props.time);
+  let durationChecker = durationGenerator(
+    new Date(dateObj.durationDate),
+    new Date()
+  );
   let delDateObj;
+  let delDurationChecker;
   let linkSts = props.deleted;
   if (linkSts) {
     delDateObj = dateTimegen(props.deleted_time);
+    delDurationChecker = durationGenerator(
+      new Date(delDateObj.durationDate),
+      new Date()
+    );
   }
   return (
     <>
@@ -386,67 +395,60 @@ const DetailLayout = (props) => {
         <div className={Styles.linkDeatilsCont}>
           <p className={Styles.link}>www.freeskout.com/redirect{props.path}</p>
           <div className={Styles.moreDetails}>
-            <p className={Styles.createdBy}>
-              Created by:
-              <span className={Styles.createdByName}>
+            <div className={Styles.createdBy}>
+              <p>Created by:</p>
+              <p>
                 {props.name} (<span>{props.email}</span>)
-              </span>
-            </p>
-            <p className={Styles.createdBy}>
-              Created at:
-              <span className={Styles.createdDateCont}>
+              </p>
+            </div>
+            <div className={Styles.createdBy}>
+              <p> Created at:</p>
+              <p className={Styles.createdDateCont}>
                 <span className={Styles.createdDate}>{dateObj.date} </span>
-                {console.log(dateObj)}
                 at <span className={Styles.createdTime}>{dateObj.time}</span>
-              </span>
-            </p>
-            <p className={Styles.createdBy}>
-              Created for:
-              <span className={Styles.createdByName}>
+              </p>
+            </div>
+            <div className={Styles.createdBy}>
+              <p>Created for:</p>
+              <p>
                 {props.for_name} (<span>{props.for_email}</span>)
-              </span>
-            </p>
-            <p className={Styles.createdBy}>
-              Platforms :
-              <span className={Styles.createdByName}>{props.platform}</span>
-            </p>
-            <p className={Styles.createdBy}>
-              Status:
-              <span className={Styles.stsCont}>
+              </p>
+            </div>
+            <div className={Styles.createdBy}>
+              <p>Platforms :</p>
+              <p>{props.platform}</p>
+            </div>
+            <div className={Styles.createdBy}>
+              <p> Status:</p>
+              <p>
                 {!linkSts ? (
-                  <span>
-                    <span className={Styles.active}>Active </span>
-                    since
-                    <span className={Styles.createdDate}> {dateObj.date}</span>
-                    <span className={Styles.createdTime}> {dateObj.time}</span>
-                  </span>
+                  <span className={Styles.active}>Active</span>
                 ) : (
                   <span>
-                    <span className={Styles.deleted}>Deleted </span>
-                    since{" "}
-                    <span className={Styles.createdDate}>
-                      {delDateObj.date}
-                    </span>
-                    <span className={Styles.createdTime}>
-                      {delDateObj.time}
+                    <span className={Styles.deleted}>Deleted</span>
+                    <span>
+                      ({delDateObj.date} {delDateObj.time})
                     </span>
                   </span>
                 )}
-              </span>
-            </p>
-            <p className={Styles.createdBy}>
-              Duration: <span className={Styles.hits}> 35 Days</span>
-            </p>
-            <p className={Styles.createdBy}>
-              Details:{" "}
-              <span className={Styles.desc}>
+              </p>
+            </div>
+            <div className={Styles.createdBy}>
+              <p>Duration:</p>
+              <p className={Styles.hits}>
+                {!linkSts ? durationChecker : delDurationChecker}
+              </p>
+            </div>
+            <div className={Styles.createdBy}>
+              <p> Description:</p>
+              <p className={Styles.desc}>
                 lorem ipsum dollar lorem ipsum dollar lorem ipsum dollar lorem
                 ipsum dollar lorem ipsum dollar lorem ipsum dollar
-              </span>
-            </p>
-            <p className={Styles.createdBy}>
-              Hits: <span className={Styles.hits}> 350</span>
-            </p>
+              </p>
+            </div>
+            <div className={Styles.createdBy}>
+              <p>Hits</p> <p className={Styles.hits}> 350</p>
+            </div>
           </div>
           <div
             className={Styles.okayBtn}
