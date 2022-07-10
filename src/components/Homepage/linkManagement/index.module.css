@@ -360,6 +360,7 @@ focus {
   border-radius: 10px;
   text-align: center;
   width: max-content;
+  margin-right: 3px;
 }
 .okayBtn {
   background: transparent;
