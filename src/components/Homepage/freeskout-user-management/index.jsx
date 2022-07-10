@@ -222,6 +222,9 @@ const User = ({
   DetailTrigger,
   DeleteTrigger,
 }) => {
+  const [pageError, setpageError] = useState(false);
+  const [pageLoading, setpageLoading] = useState(false);
+
   let detailObj = {
     name,
     email,
@@ -230,6 +233,7 @@ const User = ({
   };
 
   const handleUserDelete = async () => {
+    setpageLoading(true);
     try {
       let dt = new Date();
       let r = await fetch(`${L_LINK}/validate/userDelete`, {
@@ -240,24 +244,41 @@ const User = ({
         body: JSON.stringify({
           email,
           deleted_time: dt.toDateString() + " " + dt.toTimeString(),
+          deleted_by: "Freeskout",
         }),
       });
       let r1 = await r.json();
       console.log(r1);
       if (r1.issue) {
-        console.log(r1.issueDetail);
-        if (r1.issueDetail === "cannot delete ADMIN")
-          alert("HAHAHA YOU CAN't DELETE ME");
+        if (r.storageClear) {
+          r1.storageClear && localStorage.removeItem("Freeskout-session");
+          errorObj.desc = r1.issueDetail;
+          errorObj.navigationRoute = "/";
+          setpageError(true);
+        } else {
+          console.log(r1.issueDetail);
+          if (r1.issueDetail === "cannot delete ADMIN")
+            alert("HAHAHA YOU CAN't DELETE ME");
+          else {
+            console.log("inside else");
+            errorObj.desc = r1.issueDetail;
+            errorObj.navigation = false;
+            setpageError(true);
+          }
+        }
       } else {
         DeleteTrigger(email);
       }
     } catch (error) {
       console.log("error while deleting route in catch", error);
     }
+    setpageLoading(false);
   };
 
   return (
     <>
+      {pageLoading && <SmallLoading />}
+      {pageError && <InformationPopUp {...errorObj} />}
       <div className={Styles.secondCont}>
         <div className={Styles.userDiv}>
           <div className={Styles.activeUserName}>
