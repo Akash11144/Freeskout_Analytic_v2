@@ -384,8 +384,8 @@ const DetailLayout = (props) => {
   if (linkSts) {
     delDateObj = dateTimegen(props.deleted_time);
     delDurationChecker = durationGenerator(
-      new Date(delDateObj.durationDate),
-      new Date()
+      new Date(dateObj.durationDate),
+      new Date(delDateObj.durationDate)
     );
   }
   return (
