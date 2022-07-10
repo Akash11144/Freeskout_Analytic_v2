@@ -1,10 +1,9 @@
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import Styles from "./index.module.css";
 import { ipFetch, postR, L_LINK } from "../../utlis";
 import pt from "platform";
 
-const userData = async (location_pathname) => {
+const userData = async (route) => {
   let dr = new Date();
   let ud = {
     browser_name: pt.name,
@@ -17,7 +16,7 @@ const userData = async (location_pathname) => {
     os_name: pt.os.family,
     os_version: pt.os.version,
     time: dr.toDateString() + " " + dr.toTimeString(),
-    route: location_pathname,
+    route,
   };
 
   let r = await postR(L_LINK, "/user/setUser", ud);
@@ -26,14 +25,12 @@ const userData = async (location_pathname) => {
 
 // --------------------------------------------------------------------
 
-function Redir({ website }) {
-  let uloc = useLocation();
-
+function Redir({ path, website }) {
   let i = false;
   useEffect(() => {
     if (!i) {
       const dataSetter = async () => {
-        await userData(uloc.pathname);
+        await userData(path);
         // window.open(website, "_self");
       };
       dataSetter();
