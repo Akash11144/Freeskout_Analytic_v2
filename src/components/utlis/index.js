@@ -240,8 +240,6 @@ export const dateTimegen = (inputString) => {
   } else {
     dateObj.time = (timeset[0] - 12) + ':' + timeset[1] + ' PM'
   }
-  // console.log
-  // console.log(dateInitialization);
   return dateObj
 }
 //-------------------------------------------------------------------------------
@@ -260,7 +258,7 @@ export const durationGenerator = (initial, final) => {
     let hours = Math.round(+("0." + d[1]) * 24);
     output = days + " Days" + " " + hours + " hrs";
   }
-  console.log(output);
+  return output;
 };
 
 //-------------------------------------------------------------------------------
