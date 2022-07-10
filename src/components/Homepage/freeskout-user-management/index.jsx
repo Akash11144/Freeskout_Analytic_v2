@@ -4,7 +4,7 @@ import { FaRegEye } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
 import { TbMinusVertical } from "react-icons/tb";
 import SmallLoading from "../../extras/loading-animation/small-loading";
-import { fetchAuth, L_LINK, postAuth } from "../../utlis";
+import { emailChecker, fetchAuth, L_LINK, postAuth } from "../../utlis";
 import InformationPopUp from "../../extras/pop-ups/information";
 
 let errorObj = {
@@ -34,15 +34,17 @@ export default FUM;
 
 const UserForm = ({ setnewUser }) => {
   const [pageError, setpageError] = useState(false);
+  const [pageLoading, setpageLoading] = useState(false);
+
   let name = useRef(null);
   let email = useRef(null);
   let pass = useRef(null);
   let confirmpass = useRef(null);
-  let email_regex = new RegExp("[a-z0-9]+@freeskout+.[a-z]{2,3}");
   let passPattern = /^([A-Za-z0-9\-\_\@\#\$\%\&\*\\]{4,12})*$/;
   let password_regex = new RegExp(passPattern);
 
   const handleClick = async () => {
+    setpageLoading(true);
     if (
       name.current.value === "" ||
       email.current.value === "" ||
@@ -50,9 +52,9 @@ const UserForm = ({ setnewUser }) => {
       confirmpass.current.value === ""
     ) {
       alert("Fill all field");
-    } else if (email_regex.test(email.current.value) == false) {
+    } else if (emailChecker(email.current.value) === false) {
       alert("invalid email");
-    } else if (password_regex.test(pass.current.value) == false) {
+    } else if (password_regex.test(pass.current.value) === false) {
       alert("invalid password Pattern");
     } else if (pass.current.value != confirmpass.current.value) {
       alert("password dont match");
@@ -67,27 +69,34 @@ const UserForm = ({ setnewUser }) => {
       email: email.current.value,
       password: pass.current.value,
       time: dt.toDateString() + " " + dt.toTimeString(),
+      deleted: false,
+      deleted_time: "",
     });
+    console.log(r);
     if (r.issue) {
       if (r.storageClear) {
         r.storageClear && localStorage.removeItem("Freeskout-session");
         errorObj.desc = r.issueDetail;
         errorObj.navigationRoute = "/";
+        setpageError(true);
       } else {
-        console.log("inside else");
         errorObj.desc = r.issueDetail;
         errorObj.navigation = false;
+        setpageError(true);
       }
       setpageError(true);
     } else {
       console.log("res: ", r);
       setnewUser(++i);
     }
+    setpageLoading(false);
   };
 
   return (
     <>
-      {pageError && <InformationPopUp />}
+      {pageLoading && <SmallLoading />}
+      {pageError && <InformationPopUp {...errorObj} />}
+      {console.log("page error", pageError)}
       <div className={Styles.createUserPart}>
         <p className={Styles.createNewUserHead}>Create User</p>
         <div className={Styles.formContainer}>
@@ -260,7 +269,6 @@ const User = ({
           if (r1.issueDetail === "cannot delete ADMIN")
             alert("HAHAHA YOU CAN't DELETE ME");
           else {
-            console.log("inside else");
             errorObj.desc = r1.issueDetail;
             errorObj.navigation = false;
             setpageError(true);

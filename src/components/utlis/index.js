@@ -121,6 +121,7 @@ export const emailChecker = (email) => {
   let atChecker = email.split("@");
   let dotChecker = email.split("..");
   let spaceChecker = email.split(" ");
+  console.log(atChecker, dotChecker, spaceChecker);
   let firstSecondSplit;
   if (
     atChecker.length === 2 &&
@@ -175,12 +176,28 @@ export const slugchecker = (slug) => {
       break;
     }
   }
-  return slugSts
-}
+  return slugSts;
+};
 
 //-------------------------------------------------------------------------------
 export const dateTimegen = (inputString) => {
   let dateObj = {
+<<<<<<< HEAD
+    setdate: "",
+    time: "",
+  };
+  let dateInitialization = inputString.split(" ");
+  let date =
+    dateInitialization[0] +
+    " " +
+    dateInitialization[1] +
+    " " +
+    dateInitialization[2] +
+    ", " +
+    dateInitialization[3];
+  dateObj.date = date;
+  let timeset = dateInitialization[4].split(":");
+=======
     date: '',
     time: '',
     durationDate: '',
@@ -232,35 +249,51 @@ export const dateTimegen = (inputString) => {
   dateObj.durationDate = durationDate
   dateObj.date = date
   let timeset = dateInitialization[4].split(':')
+>>>>>>> b7f47936aed1bb50c74ab62d502e816267a85c11
   if (timeset[0] < 12) {
-    dateObj.time = timeset[0] + ':' + timeset[1] + ' AM'
+    dateObj.time = timeset[0] + ":" + timeset[1] + " AM";
   } else if (timeset[0] === 12) {
-    dateObj.time = timeset[0] + ':' + timeset[1]
+    dateObj.time = timeset[0] + ":" + timeset[1];
   } else {
-    dateObj.time = (timeset[0] - 12) + ':' + timeset[1] + ' PM'
+    dateObj.time = timeset[0] - 12 + ":" + timeset[1] + " PM";
   }
+<<<<<<< HEAD
   // console.log
   // console.log(dateInitialization);
+=======
+<<<<<<< HEAD
+  return dateObj;
+};
+//-------------------------------------------------------------------------------------------------------------------------------
+=======
+  console.log(dateInitialization);
+>>>>>>> 9bf1551cf6ed4d00d9a8da550236d6ce39657a09
   return dateObj
 }
 //-------------------------------------------------------------------------------
+>>>>>>> b7f47936aed1bb50c74ab62d502e816267a85c11
 export const durationGenerator = (initial, final) => {
-  let a = initial
-  let b = final
+  let a = initial;
+  let b = final;
   let output;
-  let c = b - a
+  let c = b - a;
   if (c == 0) {
-    output = 'Just now'
+    output = "Just now";
   } else {
-    let duration = c / (1000 * 3600 * 24)
-    let e = duration.toString()
-    let d = e.split('.')
-    let days = d[0]
-    let hours = Math.round(+('0.' + d[1]) * 24)
-    output = days + ' Days' + ' ' + hours + ' hrs'
+    let duration = c / (1000 * 3600 * 24);
+    let e = duration.toString();
+    let d = e.split(".");
+    let days = d[0];
+    let hours = Math.round(+("0." + d[1]) * 24);
+    output = days + " Days" + " " + hours + " hrs";
   }
+<<<<<<< HEAD
+  console.log(output);
+};
+=======
   return (output)
 }
+>>>>>>> b7f47936aed1bb50c74ab62d502e816267a85c11
 
 //-------------------------------------------------------------------------------
 

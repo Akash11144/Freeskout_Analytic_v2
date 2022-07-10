@@ -33,13 +33,14 @@ function RedirectingRoutes() {
         },
       });
       let r1 = await r.json();
-      console.log("route data: ", r1);
       const newloc = loc.pathname.split("/redirect");
       if (newloc[1]) {
         for (let i = 0; i < r1.length; i++) {
-          // console.log(newloc[1], "--", r1[i].path);
           if (newloc[1] === r1[i].path) {
-            arr.push({ path: r1[i].path, element: <Redir {...r1[i]} /> });
+            arr.push({
+              path: r1[i].path,
+              element: <Redir website={r1[i].website} path={newloc[1]} />,
+            });
             break;
           }
         }
@@ -51,7 +52,6 @@ function RedirectingRoutes() {
         FetchIssueDetail: "error getting data",
       };
     }
-    console.log("route Array: ", arr);
     setData(arr);
     console.timeEnd();
   };
@@ -64,7 +64,6 @@ function RedirectingRoutes() {
   }, []);
 
   let element = useRoutes(Data);
-  console.log("Redirectional page Route Data: ", Data);
   return element;
 }
 
