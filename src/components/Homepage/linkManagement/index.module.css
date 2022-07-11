@@ -17,7 +17,6 @@
   border: 1px solid rgba(170, 221, 238, 0.8333333333333333);
   border-radius: 1rem;
   box-shadow: 0 5px 20px 2px rgb(170 221 238 / 13%);
-  /* background-color: #fdffff; */
   padding: 1% 2%;
   box-sizing: border-box;
   display: flex;
@@ -45,32 +44,36 @@
   margin: unset;
   padding: unset;
   color: rgba(0, 0, 0, 0.5);
-  font-weight: 700;
-  font-size: 11px;
+  font-weight: 800;
+  font-size: 13px;
+  color: #fdffff;
 }
 .selectedOption,
 .selectedUserOption,
 .selectDate,
 .showBtn {
-  border: 1px solid #1adb80;
+  border: 1px solid #0a3556;
   border-radius: 10px;
   width: max-content;
-  padding: 5px 10px;
+  padding: 7px 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
   position: relative;
+  background-color: #0a3556dd;
 }
 .showBtn {
+  border-color: #0a3556dd;
+  background-color: #fdffff;
   padding: 3px 25px;
-  transition: 0.3s;
+  transition: 0.5s;
+  border-width: 2px;
 }
 .showBtn:hover {
-  border-color: transparent;
-  background-color: #1adb80;
-  color: white;
-  transform: scale(1.2);
+  border-color: #0a3556dd;
+  background-color: #0a3556dd;
+  transform: scale(1.1);
 }
 
 .selectedUserOption {
@@ -82,9 +85,10 @@
 .selectDate > p {
   margin: unset;
   padding: unset;
-  color: rgba(0, 0, 0, 0.5);
+  /* color: rgba(0, 0, 0, 0.5); */
   font-weight: 700;
-  font-size: 11px;
+  font-size: 13px;
+  color: #fdffff;
 }
 .showBtn > p {
   margin: unset;
@@ -92,9 +96,12 @@
   color: rgba(0, 0, 0, 0.5);
   font-weight: 900;
   font-size: 13px;
+  color: #0a3556dd;
+  padding: 4px 2px;
+  transition: all 0.5s;
 }
 .showBtn:hover > p {
-  color: white;
+  color: #fdffff;
 }
 .selectedUserOption > p {
   max-width: 120px;
@@ -108,6 +115,7 @@
   display: grid;
   place-items: center;
   padding: 2px 0px 2px 5px;
+  color: #fdffff;
 }
 .otherOptionsContShow {
   border-radius: 10px;
@@ -121,12 +129,14 @@
   max-height: 60vh;
   overflow-y: scroll;
   z-index: 10;
+  background-color: #0a355657;
+  padding: 4% 0;
 }
 .otherOptionsContHide {
   display: none;
 }
 .downIcon {
-  color: rgba(0, 0, 0, 0.7);
+  color: #fdffff;
   padding: unset;
   margin: unset;
   transition: 0.3s;
@@ -139,8 +149,8 @@
 .otherOptions > p {
   padding: 0 2px;
   margin: 2% auto;
-  background-color: #1adb80;
-  color: #fdffff;
+  background-color: #fdffff;
+  color: #0a3556dd;
   font-size: 12px;
   font-weight: 600;
   padding: 3% 1% 3% 4%;
@@ -148,12 +158,12 @@
   width: 120px;
   border-radius: 10px;
   text-align: left;
-  border: 1px solid transparent;
+  border: 1px solid #0a3556dd;
 }
 .otherOptions:hover > p {
-  border: 1px solid #1adb80;
-  color: rgba(0, 0, 0, 0.4);
-  background-color: #fdffff;
+  border: 1px solid #0a3556dd;
+  color: #fdffff;
+  background-color: #0a3556dd;
 }
 input[type="date"] {
   outline: none;
@@ -165,12 +175,17 @@ input[type="date"] {
   user-select: none;
   padding-left: 5px;
   caret-color: #1adb80;
+  color: #fdffff !important;
 }
-
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
 input[type="date"],
 focus {
   color: rgba(0, 0, 0, 0.5);
+  color: #fdffff !important;
   box-shadow: none;
+  font-size: 13px;
 }
 .linksContainer {
   width: 98%;

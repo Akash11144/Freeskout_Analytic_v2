@@ -1,12 +1,6 @@
 .mainCont {
   width: 100%;
   background: linear-gradient(to right, #00031d, #000536);
-  /* color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-sizing: border-box;
-  padding-left: 2%; */
   user-select: none;
   height: 10vh;
   z-index: 2;
@@ -62,10 +56,19 @@
   color: #ffffff;
   font-weight: 700;
   font-size: 30px;
-  background: -webkit-linear-gradient(#8aaae5, #ffffff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   letter-spacing: 1px;
+  animation-name: pageName;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in-out;
+  animation-duration: 0.5s;
+}
+@keyframes pageName {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .LoggerHolder {
   width: 15%;
