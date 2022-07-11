@@ -1,11 +1,11 @@
 import { useRoutes } from "react-router";
 import Dash from "../../dashboard";
 import Redir from "../../redirection/redirection-page";
-import Trial from "../../try";
 import Home from "../../homepage";
 import RedirectingRoutes from "../../redirection/redirecting-routes";
-import PageNotFound from "../../redirection/page-not-found";
+import PageNotFound from '../../redirection/page-not-found';
 import Login from "../login";
+import Trial from "../../try";
 
 export default function MainRoutes() {
   let element = useRoutes([

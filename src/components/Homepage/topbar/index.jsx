@@ -34,7 +34,6 @@ const TopbarLayout = ({ admin, person }) => {
   let i = false;
   useEffect(() => {
     if (!i) {
-      console.log("hello", loc);
       if (loc.pathname === "/home")
         pageNameRef.current.innerText = "Create Link";
       if (loc.pathname === "/home/lm")
@@ -73,21 +72,18 @@ const TopbarLayout = ({ admin, person }) => {
           >
             <div className={Styles.hamCont}>
               <span
-                className={`${Styles.line} ${
-                  isActive ? Styles.lineTop : Styles.line
-                }`}
+                className={`${Styles.line} ${isActive ? Styles.lineTop : Styles.line
+                  }`}
                 id="topLine"
               ></span>
               <span
-                className={`${Styles.line}  ${
-                  isActive ? Styles.lineMiddle : Styles.line
-                }`}
+                className={`${Styles.line}  ${isActive ? Styles.lineMiddle : Styles.line
+                  }`}
                 id="bottomLine"
               ></span>
               <span
-                className={`${Styles.line} ${
-                  isActive ? Styles.lineBottom : Styles.line
-                }`}
+                className={`${Styles.line} ${isActive ? Styles.lineBottom : Styles.line
+                  }`}
                 id="endLine"
               ></span>
             </div>
@@ -104,9 +100,8 @@ const TopbarLayout = ({ admin, person }) => {
         </div>
       </div>
       <div
-        className={`${Styles.sideBarCont} ${
-          isActive ? Styles.sideBarShow : Styles.sideBarCont
-        }`}
+        className={`${Styles.sideBarCont} ${isActive ? Styles.sideBarShow : Styles.sideBarCont
+          }`}
         id="sideMenu"
       >
         <div className={Styles.sideBar}>

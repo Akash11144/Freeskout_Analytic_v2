@@ -27,6 +27,7 @@ const RouteCreationDesign = (props) => {
   const [sideloader, setsideloader] = useState(true);
   const [sideForm, setsideForm] = useState(false);
   const [sendBtn, setsendBtn] = useState(true);
+
   const name_inp = useRef(null);
   const mail_inp = useRef(null);
   const route_inp = useRef(null);
@@ -37,6 +38,12 @@ const RouteCreationDesign = (props) => {
   const utChecked = useRef(null);
   const twChecked = useRef(null);
   const othersChecked = useRef(null);
+
+  let errorObj = {
+    desc: "",
+    navigation: true,
+    navigationRoute: "",
+  };
 
   let i = false;
   useEffect(() => {
@@ -114,7 +121,7 @@ const RouteCreationDesign = (props) => {
 
   return (
     <>
-      {/* {pageError && <InformationPopUp {...errorObj} />} */}
+      {pageError && <InformationPopUp {...errorObj} />}
       <div className={Styles.mainCont}>
         {generateLoading && <SmallLoading />}
         <div className={Styles.secondaryDiv}>
@@ -326,11 +333,11 @@ const UserCreationSideForm = ({ a, searchV }) => {
   return (
     <>
       {pageLoading && <SmallLoading />}
+      {pageError && <SmallLoading {...errorObj} />}
       <div className={Styles.genDetailsCont}>
         <div
-          className={`${Styles.afterSend} ${
-            homeDiv ? Styles.afterSendShow : Styles.afterSend
-          }`}
+          className={`${Styles.afterSend} ${homeDiv ? Styles.afterSendShow : Styles.afterSend
+            }`}
         >
           <div className={Styles.notiCont}>
             <a href="" ref={finalCopiedLink} target="_blank"></a>
