@@ -19,12 +19,10 @@ const InformationPopUp = (props) => {
           <p className={Styles.popUpPara}>{props.desc}</p>
           <div
             className={Styles.popUpBtn}
-            onClick={() => {
-              props.userDelete("akash")
+            onClick={() =>
               props.navigation
                 ? navi1(props.navigationRoute)
                 : (popupref.current.style.display = "none")
-            }
             }
           >
             OK
