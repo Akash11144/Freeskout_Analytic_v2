@@ -20,8 +20,8 @@ const InformationPopUp = (props) => {
           <div
             className={Styles.popUpBtn}
             onClick={() => {
-              if (props.keyp === "userform")
-                props.calledFromUserForm();
+              if (props.keyp === "fummain")
+                props.pucb();
               if (props.keyp === "activeuser")
                 props.calledFromActiveUser();
               if (props.keyp === "user")

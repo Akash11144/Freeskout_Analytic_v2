@@ -17,11 +17,14 @@ let i = 1;
 
 const FUM = () => {
   const [newUser, setnewUser] = useState(i);
+  const [pageError, setpageError] = useState(false);
+
   return (
     <>
+      {pageError && <InformationPopUp keyp={"fummain"} pucb={() => setpageError(false)} {...errorObj} />}
       <div className={Styles.mainCont}>
         <div className={Styles.secondaryDiv}>
-          <UserForm setnewUser={setnewUser} />
+          <UserForm abc={() => setpageError(true)} setnewUser={setnewUser} />
           <ActiveUser newUser={newUser} />
         </div>
       </div>
@@ -32,8 +35,7 @@ export default FUM;
 
 // --------------------------------------------------------------------------------------------------
 
-const UserForm = ({ setnewUser }) => {
-  const [userFormpageError, setuserFormpageError] = useState(false);
+const UserForm = ({ setnewUser, abc }) => {
   const [pageLoading, setpageLoading] = useState(false);
 
   let name = useRef(null);
@@ -78,23 +80,26 @@ const UserForm = ({ setnewUser }) => {
         r.storageClear && localStorage.removeItem("Freeskout-session");
         errorObj.desc = r.issueDetail;
         errorObj.navigationRoute = "/";
-        setuserFormpageError(true);
+        // setuserFormpageError(true);
+        setpageLoading(false);
+        abc();
       } else {
         errorObj.desc = r.issueDetail;
         errorObj.navigation = false;
-        setuserFormpageError(true);
+        // setuserFormpageError(true);
+        setpageLoading(false);
+        abc();
       }
     } else {
       console.log("res: ", r);
+      setpageLoading(false);
       setnewUser(++i);
     }
-    setpageLoading(false);
   };
 
   return (
     <>
       {pageLoading && <SmallLoading />}
-      {userFormpageError && <InformationPopUp keyp={"userform"} calledFromUserForm={() => setuserFormpageError(false)} {...errorObj} />}
       <div className={Styles.createUserPart}>
         <p className={Styles.createNewUserHead}>Create User</p>
         <div className={Styles.formContainer}>
