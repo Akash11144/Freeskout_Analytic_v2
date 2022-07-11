@@ -33,7 +33,7 @@ export default FUM;
 // --------------------------------------------------------------------------------------------------
 
 const UserForm = ({ setnewUser }) => {
-  const [pageError, setpageError] = useState(false);
+  const [userFormpageError, setuserFormpageError] = useState(false);
   const [pageLoading, setpageLoading] = useState(false);
 
   let name = useRef(null);
@@ -78,13 +78,12 @@ const UserForm = ({ setnewUser }) => {
         r.storageClear && localStorage.removeItem("Freeskout-session");
         errorObj.desc = r.issueDetail;
         errorObj.navigationRoute = "/";
-        setpageError(true);
+        setuserFormpageError(true);
       } else {
         errorObj.desc = r.issueDetail;
         errorObj.navigation = false;
-        setpageError(true);
+        setuserFormpageError(true);
       }
-      setpageError(true);
     } else {
       console.log("res: ", r);
       setnewUser(++i);
@@ -95,8 +94,8 @@ const UserForm = ({ setnewUser }) => {
   return (
     <>
       {pageLoading && <SmallLoading />}
-      {pageError && <InformationPopUp {...errorObj} />}
-      {console.log("page error", pageError)}
+      {userFormpageError && <InformationPopUp {...errorObj} />}
+      {console.log("user form page error", userFormpageError)}
       <div className={Styles.createUserPart}>
         <p className={Styles.createNewUserHead}>Create User</p>
         <div className={Styles.formContainer}>
@@ -190,7 +189,7 @@ const ActiveUser = ({ newUser }) => {
   };
   return (
     <>
-      {pageError && <InformationPopUp {...errorObj} />}
+      {pageError && <InformationPopUp user={() => console.log("user clicked")} {...errorObj} />}
       <div className={Styles.presentUsersDiv}>
         {console.log("rendering: ", userDel, Data)}
         <div className={Styles.presntUsersHeadCont}>
