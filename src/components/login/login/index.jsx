@@ -39,7 +39,7 @@ const Login = () => {
     if (username.current.value === "" || password.current.value === "") {
       errorObj.desc = "Please fill all fields";
       setLoading(false);
-      setpopUp(true);
+      setpopUp(!popUp);
     } else {
       let r = await postR(L_LINK, "/validate/login", {
         email: username.current.value,
@@ -66,6 +66,8 @@ const Login = () => {
 
   return (
     <div id="main" className={Styles.main_container}>
+      {popUp && <InformationPopUp {...errorObj} />}
+      {Loading && <SmallLoading />}
       <div className={Styles.stars}></div>
       <div className={Styles.stars2}></div>
       <div className={Styles.stars3}></div>
@@ -113,8 +115,6 @@ const Login = () => {
           </span>
         </p>
       </div>
-      {popUp && <InformationPopUp {...errorObj} b={(val) => setpopUp(val)} />}
-      {Loading && <SmallLoading />}
     </div>
   );
 };
