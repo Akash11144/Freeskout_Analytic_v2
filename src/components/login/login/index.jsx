@@ -42,7 +42,7 @@ const Login = () => {
       setpopUp(true);
     } else {
       let r = await postR(L_LINK, "/validate/login", {
-        name: username.current.value,
+        email: username.current.value,
         password: password.current.value,
       });
       console.log("output from login page post", r);
