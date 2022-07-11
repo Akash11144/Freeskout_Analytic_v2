@@ -164,7 +164,6 @@ const ActiveUser = ({ newUser }) => {
         errorObj.desc = r.issueDetail;
         errorObj.navigationRoute = "/";
       } else {
-        console.log("inside else");
         errorObj.desc = r.issueDetail;
         errorObj.navigation = false;
       }
@@ -189,7 +188,7 @@ const ActiveUser = ({ newUser }) => {
   };
   return (
     <>
-      {pageError && <InformationPopUp user={() => console.log("user clicked")} {...errorObj} />}
+      {pageError && <InformationPopUp  {...errorObj} />}
       <div className={Styles.presentUsersDiv}>
         {console.log("rendering: ", userDel, Data)}
         <div className={Styles.presntUsersHeadCont}>
