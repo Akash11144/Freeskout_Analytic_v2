@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import Styles from "../linkManagement/index.module.css";
 import { AiFillCaretDown } from "react-icons/ai";
-import { FaRegEye } from "react-icons/fa";
-import { AiOutlineDelete } from "react-icons/ai";
+import { BsFillEyeFill } from "react-icons/bs";
+import { AiTwotoneDelete } from "react-icons/ai";
 import { FaFilter } from "react-icons/fa";
 import { dateTimegen, durationGenerator, fetchAuth, L_LINK } from "../../utlis";
 import InformationPopUp from "../../extras//pop-ups/information";
@@ -24,6 +24,8 @@ const LinkManement = (props) => {
   const [Loading, setLoading] = useState(false);
   const [viewDetails, setviewDetails] = useState(false);
   const [linkData, setlinkData] = useState();
+  const [showActiveLink, setshowActiveLink] = useState(true);
+  const [showDeletedlinks, setshowDeletedlinks] = useState(true);
 
   const selected_status = useRef(null);
   const all_links = useRef(null);
@@ -60,13 +62,12 @@ const LinkManement = (props) => {
     }
   };
 
-
   let i = false;
   useEffect(() => {
     setLoading(true);
     if (!i) DataFetch();
     setLoading(false);
-    return () => i = true;
+    return () => (i = true);
   }, []);
 
   const handleStatusSelector = () => {
@@ -84,14 +85,20 @@ const LinkManement = (props) => {
   const allClick = () => {
     let allLiIt = all_links.current.innerText;
     selected_status.current.innerText = allLiIt;
+    setshowActiveLink(true);
+    setshowDeletedlinks(true);
   };
   const activeClick = () => {
     let alIt = active_links.current.innerText;
     selected_status.current.innerText = alIt;
+    setshowDeletedlinks(false);
+    setshowActiveLink(true);
   };
   const deletedClick = () => {
     let dlIt = deleted_links.current.innerText;
     selected_status.current.innerText = dlIt;
+    setshowActiveLink(false);
+    setshowDeletedlinks(true);
   };
   const selected_user = useRef();
   const handelSelctUser = (item) => {
@@ -144,12 +151,11 @@ const LinkManement = (props) => {
         }),
       });
       let r1 = await r.json();
-      console.log("response in deleting route: ", r1)
+      console.log("response in deleting route: ", r1);
       if (r1.issue) {
-        console.log("error in deleting route: ", r1.issue)
-      }
-      else {
-        DataFetch()
+        console.log("error in deleting route: ", r1.issue);
+      } else {
+        DataFetch();
       }
       console.log(r1);
     } catch (error) {
@@ -174,8 +180,9 @@ const LinkManement = (props) => {
               <FaFilter></FaFilter>
             </div>
             <div
-              className={`${Styles.selectors} ${isSelectorsActive ? Styles.selectorsShow : Styles.selectors
-                }`}
+              className={`${Styles.selectors} ${
+                isSelectorsActive ? Styles.selectorsShow : Styles.selectors
+              }`}
             >
               <div className={Styles.selectedOption}>
                 <div className={Styles.initialDiv}>
@@ -194,10 +201,11 @@ const LinkManement = (props) => {
                 </div>
                 <div
                   className={`${Styles.otherOptionsContShow}
-            ${isActive
-                      ? Styles.otherOptionsContShow
-                      : Styles.otherOptionsContHide
-                    }`}
+            ${
+              isActive
+                ? Styles.otherOptionsContShow
+                : Styles.otherOptionsContHide
+            }`}
                 >
                   <div
                     className={Styles.otherOptions}
@@ -245,10 +253,11 @@ const LinkManement = (props) => {
                 </div>
                 <div
                   className={`${Styles.otherOptionsContShow}
-            ${isUserActive
-                      ? Styles.otherOptionsContShow
-                      : Styles.otherOptionsContHide
-                    }`}
+            ${
+              isUserActive
+                ? Styles.otherOptionsContShow
+                : Styles.otherOptionsContHide
+            }`}
                 >
                   <div
                     className={Styles.otherOptions}
@@ -302,20 +311,51 @@ const LinkManement = (props) => {
             </div>
           </div>
           <div className={Styles.linkList}>
-            <div className={Styles.linksContainer}>
-              {routeData.length &&
-                routeData.map((item, index) => (
-                  <LinkLayout
-                    index={index}
-                    {...item}
-                    linkCallBack={(val) => handleDelete(val)}
-                    viewLInkDetailsTRigger={(mylinkData) => {
-                      handleview();
-                      setlinkData(mylinkData);
-                    }}
-                  />
-                ))}
-            </div>
+            {showActiveLink && (
+              <div className={Styles.linksContainer}>
+                {routeData.length &&
+                  routeData.map((item, index) => {
+                    {
+                      return (
+                        !item.deleted && (
+                          <LinkLayout
+                            index={index}
+                            {...item}
+                            linkCallBack={(val) => handleDelete(val)}
+                            viewLInkDetailsTRigger={(mylinkData) => {
+                              handleview();
+                              setlinkData(mylinkData);
+                            }}
+                          />
+                        )
+                      );
+                    }
+                  })}
+              </div>
+            )}
+            {showDeletedlinks && (
+              <div className={Styles.linksContainerA}>
+                {routeData.length &&
+                  routeData.map((item, index) => {
+                    {
+                      return (
+                        item.deleted && (
+                          <LinkLayout
+                            index={index}
+                            {...item}
+                            linkCallBack={(val) => handleDelete(val)}
+                            viewLInkDetailsTRigger={(mylinkData) => {
+                              handleview();
+                              setlinkData(mylinkData);
+                            }}
+                          />
+                        )
+                      );
+                    }
+                  })}
+              </div>
+            )}
+
             {viewDetails && (
               <DetailLayout
                 closeInkDetailsTRigger={() => handleCloseDetails()}
@@ -335,6 +375,8 @@ export default LinkManement;
 
 const LinkLayout = (props) => {
   const {
+    deleted,
+    deleted_time,
     name,
     email,
     for_name,
@@ -346,32 +388,65 @@ const LinkLayout = (props) => {
     index,
     linkCallBack,
   } = props;
+  const [status, setstatus] = useState();
+  useEffect(() => {
+    setstatus(props.deleted);
+  }, [props]);
+
   return (
-    <div key={path + index} className={Styles.cont}>
-      <p>www.freeskout.com/redirect{path}</p>
-      <div className={Styles.userActionBtnsCont}>
-        <div
-          className={Styles.viewIconCont}
-          onClick={() => {
-            props.viewLInkDetailsTRigger(props);
-          }}
-        >
-          <FaRegEye className={Styles.viewIcon} />
-          <p className={`${Styles.HoverNotification} ${Styles.viewHover}`}>
-            View
-          </p>
+    <>
+      {console.log(status)}
+      {status ? (
+        <div key={path + index} className={Styles.cont}>
+          <div className={Styles.linkCont}>
+            <p>www.freeskout.com/redirect{path}</p>
+            <p className={Styles.linkHitsitsCont}>350</p>
+          </div>
+          <div className={Styles.userActionBtnsCont}>
+            <div
+              className={Styles.viewIconCont}
+              onClick={() => {
+                props.viewLInkDetailsTRigger(props);
+              }}
+            >
+              <BsFillEyeFill className={Styles.viewIcon} />
+              <p className={`${Styles.HoverNotification} ${Styles.viewHover}`}>
+                View
+              </p>
+            </div>
+          </div>
         </div>
-        <div className={`${Styles.delIconCont}`}>
-          <AiOutlineDelete
-            onClick={() => linkCallBack(path)}
-            className={Styles.delIcon}
-          />
-          <p className={`${Styles.HoverNotification} ${Styles.delHover}`}>
-            Delete
-          </p>
+      ) : (
+        <div key={path + index} className={Styles.delCont}>
+          <div className={Styles.linkCont}>
+            <p>www.freeskout.com/redirect{path}</p>
+            <p className={Styles.linkHitsitsCont}>350</p>
+          </div>
+          <div className={Styles.userActionBtnsCont}>
+            <div
+              className={Styles.viewIconCont}
+              onClick={() => {
+                props.viewLInkDetailsTRigger(props);
+              }}
+            >
+              <BsFillEyeFill className={Styles.viewIcon} />
+              <p className={`${Styles.HoverNotification} ${Styles.viewHover}`}>
+                View
+              </p>
+            </div>
+            <div className={`${Styles.delIconCont}`}>
+              <AiTwotoneDelete
+                onClick={() => linkCallBack(path)}
+                className={Styles.delIcon}
+              />
+              <p className={`${Styles.HoverNotification} ${Styles.delHover}`}>
+                Delete
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 const DetailLayout = (props) => {
