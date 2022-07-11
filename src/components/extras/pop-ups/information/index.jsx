@@ -19,10 +19,17 @@ const InformationPopUp = (props) => {
           <p className={Styles.popUpPara}>{props.desc}</p>
           <div
             className={Styles.popUpBtn}
-            onClick={() =>
+            onClick={() => {
+              if (props.keyp === "userform")
+                props.calledFromUserForm();
+              if (props.keyp === "activeuser")
+                props.calledFromActiveUser();
+              if (props.keyp === "user")
+                props.calledFromUser();
               props.navigation
                 ? navi1(props.navigationRoute)
                 : (popupref.current.style.display = "none")
+            }
             }
           >
             OK
