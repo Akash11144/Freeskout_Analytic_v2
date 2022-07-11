@@ -31,44 +31,42 @@ const LinkManement = (props) => {
   const deleted_links = useRef(null);
   const linkContRef = useRef(null);
 
-  let i = false;
-  useEffect(() => {
-    setLoading(true);
-    if (!i) {
-      const DataFetch = async () => {
-        let r = await fetchAuth(`${L_LINK}/route/allRoutes`);
-        let r1 = "";
-        console.log("link management route data", r);
-        if (r.issue) {
+  const DataFetch = async () => {
+    let r = await fetchAuth(`${L_LINK}/route/allRoutes`);
+    let r1 = "";
+    console.log("link management route data", r);
+    if (r.issue) {
+      r.storageClear && localStorage.removeItem("Freeskout-session");
+      errorObj.desc = r.issueDetail;
+      errorObj.navigationRoute = "/";
+      setpageError(true);
+    } else {
+      r1 = await fetchAuth(`${L_LINK}/validate/allFUser`);
+      console.log("link management user data", r1);
+      if (r1.issue) {
+        if (r.storageClear) {
           r.storageClear && localStorage.removeItem("Freeskout-session");
           errorObj.desc = r.issueDetail;
           errorObj.navigationRoute = "/";
-          setpageError(true);
         } else {
-          r1 = await fetchAuth(`${L_LINK}/validate/allFUser`);
-          console.log("link management user data", r1);
-          if (r1.issue) {
-            if (r.storageClear) {
-              r.storageClear && localStorage.removeItem("Freeskout-session");
-              errorObj.desc = r.issueDetail;
-              errorObj.navigationRoute = "/";
-            } else {
-              console.log("inside else");
-              errorObj.desc = r.issueDetail;
-              errorObj.navigation = false;
-            }
-          } else {
-            setrouteData(r);
-            setuserData(r1);
-          }
+          console.log("inside else");
+          errorObj.desc = r.issueDetail;
+          errorObj.navigation = false;
         }
-      };
-      DataFetch();
+      } else {
+        setrouteData(r);
+        setuserData(r1);
+      }
     }
+  };
+
+
+  let i = false;
+  useEffect(() => {
+    setLoading(true);
+    if (!i) DataFetch();
     setLoading(false);
-    return () => {
-      i = true;
-    };
+    return () => i = true;
   }, []);
 
   const handleStatusSelector = () => {
@@ -146,6 +144,13 @@ const LinkManement = (props) => {
         }),
       });
       let r1 = await r.json();
+      console.log("response in deleting route: ", r1)
+      if (r1.issue) {
+        console.log("error in deleting route: ", r1.issue)
+      }
+      else {
+        DataFetch()
+      }
       console.log(r1);
     } catch (error) {
       console.log("error while deleting route in catch", error);
@@ -169,9 +174,8 @@ const LinkManement = (props) => {
               <FaFilter></FaFilter>
             </div>
             <div
-              className={`${Styles.selectors} ${
-                isSelectorsActive ? Styles.selectorsShow : Styles.selectors
-              }`}
+              className={`${Styles.selectors} ${isSelectorsActive ? Styles.selectorsShow : Styles.selectors
+                }`}
             >
               <div className={Styles.selectedOption}>
                 <div className={Styles.initialDiv}>
@@ -190,11 +194,10 @@ const LinkManement = (props) => {
                 </div>
                 <div
                   className={`${Styles.otherOptionsContShow}
-            ${
-              isActive
-                ? Styles.otherOptionsContShow
-                : Styles.otherOptionsContHide
-            }`}
+            ${isActive
+                      ? Styles.otherOptionsContShow
+                      : Styles.otherOptionsContHide
+                    }`}
                 >
                   <div
                     className={Styles.otherOptions}
@@ -242,11 +245,10 @@ const LinkManement = (props) => {
                 </div>
                 <div
                   className={`${Styles.otherOptionsContShow}
-            ${
-              isUserActive
-                ? Styles.otherOptionsContShow
-                : Styles.otherOptionsContHide
-            }`}
+            ${isUserActive
+                      ? Styles.otherOptionsContShow
+                      : Styles.otherOptionsContHide
+                    }`}
                 >
                   <div
                     className={Styles.otherOptions}
