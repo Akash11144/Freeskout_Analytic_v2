@@ -60,6 +60,12 @@ body {
   padding: 1% 0;
   box-sizing: border-box;
   background: linear-gradient(to left, #d0dae0, #e2ebf0);
+  position: relative;
+  overflow: hidden;
+}
+.myerror {
+  filter: blur(4px);
+  background: linear-gradient(to right, red, blue);
 }
 
 .presentUsersDiv {

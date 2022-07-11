@@ -188,8 +188,8 @@ const ActiveUser = ({ newUser }) => {
   };
   return (
     <>
-      {pageError && <InformationPopUp  {...errorObj} />}
       <div className={Styles.presentUsersDiv}>
+        {pageError && <InformationPopUp {...errorObj} />}
         {console.log("rendering: ", userDel, Data)}
         <div className={Styles.presntUsersHeadCont}>
           <p>Active Users</p>
@@ -266,8 +266,7 @@ const User = ({
           if (r1.issueDetail === "cannot delete ADMIN") {
             errorObj.desc = "HAHAHA I AM ADMIN :x";
             errorObj.navigation = false;
-          }
-          else {
+          } else {
             errorObj.desc = r1.issueDetail;
             errorObj.navigation = false;
           }
