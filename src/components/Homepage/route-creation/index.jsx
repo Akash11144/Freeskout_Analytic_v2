@@ -27,6 +27,7 @@ const RouteCreationDesign = (props) => {
   const [sideloader, setsideloader] = useState(true);
   const [sideForm, setsideForm] = useState(false);
   const [sendBtn, setsendBtn] = useState(true);
+  const [pageError, setpageError] = useState(false);
 
   const name_inp = useRef(null);
   const mail_inp = useRef(null);
