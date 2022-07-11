@@ -43,7 +43,7 @@ const UserForm = ({ setnewUser }) => {
   let passPattern = /^([A-Za-z0-9\-\_\@\#\$\%\&\*\\]{4,12})*$/;
   let password_regex = new RegExp(passPattern);
 
-  const handleClick = async () => {
+  const handleCreateUser = async () => {
     setpageLoading(true);
     if (
       name.current.value === "" ||
@@ -128,7 +128,7 @@ const UserForm = ({ setnewUser }) => {
         <div
           className={Styles.createUserBtn}
           onClick={() => {
-            handleClick();
+            handleCreateUser();
           }}
         >
           Create User
@@ -262,17 +262,18 @@ const User = ({
           r1.storageClear && localStorage.removeItem("Freeskout-session");
           errorObj.desc = r1.issueDetail;
           errorObj.navigationRoute = "/";
-          setpageError(true);
         } else {
           console.log(r1.issueDetail);
-          if (r1.issueDetail === "cannot delete ADMIN")
-            alert("HAHAHA YOU CAN't DELETE ME");
+          if (r1.issueDetail === "cannot delete ADMIN") {
+            errorObj.desc = "HAHAHA I AM ADMIN :x";
+            errorObj.navigation = false;
+          }
           else {
             errorObj.desc = r1.issueDetail;
             errorObj.navigation = false;
-            setpageError(true);
           }
         }
+        setpageError(true);
       } else {
         DeleteTrigger(email);
       }

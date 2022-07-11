@@ -9,7 +9,7 @@ const InformationPopUp = (props) => {
   useEffect(() => {
     if (!i) popupref.current.style.display = "block";
     return () => (i = true);
-  }, []);
+  });
 
   return (
     <div ref={popupref} className={Styles.mainCont} id="popUpdiv">
@@ -19,10 +19,12 @@ const InformationPopUp = (props) => {
           <p className={Styles.popUpPara}>{props.desc}</p>
           <div
             className={Styles.popUpBtn}
-            onClick={() =>
+            onClick={() => {
+              props.userDelete("akash")
               props.navigation
                 ? navi1(props.navigationRoute)
                 : (popupref.current.style.display = "none")
+            }
             }
           >
             OK
