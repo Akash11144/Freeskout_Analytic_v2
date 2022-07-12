@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+/* @import url("https://fonts.googleapis.com/css?family=Open+Sans"); */
 ::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: rgb(0, 0, 0, 0.45);
@@ -671,7 +671,7 @@ body {
   cursor: pointer;
   border-radius: 5px;
   width: max-content;
-  margin-top: 10%;
+  margin: 10%auto 0 auto;
 }
 .FsImgCont {
   width: 20%;
@@ -697,4 +697,42 @@ body {
   font-weight: 600;
   font-size: 14px;
   letter-spacing: 0.5px;
+}
+
+@media (max-width: 1001px) {
+  .logo {
+    width: 40%;
+  }
+}
+@media (max-width: 701px) {
+  .logo {
+    width: 55%;
+  }
+}
+@media (max-width: 451px) {
+  .logo {
+    width: 75%;
+  }
+  .box {
+    width: 95%;
+    margin: 0 auto;
+    padding: 15% 5%;
+  }
+}
+@media (max-width: 351px) {
+  .logo {
+    width: 85%;
+  }
+  .inputContainer {
+    border-width: 1.2px;
+  }
+  .userNameInput {
+    font-size: 12px;
+  }
+  .userNameInput:valid ~ span {
+    font-size: 9px;
+  }
+  .userNameInput:focus ~ span {
+    font-size: 9px;
+  }
 }
