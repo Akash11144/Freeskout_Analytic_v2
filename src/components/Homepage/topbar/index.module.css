@@ -101,7 +101,7 @@
   opacity: 1;
   transition-duration: 0.2s;
   transition-timing-function: ease-in;
-  z-index: 5;
+  z-index: 7;
 }
 .sideBarShow {
   position: absolute;
@@ -712,10 +712,10 @@
   text-decoration: none;
 }
 .optionsContainer > .linky > p {
-  width: 60%;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
-  text-align: left;
+  /* text-align: left; */
   color: white;
   font-size: 17px;
   font-weight: 600;
@@ -781,19 +781,11 @@
   .sideBar {
     width: 30vw;
   }
-  .userNameCont {
-    width: 100%;
-    /* text-align: left; */
-    /* padding-left: 40%; */
-  }
   .optionsContainer {
-    width: 100%;
-    margin: 8% auto 5% auto;
+    margin-top: 25%;
   }
-  .optionsContainer > .linky > p {
-    text-align: left;
-    margin: unset;
-    margin: 8% auto;
+  .SblogOutBtn {
+    margin-top: 5%;
   }
 }
 @media (max-width: 1000px) {
@@ -805,6 +797,14 @@
   }
   .sideBar {
     width: 30vw;
+  }
+}
+@media (max-width: 850px) {
+  .pageName {
+    font-size: 18px;
+  }
+  .loggerName {
+    font-size: 15px;
   }
 }
 @media (max-width: 768px) {
@@ -858,20 +858,60 @@
 }
 @media (max-width: 540px) {
   .LoggerHolder {
-    display: none;
+    width: 30%;
   }
   .leftMain {
-    width: max-content;
+    width: 30%;
   }
   .pageName {
-    width: max-content;
-    text-align: right;
-    padding: unset;
-    margin: unset;
-    padding-right: 3px;
+    /* width: max-content; */
+    /* text-align: right; */
+    width: 40%;
+    /* padding-right: 3px; */
   }
 }
 @media (max-width: 421px) {
+  .line {
+    margin: 9%;
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    border-radius: 3px;
+    transition: transform 0.25s, opacity 0.35s;
+  }
+  .lineTop {
+    transform: translateY(11px) rotate(45deg);
+  }
+  .lineBottom {
+    transform: translateY(-4px) rotate(-45deg);
+  }
+  .sideBar {
+    width: 70vw;
+  }
+  .sideBarCont {
+    left: -100vw;
+  }
+  .sideBarShow {
+    left: 0;
+  }
+  .userNameCont {
+    width: 100%;
+    text-align: center;
+    padding-left: unset;
+  }
+  .userNameCont > p {
+    text-align: center;
+  }
+  .pageName {
+    font-size: 14px;
+  }
+  .loggerName {
+    font-size: 12px;
+    padding: 1px;
+  }
+}
+
+@media (max-width: 320px) {
   .sideBar {
     width: 100vw;
   }
@@ -881,20 +921,13 @@
   .sideBarShow {
     left: 0;
   }
-  .optionsContainer {
-    margin: 5% auto;
+  .leftMain {
+    width: max-content;
   }
-  .optionsContainer > .linky > p {
-    text-align: center;
-    margin: unset;
-    margin: 5% auto;
+  .pageName {
+    margin-left: 15%;
   }
-  .userNameCont {
-    width: 100%;
-    text-align: center;
-    padding-left: unset;
-  }
-  .userNameCont > p {
-    text-align: center;
+  .LoggerHolder {
+    width: max-content;
   }
 }
