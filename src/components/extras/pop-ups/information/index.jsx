@@ -24,6 +24,8 @@ const InformationPopUp = (props) => {
                 props.loginPopUpC();
               if (props.keyp === "sfcb")
                 props.createUserPopUp();
+              if (props.keyp === "lmcb")
+                props.linkMgmtPopUp();
               if (props.keyp === "fummain")
                 props.pucb();
               props.navigation

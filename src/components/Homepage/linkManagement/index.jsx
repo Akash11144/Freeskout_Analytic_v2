@@ -55,6 +55,7 @@ const LinkManement = (props) => {
           errorObj.desc = r.issueDetail;
           errorObj.navigation = false;
         }
+        setpageError(true);
       } else {
         setrouteData(r);
         setuserData(r1);
@@ -155,12 +156,22 @@ const LinkManement = (props) => {
       let r1 = await r.json();
       console.log("response in deleting route: ", r1);
       if (r1.issue) {
-        console.log("error in deleting route: ", r1.issue);
+        if (r1.storageClear) {
+          r1.storageClear && localStorage.removeItem("Freeskout-session");
+          errorObj.desc = r1.issueDetail;
+          errorObj.navigationRoute = "/";
+        } else {
+          errorObj.desc = r.issueDetail;
+          errorObj.navigation = false;
+        }
+        setpageError(true)
       } else {
         DataFetch();
       }
-      console.log(r1);
     } catch (error) {
+      errorObj.desc = "Some error while deleting";
+      errorObj.navigation = false;
+      setpageError(true)
       console.log("error while deleting route in catch", error);
     }
   };
@@ -168,7 +179,7 @@ const LinkManement = (props) => {
   return (
     <>
       {Loading && <SmallLoading />}
-      {pageError && <InformationPopUp {...errorObj} />}
+      {pageError && <InformationPopUp keyp={"lmcb"} linkMgmtPopUp={() => setpageError(false)} {...errorObj} />}
       <div className={Styles.mainCont}>
         <div className={Styles.secondaryDiv}>
           <div className={Styles.filtersOnMobile}>
@@ -181,9 +192,8 @@ const LinkManement = (props) => {
               <FaFilter></FaFilter>
             </div>
             <div
-              className={`${Styles.selectors} ${
-                isSelectorsActive ? Styles.selectorsShow : Styles.selectors
-              }`}
+              className={`${Styles.selectors} ${isSelectorsActive ? Styles.selectorsShow : Styles.selectors
+                }`}
             >
               <div className={Styles.selectedOption}>
                 <div className={Styles.initialDiv}>
@@ -202,11 +212,10 @@ const LinkManement = (props) => {
                 </div>
                 <div
                   className={`${Styles.otherOptionsContShow}
-            ${
-              isActive
-                ? Styles.otherOptionsContShow
-                : Styles.otherOptionsContHide
-            }`}
+            ${isActive
+                      ? Styles.otherOptionsContShow
+                      : Styles.otherOptionsContHide
+                    }`}
                 >
                   <div
                     className={Styles.otherOptions}
@@ -254,11 +263,10 @@ const LinkManement = (props) => {
                 </div>
                 <div
                   className={`${Styles.otherOptionsContShow}
-            ${
-              isUserActive
-                ? Styles.otherOptionsContShow
-                : Styles.otherOptionsContHide
-            }`}
+            ${isUserActive
+                      ? Styles.otherOptionsContShow
+                      : Styles.otherOptionsContHide
+                    }`}
                 >
                   <div
                     className={Styles.otherOptions}
@@ -384,9 +392,8 @@ const LinkLayout = (props) => {
     <>
       <div
         key={index}
-        className={`${Styles.delCont} ${
-          status ? Styles.delCont : Styles.activeCont
-        }`}
+        className={`${Styles.delCont} ${status ? Styles.delCont : Styles.activeCont
+          }`}
       >
         <div className={Styles.linkCont}>
           <p>www.freeskout.com/redirect{path}</p>
@@ -447,11 +454,10 @@ const DetailLayout = (props) => {
     if (!i) {
       const hitFetch = async () => {
         let r = await fetchAuth(
-          `http://localhost:1111/user/getAllFromSlug/${
-            props.path.split("/")[1]
+          `http://localhost:1111/user/getAllFromSlug/${props.path.split("/")[1]
           }`
         );
-        hitRef.current.innerText = r.length;
+        hitRef.current.innerText = r;
       };
       hitFetch();
     }
