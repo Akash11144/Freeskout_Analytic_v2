@@ -8,7 +8,6 @@ const userData = async (route) => {
   let ud = {
     browser_name: pt.name,
     browser_version: pt.version,
-    id: dr.getTime(),
     ip: await ipFetch(),
     product_manufacturer: pt.manufacturer ? pt.manufacturer : "not available",
     product_name: pt.product ? pt.product : "desktop",

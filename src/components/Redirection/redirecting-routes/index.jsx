@@ -33,6 +33,7 @@ function RedirectingRoutes() {
         },
       });
       let r1 = await r.json();
+      console.log("route data:", r1);
       const newloc = loc.pathname.split("/redirect");
       if (newloc[1]) {
         for (let i = 0; i < r1.length; i++) {
