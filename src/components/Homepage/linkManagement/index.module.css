@@ -28,11 +28,11 @@
 }
 .linkList {
   position: relative;
-  height: max-content;
+  min-height: 75vh;
   padding-bottom: 5px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
 }
 .initialDiv {
@@ -202,7 +202,6 @@ focus {
   width: 98%;
   margin: 0 auto;
   display: flex;
-  /* justify-content: space-around; */
   flex-wrap: wrap;
   align-items: center;
   max-height: 69vh;
@@ -221,6 +220,9 @@ focus {
   color: #fdffff;
   padding: 1% 2%;
   box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .activeCont {
   min-width: 45%;
@@ -234,6 +236,9 @@ focus {
   color: #fdffff;
   padding: 1% 2%;
   box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .linkCont {
@@ -252,7 +257,6 @@ focus {
 }
 .linkCont > p:nth-of-type(1),
 .linkCont > div > p:nth-of-type(1) {
-  width: 70%;
   word-wrap: break-word;
   font-size: 14px;
   font-weight: 500;
@@ -336,6 +340,7 @@ focus {
   display: flex;
   justify-content: center;
   width: 100%;
+  height: 98.5%;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.132);
   position: absolute;
@@ -402,11 +407,6 @@ focus {
   border-radius: 10px;
   transform: translateY(20px);
 }
-/* .desc {
-  width: 80%;
-  word-wrap: break-word;
-  text-align: right;
-} */
 .hits {
   background-color: #0a3556dd;
   color: #fdffff !important;
@@ -551,7 +551,6 @@ focus {
   .initialDiv > p {
     margin: unset;
     padding: unset;
-    color: rgba(0, 0, 0, 0.5);
     font-weight: 700;
     font-size: 11px;
   }

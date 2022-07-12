@@ -6,8 +6,6 @@ import companyLogo from "../../assets/FsnoBg.gif";
 import InformationPopUp from "../../extras/pop-ups/information";
 import SmallLoading from "../../extras/loading-animation/small-loading";
 
-
-
 let errorObj = {
   desc: "",
   navigation: false,
@@ -31,10 +29,12 @@ const Login = () => {
 
   let i = false;
   useEffect(() => {
-    !i && (JSON.parse(localStorage.getItem("Freeskout-session")) !== null) && navi("/home");
+    !i &&
+      JSON.parse(localStorage.getItem("Freeskout-session")) !== null &&
+      navi("/home");
 
     setPageLoading(false);
-    return () => i = true;
+    return () => (i = true);
   }, []);
 
   const handleLogin = async () => {
@@ -54,8 +54,7 @@ const Login = () => {
         console.log(r.issueDetail, errorObj);
         setLoading(false);
         setpopUp(true);
-      }
-      else if (r.output) {
+      } else if (r.output) {
         setLoading(false);
         localStorage.setItem("Freeskout-session", JSON.stringify(r.output));
         navi("/home");
@@ -66,12 +65,13 @@ const Login = () => {
   return (
     <>
       {Loading && <SmallLoading />}
-      {popUp &&
+      {popUp && (
         <InformationPopUp
           keyp={"loginPopUp"}
           loginPopUpC={() => setpopUp(false)}
           {...errorObj}
-        />}
+        />
+      )}
       <div id="main" className={Styles.main_container}>
         <div className={Styles.stars}></div>
         <div className={Styles.stars2}></div>
@@ -89,6 +89,7 @@ const Login = () => {
               required="requried"
               maxLength="50"
               className={Styles.userNameInput}
+              autoComplete
             />
             <span>Username</span>
           </div>

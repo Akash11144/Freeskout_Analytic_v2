@@ -652,12 +652,12 @@ body {
 }
 .userNameInput:valid ~ span {
   color: #1adb80;
-  transform: translateX(0px) translateY(-80%);
+  transform: translateX(0px) translateY(-100%);
   font-size: 12px;
 }
 .userNameInput:focus ~ span {
   color: #1adb80;
-  transform: translateX(0px) translateY(-80%);
+  transform: translateX(0px) translateY(-100%);
   font-size: 12px;
 }
 .logInBtn {
@@ -702,6 +702,10 @@ body {
 @media (max-width: 1001px) {
   .logo {
     width: 40%;
+  }
+  .box {
+    width: 60%;
+    margin: 0 auto;
   }
 }
 @media (max-width: 701px) {

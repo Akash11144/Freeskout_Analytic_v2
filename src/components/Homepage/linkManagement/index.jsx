@@ -149,7 +149,7 @@ const LinkManement = (props) => {
         body: JSON.stringify({
           path: path,
           deleted_time: dt.toDateString() + " " + dt.toTimeString(),
-          deleted_by: email
+          deleted_by: email,
         }),
       });
       let r1 = await r.json();
@@ -181,8 +181,9 @@ const LinkManement = (props) => {
               <FaFilter></FaFilter>
             </div>
             <div
-              className={`${Styles.selectors} ${isSelectorsActive ? Styles.selectorsShow : Styles.selectors
-                }`}
+              className={`${Styles.selectors} ${
+                isSelectorsActive ? Styles.selectorsShow : Styles.selectors
+              }`}
             >
               <div className={Styles.selectedOption}>
                 <div className={Styles.initialDiv}>
@@ -201,10 +202,11 @@ const LinkManement = (props) => {
                 </div>
                 <div
                   className={`${Styles.otherOptionsContShow}
-            ${isActive
-                      ? Styles.otherOptionsContShow
-                      : Styles.otherOptionsContHide
-                    }`}
+            ${
+              isActive
+                ? Styles.otherOptionsContShow
+                : Styles.otherOptionsContHide
+            }`}
                 >
                   <div
                     className={Styles.otherOptions}
@@ -252,10 +254,11 @@ const LinkManement = (props) => {
                 </div>
                 <div
                   className={`${Styles.otherOptionsContShow}
-            ${isUserActive
-                      ? Styles.otherOptionsContShow
-                      : Styles.otherOptionsContHide
-                    }`}
+            ${
+              isUserActive
+                ? Styles.otherOptionsContShow
+                : Styles.otherOptionsContHide
+            }`}
                 >
                   <div
                     className={Styles.otherOptions}
@@ -379,44 +382,29 @@ const LinkLayout = (props) => {
 
   return (
     <>
-      {status ? (
-        <div key={index} className={Styles.delCont}>
-          <div className={Styles.linkCont}>
-            <p>www.freeskout.com/redirect{path}</p>
-            <p className={Styles.linkHitsitsCont}>350</p>
-          </div>
-          <div className={Styles.userActionBtnsCont}>
-            <div
-              className={Styles.viewIconCont}
-              onClick={() => {
-                props.viewLInkDetailsTRigger(props);
-              }}
-            >
-              <BsFillEyeFill className={Styles.viewIcon} />
-              <p className={`${Styles.HoverNotification} ${Styles.viewHover}`}>
-                View
-              </p>
-            </div>
-          </div>
+      <div
+        key={index}
+        className={`${Styles.delCont} ${
+          status ? Styles.delCont : Styles.activeCont
+        }`}
+      >
+        <div className={Styles.linkCont}>
+          <p>www.freeskout.com/redirect{path}</p>
+          {/* <p className={Styles.linkHitsitsCont}>350</p> */}
         </div>
-      ) : (
-        <div key={index} className={Styles.activeCont}>
-          <div className={Styles.linkCont}>
-            <p>www.freeskout.com/redirect{path}</p>
-            <p className={Styles.linkHitsitsCont}>350</p>
+        <div className={Styles.userActionBtnsCont}>
+          <div
+            className={Styles.viewIconCont}
+            onClick={() => {
+              props.viewLInkDetailsTRigger(props);
+            }}
+          >
+            <BsFillEyeFill className={Styles.viewIcon} />
+            <p className={`${Styles.HoverNotification} ${Styles.viewHover}`}>
+              View
+            </p>
           </div>
-          <div className={Styles.userActionBtnsCont}>
-            <div
-              className={Styles.viewIconCont}
-              onClick={() => {
-                props.viewLInkDetailsTRigger(props);
-              }}
-            >
-              <BsFillEyeFill className={Styles.viewIcon} />
-              <p className={`${Styles.HoverNotification} ${Styles.viewHover}`}>
-                View
-              </p>
-            </div>
+          {!status && (
             <div className={`${Styles.delIconCont}`}>
               <AiTwotoneDelete
                 onClick={() => linkCallBack({ path, email })}
@@ -426,18 +414,16 @@ const LinkLayout = (props) => {
                 Delete
               </p>
             </div>
-          </div>
+          )}
         </div>
-      )}
+      </div>
     </>
   );
 };
 
 // --------------------------------------------------------------------------------------------
 
-
 const DetailLayout = (props) => {
-
   let hitRef = useRef(null);
 
   let dateObj = dateTimegen(props.time);
@@ -460,14 +446,17 @@ const DetailLayout = (props) => {
   useEffect(() => {
     if (!i) {
       const hitFetch = async () => {
-        let r = await fetchAuth(`http://localhost:1111/user/getAllFromSlug/${props.path.split("/")[1]}`);
+        let r = await fetchAuth(
+          `http://localhost:1111/user/getAllFromSlug/${
+            props.path.split("/")[1]
+          }`
+        );
         hitRef.current.innerText = r.length;
-      }
+      };
       hitFetch();
     }
-    return () => i = true
-  })
-
+    return () => (i = true);
+  });
 
   return (
     <>
@@ -527,7 +516,7 @@ const DetailLayout = (props) => {
               </p>
             </div>
             <div className={Styles.createdBy}>
-              <p>Hits</p> <p ref={hitRef} className={Styles.hits}> 350</p>
+              <p>Hits</p> <p ref={hitRef} className={Styles.hits}></p>
             </div>
           </div>
           <div
