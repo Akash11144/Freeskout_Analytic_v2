@@ -20,12 +20,10 @@ const InformationPopUp = (props) => {
           <div
             className={Styles.popUpBtn}
             onClick={() => {
+              if (props.keyp === "loginPopUp")
+                props.loginPopUpC();
               if (props.keyp === "fummain")
                 props.pucb();
-              if (props.keyp === "activeuser")
-                props.calledFromActiveUser();
-              if (props.keyp === "user")
-                props.calledFromUser();
               props.navigation
                 ? navi1(props.navigationRoute)
                 : (popupref.current.style.display = "none")

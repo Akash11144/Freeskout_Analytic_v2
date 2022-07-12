@@ -24,8 +24,8 @@ const FUM = () => {
       {pageError && <InformationPopUp keyp={"fummain"} pucb={() => setpageError(false)} {...errorObj} />}
       <div className={Styles.mainCont}>
         <div className={Styles.secondaryDiv}>
-          <UserForm abc={() => setpageError(true)} setnewUser={setnewUser} />
-          <ActiveUser newUser={newUser} />
+          <UserForm userFormPopUpCallback={() => setpageError(true)} setnewUser={setnewUser} />
+          <ActiveUser activeUserCallback={() => setpageError(true)} newUser={newUser} />
         </div>
       </div>
     </>
@@ -35,7 +35,7 @@ export default FUM;
 
 // --------------------------------------------------------------------------------------------------
 
-const UserForm = ({ setnewUser, abc }) => {
+const UserForm = ({ setnewUser, userFormPopUpCallback }) => {
   const [pageLoading, setpageLoading] = useState(false);
 
   let name = useRef(null);
@@ -80,20 +80,16 @@ const UserForm = ({ setnewUser, abc }) => {
         r.storageClear && localStorage.removeItem("Freeskout-session");
         errorObj.desc = r.issueDetail;
         errorObj.navigationRoute = "/";
-        // setuserFormpageError(true);
-        setpageLoading(false);
-        abc();
       } else {
         errorObj.desc = r.issueDetail;
         errorObj.navigation = false;
-        // setuserFormpageError(true);
-        setpageLoading(false);
-        abc();
       }
+      setpageLoading(false);
+      userFormPopUpCallback();
     } else {
       console.log("res: ", r);
-      setpageLoading(false);
       setnewUser(++i);
+      setpageLoading(false);
     }
   };
 
@@ -144,23 +140,14 @@ const UserForm = ({ setnewUser, abc }) => {
 
 // --------------------------------------------------------------------------------------
 
-const ActiveUser = ({ newUser }) => {
+const ActiveUser = ({ newUser, activeUserCallback }) => {
   const [Data, setData] = useState([]);
-  const [pageError, setpageError] = useState(false);
   const [viewDetails, setviewDetails] = useState(false);
-  const [userDel, setuserDel] = useState(0);
   const [useDetails, setuseDetails] = useState();
+  const [pageLoading, setpageLoading] = useState(false);
 
   const dataFetch = async () => {
-    let r = await fetchAuth("http://localhost:1111/validate/allFUser", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${JSON.parse(
-          localStorage.getItem("Freeskout-session")
-        )}`,
-      },
-    });
+    let r = await fetchAuth(`${L_LINK}/validate/allFUser`);
     console.log("fecth response in active user: ", r);
     if (r.issue) {
       if (r.storageClear) {
@@ -171,13 +158,16 @@ const ActiveUser = ({ newUser }) => {
         errorObj.desc = r.issueDetail;
         errorObj.navigation = false;
       }
-      setpageError(true);
+      activeUserCallback();
     } else setData(r);
   };
 
   let j = false;
   useEffect(() => {
+    setpageLoading(true)
+
     if (!j) dataFetch();
+    setpageLoading(false)
     return () => {
       j = true;
     };
@@ -192,24 +182,45 @@ const ActiveUser = ({ newUser }) => {
   };
   return (
     <>
+      {pageLoading && <SmallLoading />}
       <div className={Styles.presentUsersDiv}>
-        {pageError && <InformationPopUp keyp={"activeuser"} calledFromActiveUser={() => setpageError(false)} {...errorObj} />}
         <div className={Styles.presntUsersHeadCont}>
           <p>Active Users</p>
         </div>
         <div className={Styles.activeUsersCont}>
           {Data.length ? (
-            Data.map((item, index) => (
-              <User
-                key={index}
-                {...item}
-                DetailTrigger={(d) => {
-                  setuseDetails(d);
-                  handelViewDetails();
-                }}
-                DeleteTrigger={() => setuserDel((v) => v + 1)}
-              />
-            ))
+            Data.map((item, index) => {
+              return !item.deleted &&
+                <User
+                  key={index}
+                  {...item}
+                  DetailTrigger={(d) => {
+                    setuseDetails(d);
+                    handelViewDetails();
+                  }}
+                  DeleteTrigger={() => dataFetch()}
+                  userPopUpCallback={() => activeUserCallback()}
+                />
+            })
+          ) : (
+            <h1>NO user available</h1>
+          )}
+        </div>
+        <div className={Styles.activeUsersCont}>
+          {Data.length ? (
+            Data.map((item, index) => {
+              return item.deleted &&
+                <User
+                  key={index}
+                  {...item}
+                  DetailTrigger={(d) => {
+                    setuseDetails(d);
+                    handelViewDetails();
+                  }}
+                  DeleteTrigger={() => dataFetch()}
+                  userPopUpCallback={() => activeUserCallback()}
+                />
+            })
           ) : (
             <h1>NO user available</h1>
           )}
@@ -229,10 +240,11 @@ const User = ({
   email,
   password,
   time,
+  deleted,
   DetailTrigger,
   DeleteTrigger,
+  userPopUpCallback
 }) => {
-  const [pageError, setpageError] = useState(false);
   const [pageLoading, setpageLoading] = useState(false);
 
 
@@ -275,7 +287,7 @@ const User = ({
             errorObj.navigation = false;
           }
         }
-        setpageError(true);
+        userPopUpCallback();
       } else {
         DeleteTrigger(email);
       }
@@ -288,7 +300,6 @@ const User = ({
   return (
     <>
       {pageLoading && <SmallLoading />}
-      {pageError && <InformationPopUp keyp={"user"} calledFromUser={() => setpageError(false)} {...errorObj} />}
       <div className={Styles.secondCont}>
         <div className={Styles.userDiv}>
           <div className={Styles.activeUserName}>
@@ -327,8 +338,6 @@ const User = ({
 const ViewUserDetails = (props) => {
   return (
     <>
-      {/* {alert(props.a.name)} */}
-      {console.log("inside view detail")}
       <div className={Styles.userDataCont}>
         <div className={Styles.userDataSecondaryDiv}>
           <p className={Styles.selectedUserEmail}>
