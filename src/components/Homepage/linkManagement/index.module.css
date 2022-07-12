@@ -209,7 +209,7 @@ focus {
   overflow-y: auto;
   padding-left: 4%;
 }
-.cont {
+.delCont {
   min-width: 45%;
   max-width: calc(50% - 5px);
   margin: 0 10px 10px 10px;
@@ -217,12 +217,12 @@ focus {
   border: 1px solid rgba(170, 221, 238, 0.3333333333333333);
   border-radius: 1rem;
   box-shadow: 0 2.5px 10px 1px rgb(170 221 238 / 13%);
-  background-color: #b30f28ca;
+  background-color: #b30f28a8;
   color: #fdffff;
   padding: 1% 2%;
   box-sizing: border-box;
 }
-.delCont {
+.activeCont {
   min-width: 45%;
   max-width: calc(50% - 5px);
   margin: 0 10px 10px 10px;

@@ -771,17 +771,17 @@
   .pageName {
     width: 60%;
   }
-  /* .dateTimeCont {
+  .LoggerHolder {
     width: 20%;
-  } */
+  }
 }
 @media (max-width: 1150px) {
   .pageName {
     font-size: 24px;
   }
-  /* .dateTimeCont {
+  .LoggerHolder {
     font-size: 14px;
-  } */
+  }
   .sideBarCont {
     left: -30vw;
   }
@@ -835,10 +835,10 @@
   .leftMain {
     width: 25%;
   }
-  /* .dateTimeCont {
+  .LoggerHolder {
     font-size: 12px;
     width: 25%;
-  } */
+  }
   .sideBar {
     width: 40vw;
   }
@@ -867,9 +867,9 @@
   }
 }
 @media (max-width: 540px) {
-  /* .dateTimeCont {
+  .LoggerHolder {
     display: none;
-  } */
+  }
   .leftMain {
     width: max-content;
   }

@@ -397,7 +397,7 @@ const LinkLayout = (props) => {
     <>
       {console.log(status)}
       {status ? (
-        <div key={path + index} className={Styles.cont}>
+        <div key={path + index} className={Styles.delCont}>
           <div className={Styles.linkCont}>
             <p>www.freeskout.com/redirect{path}</p>
             <p className={Styles.linkHitsitsCont}>350</p>
@@ -417,7 +417,7 @@ const LinkLayout = (props) => {
           </div>
         </div>
       ) : (
-        <div key={path + index} className={Styles.delCont}>
+        <div key={path + index} className={Styles.activeCont}>
           <div className={Styles.linkCont}>
             <p>www.freeskout.com/redirect{path}</p>
             <p className={Styles.linkHitsitsCont}>350</p>
