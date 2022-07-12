@@ -88,41 +88,6 @@
   font-weight: 600;
   z-index: 2;
 }
-.LogOutBtn {
-  position: absolute;
-  width: max-content;
-  z-index: 6;
-  padding: 2% 8%;
-  margin: unset;
-  /* top: 50%; */
-  bottom: -90%;
-  left: 40%;
-  color: #e8ebf7;
-  background-color: #de1a1a;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 700;
-  letter-spacing: 1px;
-  transition: 0.3s;
-  font-size: 14px;
-  opacity: 0;
-  transition: all 0.3s;
-  pointer-events: none;
-}
-.LoggerHolder:hover {
-  overflow: unset;
-}
-.LoggerHolder:hover > .LogOutBtn {
-  display: block;
-  /* top: 90%; */
-  bottom: -50%;
-  opacity: 1;
-  pointer-events: all;
-}
-.LogOutBtn:active {
-  color: #1adb30;
-  transform: translateY(3px);
-}
 .secDiv {
   width: 100%;
   float: right;
@@ -738,8 +703,9 @@
 }
 
 .optionsContainer {
-  margin: 50% 0 0 0;
-  width: 100%;
+  margin: 50% auto 0 auto;
+  width: 70%;
+  /* background-color: #de1a1a; */
   box-sizing: border-box;
 }
 .linky {
@@ -761,6 +727,20 @@
 .optionsContainer > .linky > p:hover {
   font-size: 19px;
   color: #1adb30;
+}
+.SblogOutBtn {
+  width: max-content;
+  padding: 2% 8%;
+  margin: unset;
+  color: #e8ebf7;
+  background-color: #de1a1a;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  letter-spacing: 1px;
+  transition: 0.3s;
+  font-size: 14px;
+  transition: all 0.3s;
 }
 .copyRightCont {
   width: 100%;
