@@ -136,8 +136,9 @@ const LinkManement = (props) => {
   const handleCloseDetails = () => {
     setviewDetails(false);
   };
-  const handleDelete = async (value) => {
-    console.log("deleting route: ", value);
+
+  const handleDelete = async ({ path, email }) => {
+    console.log("deleting route: ", path, email);
     try {
       let dt = new Date();
       let r = await fetch(`${L_LINK}/route/deleteRoute`, {
@@ -146,8 +147,9 @@ const LinkManement = (props) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          path: value,
+          path: path,
           deleted_time: dt.toDateString() + " " + dt.toTimeString(),
+          deleted_by: email
         }),
       });
       let r1 = await r.json();
@@ -168,7 +170,6 @@ const LinkManement = (props) => {
       {Loading && <SmallLoading />}
       {pageError && <InformationPopUp {...errorObj} />}
       <div className={Styles.mainCont}>
-        {/* {generateLoading && <SmallLoading />} */}
         <div className={Styles.secondaryDiv}>
           <div className={Styles.filtersOnMobile}>
             <div
@@ -180,9 +181,8 @@ const LinkManement = (props) => {
               <FaFilter></FaFilter>
             </div>
             <div
-              className={`${Styles.selectors} ${
-                isSelectorsActive ? Styles.selectorsShow : Styles.selectors
-              }`}
+              className={`${Styles.selectors} ${isSelectorsActive ? Styles.selectorsShow : Styles.selectors
+                }`}
             >
               <div className={Styles.selectedOption}>
                 <div className={Styles.initialDiv}>
@@ -201,11 +201,10 @@ const LinkManement = (props) => {
                 </div>
                 <div
                   className={`${Styles.otherOptionsContShow}
-            ${
-              isActive
-                ? Styles.otherOptionsContShow
-                : Styles.otherOptionsContHide
-            }`}
+            ${isActive
+                      ? Styles.otherOptionsContShow
+                      : Styles.otherOptionsContHide
+                    }`}
                 >
                   <div
                     className={Styles.otherOptions}
@@ -253,11 +252,10 @@ const LinkManement = (props) => {
                 </div>
                 <div
                   className={`${Styles.otherOptionsContShow}
-            ${
-              isUserActive
-                ? Styles.otherOptionsContShow
-                : Styles.otherOptionsContHide
-            }`}
+            ${isUserActive
+                      ? Styles.otherOptionsContShow
+                      : Styles.otherOptionsContHide
+                    }`}
                 >
                   <div
                     className={Styles.otherOptions}
@@ -374,30 +372,15 @@ export default LinkManement;
 // ------------------------------------------------------------------------------------------------
 
 const LinkLayout = (props) => {
-  const {
-    deleted,
-    deleted_time,
-    name,
-    email,
-    for_name,
-    for_email,
-    description,
-    path,
-    website,
-    time,
-    index,
-    linkCallBack,
-  } = props;
+  const { email, path, index, linkCallBack } = props;
   const [status, setstatus] = useState();
-  useEffect(() => {
-    setstatus(props.deleted);
-  }, [props]);
+
+  useEffect(() => setstatus(props.deleted), [props]);
 
   return (
     <>
-      {console.log(status)}
       {status ? (
-        <div key={path + index} className={Styles.delCont}>
+        <div key={index} className={Styles.delCont}>
           <div className={Styles.linkCont}>
             <p>www.freeskout.com/redirect{path}</p>
             <p className={Styles.linkHitsitsCont}>350</p>
@@ -417,7 +400,7 @@ const LinkLayout = (props) => {
           </div>
         </div>
       ) : (
-        <div key={path + index} className={Styles.activeCont}>
+        <div key={index} className={Styles.activeCont}>
           <div className={Styles.linkCont}>
             <p>www.freeskout.com/redirect{path}</p>
             <p className={Styles.linkHitsitsCont}>350</p>
@@ -436,7 +419,7 @@ const LinkLayout = (props) => {
             </div>
             <div className={`${Styles.delIconCont}`}>
               <AiTwotoneDelete
-                onClick={() => linkCallBack(path)}
+                onClick={() => linkCallBack({ path, email })}
                 className={Styles.delIcon}
               />
               <p className={`${Styles.HoverNotification} ${Styles.delHover}`}>
@@ -449,7 +432,14 @@ const LinkLayout = (props) => {
     </>
   );
 };
+
+// --------------------------------------------------------------------------------------------
+
+
 const DetailLayout = (props) => {
+
+  let hitRef = useRef(null);
+
   let dateObj = dateTimegen(props.time);
   let durationChecker = durationGenerator(
     new Date(dateObj.durationDate),
@@ -465,9 +455,22 @@ const DetailLayout = (props) => {
       new Date(delDateObj.durationDate)
     );
   }
+
+  let i = false;
+  useEffect(() => {
+    if (!i) {
+      const hitFetch = async () => {
+        let r = await fetchAuth(`http://localhost:1111/user/getAllFromSlug/${props.path.split("/")[1]}`);
+        hitRef.current.innerText = r.length;
+      }
+      hitFetch();
+    }
+    return () => i = true
+  })
+
+
   return (
     <>
-      {console.log(props)}
       <div className={Styles.detHolder}>
         <div className={Styles.linkDeatilsCont}>
           <p className={Styles.link}>www.freeskout.com/redirect{props.path}</p>
@@ -524,7 +527,7 @@ const DetailLayout = (props) => {
               </p>
             </div>
             <div className={Styles.createdBy}>
-              <p>Hits</p> <p className={Styles.hits}> 350</p>
+              <p>Hits</p> <p ref={hitRef} className={Styles.hits}> 350</p>
             </div>
           </div>
           <div

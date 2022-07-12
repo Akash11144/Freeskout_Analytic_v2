@@ -40,12 +40,6 @@ const RouteCreationDesign = (props) => {
   const twChecked = useRef(null);
   const othersChecked = useRef(null);
 
-  let errorObj = {
-    desc: "",
-    navigation: true,
-    navigationRoute: "",
-  };
-
   let i = false;
   useEffect(() => {
     if (!i) console.log("create link props: ", props);
@@ -308,6 +302,7 @@ const UserCreationSideForm = ({ a, searchV }) => {
       time: dt.toDateString() + " " + dt.toTimeString(),
       deleted: false,
       deleted_time: "",
+      deleted_by: ""
     });
     console.log("result: ", r);
     if (r.issue) {
