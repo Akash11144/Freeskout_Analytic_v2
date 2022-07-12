@@ -451,6 +451,11 @@ focus {
 .okayBtn:active {
   transform: translateY(2px);
 }
+
+/* -------------------------Media Queries------------ */
+@media (max-width: px) {
+}
+
 @media (max-width: 768px) {
   .linkList {
     height: 80vh;
