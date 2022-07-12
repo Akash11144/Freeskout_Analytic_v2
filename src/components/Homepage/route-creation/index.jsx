@@ -53,7 +53,7 @@ const RouteCreationDesign = (props) => {
     let finalDesc = desc_inp.current.value;
     let finalRoute = "/" + route_inp.current.value;
     let finalWebsite = website_inp.current.value;
-    let genLink = "http://localhost:3000" + "/redirect/" + finalRoute;
+    let genLink = "http://localhost:3000" + "/redirect" + finalRoute;
     let instaSts = instaCheck.current.checked;
     let linkedinSts = linkedinCheck.current.checked;
     let utSts = utChecked.current.checked;
@@ -116,7 +116,7 @@ const RouteCreationDesign = (props) => {
 
   return (
     <>
-      {pageError && <InformationPopUp {...errorObj} />}
+      {pageError && <InformationPopUp keyp={"sfcb"} createUserPopUp={() => setpageError(false)}  {...errorObj} />}
       <div className={Styles.mainCont}>
         {generateLoading && <SmallLoading />}
         <div className={Styles.secondaryDiv}>
@@ -218,6 +218,7 @@ const RouteCreationDesign = (props) => {
               <UserCreationSideForm
                 a={sideForm}
                 searchV={() => handelSendBtnShow()}
+                sideFormCallback={() => setpageError(true)}
               />
             )}
             {sideloader && (
@@ -240,11 +241,10 @@ export default RouteCreationDesign;
 
 // ---------------------------------------------------------------------------------------------
 
-const UserCreationSideForm = ({ a, searchV }) => {
+const UserCreationSideForm = ({ a, searchV, sideFormCallback }) => {
   const [homeDiv, sethomeDiv] = useState(false);
   const [saveBtnLoading, setsaveBtnLoading] = useState(false);
   const [pageLoading, setpageLoading] = useState(false);
-  const [pageError, setpageError] = useState(false);
 
   const {
     name,
@@ -288,9 +288,9 @@ const UserCreationSideForm = ({ a, searchV }) => {
 
   const handleSaveBtn = async () => {
     setsaveBtnLoading(true);
-    // let url = new URL(L_LINK);
-    // url.pathname("/route/addRoute");
-    let r = await postAuth(`${L_LINK}/route/addRoute`, "", {
+    let url = new URL(L_LINK);
+    url.pathname = "/route/addRoute";
+    let r = await postAuth(url, "", {
       name,
       email,
       for_name,
@@ -311,15 +311,16 @@ const UserCreationSideForm = ({ a, searchV }) => {
         errorObj.desc = r.issueDetail;
         errorObj.navigationRoute = "/";
       } else {
-        console.log("inside else");
         errorObj.desc = r.issueDetail;
         errorObj.navigation = false;
       }
-      setpageError(true);
+      sideFormCallback();
     } else {
-      console.log("adding route success!!!");
+      errorObj.desc = r.issueDetail;
+      errorObj.navigation = false;
+      sideFormCallback();
+      sethomeDiv(true);
     }
-    sethomeDiv(true);
     setsaveBtnLoading(false);
   };
   const handelHomeBtn = () => {
@@ -329,7 +330,6 @@ const UserCreationSideForm = ({ a, searchV }) => {
   return (
     <>
       {pageLoading && <SmallLoading />}
-      {pageError && <SmallLoading {...errorObj} />}
       <div className={Styles.genDetailsCont}>
         <div
           className={`${Styles.afterSend} ${homeDiv ? Styles.afterSendShow : Styles.afterSend

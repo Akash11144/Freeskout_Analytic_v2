@@ -22,6 +22,8 @@ const InformationPopUp = (props) => {
             onClick={() => {
               if (props.keyp === "loginPopUp")
                 props.loginPopUpC();
+              if (props.keyp === "sfcb")
+                props.createUserPopUp();
               if (props.keyp === "fummain")
                 props.pucb();
               props.navigation
