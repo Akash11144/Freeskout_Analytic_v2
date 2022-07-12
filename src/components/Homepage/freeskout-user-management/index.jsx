@@ -17,11 +17,14 @@ let i = 1;
 
 const FUM = () => {
   const [newUser, setnewUser] = useState(i);
+  const [pageError, setpageError] = useState(false);
+
   return (
     <>
+      {pageError && <InformationPopUp keyp={"fummain"} pucb={() => setpageError(false)} {...errorObj} />}
       <div className={Styles.mainCont}>
         <div className={Styles.secondaryDiv}>
-          <UserForm setnewUser={setnewUser} />
+          <UserForm abc={() => setpageError(true)} setnewUser={setnewUser} />
           <ActiveUser newUser={newUser} />
         </div>
       </div>
@@ -32,15 +35,14 @@ export default FUM;
 
 // --------------------------------------------------------------------------------------------------
 
-const UserForm = ({ setnewUser }) => {
-  const [userFormpageError, setuserFormpageError] = useState(false);
+const UserForm = ({ setnewUser, abc }) => {
   const [pageLoading, setpageLoading] = useState(false);
 
   let name = useRef(null);
   let email = useRef(null);
   let pass = useRef(null);
   let confirmpass = useRef(null);
-  let passPattern = /^([A-Za-z0-9\-\_\@\#\$\%\&\*\\]{4,12})*$/;
+  let passPattern = /^([A-Za-z0-9\-\_\@\#\$\%\&\*\\]{3,12})*$/;
   let password_regex = new RegExp(passPattern);
 
   const handleCreateUser = async () => {
@@ -78,24 +80,26 @@ const UserForm = ({ setnewUser }) => {
         r.storageClear && localStorage.removeItem("Freeskout-session");
         errorObj.desc = r.issueDetail;
         errorObj.navigationRoute = "/";
-        setuserFormpageError(true);
+        // setuserFormpageError(true);
+        setpageLoading(false);
+        abc();
       } else {
         errorObj.desc = r.issueDetail;
         errorObj.navigation = false;
-        setuserFormpageError(true);
+        // setuserFormpageError(true);
+        setpageLoading(false);
+        abc();
       }
     } else {
       console.log("res: ", r);
+      setpageLoading(false);
       setnewUser(++i);
     }
-    setpageLoading(false);
   };
 
   return (
     <>
       {pageLoading && <SmallLoading />}
-      {userFormpageError && <InformationPopUp {...errorObj} />}
-      {console.log("user form page error", userFormpageError)}
       <div className={Styles.createUserPart}>
         <p className={Styles.createNewUserHead}>Create User</p>
         <div className={Styles.formContainer}>
@@ -189,8 +193,7 @@ const ActiveUser = ({ newUser }) => {
   return (
     <>
       <div className={Styles.presentUsersDiv}>
-        {pageError && <InformationPopUp {...errorObj} />}
-        {console.log("rendering: ", userDel, Data)}
+        {pageError && <InformationPopUp keyp={"activeuser"} calledFromActiveUser={() => setpageError(false)} {...errorObj} />}
         <div className={Styles.presntUsersHeadCont}>
           <p>Active Users</p>
         </div>
@@ -231,6 +234,7 @@ const User = ({
 }) => {
   const [pageError, setpageError] = useState(false);
   const [pageLoading, setpageLoading] = useState(false);
+
 
   let detailObj = {
     name,
@@ -284,7 +288,7 @@ const User = ({
   return (
     <>
       {pageLoading && <SmallLoading />}
-      {pageError && <InformationPopUp {...errorObj} />}
+      {pageError && <InformationPopUp keyp={"user"} calledFromUser={() => setpageError(false)} {...errorObj} />}
       <div className={Styles.secondCont}>
         <div className={Styles.userDiv}>
           <div className={Styles.activeUserName}>
@@ -324,6 +328,7 @@ const ViewUserDetails = (props) => {
   return (
     <>
       {/* {alert(props.a.name)} */}
+      {console.log("inside view detail")}
       <div className={Styles.userDataCont}>
         <div className={Styles.userDataSecondaryDiv}>
           <p className={Styles.selectedUserEmail}>
