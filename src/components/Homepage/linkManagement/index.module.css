@@ -469,7 +469,7 @@ focus {
   .showBtn {
     margin: 0.5% auto;
   }
-  .linkList {
+  .linkListSecCont {
     max-height: unset;
     min-height: unset;
     height: 70vh;
@@ -488,7 +488,7 @@ focus {
 }
 
 @media (max-width: 768px) {
-  .linkList {
+  .linkListSecCont {
     padding-top: 5%;
     height: 78vh;
   }
@@ -655,7 +655,9 @@ focus {
   }
   .delCont,
   .activeCont {
-    width: 100%;
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 @media (max-width: 320px) {
