@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router";
 import Styles from "../freeskout-user-management/index.module.css";
 import { FaRegEye } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -6,20 +7,14 @@ import { TbMinusVertical } from "react-icons/tb";
 import SmallLoading from "../../extras/loading-animation/small-loading";
 import { emailChecker, fetchAuth, L_LINK, postAuth } from "../../utlis";
 import InformationPopUp from "../../extras/pop-ups/information";
+import SendMail from "../../extras/loading-animation/sendMailAnimation";
 
 let errorObj = {
   desc: "",
   navigation: true,
   navigationRoute: "",
 };
-let j = false;
-useEffect(() => {
-  first
 
-  return () => {
-    j = true;
-  }
-}, [third])
 
 
 let i = 1;
@@ -27,9 +22,21 @@ let i = 1;
 const FUM = () => {
   const [newUser, setnewUser] = useState(i);
   const [pageError, setpageError] = useState(false);
+  const [pageLoading, setpageLoading] = useState(false)
+  const loc = useLocation();
+  const nav = useNavigate();
+
+  let j = false;
+  useEffect(() => {
+    setpageLoading(true)
+    !j && !loc.state && nav("/home");
+    setpageLoading(false)
+    return () => j = true;
+  }, [])
 
   return (
     <>
+      {pageLoading && <SmallLoading />}
       {pageError && <InformationPopUp keyp={"fummain"} pucb={() => setpageError(false)} {...errorObj} />}
       <div className={Styles.mainCont}>
         <div className={Styles.secondaryDiv}>
@@ -174,7 +181,6 @@ const ActiveUser = ({ newUser, activeUserCallback }) => {
   let j = false;
   useEffect(() => {
     setpageLoading(true)
-
     if (!j) dataFetch();
     setpageLoading(false)
     return () => {
@@ -345,9 +351,28 @@ const User = ({
 
 //-------------------------------
 const ViewUserDetails = (props) => {
+  const [pageLoading, setpageLoading] = useState(true)
+
+  let userHitRef = useRef(null);
+  let userRouteCount = useRef(null);
+
+  const getUserHit = async () => userHitRef.current.innerText = await fetchAuth(`${L_LINK}/route/getAllUserRoutes/${props.a.email}`);
+  const getRouteCount = async () => userRouteCount.current.innerText = await fetchAuth(`${L_LINK}/route/getAllUserRoutesCount/${props.a.email}`);
+  let i = false;
+  useEffect(() => {
+    setpageLoading(true)
+    if (!i) {
+      getUserHit();
+      getRouteCount()
+    }
+    setpageLoading(false)
+    return () => i = true;
+  }, [])
+
   return (
     <>
       <div className={Styles.userDataCont}>
+        {console.log("loading...", pageLoading)}
         <div className={Styles.userDataSecondaryDiv}>
           <p className={Styles.selectedUserEmail}>
             E-Mail: <span className={Styles.userInfo}>{props.a.email}</span>
@@ -358,11 +383,11 @@ const ViewUserDetails = (props) => {
           <div className={Styles.dataSecondaryDiv}>
             <p className={Styles.linksCreated}>
               Links Created :{" "}
-              <span className={Styles.userInfo}>{props.a.linkNumber}</span>
+              <span ref={userRouteCount} className={Styles.userInfo}>{props.a.linkNumber}</span>
             </p>
             <p className={Styles.hitsGenerated}>
-              Hits Generated:{" "}
-              <span className={Styles.userInfo}>{props.a.hitNUmber}</span>
+              Hits Generated:
+              <span ref={userHitRef} className={Styles.userInfo}>{pageLoading && 0}</span>
             </p>
           </div>
           <div className={Styles.okHolder} onClick={() => props.okayTrigger()}>

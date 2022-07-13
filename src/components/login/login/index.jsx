@@ -48,10 +48,8 @@ const Login = () => {
         email: username.current.value,
         password: password.current.value,
       });
-      console.log("output from login page post", r);
       if (r.issue) {
         errorObj.desc = r.issueDetail;
-        console.log(r.issueDetail, errorObj);
         setLoading(false);
         setpopUp(true);
       } else if (r.output) {
@@ -89,7 +87,7 @@ const Login = () => {
               required="requried"
               maxLength="50"
               className={Styles.userNameInput}
-              autoComplete
+              autoComplete="on"
             />
             <span>Username</span>
           </div>

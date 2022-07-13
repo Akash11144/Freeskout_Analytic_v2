@@ -1,8 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import Styles from "./index.module.css";
-import SmallLoading from "../../extras/loading-animation/small-loading";
-import SendMail from "../../extras/loading-animation/sendMailAnimation";
-import companyGif from "../../assets/FsnoBg.gif";
 import {
   urlChecker,
   emailChecker,
@@ -10,10 +7,13 @@ import {
   postAuth,
   slugchecker,
 } from "../../utlis";
+import companyGif from "../../assets/FsnoBg.gif";
 import { IoLogoInstagram } from "react-icons/io";
 import { IoLogoYoutube } from "react-icons/io";
 import { IoLogoTwitter } from "react-icons/io";
 import { IoLogoLinkedin } from "react-icons/io";
+import SmallLoading from "../../extras/loading-animation/small-loading";
+import SendMail from "../../extras/loading-animation/sendMailAnimation";
 import InformationPopUp from "../../extras/pop-ups/information";
 
 let errorObj = {
@@ -116,9 +116,9 @@ const RouteCreationDesign = (props) => {
 
   return (
     <>
+      {generateLoading && <SmallLoading />}
       {pageError && <InformationPopUp keyp={"sfcb"} createUserPopUp={() => setpageError(false)}  {...errorObj} />}
       <div className={Styles.mainCont}>
-        {generateLoading && <SmallLoading />}
         <div className={Styles.secondaryDiv}>
           <div className={Styles.formPartOne}>
             <input
@@ -315,12 +315,7 @@ const UserCreationSideForm = ({ a, searchV, sideFormCallback }) => {
         errorObj.navigation = false;
       }
       sideFormCallback();
-    } else {
-      errorObj.desc = "route created successfully and link copied:" + path;
-      errorObj.navigation = false;
-      sideFormCallback();
-      sethomeDiv(true);
-    }
+    } else sethomeDiv(true);
     setsaveBtnLoading(false);
   };
   const handelHomeBtn = () => {

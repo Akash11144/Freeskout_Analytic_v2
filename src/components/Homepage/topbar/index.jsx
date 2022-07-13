@@ -72,21 +72,18 @@ const TopbarLayout = ({ admin, person }) => {
           >
             <div className={Styles.hamCont}>
               <span
-                className={`${Styles.line} ${
-                  isActive ? Styles.lineTop : Styles.line
-                }`}
+                className={`${Styles.line} ${isActive ? Styles.lineTop : Styles.line
+                  }`}
                 id="topLine"
               ></span>
               <span
-                className={`${Styles.line}  ${
-                  isActive ? Styles.lineMiddle : Styles.line
-                }`}
+                className={`${Styles.line}  ${isActive ? Styles.lineMiddle : Styles.line
+                  }`}
                 id="bottomLine"
               ></span>
               <span
-                className={`${Styles.line} ${
-                  isActive ? Styles.lineBottom : Styles.line
-                }`}
+                className={`${Styles.line} ${isActive ? Styles.lineBottom : Styles.line
+                  }`}
                 id="endLine"
               ></span>
             </div>
@@ -100,9 +97,8 @@ const TopbarLayout = ({ admin, person }) => {
         </div>
       </div>
       <div
-        className={`${Styles.sideBarCont} ${
-          isActive ? Styles.sideBarShow : Styles.sideBarCont
-        }`}
+        className={`${Styles.sideBarCont} ${isActive ? Styles.sideBarShow : Styles.sideBarCont
+          }`}
         id="sideMenu"
       >
         <div className={Styles.sideBar}>
@@ -113,18 +109,16 @@ const TopbarLayout = ({ admin, person }) => {
             <Link
               className={Styles.linky}
               to={"/home"}
-              onClick={() => {
-                hamClick();
-              }}
+              state={{ admin }}
+              onClick={() => hamClick()}
             >
               <p>Create Link</p>
             </Link>
             <Link
               className={Styles.linky}
               to={"/home/lm"}
-              onClick={() => {
-                hamClick();
-              }}
+              state={{ admin }}
+              onClick={() => hamClick()}
             >
               <p>Manage Links</p>
             </Link>
@@ -132,9 +126,8 @@ const TopbarLayout = ({ admin, person }) => {
               <Link
                 className={Styles.linky}
                 to={"/home/fum"}
-                onClick={() => {
-                  hamClick();
-                }}
+                state={{ admin }}
+                onClick={() => hamClick()}
               >
                 <p>Manage Users</p>
               </Link>
@@ -142,6 +135,7 @@ const TopbarLayout = ({ admin, person }) => {
             <Link
               className={Styles.linky}
               to={"/home"}
+              state={{ admin }}
               onClick={() => hamClick()}
             >
               <p>Dashboard</p>
