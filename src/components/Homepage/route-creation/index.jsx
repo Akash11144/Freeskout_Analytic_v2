@@ -316,7 +316,7 @@ const UserCreationSideForm = ({ a, searchV, sideFormCallback }) => {
       }
       sideFormCallback();
     } else {
-      errorObj.desc = r.issueDetail;
+      errorObj.desc = "route created successfully and link copied:" + path;
       errorObj.navigation = false;
       sideFormCallback();
       sethomeDiv(true);

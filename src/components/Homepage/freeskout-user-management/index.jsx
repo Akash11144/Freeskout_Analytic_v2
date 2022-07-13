@@ -12,6 +12,15 @@ let errorObj = {
   navigation: true,
   navigationRoute: "",
 };
+let j = false;
+useEffect(() => {
+  first
+
+  return () => {
+    j = true;
+  }
+}, [third])
+
 
 let i = 1;
 
