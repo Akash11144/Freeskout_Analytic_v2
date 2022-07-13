@@ -3,6 +3,7 @@ import Styles from "../linkManagement/index.module.css";
 import { AiFillCaretDown } from "react-icons/ai";
 import { BsFillEyeFill } from "react-icons/bs";
 import { AiTwotoneDelete } from "react-icons/ai";
+import { AiFillCloseCircle } from "react-icons/ai";
 import { FaFilter } from "react-icons/fa";
 import { dateTimegen, durationGenerator, fetchAuth, L_LINK } from "../../utlis";
 import InformationPopUp from "../../extras//pop-ups/information";
@@ -26,6 +27,7 @@ const LinkManement = (props) => {
   const [linkData, setlinkData] = useState();
   const [showActiveLink, setshowActiveLink] = useState(true);
   const [showDeletedlinks, setshowDeletedlinks] = useState(true);
+  const [closeFilterIcon, setcloseFilterIcon] = useState(false);
 
   const selected_status = useRef(null);
   const all_links = useRef(null);
@@ -193,9 +195,16 @@ const LinkManement = (props) => {
               className={Styles.filterIconHolder}
               onClick={() => {
                 handelMobileSelectors();
+                setcloseFilterIcon(!closeFilterIcon);
               }}
             >
-              <FaFilter></FaFilter>
+              {closeFilterIcon ? (
+                <AiFillCloseCircle
+                  className={Styles.closeFilterIcon}
+                ></AiFillCloseCircle>
+              ) : (
+                <FaFilter></FaFilter>
+              )}
             </div>
             <div
               className={`${Styles.selectors} ${
@@ -229,6 +238,7 @@ const LinkManement = (props) => {
                     className={Styles.otherOptions}
                     onClick={() => {
                       handleStatusSelector();
+
                       allClick();
                     }}
                   >
