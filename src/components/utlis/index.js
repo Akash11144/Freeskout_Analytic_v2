@@ -161,9 +161,10 @@ export const urlChecker = (site) => {
 
 // ------------------------------------------------------------------------------
 export const slugchecker = (slug) => {
+  let mainSLug = slug.toLowerCase()
   let slugSts = true;
-  for (let i = 0; i < slug.length; i++) {
-    let a = slug[i].charCodeAt();
+  for (let i = 0; i < mainSLug.length; i++) {
+    let a = mainSLug[i].charCodeAt();
     if (
       (a > 96 && a < 123) ||
       (a > 47 && a < 58) ||

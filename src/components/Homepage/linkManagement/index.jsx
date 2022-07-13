@@ -3,6 +3,7 @@ import Styles from "../linkManagement/index.module.css";
 import { AiFillCaretDown } from "react-icons/ai";
 import { BsFillEyeFill } from "react-icons/bs";
 import { AiTwotoneDelete } from "react-icons/ai";
+import { AiFillCloseCircle } from "react-icons/ai";
 import { FaFilter } from "react-icons/fa";
 import { dateTimegen, durationGenerator, fetchAuth, L_LINK } from "../../utlis";
 import InformationPopUp from "../../extras//pop-ups/information";
@@ -26,6 +27,7 @@ const LinkManement = (props) => {
   const [linkData, setlinkData] = useState();
   const [showActiveLink, setshowActiveLink] = useState(true);
   const [showDeletedlinks, setshowDeletedlinks] = useState(true);
+  const [closeFilterIcon, setcloseFilterIcon] = useState(false);
 
   const selected_status = useRef(null);
   const all_links = useRef(null);
@@ -57,7 +59,7 @@ const LinkManement = (props) => {
         }
         setpageError(true);
       } else {
-        setrouteData(r);
+        setrouteData(r.reverse());
         setuserData(r1);
       }
     }
@@ -164,14 +166,14 @@ const LinkManement = (props) => {
           errorObj.desc = r.issueDetail;
           errorObj.navigation = false;
         }
-        setpageError(true)
+        setpageError(true);
       } else {
         DataFetch();
       }
     } catch (error) {
       errorObj.desc = "Some error while deleting";
       errorObj.navigation = false;
-      setpageError(true)
+      setpageError(true);
       console.log("error while deleting route in catch", error);
     }
   };
@@ -179,7 +181,13 @@ const LinkManement = (props) => {
   return (
     <>
       {Loading && <SmallLoading />}
-      {pageError && <InformationPopUp keyp={"lmcb"} linkMgmtPopUp={() => setpageError(false)} {...errorObj} />}
+      {pageError && (
+        <InformationPopUp
+          keyp={"lmcb"}
+          linkMgmtPopUp={() => setpageError(false)}
+          {...errorObj}
+        />
+      )}
       <div className={Styles.mainCont}>
         <div className={Styles.secondaryDiv}>
           <div className={Styles.filtersOnMobile}>
@@ -187,13 +195,21 @@ const LinkManement = (props) => {
               className={Styles.filterIconHolder}
               onClick={() => {
                 handelMobileSelectors();
+                setcloseFilterIcon(!closeFilterIcon);
               }}
             >
-              <FaFilter></FaFilter>
+              {closeFilterIcon ? (
+                <AiFillCloseCircle
+                  className={Styles.closeFilterIcon}
+                ></AiFillCloseCircle>
+              ) : (
+                <FaFilter></FaFilter>
+              )}
             </div>
             <div
-              className={`${Styles.selectors} ${isSelectorsActive ? Styles.selectorsShow : Styles.selectors
-                }`}
+              className={`${Styles.selectors} ${
+                isSelectorsActive ? Styles.selectorsShow : Styles.selectors
+              }`}
             >
               <div className={Styles.selectedOption}>
                 <div className={Styles.initialDiv}>
@@ -212,15 +228,17 @@ const LinkManement = (props) => {
                 </div>
                 <div
                   className={`${Styles.otherOptionsContShow}
-            ${isActive
-                      ? Styles.otherOptionsContShow
-                      : Styles.otherOptionsContHide
-                    }`}
+            ${
+              isActive
+                ? Styles.otherOptionsContShow
+                : Styles.otherOptionsContHide
+            }`}
                 >
                   <div
                     className={Styles.otherOptions}
                     onClick={() => {
                       handleStatusSelector();
+
                       allClick();
                     }}
                   >
@@ -263,10 +281,11 @@ const LinkManement = (props) => {
                 </div>
                 <div
                   className={`${Styles.otherOptionsContShow}
-            ${isUserActive
-                      ? Styles.otherOptionsContShow
-                      : Styles.otherOptionsContHide
-                    }`}
+            ${
+              isUserActive
+                ? Styles.otherOptionsContShow
+                : Styles.otherOptionsContHide
+            }`}
                 >
                   <div
                     className={Styles.otherOptions}
@@ -322,6 +341,7 @@ const LinkManement = (props) => {
           <div className={Styles.linkList}>
             {showActiveLink && (
               <div className={Styles.linksContainer}>
+                {console.log("testingData", routeData)}
                 {routeData.length &&
                   routeData.map((item, index) => {
                     {
@@ -392,8 +412,9 @@ const LinkLayout = (props) => {
     <>
       <div
         key={index}
-        className={`${Styles.delCont} ${status ? Styles.delCont : Styles.activeCont
-          }`}
+        className={`${Styles.delCont} ${
+          status ? Styles.delCont : Styles.activeCont
+        }`}
       >
         <div className={Styles.linkCont}>
           <p>www.freeskout.com/redirect{path}</p>
@@ -454,7 +475,8 @@ const DetailLayout = (props) => {
     if (!i) {
       const hitFetch = async () => {
         let r = await fetchAuth(
-          `http://localhost:1111/user/getAllFromSlug/${props.path.split("/")[1]
+          `http://localhost:1111/user/getAllFromSlug/${
+            props.path.split("/")[1]
           }`
         );
         hitRef.current.innerText = r;

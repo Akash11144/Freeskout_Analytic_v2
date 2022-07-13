@@ -15,8 +15,6 @@ let errorObj = {
   navigationRoute: "",
 };
 
-
-
 let i = 1;
 
 const FUM = () => {
@@ -41,7 +39,10 @@ const FUM = () => {
       <div className={Styles.mainCont}>
         <div className={Styles.secondaryDiv}>
           <UserForm userFormPopUpCallback={() => setpageError(true)} setnewUser={setnewUser} />
-          <ActiveUser activeUserCallback={() => setpageError(true)} newUser={newUser} />
+          <ActiveUser
+            activeUserCallback={() => setpageError(true)}
+            newUser={newUser}
+          />
         </div>
       </div>
     </>
@@ -182,10 +183,8 @@ const ActiveUser = ({ newUser, activeUserCallback }) => {
   useEffect(() => {
     setpageLoading(true)
     if (!j) dataFetch();
-    setpageLoading(false)
-    return () => {
-      j = true;
-    };
+    setpageLoading(false);
+    return () => j = true;
   }, [newUser]);
 
   const handelViewDetails = () => {
@@ -205,17 +204,20 @@ const ActiveUser = ({ newUser, activeUserCallback }) => {
         <div className={Styles.activeUsersCont}>
           {Data.length ? (
             Data.map((item, index) => {
-              return !item.deleted &&
-                <User
-                  key={index}
-                  {...item}
-                  DetailTrigger={(d) => {
-                    setuseDetails(d);
-                    handelViewDetails();
-                  }}
-                  DeleteTrigger={() => dataFetch()}
-                  userPopUpCallback={() => activeUserCallback()}
-                />
+              return (
+                !item.deleted && (
+                  <User
+                    key={index}
+                    {...item}
+                    DetailTrigger={(d) => {
+                      setuseDetails(d);
+                      handelViewDetails();
+                    }}
+                    DeleteTrigger={() => dataFetch()}
+                    userPopUpCallback={() => activeUserCallback()}
+                  />
+                )
+              );
             })
           ) : (
             <h1>NO user available</h1>
@@ -224,17 +226,20 @@ const ActiveUser = ({ newUser, activeUserCallback }) => {
         <div className={Styles.activeUsersCont}>
           {Data.length ? (
             Data.map((item, index) => {
-              return item.deleted &&
-                <User
-                  key={index}
-                  {...item}
-                  DetailTrigger={(d) => {
-                    setuseDetails(d);
-                    handelViewDetails();
-                  }}
-                  DeleteTrigger={() => dataFetch()}
-                  userPopUpCallback={() => activeUserCallback()}
-                />
+              return (
+                item.deleted && (
+                  <User
+                    key={index}
+                    {...item}
+                    DetailTrigger={(d) => {
+                      setuseDetails(d);
+                      handelViewDetails();
+                    }}
+                    DeleteTrigger={() => dataFetch()}
+                    userPopUpCallback={() => activeUserCallback()}
+                  />
+                )
+              );
             })
           ) : (
             <h1>NO user available</h1>
@@ -258,10 +263,9 @@ const User = ({
   deleted,
   DetailTrigger,
   DeleteTrigger,
-  userPopUpCallback
+  userPopUpCallback,
 }) => {
   const [pageLoading, setpageLoading] = useState(false);
-
 
   let detailObj = {
     name,
@@ -383,11 +387,11 @@ const ViewUserDetails = (props) => {
           <div className={Styles.dataSecondaryDiv}>
             <p className={Styles.linksCreated}>
               Links Created :{" "}
-              <span ref={userRouteCount} className={Styles.userInfo}>{props.a.linkNumber}</span>
+              <span ref={userRouteCount} className={Styles.userInfo}>{props.a.linkNumber} </span>
             </p>
             <p className={Styles.hitsGenerated}>
               Hits Generated:
-              <span ref={userHitRef} className={Styles.userInfo}>{pageLoading && 0}</span>
+              <span ref={userHitRef} className={Styles.userInfo}>{" "}{pageLoading && 0}</span>
             </p>
           </div>
           <div className={Styles.okHolder} onClick={() => props.okayTrigger()}>
