@@ -28,11 +28,11 @@ const LinkManement = (props) => {
   const [showActiveLink, setshowActiveLink] = useState(true);
   const [showDeletedlinks, setshowDeletedlinks] = useState(true);
   const [closeFilterIcon, setcloseFilterIcon] = useState(false);
-
   const selected_status = useRef(null);
   const all_links = useRef(null);
   const active_links = useRef(null);
   const deleted_links = useRef(null);
+  const linkListCont = useRef(null);
   const linkContRef = useRef(null);
 
   const DataFetch = async () => {
@@ -135,9 +135,11 @@ const LinkManement = (props) => {
 
   const handleview = () => {
     setviewDetails(true);
+    // linkListCont.current.style.overflowY = "hidden";
   };
   const handleCloseDetails = () => {
     setviewDetails(false);
+    // linkListCont.current.style.overflowY = "scroll";
   };
 
   const handleDelete = async ({ path, email }) => {
@@ -338,52 +340,54 @@ const LinkManement = (props) => {
               </div>
             </div>
           </div>
-          <div className={Styles.linkList}>
-            {showActiveLink && (
-              <div className={Styles.linksContainer}>
-                {console.log("testingData", routeData)}
-                {routeData.length &&
-                  routeData.map((item, index) => {
-                    {
-                      return (
-                        !item.deleted && (
-                          <LinkLayout
-                            index={index}
-                            {...item}
-                            linkCallBack={(val) => handleDelete(val)}
-                            viewLInkDetailsTRigger={(mylinkData) => {
-                              handleview();
-                              setlinkData(mylinkData);
-                            }}
-                          />
-                        )
-                      );
-                    }
-                  })}
-              </div>
-            )}
-            {showDeletedlinks && (
-              <div className={Styles.linksContainerA}>
-                {routeData.length &&
-                  routeData.map((item, index) => {
-                    {
-                      return (
-                        item.deleted && (
-                          <LinkLayout
-                            index={index}
-                            {...item}
-                            linkCallBack={(val) => handleDelete(val)}
-                            viewLInkDetailsTRigger={(mylinkData) => {
-                              handleview();
-                              setlinkData(mylinkData);
-                            }}
-                          />
-                        )
-                      );
-                    }
-                  })}
-              </div>
-            )}
+          <div className={Styles.linkList} ref={linkListCont}>
+            <div className={Styles.linkListSecCont}>
+              {showActiveLink && (
+                <div className={Styles.linksContainer}>
+                  {console.log("testingData", routeData)}
+                  {routeData.length &&
+                    routeData.map((item, index) => {
+                      {
+                        return (
+                          !item.deleted && (
+                            <LinkLayout
+                              index={index}
+                              {...item}
+                              linkCallBack={(val) => handleDelete(val)}
+                              viewLInkDetailsTRigger={(mylinkData) => {
+                                handleview();
+                                setlinkData(mylinkData);
+                              }}
+                            />
+                          )
+                        );
+                      }
+                    })}
+                </div>
+              )}
+              {showDeletedlinks && (
+                <div className={Styles.linksContainerA}>
+                  {routeData.length &&
+                    routeData.map((item, index) => {
+                      {
+                        return (
+                          item.deleted && (
+                            <LinkLayout
+                              index={index}
+                              {...item}
+                              linkCallBack={(val) => handleDelete(val)}
+                              viewLInkDetailsTRigger={(mylinkData) => {
+                                handleview();
+                                setlinkData(mylinkData);
+                              }}
+                            />
+                          )
+                        );
+                      }
+                    })}
+                </div>
+              )}
+            </div>
 
             {viewDetails && (
               <DetailLayout
