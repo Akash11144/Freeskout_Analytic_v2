@@ -111,25 +111,31 @@ const LinkManement = (props) => {
   const handleSortedData = async () => {
     setLoading(true);
     console.log(selected_user.current.innerText);
-    let r = await fetchAuth(
-      `${L_LINK}/route/userRoute/${selected_user.current.innerText}`
-    );
-    if (r.issue) {
-      if (r.storageClear) {
-        r.storageClear && localStorage.removeItem("Freeskout-session");
-        errorObj.desc = r.issueDetail;
-        errorObj.navigationRoute = "/";
+    if (selected_user.current.innerText === "All User") {
+      let r = await fetchAuth(`${L_LINK}/route/allRoutes`);
+      setrouteData(r.reverse());
+    }
+    else {
+      let r = await fetchAuth(
+        `${L_LINK}/route/userRoute/${selected_user.current.innerText}`
+      );
+      if (r.issue) {
+        if (r.storageClear) {
+          r.storageClear && localStorage.removeItem("Freeskout-session");
+          errorObj.desc = r.issueDetail;
+          errorObj.navigationRoute = "/";
+        } else {
+          console.log("inside else");
+          errorObj.desc = r.issueDetail;
+          errorObj.navigation = false;
+        }
+        setLoading(false);
+        setpageError(true);
       } else {
-        console.log("inside else");
-        errorObj.desc = r.issueDetail;
-        errorObj.navigation = false;
+        setrouteData(r);
+        console.log(r);
+        setLoading(false);
       }
-      setLoading(false);
-      setpageError(true);
-    } else {
-      setrouteData(r);
-      console.log(r);
-      setLoading(false);
     }
   };
 
@@ -207,9 +213,8 @@ const LinkManement = (props) => {
               )}
             </div>
             <div
-              className={`${Styles.selectors} ${
-                isSelectorsActive ? Styles.selectorsShow : Styles.selectors
-              }`}
+              className={`${Styles.selectors} ${isSelectorsActive ? Styles.selectorsShow : Styles.selectors
+                }`}
             >
               <div className={Styles.selectedOption}>
                 <div className={Styles.initialDiv}>
@@ -228,11 +233,10 @@ const LinkManement = (props) => {
                 </div>
                 <div
                   className={`${Styles.otherOptionsContShow}
-            ${
-              isActive
-                ? Styles.otherOptionsContShow
-                : Styles.otherOptionsContHide
-            }`}
+            ${isActive
+                      ? Styles.otherOptionsContShow
+                      : Styles.otherOptionsContHide
+                    }`}
                 >
                   <div
                     className={Styles.otherOptions}
@@ -281,11 +285,10 @@ const LinkManement = (props) => {
                 </div>
                 <div
                   className={`${Styles.otherOptionsContShow}
-            ${
-              isUserActive
-                ? Styles.otherOptionsContShow
-                : Styles.otherOptionsContHide
-            }`}
+            ${isUserActive
+                      ? Styles.otherOptionsContShow
+                      : Styles.otherOptionsContHide
+                    }`}
                 >
                   <div
                     className={Styles.otherOptions}
@@ -412,9 +415,8 @@ const LinkLayout = (props) => {
     <>
       <div
         key={index}
-        className={`${Styles.delCont} ${
-          status ? Styles.delCont : Styles.activeCont
-        }`}
+        className={`${Styles.delCont} ${status ? Styles.delCont : Styles.activeCont
+          }`}
       >
         <div className={Styles.linkCont}>
           <p>www.freeskout.com/redirect{path}</p>
@@ -475,8 +477,7 @@ const DetailLayout = (props) => {
     if (!i) {
       const hitFetch = async () => {
         let r = await fetchAuth(
-          `http://localhost:1111/user/getAllFromSlug/${
-            props.path.split("/")[1]
+          `http://localhost:1111/user/getAllFromSlug/${props.path.split("/")[1]
           }`
         );
         hitRef.current.innerText = r;
