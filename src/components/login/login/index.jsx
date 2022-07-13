@@ -89,7 +89,7 @@ const Login = () => {
               required="requried"
               maxLength="50"
               className={Styles.userNameInput}
-              autoComplete
+              autoComplete="on"
             />
             <span>Username</span>
           </div>

@@ -12,15 +12,14 @@ let errorObj = {
   navigation: true,
   navigationRoute: "",
 };
-let j = false;
-useEffect(() => {
-  first
+// let j = false;
+// useEffect(() => {
+//   first
 
-  return () => {
-    j = true;
-  }
-}, [third])
-
+//   return () => {
+//     j = true;
+//   }
+// }, [third])
 
 let i = 1;
 
@@ -30,11 +29,23 @@ const FUM = () => {
 
   return (
     <>
-      {pageError && <InformationPopUp keyp={"fummain"} pucb={() => setpageError(false)} {...errorObj} />}
+      {pageError && (
+        <InformationPopUp
+          keyp={"fummain"}
+          pucb={() => setpageError(false)}
+          {...errorObj}
+        />
+      )}
       <div className={Styles.mainCont}>
         <div className={Styles.secondaryDiv}>
-          <UserForm userFormPopUpCallback={() => setpageError(true)} setnewUser={setnewUser} />
-          <ActiveUser activeUserCallback={() => setpageError(true)} newUser={newUser} />
+          <UserForm
+            userFormPopUpCallback={() => setpageError(true)}
+            setnewUser={setnewUser}
+          />
+          <ActiveUser
+            activeUserCallback={() => setpageError(true)}
+            newUser={newUser}
+          />
         </div>
       </div>
     </>
@@ -173,10 +184,10 @@ const ActiveUser = ({ newUser, activeUserCallback }) => {
 
   let j = false;
   useEffect(() => {
-    setpageLoading(true)
+    setpageLoading(true);
 
     if (!j) dataFetch();
-    setpageLoading(false)
+    setpageLoading(false);
     return () => {
       j = true;
     };
@@ -199,17 +210,20 @@ const ActiveUser = ({ newUser, activeUserCallback }) => {
         <div className={Styles.activeUsersCont}>
           {Data.length ? (
             Data.map((item, index) => {
-              return !item.deleted &&
-                <User
-                  key={index}
-                  {...item}
-                  DetailTrigger={(d) => {
-                    setuseDetails(d);
-                    handelViewDetails();
-                  }}
-                  DeleteTrigger={() => dataFetch()}
-                  userPopUpCallback={() => activeUserCallback()}
-                />
+              return (
+                !item.deleted && (
+                  <User
+                    key={index}
+                    {...item}
+                    DetailTrigger={(d) => {
+                      setuseDetails(d);
+                      handelViewDetails();
+                    }}
+                    DeleteTrigger={() => dataFetch()}
+                    userPopUpCallback={() => activeUserCallback()}
+                  />
+                )
+              );
             })
           ) : (
             <h1>NO user available</h1>
@@ -218,17 +232,20 @@ const ActiveUser = ({ newUser, activeUserCallback }) => {
         <div className={Styles.activeUsersCont}>
           {Data.length ? (
             Data.map((item, index) => {
-              return item.deleted &&
-                <User
-                  key={index}
-                  {...item}
-                  DetailTrigger={(d) => {
-                    setuseDetails(d);
-                    handelViewDetails();
-                  }}
-                  DeleteTrigger={() => dataFetch()}
-                  userPopUpCallback={() => activeUserCallback()}
-                />
+              return (
+                item.deleted && (
+                  <User
+                    key={index}
+                    {...item}
+                    DetailTrigger={(d) => {
+                      setuseDetails(d);
+                      handelViewDetails();
+                    }}
+                    DeleteTrigger={() => dataFetch()}
+                    userPopUpCallback={() => activeUserCallback()}
+                  />
+                )
+              );
             })
           ) : (
             <h1>NO user available</h1>
@@ -252,10 +269,9 @@ const User = ({
   deleted,
   DetailTrigger,
   DeleteTrigger,
-  userPopUpCallback
+  userPopUpCallback,
 }) => {
   const [pageLoading, setpageLoading] = useState(false);
-
 
   let detailObj = {
     name,
