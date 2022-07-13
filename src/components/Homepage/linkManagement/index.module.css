@@ -8,8 +8,7 @@
 .secondaryDiv {
   padding: 0 3%;
 }
-.selectors,
-.linkList {
+.selectors {
   height: inherit;
   width: 98%;
   margin: 0 auto;
@@ -28,12 +27,17 @@
 }
 .linkList {
   position: relative;
-  min-height: 75vh;
+  height: inherit;
+  width: 98%;
+  margin: 0 auto;
+  background-clip: border-box;
+  min-height: 73vh;
   padding-bottom: 5px;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: center;
+  padding: 1% 0;
 }
 .initialDiv {
   display: flex;
@@ -187,66 +191,52 @@ focus {
   box-shadow: none;
   font-size: 13px;
 }
-.linksContainer {
-  width: 98%;
-  margin: 0 auto;
-  display: flex;
-  /* justify-content: space-around; */
-  align-items: center;
-  flex-wrap: wrap;
-  max-height: 69vh;
-  overflow-y: auto;
-  padding-left: 4%;
-}
+.linksContainer,
 .linksContainerA {
-  width: 98%;
+  width: 100%;
+  box-sizing: border-box;
   margin: 0 auto;
   display: flex;
-  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   max-height: 69vh;
   overflow-y: auto;
-  padding-left: 4%;
+}
+.delCont,
+.activeCont {
+  width: calc(48% - 5px);
+  margin: 0 10px 10px 10px;
+  background-clip: border-box;
+  border: 1px solid rgba(170, 221, 238, 0.3333333333333333);
+  border-radius: 1rem;
+  box-shadow: 0 2.5px 10px 1px rgb(170 221 238 / 13%);
+  color: #fdffff;
+  padding: 1% 2%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .delCont {
-  min-width: 45%;
-  max-width: calc(50% - 5px);
-  margin: 0 10px 10px 10px;
-  background-clip: border-box;
-  border: 1px solid rgba(170, 221, 238, 0.3333333333333333);
-  border-radius: 1rem;
-  box-shadow: 0 2.5px 10px 1px rgb(170 221 238 / 13%);
   background-color: #b30f28a8;
-  color: #fdffff;
-  padding: 1% 2%;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 .activeCont {
-  min-width: 45%;
-  max-width: calc(50% - 5px);
-  margin: 0 10px 10px 10px;
-  background-clip: border-box;
-  border: 1px solid rgba(170, 221, 238, 0.3333333333333333);
-  border-radius: 1rem;
-  box-shadow: 0 2.5px 10px 1px rgb(170 221 238 / 13%);
   background-color: cadetblue;
-  color: #fdffff;
-  padding: 1% 2%;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .linkCont {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 80%;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.linkHitsitsCont {
+/* .linkHitsitsCont {
   background-color: #0a3556dd;
   color: #fdffff !important;
   padding: 1% 2%;
@@ -254,7 +244,7 @@ focus {
   font-size: 12px;
   font-weight: 700 !important;
   margin: unset;
-}
+} */
 .linkCont > p:nth-of-type(1),
 .linkCont > div > p:nth-of-type(1) {
   word-wrap: break-word;
@@ -270,12 +260,17 @@ focus {
   margin: unset;
 }
 .userActionBtnsCont {
+  width: 10%;
   display: grid;
   place-items: center;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto;
   column-gap: 8px;
-  width: max-content;
+  /* width: max-content; */
   /* margin-top: 3px; */
+}
+
+.activeCont > div:nth-of-type(2) {
+  grid-template-columns: auto auto;
 }
 .HoverNotification {
   border: 1px solid rgba(170, 221, 238, 0.3333333333333333);
@@ -340,7 +335,7 @@ focus {
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 98.5%;
+  height: 96.5%;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.132);
   position: absolute;
@@ -453,7 +448,7 @@ focus {
 }
 
 /* -------------------------Media Queries------------ */
-@media (max-width: px) {
+@media (max-width: 1001px) {
 }
 
 @media (max-width: 768px) {
