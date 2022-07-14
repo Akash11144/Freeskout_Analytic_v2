@@ -24,7 +24,7 @@ const LinkManement = (props) => {
   const [userData, setuserData] = useState([]);
   const [isSelectorsActive, setisSelectorsActive] = useState(false);
   const [pageError, setpageError] = useState(false);
-  const [Loading, setLoading] = useState(false);
+  const [Loading, setLoading] = useState(true);
   const [viewDetails, setviewDetails] = useState(false);
   const [linkData, setlinkData] = useState();
   const [showActiveLink, setshowActiveLink] = useState(true);
@@ -70,7 +70,6 @@ const LinkManement = (props) => {
 
   let i = false;
   useEffect(() => {
-    setLoading(true);
     if (!i) DataFetch();
     setLoading(false);
     return () => (i = true);
