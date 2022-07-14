@@ -103,10 +103,7 @@ const Login = () => {
           </div>
           <div
             className={Styles.logInBtn}
-            onClick={(e) => {
-              e.preventDefault();
-              handleLogin();
-            }}
+            onClick={() => handleLogin()}
           >
             Log In
           </div>
