@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router";
-import Styles from "../linkManagement/index.module.css";
+import Styles from "../link-management/index.module.css";
 import { AiFillCaretDown } from "react-icons/ai";
 import { BsFillEyeFill } from "react-icons/bs";
 import { AiTwotoneDelete } from "react-icons/ai";
@@ -9,7 +9,7 @@ import { FaFilter } from "react-icons/fa";
 import { dateTimegen, durationGenerator, fetchAuth, L_LINK } from "../../utlis";
 import InformationPopUp from "../../extras//pop-ups/information";
 import SmallLoading from "../../extras/loading-animation/small-loading";
-import SendMail from "../../extras/loading-animation/sendMailAnimation";
+import SendMail from "../../extras/loading-animation/send-mail-animation";
 
 let errorObj = {
   desc: "",
@@ -228,9 +228,8 @@ const LinkManement = (props) => {
               )}
             </div>
             <div
-              className={`${Styles.selectors} ${
-                isSelectorsActive ? Styles.selectorsShow : Styles.selectors
-              }`}
+              className={`${Styles.selectors} ${isSelectorsActive ? Styles.selectorsShow : Styles.selectors
+                }`}
             >
               <div className={Styles.selectedOption}>
                 <div className={Styles.initialDiv}>
@@ -249,11 +248,10 @@ const LinkManement = (props) => {
                 </div>
                 <div
                   className={`${Styles.otherOptionsContShow}
-            ${
-              isActive
-                ? Styles.otherOptionsContShow
-                : Styles.otherOptionsContHide
-            }`}
+            ${isActive
+                      ? Styles.otherOptionsContShow
+                      : Styles.otherOptionsContHide
+                    }`}
                 >
                   <div
                     className={Styles.otherOptions}
@@ -304,11 +302,10 @@ const LinkManement = (props) => {
                   </div>
                   <div
                     className={`${Styles.otherOptionsContShow}
-            ${
-              isUserActive
-                ? Styles.otherOptionsContShow
-                : Styles.otherOptionsContHide
-            }`}
+            ${isUserActive
+                        ? Styles.otherOptionsContShow
+                        : Styles.otherOptionsContHide
+                      }`}
                   >
                     <div
                       className={Styles.otherOptions}
@@ -438,9 +435,8 @@ const LinkLayout = (props) => {
     <>
       <div
         key={index}
-        className={`${Styles.delCont} ${
-          status ? Styles.delCont : Styles.activeCont
-        }`}
+        className={`${Styles.delCont} ${status ? Styles.delCont : Styles.activeCont
+          }`}
       >
         <div className={Styles.linkCont}>
           <p>www.freeskout.com/redirect{path}</p>

@@ -7,7 +7,7 @@ import { TbMinusVertical } from "react-icons/tb";
 import SmallLoading from "../../extras/loading-animation/small-loading";
 import { emailChecker, fetchAuth, L_LINK, postAuth } from "../../utlis";
 import InformationPopUp from "../../extras/pop-ups/information";
-import SendMail from "../../extras/loading-animation/sendMailAnimation";
+import SendMail from "../../extras/loading-animation/send-mail-animation";
 
 let errorObj = {
   desc: "",

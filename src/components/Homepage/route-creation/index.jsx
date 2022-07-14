@@ -13,7 +13,7 @@ import { IoLogoYoutube } from "react-icons/io";
 import { IoLogoTwitter } from "react-icons/io";
 import { IoLogoLinkedin } from "react-icons/io";
 import SmallLoading from "../../extras/loading-animation/small-loading";
-import SendMail from "../../extras/loading-animation/sendMailAnimation";
+import SendMail from "../../extras/loading-animation/send-mail-animation";
 import InformationPopUp from "../../extras/pop-ups/information";
 
 let errorObj = {
@@ -408,9 +408,8 @@ const UserCreationSideForm = ({
       {pageLoading && <SmallLoading />}
       <div className={Styles.genDetailsCont}>
         <div
-          className={`${Styles.afterSend} ${
-            homeDiv ? Styles.afterSendShow : Styles.afterSend
-          }`}
+          className={`${Styles.afterSend} ${homeDiv ? Styles.afterSendShow : Styles.afterSend
+            }`}
         >
           <div className={Styles.notiCont}>
             <a href="" ref={finalCopiedLink} target="_blank"></a>
