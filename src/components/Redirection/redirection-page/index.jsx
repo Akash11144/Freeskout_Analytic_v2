@@ -30,7 +30,7 @@ function Redir({ path, website }) {
     if (!i) {
       const dataSetter = async () => {
         await userData(path);
-        // window.open(website, "_self");
+        window.open(website, "_self");
       };
       dataSetter();
     }
