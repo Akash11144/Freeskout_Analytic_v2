@@ -418,6 +418,10 @@ focus {
   padding: 1% 2%;
   border-radius: 10px !important;
   width: unset !important;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .deletedHolder {
   background-color: turquoise;
