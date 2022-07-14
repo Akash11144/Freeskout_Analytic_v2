@@ -58,9 +58,19 @@ const RouteCreationDesign = (props) => {
     utCheck.current.value = false;
     othersCheck.current.value = false;
     twCheck.current.value = false;
+    social.insta = false;
+    social.linkedin = false;
+    social.youtube = false;
+    social.twitter = false;
+    social.others = false;
     setsendBtn(true);
     setsideForm(false);
     setsideloader(true);
+    instaCheck.current.style.color = "grey";
+    linkedinCheck.current.style.color = "grey";
+    utCheck.current.style.color = "grey";
+    twCheck.current.style.color = "grey";
+    othersCheck.current.style.color = "grey";
   };
 
   let i = false;
@@ -77,13 +87,8 @@ const RouteCreationDesign = (props) => {
     let finalRoute = "/" + route_inp.current.value;
     let finalWebsite = website_inp.current.value;
     let genLink = "http://localhost:3000" + "/redirect" + finalRoute;
-    let instaSts = instaCheck.current.checked;
-    let linkedinSts = linkedinCheck.current.checked;
-    let utSts = utCheck.current.checked;
-    let twSts = twCheck.current.checked;
-    let otherSts = othersCheck.current.checked;
+    let { insta, linkedin, youtube, twitter, others } = social;
     let platform = "";
-
     let sts = emailChecker(finalMail);
     let urlSts = urlChecker(finalWebsite);
     let slugSts = slugchecker(route_inp.current.value);
@@ -102,20 +107,14 @@ const RouteCreationDesign = (props) => {
       alert("Inavlid landing url, Space not allowed");
     } else if (slugSts === false) {
       alert("Invalid slug format");
-    } else if (
-      instaSts == false &&
-      linkedinSts == false &&
-      utSts == false &&
-      twSts == false &&
-      otherSts == false
-    ) {
+    } else if (!insta && !linkedin && !youtube && !twitter && !others) {
       alert("select atleast one platform");
     } else {
-      if (instaSts) platform += "Instagram,";
-      if (linkedinSts) platform += "LinkedIn,";
-      if (utSts) platform += "YouTube,";
-      if (twSts) platform += "Twitter,";
-      if (otherSts) platform += "Others";
+      if (insta) platform += "Instagram,";
+      if (linkedin) platform += "LinkedIn,";
+      if (youtube) platform += "YouTube,";
+      if (twitter) platform += "Twitter,";
+      if (others) platform += "Others";
 
       setsideForm({
         name: props.name,
@@ -267,7 +266,7 @@ const RouteCreationDesign = (props) => {
                     console.log(social);
                   }
                   social.others
-                    ? (othersCheck.current.style.color = "#1adb")
+                    ? (othersCheck.current.style.color = "#0c1117")
                     : (othersCheck.current.style.color = "grey");
                 }}
               >
