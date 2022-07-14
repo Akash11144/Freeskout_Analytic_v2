@@ -207,7 +207,7 @@ const RouteCreationDesign = (props) => {
                     console.log(social);
                   }
                   social.insta
-                    ? (instaCheck.current.style.color = "blue")
+                    ? (instaCheck.current.style.color = "#bc2a8d")
                     : (instaCheck.current.style.color = "grey");
                 }}
               >
@@ -221,8 +221,8 @@ const RouteCreationDesign = (props) => {
                   {
                     console.log(social);
                   }
-                  social.insta
-                    ? (linkedinCheck.current.style.color = "blue")
+                  social.linkedin
+                    ? (linkedinCheck.current.style.color = "#0072b1")
                     : (linkedinCheck.current.style.color = "grey");
                 }}
               >
@@ -237,7 +237,7 @@ const RouteCreationDesign = (props) => {
                     console.log(social);
                   }
                   social.youtube
-                    ? (utCheck.current.style.color = "red")
+                    ? (utCheck.current.style.color = "#ff0000")
                     : (utCheck.current.style.color = "grey");
                 }}
               >
@@ -252,7 +252,7 @@ const RouteCreationDesign = (props) => {
                     console.log(social);
                   }
                   social.twitter
-                    ? (twCheck.current.style.color = "red")
+                    ? (twCheck.current.style.color = "#1da1f2")
                     : (twCheck.current.style.color = "grey");
                 }}
               >
@@ -267,7 +267,7 @@ const RouteCreationDesign = (props) => {
                     console.log(social);
                   }
                   social.others
-                    ? (othersCheck.current.style.color = "pink")
+                    ? (othersCheck.current.style.color = "#1adb")
                     : (othersCheck.current.style.color = "grey");
                 }}
               >
@@ -408,8 +408,9 @@ const UserCreationSideForm = ({
       {pageLoading && <SmallLoading />}
       <div className={Styles.genDetailsCont}>
         <div
-          className={`${Styles.afterSend} ${homeDiv ? Styles.afterSendShow : Styles.afterSend
-            }`}
+          className={`${Styles.afterSend} ${
+            homeDiv ? Styles.afterSendShow : Styles.afterSend
+          }`}
         >
           <div className={Styles.notiCont}>
             <a href="" ref={finalCopiedLink} target="_blank"></a>
