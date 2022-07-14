@@ -40,6 +40,22 @@ const RouteCreationDesign = (props) => {
   const twChecked = useRef(null);
   const othersChecked = useRef(null);
 
+  let refresh = () => {
+    name_inp.current.value = "";
+    mail_inp.current.value = "";
+    route_inp.current.value = "";
+    desc_inp.current.value = "";
+    website_inp.current.value = "";
+    instaCheck.current.checked = false;
+    linkedinCheck.current.value = false;
+    utChecked.current.value = false;
+    othersChecked.current.value = false;
+    twChecked.current.value = false;
+    setsendBtn(true);
+    setsideForm(false);
+    setsideloader(true);
+  };
+
   let i = false;
   useEffect(() => {
     if (!i) console.log("create link props: ", props);
@@ -117,12 +133,18 @@ const RouteCreationDesign = (props) => {
   return (
     <>
       {generateLoading && <SmallLoading />}
-      {pageError && <InformationPopUp keyp={"sfcb"} createUserPopUp={() => setpageError(false)}  {...errorObj} />}
+      {pageError && (
+        <InformationPopUp
+          keyp={"sfcb"}
+          createUserPopUp={() => setpageError(false)}
+          {...errorObj}
+        />
+      )}
       <div className={Styles.mainCont}>
         <div className={Styles.secondaryDiv}>
           <div className={Styles.formPartOne}>
             <input
-              autoComplete="off"
+              autoComplete="on"
               className={Styles.inputFields}
               id="Name"
               ref={name_inp}
@@ -152,7 +174,7 @@ const RouteCreationDesign = (props) => {
             />
 
             <input
-              autoComplete="off"
+              autoComplete="on"
               className={Styles.inputFields}
               id="linkTotrack"
               ref={website_inp}
@@ -161,7 +183,7 @@ const RouteCreationDesign = (props) => {
               required={true}
             />
             <input
-              autoComplete="off"
+              autoComplete="on"
               className={`${Styles.inputFields}`}
               id="slug"
               ref={route_inp}
@@ -218,6 +240,7 @@ const RouteCreationDesign = (props) => {
               <UserCreationSideForm
                 a={sideForm}
                 searchV={() => handelSendBtnShow()}
+                handelrefresh={() => refresh()}
                 sideFormCallback={() => setpageError(true)}
               />
             )}
@@ -241,7 +264,12 @@ export default RouteCreationDesign;
 
 // ---------------------------------------------------------------------------------------------
 
-const UserCreationSideForm = ({ a, searchV, sideFormCallback }) => {
+const UserCreationSideForm = ({
+  a,
+  searchV,
+  sideFormCallback,
+  handelrefresh,
+}) => {
   const [homeDiv, sethomeDiv] = useState(false);
   const [saveBtnLoading, setsaveBtnLoading] = useState(false);
   const [pageLoading, setpageLoading] = useState(false);
@@ -266,12 +294,13 @@ const UserCreationSideForm = ({ a, searchV, sideFormCallback }) => {
   const gen_ref = useRef(null);
   const gen_slug = useRef(null);
   const gen_platforms = useRef(null);
-  let b;
+  let b = "";
   let dt = new Date();
 
   useEffect(() => {
     setpageLoading(true);
     gen_link.current.innerText = genLink;
+    b = genLink;
     finalCopiedLink.current.innerText = genLink;
     finalCopiedLink.current.href = genLink;
     gen_name.current.innerText = for_name;
@@ -282,9 +311,7 @@ const UserCreationSideForm = ({ a, searchV, sideFormCallback }) => {
     gen_slug.current.innerText = path;
     gen_platforms.current.innerText = platform;
     setpageLoading(false);
-  }, [a, searchV]);
-
-  const copyLink = () => navigator.clipboard.writeText(genLink);
+  }, [a, searchV, handelrefresh]);
 
   const handleSaveBtn = async () => {
     setsaveBtnLoading(true);
@@ -302,7 +329,7 @@ const UserCreationSideForm = ({ a, searchV, sideFormCallback }) => {
       time: dt.toDateString() + " " + dt.toTimeString(),
       deleted: false,
       deleted_time: "",
-      deleted_by: ""
+      deleted_by: "",
     });
     console.log("result: ", r);
     if (r.issue) {
@@ -318,17 +345,17 @@ const UserCreationSideForm = ({ a, searchV, sideFormCallback }) => {
     } else sethomeDiv(true);
     setsaveBtnLoading(false);
   };
-  const handelHomeBtn = () => {
-    navigator.clipboard.writeText(b);
-    window.location.reload();
-  };
+  // const handelHomeBtn = () => {
+  //   window.location.reload();
+  // };
   return (
     <>
       {pageLoading && <SmallLoading />}
       <div className={Styles.genDetailsCont}>
         <div
-          className={`${Styles.afterSend} ${homeDiv ? Styles.afterSendShow : Styles.afterSend
-            }`}
+          className={`${Styles.afterSend} ${
+            homeDiv ? Styles.afterSendShow : Styles.afterSend
+          }`}
         >
           <div className={Styles.notiCont}>
             <a href="" ref={finalCopiedLink} target="_blank"></a>
@@ -338,7 +365,8 @@ const UserCreationSideForm = ({ a, searchV, sideFormCallback }) => {
             <div
               className={Styles.btn}
               onClick={() => {
-                handelHomeBtn();
+                handelrefresh("hello");
+                sethomeDiv(false);
               }}
             >
               Create New
@@ -364,7 +392,6 @@ const UserCreationSideForm = ({ a, searchV, sideFormCallback }) => {
             <span>Slug: </span>
             <span ref={gen_slug}></span>
           </p>
-
           <p>
             <span>Desc: </span>
             <span ref={gen_desc}></span>
@@ -382,7 +409,7 @@ const UserCreationSideForm = ({ a, searchV, sideFormCallback }) => {
           className={Styles.btn}
           onClick={() => {
             searchV("hello");
-            copyLink();
+            navigator.clipboard.writeText(gen_link.current.innerText);
             handleSaveBtn();
           }}
           id="sendmailBtn"
