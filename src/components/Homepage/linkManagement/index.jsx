@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useLocation, useNavigate } from "react-router";
 import Styles from "../linkManagement/index.module.css";
 import { AiFillCaretDown } from "react-icons/ai";
 import { BsFillEyeFill } from "react-icons/bs";
@@ -35,6 +36,8 @@ const LinkManement = (props) => {
   const deleted_links = useRef(null);
   const linkListCont = useRef(null);
   const [isAdmin, setisAdmin] = useState(false);
+  const [pageLoading, setpageLoading] = useState(false);
+
   const DataFetch = async () => {
     let r = await fetchAuth(`${L_LINK}/route/allRoutes`);
     let r1 = "";
@@ -72,6 +75,17 @@ const LinkManement = (props) => {
     setLoading(false);
     return () => (i = true);
   }, []);
+
+  const loc = useLocation();
+
+  let j = false;
+  console.log(loc.state.admin, "admin ftns sts");
+  useEffect(() => {
+    setpageLoading(true);
+    !j && loc.state && setisAdmin(loc.state.admin);
+    setpageLoading(false);
+    return () => (j = true);
+  }, [loc.state.admin]);
 
   const handleStatusSelector = () => {
     setisActive(!isActive);
@@ -271,58 +285,61 @@ const LinkManement = (props) => {
                   </div>
                 </div>
               </div>
-              <div className={Styles.selectedUserOption}>
-                <div className={Styles.initialDiv}>
-                  <p ref={selected_user}>All Users</p>
-                  <div
-                    className={Styles.dropholder}
-                    onClick={() => {
-                      handleUserSelector();
-                    }}
-                  >
-                    <AiFillCaretDown
-                      className={`${Styles.downIcon}
+              {console.log(isAdmin, "render value")}
+              {isAdmin && (
+                <div className={Styles.selectedUserOption}>
+                  <div className={Styles.initialDiv}>
+                    <p ref={selected_user}>All Users</p>
+                    <div
+                      className={Styles.dropholder}
+                      onClick={() => {
+                        handleUserSelector();
+                      }}
+                    >
+                      <AiFillCaretDown
+                        className={`${Styles.downIcon}
               ${isUserActive ? Styles.rotatedIcon : Styles.downIcon}`}
-                    />
+                      />
+                    </div>
                   </div>
-                </div>
-                <div
-                  className={`${Styles.otherOptionsContShow}
+                  <div
+                    className={`${Styles.otherOptionsContShow}
             ${
               isUserActive
                 ? Styles.otherOptionsContShow
                 : Styles.otherOptionsContHide
             }`}
-                >
-                  <div
-                    className={Styles.otherOptions}
-                    onClick={() => {
-                      handleUserSelector();
-                      handelSelctUser("All Users");
-                    }}
                   >
-                    <p>All Users</p>
+                    <div
+                      className={Styles.otherOptions}
+                      onClick={() => {
+                        handleUserSelector();
+                        handelSelctUser("All Users");
+                      }}
+                    >
+                      <p>All Users</p>
+                    </div>
+                    {userData ? (
+                      userData.map((item, index) => {
+                        return (
+                          <div
+                            key={index}
+                            className={Styles.otherOptions}
+                            onClick={() => {
+                              handleUserSelector();
+                              handelSelctUser(item.name);
+                            }}
+                          >
+                            <p>{item.name}</p>
+                          </div>
+                        );
+                      })
+                    ) : (
+                      <h1>Loading...</h1>
+                    )}
                   </div>
-                  {userData ? (
-                    userData.map((item, index) => {
-                      return (
-                        <div
-                          key={index}
-                          className={Styles.otherOptions}
-                          onClick={() => {
-                            handleUserSelector();
-                            handelSelctUser(item.name);
-                          }}
-                        >
-                          <p>{item.name}</p>
-                        </div>
-                      );
-                    })
-                  ) : (
-                    <h1>Loading...</h1>
-                  )}
                 </div>
-              </div>
+              )}
 
               <div className={Styles.selectDate}>
                 <p>From: </p>
