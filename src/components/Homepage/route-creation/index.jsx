@@ -21,6 +21,13 @@ let errorObj = {
   navigation: true,
   navigationRoute: "",
 };
+let social = {
+  insta: false,
+  linkedin: false,
+  youtube: false,
+  twitter: false,
+  others: false,
+};
 
 const RouteCreationDesign = (props) => {
   const [generateLoading, setgenerateLoading] = useState(false);
@@ -36,9 +43,9 @@ const RouteCreationDesign = (props) => {
   const website_inp = useRef(null);
   const instaCheck = useRef(null);
   const linkedinCheck = useRef(null);
-  const utChecked = useRef(null);
-  const twChecked = useRef(null);
-  const othersChecked = useRef(null);
+  const utCheck = useRef(null);
+  const twCheck = useRef(null);
+  const othersCheck = useRef(null);
 
   let refresh = () => {
     name_inp.current.value = "";
@@ -48,9 +55,9 @@ const RouteCreationDesign = (props) => {
     website_inp.current.value = "";
     instaCheck.current.checked = false;
     linkedinCheck.current.value = false;
-    utChecked.current.value = false;
-    othersChecked.current.value = false;
-    twChecked.current.value = false;
+    utCheck.current.value = false;
+    othersCheck.current.value = false;
+    twCheck.current.value = false;
     setsendBtn(true);
     setsideForm(false);
     setsideloader(true);
@@ -72,9 +79,9 @@ const RouteCreationDesign = (props) => {
     let genLink = "http://localhost:3000" + "/redirect" + finalRoute;
     let instaSts = instaCheck.current.checked;
     let linkedinSts = linkedinCheck.current.checked;
-    let utSts = utChecked.current.checked;
-    let twSts = twChecked.current.checked;
-    let otherSts = othersChecked.current.checked;
+    let utSts = utCheck.current.checked;
+    let twSts = twCheck.current.checked;
+    let otherSts = othersCheck.current.checked;
     let platform = "";
 
     let sts = emailChecker(finalMail);
@@ -154,7 +161,6 @@ const RouteCreationDesign = (props) => {
             />
 
             <input
-              // autoComplete="off"
               className={Styles.inputFields}
               id="email"
               ref={mail_inp}
@@ -192,35 +198,81 @@ const RouteCreationDesign = (props) => {
               required={true}
             />
             <div className={Styles.socialSelectorCont}>
-              <label className={Styles.container}>
+              <span
+                className={Styles.instaHolder}
+                ref={instaCheck}
+                onClick={() => {
+                  social.insta = !social.insta;
+                  {
+                    console.log(social);
+                  }
+                  social.insta
+                    ? (instaCheck.current.style.color = "blue")
+                    : (instaCheck.current.style.color = "grey");
+                }}
+              >
                 <IoLogoInstagram className={Styles.instalogo} />
-                <input type="checkbox" ref={instaCheck} />
-                <span className={Styles.checkmark}></span>
-              </label>
-
-              <label className={Styles.container}>
+              </span>
+              <span
+                className={Styles.instaHolder}
+                ref={linkedinCheck}
+                onClick={() => {
+                  social.linkedin = !social.linkedin;
+                  {
+                    console.log(social);
+                  }
+                  social.insta
+                    ? (linkedinCheck.current.style.color = "blue")
+                    : (linkedinCheck.current.style.color = "grey");
+                }}
+              >
                 <IoLogoLinkedin className={Styles.linlogo} />
-                <input type="checkbox" ref={linkedinCheck} />
-                <span className={Styles.checkmark}></span>
-              </label>
-
-              <label className={Styles.container}>
+              </span>
+              <span
+                className={Styles.instaHolder}
+                ref={utCheck}
+                onClick={() => {
+                  social.youtube = !social.youtube;
+                  {
+                    console.log(social);
+                  }
+                  social.youtube
+                    ? (utCheck.current.style.color = "red")
+                    : (utCheck.current.style.color = "grey");
+                }}
+              >
                 <IoLogoYoutube className={Styles.utlogo} />
-                <input type="checkbox" ref={utChecked} />
-                <span className={Styles.checkmark}></span>
-              </label>
-
-              <label className={Styles.container}>
+              </span>
+              <span
+                className={Styles.instaHolder}
+                ref={twCheck}
+                onClick={() => {
+                  social.twitter = !social.twitter;
+                  {
+                    console.log(social);
+                  }
+                  social.twitter
+                    ? (twCheck.current.style.color = "red")
+                    : (twCheck.current.style.color = "grey");
+                }}
+              >
                 <IoLogoTwitter className={Styles.twlogo} />
-                <input type="checkbox" ref={twChecked} />
-                <span className={Styles.checkmark}></span>
-              </label>
-
-              <label className={Styles.container}>
-                <p className={Styles.otlogo}> others</p>
-                <input type="checkbox" ref={othersChecked} />
-                <span className={Styles.checkmark}></span>
-              </label>
+              </span>
+              <span
+                className={Styles.instaHolder}
+                ref={othersCheck}
+                onClick={() => {
+                  social.others = !social.others;
+                  {
+                    console.log(social);
+                  }
+                  social.others
+                    ? (othersCheck.current.style.color = "pink")
+                    : (othersCheck.current.style.color = "grey");
+                }}
+              >
+                <p className={Styles.otlogo}>others</p>
+              </span>
             </div>
             {sendBtn && (
               <div
