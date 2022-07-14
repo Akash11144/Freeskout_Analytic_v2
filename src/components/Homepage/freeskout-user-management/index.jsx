@@ -20,13 +20,13 @@ let i = 1;
 const FUM = () => {
   const [newUser, setnewUser] = useState(i);
   const [pageError, setpageError] = useState(false);
-  const [pageLoading, setpageLoading] = useState(false)
+  const [pageLoading, setpageLoading] = useState(true)
   const loc = useLocation();
   const nav = useNavigate();
 
   let j = false;
   useEffect(() => {
-    setpageLoading(true)
+    // setpageLoading(true)
     !j && !loc.state && nav("/home");
     setpageLoading(false)
     return () => j = true;
