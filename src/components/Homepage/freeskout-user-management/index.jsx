@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, createContext } from "react";
 import { useLocation, useNavigate } from "react-router";
 import Styles from "../freeskout-user-management/index.module.css";
 import { FaRegEye } from "react-icons/fa";
@@ -8,43 +8,47 @@ import SmallLoading from "../../extras/loading-animation/small-loading";
 import { emailChecker, fetchAuth, L_LINK, postAuth } from "../../utlis";
 import InformationPopUp from "../../extras/pop-ups/information";
 import SendMail from "../../extras/loading-animation/send-mail-animation";
+import { useContext } from "react";
 
 let errorObj = {
   desc: "",
   navigation: true,
   navigationRoute: "",
 };
-
-let i = 1;
+export let stateContext = createContext();
 
 const FUM = () => {
-  const [newUser, setnewUser] = useState(i);
+  const [newUser, setnewUser] = useState(0);
   const [pageError, setpageError] = useState(false);
   const [pageLoading, setpageLoading] = useState(true)
+  const [Data, setData] = useState([])
   const loc = useLocation();
   const nav = useNavigate();
 
+
   let j = false;
   useEffect(() => {
-    // setpageLoading(true)
     !j && !loc.state && nav("/home");
     setpageLoading(false)
     return () => j = true;
   }, [])
 
+  const userData = (a) => setData(a);
+  const addUser = () => setnewUser(v => v + 1);
+  const popUpShow = () => setpageError(true);
+
   return (
     <>
-      {pageLoading && <SmallLoading />}
-      {pageError && <InformationPopUp keyp={"fummain"} pucb={() => setpageError(false)} {...errorObj} />}
-      <div className={Styles.mainCont}>
-        <div className={Styles.secondaryDiv}>
-          <UserForm userFormPopUpCallback={() => setpageError(true)} setnewUser={setnewUser} />
-          <ActiveUser
-            activeUserCallback={() => setpageError(true)}
-            newUser={newUser}
-          />
+      <stateContext.Provider value={{ userData, Data, addUser, newUser, popUpShow }}>
+        {pageLoading && <SmallLoading />}
+        {pageError && <InformationPopUp keyp={"fummain"} pucb={() => setpageError(false)} {...errorObj} />}
+        <div className={Styles.mainCont}>
+          <div className={Styles.secondaryDiv}>
+            <UserForm />
+            <ActiveUser />
+          </div>
         </div>
-      </div>
+      </stateContext.Provider>
     </>
   );
 };
@@ -52,8 +56,8 @@ export default FUM;
 
 // --------------------------------------------------------------------------------------------------
 
-const UserForm = ({ setnewUser, userFormPopUpCallback }) => {
-  const [pageLoading, setpageLoading] = useState(false);
+const UserForm = () => {
+  let { addUser, popUpShow } = useContext(stateContext);
 
   let name = useRef(null);
   let email = useRef(null);
@@ -63,7 +67,6 @@ const UserForm = ({ setnewUser, userFormPopUpCallback }) => {
   let password_regex = new RegExp(passPattern);
 
   const handleCreateUser = async () => {
-    setpageLoading(true);
     if (
       name.current.value === "" ||
       email.current.value === "" ||
@@ -101,18 +104,12 @@ const UserForm = ({ setnewUser, userFormPopUpCallback }) => {
         errorObj.desc = r.issueDetail;
         errorObj.navigation = false;
       }
-      setpageLoading(false);
-      userFormPopUpCallback();
-    } else {
-      console.log("res: ", r);
-      setnewUser(++i);
-      setpageLoading(false);
-    }
+      popUpShow()
+    } else addUser();
   };
 
   return (
     <>
-      {pageLoading && <SmallLoading />}
       <div className={Styles.createUserPart}>
         <p className={Styles.createNewUserHead}>Create User</p>
         <div className={Styles.formContainer}>
@@ -144,9 +141,7 @@ const UserForm = ({ setnewUser, userFormPopUpCallback }) => {
         </div>
         <div
           className={Styles.createUserBtn}
-          onClick={() => {
-            handleCreateUser();
-          }}
+          onClick={() => handleCreateUser()}
         >
           Create User
         </div>
@@ -157,15 +152,15 @@ const UserForm = ({ setnewUser, userFormPopUpCallback }) => {
 
 // --------------------------------------------------------------------------------------
 
-const ActiveUser = ({ newUser, activeUserCallback }) => {
-  const [Data, setData] = useState([]);
+const ActiveUser = () => {
   const [viewDetails, setviewDetails] = useState(false);
   const [useDetails, setuseDetails] = useState();
-  const [pageLoading, setpageLoading] = useState(false);
+
+  let { userData, Data, newUser, popUpShow } = useContext(stateContext);
+
 
   const dataFetch = async () => {
     let r = await fetchAuth(`${L_LINK}/validate/allFUser`);
-    console.log("fecth response in active user: ", r);
     if (r.issue) {
       if (r.storageClear) {
         r.storageClear && localStorage.removeItem("Freeskout-session");
@@ -175,28 +170,21 @@ const ActiveUser = ({ newUser, activeUserCallback }) => {
         errorObj.desc = r.issueDetail;
         errorObj.navigation = false;
       }
-      activeUserCallback();
-    } else setData(r);
+      popUpShow()
+    } else userData(r)
   };
 
   let j = false;
   useEffect(() => {
-    setpageLoading(true)
     if (!j) dataFetch();
-    setpageLoading(false);
     return () => j = true;
   }, [newUser]);
 
-  const handelViewDetails = () => {
-    setviewDetails(true);
-  };
+  const handelViewDetails = () => setviewDetails(true);
+  const handelOKay = () => setviewDetails(false);
 
-  const handelOKay = () => {
-    setviewDetails(false);
-  };
   return (
     <>
-      {pageLoading && <SmallLoading />}
       <div className={Styles.presentUsersDiv}>
         <div className={Styles.presntUsersHeadCont}>
           <p>Active Users</p>
@@ -213,8 +201,6 @@ const ActiveUser = ({ newUser, activeUserCallback }) => {
                       setuseDetails(d);
                       handelViewDetails();
                     }}
-                    DeleteTrigger={() => dataFetch()}
-                    userPopUpCallback={() => activeUserCallback()}
                   />
                 )
               );
@@ -235,8 +221,6 @@ const ActiveUser = ({ newUser, activeUserCallback }) => {
                       setuseDetails(d);
                       handelViewDetails();
                     }}
-                    DeleteTrigger={() => dataFetch()}
-                    userPopUpCallback={() => activeUserCallback()}
                   />
                 )
               );
@@ -267,11 +251,14 @@ const User = ({
 }) => {
   const [pageLoading, setpageLoading] = useState(false);
 
+  let { addUser, popUpShow } = useContext(stateContext);
+
+
   let detailObj = {
     name,
     email,
-    linkNumber: 10,
-    hitNUmber: 566,
+    linkNumber: "-",
+    hitNUmber: "-",
   };
 
   const handleUserDelete = async () => {
@@ -306,10 +293,8 @@ const User = ({
             errorObj.navigation = false;
           }
         }
-        userPopUpCallback();
-      } else {
-        DeleteTrigger(email);
-      }
+        popUpShow()
+      } else addUser();
     } catch (error) {
       console.log("error while deleting route in catch", error);
     }
@@ -353,7 +338,8 @@ const User = ({
   );
 };
 
-//-------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------
+
 const ViewUserDetails = (props) => {
   const [pageLoading, setpageLoading] = useState(true)
 
