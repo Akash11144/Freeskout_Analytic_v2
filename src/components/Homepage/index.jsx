@@ -4,7 +4,7 @@ import Styles from "../homepage/index.module.css";
 import Topbar from "./topbar";
 import RouteCreationDesign from "./route-creation";
 import FUM from "./freeskout-user-management";
-import LinkManement from "./linkManagement";
+import LinkManement from "./link-management";
 import PageNotFound from "../redirection/page-not-found";
 import InformationPopUp from "../extras/pop-ups/information";
 import SmallLoading from "../extras/loading-animation/small-loading";

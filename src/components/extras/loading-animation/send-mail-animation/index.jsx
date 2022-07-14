@@ -1,5 +1,5 @@
 import React from "react";
-import Styles from "../sendMailAnimation/index.module.css";
+import Styles from "../send-mail-animation/index.module.css";
 import sendmail from "../../../assets/sendMailanimation.gif";
 const SendMail = () => {
   return (
