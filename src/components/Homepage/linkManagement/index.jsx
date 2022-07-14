@@ -34,8 +34,7 @@ const LinkManement = (props) => {
   const active_links = useRef(null);
   const deleted_links = useRef(null);
   const linkListCont = useRef(null);
-  const linkContRef = useRef(null);
-
+  const [isAdmin, setisAdmin] = useState(false);
   const DataFetch = async () => {
     let r = await fetchAuth(`${L_LINK}/route/allRoutes`);
     let r1 = "";

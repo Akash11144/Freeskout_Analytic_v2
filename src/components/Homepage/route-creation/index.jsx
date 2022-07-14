@@ -241,7 +241,10 @@ const RouteCreationDesign = (props) => {
                 a={sideForm}
                 searchV={() => handelSendBtnShow()}
                 handelrefresh={() => refresh()}
-                sideFormCallback={() => setpageError(true)}
+                sideFormCallback={() => {
+                  setpageError(true);
+                  setsendBtn(true);
+                }}
               />
             )}
             {sideloader && (
