@@ -270,6 +270,36 @@ export const durationGenerator = (initial, final) => {
 };
 
 //-------------------------------------------------------------------------------
+export const dateSelectionError = (ini, fin) => {
+  const dateFormatgen = (input) => {
+    let a = input.split('-')
+    let output = a[1] + '/' + a[2] + '/' + a[0]
+    return output
+  }
+  let c;
+  let a = new Date(dateFormatgen(ini))
+  let b = new Date(dateFormatgen(fin))
+  let dateErr = { reason: '', error: false, startDate: dateFormatgen(ini), endDate: dateFormatgen(fin) };
+  if (ini != '' && fin === '') {
+    dateErr.reason = 'Please Select End Date'
+  } else if (ini === '' & fin != '') {
+    dateErr.reason = 'Please Select Start Date'
+  }
+  else if ((new Date() - b) < 0) {
+    dateErr.reason = 'Max range of End Date is today'
+    dateErr.error = true
+  } else if (ini != '' || fin != '') {
+    c = b - a
+    console.log(c)
+  }
+  if (c < 0) {
+    dateErr.reason = 'End date cannot be before Start date'
+    dateErr.error = true
+  }
+  return dateErr
+}
+
+//-------------------------------------------------------------------------------
 
 // const getCoordinates = () => {
 //   return new Promise((resolve, reject) =>

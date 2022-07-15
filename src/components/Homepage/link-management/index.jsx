@@ -6,7 +6,13 @@ import { BsFillEyeFill } from "react-icons/bs";
 import { AiTwotoneDelete } from "react-icons/ai";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { FaFilter } from "react-icons/fa";
-import { dateTimegen, durationGenerator, fetchAuth, L_LINK } from "../../utlis";
+import {
+  dateSelectionError,
+  dateTimegen,
+  durationGenerator,
+  fetchAuth,
+  L_LINK,
+} from "../../utlis";
 import InformationPopUp from "../../extras//pop-ups/information";
 import SmallLoading from "../../extras/loading-animation/small-loading";
 import SendMail from "../../extras/loading-animation/send-mail-animation";
@@ -35,6 +41,8 @@ const LinkManement = (props) => {
   const active_links = useRef(null);
   const deleted_links = useRef(null);
   const linkListCont = useRef(null);
+  const startDate = useRef(null);
+  const endDate = useRef(null);
   const [isAdmin, setisAdmin] = useState(false);
   const [pageLoading, setpageLoading] = useState(false);
 
@@ -122,33 +130,38 @@ const LinkManement = (props) => {
   };
 
   const handleSortedData = async () => {
-    setLoading(true);
-    console.log(selected_user.current.innerText);
-    if (selected_user.current.innerText === "All User") {
-      let r = await fetchAuth(`${L_LINK}/route/allRoutes`);
-      setrouteData(r.reverse());
-    } else {
-      let r = await fetchAuth(
-        `${L_LINK}/route/userRoute/${selected_user.current.innerText}`
-      );
-      if (r.issue) {
-        if (r.storageClear) {
-          r.storageClear && localStorage.removeItem("Freeskout-session");
-          errorObj.desc = r.issueDetail;
-          errorObj.navigationRoute = "/";
-        } else {
-          console.log("inside else");
-          errorObj.desc = r.issueDetail;
-          errorObj.navigation = false;
-        }
-        setLoading(false);
-        setpageError(true);
-      } else {
-        setrouteData(r);
-        console.log(r);
-        setLoading(false);
-      }
-    }
+    let cal = dateSelectionError(
+      startDate.current.value,
+      endDate.current.value
+    );
+    console.log(cal);
+    // setLoading(true);
+    // console.log(selected_user.current.innerText);
+    // if (selected_user.current.innerText === "All User") {
+    //   let r = await fetchAuth(`${L_LINK}/route/allRoutes`);
+    //   setrouteData(r.reverse());
+    // } else {
+    //   let r = await fetchAuth(
+    //     `${L_LINK}/route/userRoute/${selected_user.current.innerText}`
+    //   );
+    //   if (r.issue) {
+    //     if (r.storageClear) {
+    //       r.storageClear && localStorage.removeItem("Freeskout-session");
+    //       errorObj.desc = r.issueDetail;
+    //       errorObj.navigationRoute = "/";
+    //     } else {
+    //       console.log("inside else");
+    //       errorObj.desc = r.issueDetail;
+    //       errorObj.navigation = false;
+    //     }
+    //     setLoading(false);
+    //     setpageError(true);
+    //   } else {
+    //     setrouteData(r);
+    //     console.log(r);
+    //     setLoading(false);
+    //   }
+    // }
   };
 
   const handleview = () => {
@@ -227,8 +240,9 @@ const LinkManement = (props) => {
               )}
             </div>
             <div
-              className={`${Styles.selectors} ${isSelectorsActive ? Styles.selectorsShow : Styles.selectors
-                }`}
+              className={`${Styles.selectors} ${
+                isSelectorsActive ? Styles.selectorsShow : Styles.selectors
+              }`}
             >
               <div className={Styles.selectedOption}>
                 <div className={Styles.initialDiv}>
@@ -247,10 +261,11 @@ const LinkManement = (props) => {
                 </div>
                 <div
                   className={`${Styles.otherOptionsContShow}
-            ${isActive
-                      ? Styles.otherOptionsContShow
-                      : Styles.otherOptionsContHide
-                    }`}
+            ${
+              isActive
+                ? Styles.otherOptionsContShow
+                : Styles.otherOptionsContHide
+            }`}
                 >
                   <div
                     className={Styles.otherOptions}
@@ -301,10 +316,11 @@ const LinkManement = (props) => {
                   </div>
                   <div
                     className={`${Styles.otherOptionsContShow}
-            ${isUserActive
-                        ? Styles.otherOptionsContShow
-                        : Styles.otherOptionsContHide
-                      }`}
+            ${
+              isUserActive
+                ? Styles.otherOptionsContShow
+                : Styles.otherOptionsContHide
+            }`}
                   >
                     <div
                       className={Styles.otherOptions}
@@ -339,11 +355,11 @@ const LinkManement = (props) => {
 
               <div className={Styles.selectDate}>
                 <p>From: </p>
-                <input type="date" required="required"></input>
+                <input ref={startDate} type="date" required="required"></input>
               </div>
               <div className={Styles.selectDate}>
                 <p>To:</p>
-                <input type="date" required="required"></input>
+                <input ref={endDate} type="date" required="required"></input>
               </div>
               <div
                 onClick={() => {
@@ -434,8 +450,9 @@ const LinkLayout = (props) => {
     <>
       <div
         key={index}
-        className={`${Styles.delCont} ${status ? Styles.delCont : Styles.activeCont
-          }`}
+        className={`${Styles.delCont} ${
+          status ? Styles.delCont : Styles.activeCont
+        }`}
       >
         <div className={Styles.linkCont}>
           <p>www.freeskout.com/redirect{path}</p>
