@@ -5,7 +5,14 @@ import { FaRegEye } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
 import { TbMinusVertical } from "react-icons/tb";
 import SmallLoading from "../../extras/loading-animation/small-loading";
-import { emailChecker, fetchAuth, L_LINK, postAuth } from "../../utlis";
+import {
+  emailChecker,
+  fetchAuth,
+  L_LINK,
+  postAuth,
+  dateTimegen,
+  durationGenerator,
+} from "../../utlis";
 import InformationPopUp from "../../extras/pop-ups/information";
 import SendMail from "../../extras/loading-animation/send-mail-animation";
 
@@ -20,19 +27,18 @@ export let activeUserContext = createContext();
 const FUM = () => {
   const [newUser, setnewUser] = useState(0);
   const [pageError, setpageError] = useState(false);
-  const [pageLoading, setpageLoading] = useState(true)
+  const [pageLoading, setpageLoading] = useState(true);
   const loc = useLocation();
   const nav = useNavigate();
-
 
   let j = false;
   useEffect(() => {
     !j && !loc.state && nav("/home");
-    setpageLoading(false)
-    return () => j = true;
-  }, [])
+    setpageLoading(false);
+    return () => (j = true);
+  }, []);
 
-  const addUser = () => setnewUser(v => v + 1);
+  const addUser = () => setnewUser((v) => v + 1);
   const popUpShow = () => setpageError(true);
 
   return (
@@ -41,8 +47,18 @@ const FUM = () => {
         {pageLoading && <SmallLoading />}
         <div className={Styles.mainCont}>
           <div className={Styles.secondaryDiv}>
-            {pageError ? <InformationPopUp keyp={"fummain"} pucb={() => setpageError(false)} {...errorObj} />
-              : <> <UserForm /> <ActiveUser /> </>}
+            {pageError ? (
+              <InformationPopUp
+                keyp={"fummain"}
+                pucb={() => setpageError(false)}
+                {...errorObj}
+              />
+            ) : (
+              <>
+                {" "}
+                <UserForm /> <ActiveUser />{" "}
+              </>
+            )}
           </div>
         </div>
       </stateContext.Provider>
@@ -102,7 +118,7 @@ const UserForm = () => {
         errorObj.desc = r.issueDetail;
         errorObj.navigation = false;
       }
-      popUpShow()
+      popUpShow();
     } else addUser();
   };
 
@@ -158,6 +174,7 @@ const ActiveUser = () => {
 
   const dataFetch = async () => {
     let r = await fetchAuth(`${L_LINK}/validate/allFUser`);
+    console.log(r);
     if (r.issue) {
       if (r.storageClear) {
         r.storageClear && localStorage.removeItem("Freeskout-session");
@@ -167,32 +184,42 @@ const ActiveUser = () => {
         errorObj.desc = r.issueDetail;
         errorObj.navigation = false;
       }
-      popUpShow()
-    } else setData(r)
+      popUpShow();
+    } else setData(r);
   };
 
   let j = false;
   useEffect(() => {
     if (!j) dataFetch();
-    return () => j = true;
+    return () => (j = true);
   }, [newUser]);
 
   const setView = (a) => setviewData(a);
 
   return (
-    <activeUserContext.Provider value={{ viewData, setView }} >
+    <activeUserContext.Provider value={{ viewData, setView }}>
       <>
         <div className={Styles.presentUsersDiv}>
           <div className={Styles.presntUsersHeadCont}>
             <p>Active Users</p>
           </div>
           <div className={Styles.activeUsersCont}>
-            {Data.length ? Data.map((item, index) => { return !item.deleted && < User key={index} {...item} /> })
-              : <h1>NO user available</h1>}
+            {Data.length ? (
+              Data.map((item, index) => {
+                return !item.deleted && <User key={index} {...item} />;
+              })
+            ) : (
+              <SmallLoading></SmallLoading>
+            )}
           </div>
           <div className={Styles.activeUsersCont}>
-            {Data.length ? Data.map((item, index) => { return item.deleted && < User key={index} {...item} /> })
-              : <h1>NO user available</h1>}
+            {Data.length ? (
+              Data.map((item, index) => {
+                return item.deleted && <User key={index} {...item} />;
+              })
+            ) : (
+              <SmallLoading></SmallLoading>
+            )}
           </div>
           {viewData && <ViewUserDetails />}
         </div>
@@ -206,9 +233,9 @@ const ActiveUser = () => {
 const User = ({
   name,
   email,
-  password,
   time,
   deleted,
+  deleted_time,
   DetailTrigger,
   DeleteTrigger,
   userPopUpCallback,
@@ -218,10 +245,12 @@ const User = ({
   let { addUser, popUpShow } = useContext(stateContext);
   let { setView } = useContext(activeUserContext);
 
-
   let detailObj = {
     name,
     email,
+    time,
+    deleted,
+    deleted_time,
   };
 
   const handleUserDelete = async () => {
@@ -256,7 +285,7 @@ const User = ({
             errorObj.navigation = false;
           }
         }
-        popUpShow()
+        popUpShow();
       } else addUser();
     } catch (error) {
       console.log("error while deleting route in catch", error);
@@ -308,49 +337,96 @@ const ViewUserDetails = () => {
 
   let { setView, viewData } = useContext(activeUserContext);
 
-
   let userHitRef = useRef(null);
   let userRouteCount = useRef(null);
 
   const getUserHit = async () => {
     // setpageLoading(true)
-    userHitRef.current.innerText = await fetchAuth(`${L_LINK}/route/getAllUserRoutes/${viewData.email}`);
-  }
+    userHitRef.current.innerText = await fetchAuth(
+      `${L_LINK}/route/getAllUserRoutes/${viewData.email}`
+    );
+  };
   const getRouteCount = async () => {
-    userRouteCount.current.innerText = await fetchAuth(`${L_LINK}/route/getAllUserRoutesCount/${viewData.email}`);
+    userRouteCount.current.innerText = await fetchAuth(
+      `${L_LINK}/route/getAllUserRoutesCount/${viewData.email}`
+    );
     // setpageLoading(false);
-  }
+  };
 
   let i = false;
   useEffect(() => {
     if (!i) {
       getUserHit();
-      getRouteCount()
+      getRouteCount();
     }
-    return () => i = true;
-  }, [])
+    return () => (i = true);
+  }, []);
+  let dateObj = dateTimegen(viewData.time);
+  let durationChecker = durationGenerator(
+    new Date(dateObj.durationDate),
+    new Date()
+  );
+  let delDateObj;
+  let delDurationChecker;
+  let linkSts = viewData.deleted;
+  if (linkSts) {
+    delDateObj = dateTimegen(viewData.deleted_time);
+    delDurationChecker = durationGenerator(
+      new Date(dateObj.durationDate),
+      new Date(delDateObj.durationDate)
+    );
+  }
 
   return (
     <>
       <div className={Styles.userDataCont}>
         <div className={Styles.userDataSecondaryDiv}>
-          <p className={Styles.selectedUserEmail}>
-            E-Mail: <span className={Styles.userInfo}>{viewData.email}</span>
-          </p>
-          <p className={Styles.selectedUsePassword}>
-            Name: <span className={Styles.userInfo}>{viewData.name}</span>
-          </p>
-          <div className={Styles.dataSecondaryDiv}>
-            <p className={Styles.linksCreated}>
-              Links Created :{" "}
-              <span ref={userRouteCount} className={Styles.userInfo}>{"..."} </span>
-            </p>
-            <p className={Styles.hitsGenerated}>
-              Hits Generated:
-              <span ref={userHitRef} className={Styles.userInfo}>{" "}{"..."}</span>
+          <p className={Styles.selectedUserEmail}>{viewData.email}</p>
+          <div className={Styles.createdBy}>
+            <p>Created by:</p>
+            <p>{viewData.name}</p>
+          </div>
+          <div className={Styles.createdBy}>
+            <p> Created at:</p>
+            <p className={Styles.createdDateCont}>
+              <span className={Styles.createdDate}>{dateObj.date} </span>
+              at <span className={Styles.createdTime}>{dateObj.time}</span>
             </p>
           </div>
-          <div className={Styles.okHolder} onClick={() => setView(false)}>
+          <div className={Styles.createdBy}>
+            <p> Status:</p>
+            <p>
+              {!linkSts ? (
+                <span className={Styles.active}>Active</span>
+              ) : (
+                <span>
+                  <span className={Styles.deleted}>Deleted</span>
+                  <span>
+                    ({delDateObj.date} {delDateObj.time})
+                  </span>
+                </span>
+              )}
+            </p>
+          </div>
+          <div className={Styles.createdBy}>
+            <p>Duration:</p>
+            <p className={Styles.hits}>
+              {!linkSts ? durationChecker : delDurationChecker}
+            </p>
+          </div>
+          <div className={Styles.dataSecondaryDiv}>
+            <p className={Styles.createdBy}>
+              Links Created :{" "}
+              <span ref={userRouteCount} className={Styles.hits}>
+                {"..."}{" "}
+              </span>
+            </p>
+            <p className={Styles.createdBy}>
+              Hits Generated:
+              <span ref={userHitRef} className={Styles.hits}></span>
+            </p>
+          </div>
+          <div className={Styles.okayBtn} onClick={() => setView(false)}>
             <p>Okay</p>
           </div>
         </div>

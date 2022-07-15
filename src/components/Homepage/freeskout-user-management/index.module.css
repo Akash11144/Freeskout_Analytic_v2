@@ -286,19 +286,103 @@ body {
   color: #fff;
   border-color: transparent;
 }
-.copyRightCont {
-  width: 100%;
-  margin-top: 4%;
-  text-align: center;
-}
-.CopyRightP {
-  margin: unset;
-  padding: unset;
-}
+
 .disp {
   display: none;
 }
-
+.selectedUserEmail {
+  color: #fdffff;
+  font-weight: 800;
+  font-size: 14px;
+  margin-bottom: 3%;
+  letter-spacing: 0.5px;
+  background-color: #0a3556dd;
+  padding: 1% 2%;
+  border-radius: 10px;
+  transition: all 0.3s;
+  text-decoration: none;
+  text-align: center;
+}
+.selectedUserEmail:hover {
+  color: #1adb45;
+}
+.createdBy {
+  width: 98%;
+  margin: 2% auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(170, 170, 170, 0.192);
+}
+.createdBy > p:nth-of-type(1) {
+  color: rgba(0, 0, 0, 0.91);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  font-size: 16px;
+  width: 30%;
+  text-align: left;
+}
+.createdBy > p:nth-of-type(2) {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  width: 70%;
+  text-align: right;
+}
+.active {
+  color: #fdffff;
+  background: rgb(100, 166, 168);
+  font-weight: 900;
+  padding: 1% 2%;
+  border-radius: 10px;
+  transform: translateY(20px);
+}
+.hits {
+  background-color: #0a3556dd;
+  color: #fdffff !important;
+  font-weight: 900 !important;
+  padding: 1% 2%;
+  border-radius: 10px !important;
+  width: unset !important;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.deleted {
+  color: #fdffff;
+  background: #de1a1a;
+  font-weight: 900;
+  padding: 1% 2%;
+  border-radius: 10px;
+  text-align: center;
+  width: max-content;
+  margin-right: 3px;
+}
+.okayBtn {
+  background: transparent;
+  color: #1adb80;
+  font-weight: 600;
+  padding: 6px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: max-content;
+  margin: 0 auto;
+  transition: 0.3px;
+  border: 1px solid #1adb80;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+.okayBtn:hover {
+  border: 1px solid transparent;
+  background-color: #1adb80;
+  color: #fdffff;
+}
+.okayBtn:active {
+  transform: translateY(2px);
+}
 /* Media Queries */
 @media (max-width: 1100px) {
   .createUserPart,
