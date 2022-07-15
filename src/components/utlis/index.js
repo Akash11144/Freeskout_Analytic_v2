@@ -279,11 +279,13 @@ export const dateSelectionError = (ini, fin) => {
   let c;
   let a = new Date(dateFormatgen(ini))
   let b = new Date(dateFormatgen(fin))
-  let dateErr = { reason: '', error: false, startDate: dateFormatgen(ini), endDate: dateFormatgen(fin) };
+  let dateErr = { reason: '', error: false };
   if (ini != '' && fin === '') {
     dateErr.reason = 'Please Select End Date'
+    dateErr.error = true
   } else if (ini === '' & fin != '') {
     dateErr.reason = 'Please Select Start Date'
+    dateErr.error = true
   }
   else if ((new Date() - b) < 0) {
     dateErr.reason = 'Max range of End Date is today'

@@ -135,6 +135,9 @@ const LinkManement = (props) => {
       endDate.current.value
     );
     console.log(cal);
+    if (cal.error === true) {
+      alert(cal.reason);
+    }
     // setLoading(true);
     // console.log(selected_user.current.innerText);
     // if (selected_user.current.innerText === "All User") {
