@@ -33,6 +33,7 @@ const FUM = () => {
 
   let j = false;
   useEffect(() => {
+    console.log("inside manage user main ue,", loc);
     !j && !loc.state && nav("/home");
     setpageLoading(false);
     return () => (j = true);
@@ -233,12 +234,9 @@ const ActiveUser = () => {
 const User = ({
   name,
   email,
-  time,
+  created,
   deleted,
   deleted_time,
-  DetailTrigger,
-  DeleteTrigger,
-  userPopUpCallback,
 }) => {
   const [pageLoading, setpageLoading] = useState(false);
 
@@ -248,7 +246,7 @@ const User = ({
   let detailObj = {
     name,
     email,
-    time,
+    created,
     deleted,
     deleted_time,
   };
@@ -361,7 +359,7 @@ const ViewUserDetails = () => {
     }
     return () => (i = true);
   }, []);
-  let dateObj = dateTimegen(viewData.time);
+  let dateObj = dateTimegen(viewData.created);
   let durationChecker = durationGenerator(
     new Date(dateObj.durationDate),
     new Date()

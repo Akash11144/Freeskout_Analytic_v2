@@ -126,6 +126,7 @@ const TopbarLayout = ({ admin, person, email }) => {
               <Link
                 className={Styles.linky}
                 to={"/home/fum"}
+                state={{ admin, email }}
                 onClick={() => hamClick()}
               >
                 <p>Manage Users</p>

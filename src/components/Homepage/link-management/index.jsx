@@ -571,7 +571,7 @@ const DetailLayout = (props) => {
               <p>Hits</p>
 
               <p ref={hitRef} className={Styles.hits}>
-                {hitLoading && <SendMail></SendMail>}
+                {/* {hitLoading && <SendMail></SendMail>} */}
               </p>
             </div>
           </div>
