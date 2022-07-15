@@ -423,10 +423,6 @@ focus {
   justify-content: center;
   align-items: center;
 }
-.deletedHolder {
-  background-color: turquoise;
-  width: max-content;
-}
 .deleted {
   color: #fdffff;
   background: #de1a1a;
