@@ -742,6 +742,9 @@
   font-size: 14px;
   transition: all 0.3s;
 }
+.SblogOutBtn:hover {
+  box-shadow: 0 0 10px 2px #de1a1a;
+}
 .copyRightCont {
   width: 100%;
   color: #1adb80;
