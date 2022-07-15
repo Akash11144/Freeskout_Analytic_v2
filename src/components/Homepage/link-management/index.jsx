@@ -500,7 +500,8 @@ const DetailLayout = (props) => {
 
   const hitFetch = async () => {
     sethitLoading(true);
-    hitRef.current.innerText = await fetchAuth(`http://localhost:1111/user/getAllFromSlug/${props.path.split("/")[1]}`);
+    let a = await fetchAuth(`http://localhost:1111/user/getAllFromSlug/${props.path.split("/")[1]}`);
+    hitRef.current.innerText = a
     sethitLoading(false);
   };
 
