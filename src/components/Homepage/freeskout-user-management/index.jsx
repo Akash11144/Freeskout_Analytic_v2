@@ -108,7 +108,6 @@ const UserForm = () => {
 
   return (
     <>
-      {pageE && <InformationPopUp />}
       <div className={Styles.createUserPart}>
         <p className={Styles.createNewUserHead}>Create User</p>
         <div className={Styles.formContainer}>
