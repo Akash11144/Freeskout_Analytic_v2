@@ -234,9 +234,8 @@ const LinkManement = (props) => {
               )}
             </div>
             <div
-              className={`${Styles.selectors} ${
-                isSelectorsActive ? Styles.selectorsShow : Styles.selectors
-              }`}
+              className={`${Styles.selectors} ${isSelectorsActive ? Styles.selectorsShow : Styles.selectors
+                }`}
             >
               <div className={Styles.selectedOption}>
                 <div className={Styles.initialDiv}>
@@ -255,11 +254,10 @@ const LinkManement = (props) => {
                 </div>
                 <div
                   className={`${Styles.otherOptionsContShow}
-            ${
-              isActive
-                ? Styles.otherOptionsContShow
-                : Styles.otherOptionsContHide
-            }`}
+            ${isActive
+                      ? Styles.otherOptionsContShow
+                      : Styles.otherOptionsContHide
+                    }`}
                 >
                   <div
                     className={Styles.otherOptions}
@@ -309,11 +307,10 @@ const LinkManement = (props) => {
                   </div>
                   <div
                     className={`${Styles.otherOptionsContShow}
-            ${
-              isUserActive
-                ? Styles.otherOptionsContShow
-                : Styles.otherOptionsContHide
-            }`}
+            ${isUserActive
+                        ? Styles.otherOptionsContShow
+                        : Styles.otherOptionsContHide
+                      }`}
                   >
                     <div
                       className={Styles.otherOptions}
@@ -442,9 +439,8 @@ const LinkLayout = (props) => {
     <>
       <div
         key={email}
-        className={`${Styles.delCont} ${
-          status ? Styles.delCont : Styles.activeCont
-        }`}
+        className={`${Styles.delCont} ${status ? Styles.delCont : Styles.activeCont
+          }`}
       >
         <div className={Styles.linkCont}>
           <p>www.freeskout.com/redirect{path}</p>
@@ -502,14 +498,8 @@ const DetailLayout = (props) => {
 
   const hitFetch = async () => {
     sethitLoading(true);
-<<<<<<< HEAD
     let a = await fetchAuth(`http://localhost:1111/user/getAllFromSlug/${props.path.split("/")[1]}`);
     hitRef.current.innerText = a
-=======
-    hitRef.current.innerText = await fetchAuth(
-      `http://localhost:1111/user/getAllFromSlug/${props.path.split("/")[1]}`
-    );
->>>>>>> 01d3c69b977ba2e4201ef0a738d3a66bc855dc61
     sethitLoading(false);
   };
 
