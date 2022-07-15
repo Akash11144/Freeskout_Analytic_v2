@@ -36,6 +36,9 @@ const LinkManement = (props) => {
   const [showActiveLink, setshowActiveLink] = useState(true);
   const [showDeletedlinks, setshowDeletedlinks] = useState(true);
   const [closeFilterIcon, setcloseFilterIcon] = useState(false);
+  const [isAdmin, setisAdmin] = useState(false);
+  const [pageLoading, setpageLoading] = useState(false);
+
   const selected_status = useRef(null);
   const all_links = useRef(null);
   const active_links = useRef(null);
@@ -43,10 +46,13 @@ const LinkManement = (props) => {
   const linkListCont = useRef(null);
   const startDate = useRef(null);
   const endDate = useRef(null);
-  const [isAdmin, setisAdmin] = useState(false);
-  const [pageLoading, setpageLoading] = useState(false);
+
+  const loc = useLocation();
+  let { admin, email } = loc.state;
 
   const DataFetch = async () => {
+    console.log("hiiii", loc.state, admin, email)
+
     let r = await fetchAuth(`${L_LINK}/route/allRoutes`);
     let r1 = "";
     console.log("link management route data", r);
@@ -64,7 +70,6 @@ const LinkManement = (props) => {
           errorObj.desc = r.issueDetail;
           errorObj.navigationRoute = "/";
         } else {
-          console.log("inside else");
           errorObj.desc = r.issueDetail;
           errorObj.navigation = false;
         }
@@ -78,33 +83,21 @@ const LinkManement = (props) => {
 
   let i = false;
   useEffect(() => {
-    if (!i) DataFetch();
+    if (!i) {
+      loc.state && setisAdmin(loc.state.admin);
+      DataFetch();
+    }
     setLoading(false);
     return () => (i = true);
   }, []);
 
-  const loc = useLocation();
 
-  let j = false;
-  console.log(loc.state.admin, "admin ftns sts");
-  useEffect(() => {
-    setpageLoading(true);
-    !j && loc.state && setisAdmin(loc.state.admin);
-    setpageLoading(false);
-    return () => (j = true);
-  }, [loc.state.admin]);
+  const handleStatusSelector = () => setisActive(!isActive);
 
-  const handleStatusSelector = () => {
-    setisActive(!isActive);
-  };
+  const handelMobileSelectors = () => setisSelectorsActive(!isSelectorsActive);
 
-  const handelMobileSelectors = () => {
-    setisSelectorsActive(!isSelectorsActive);
-  };
+  const handleUserSelector = () => setisUserActive(!isUserActive);
 
-  const handleUserSelector = () => {
-    setisUserActive(!isUserActive);
-  };
 
   const allClick = () => {
     let allLiIt = all_links.current.innerText;
@@ -243,9 +236,8 @@ const LinkManement = (props) => {
               )}
             </div>
             <div
-              className={`${Styles.selectors} ${
-                isSelectorsActive ? Styles.selectorsShow : Styles.selectors
-              }`}
+              className={`${Styles.selectors} ${isSelectorsActive ? Styles.selectorsShow : Styles.selectors
+                }`}
             >
               <div className={Styles.selectedOption}>
                 <div className={Styles.initialDiv}>
@@ -264,11 +256,10 @@ const LinkManement = (props) => {
                 </div>
                 <div
                   className={`${Styles.otherOptionsContShow}
-            ${
-              isActive
-                ? Styles.otherOptionsContShow
-                : Styles.otherOptionsContHide
-            }`}
+            ${isActive
+                      ? Styles.otherOptionsContShow
+                      : Styles.otherOptionsContHide
+                    }`}
                 >
                   <div
                     className={Styles.otherOptions}
@@ -300,7 +291,6 @@ const LinkManement = (props) => {
                   </div>
                 </div>
               </div>
-              {console.log(isAdmin, "render value")}
               {isAdmin && (
                 <div className={Styles.selectedUserOption}>
                   <div className={Styles.initialDiv}>
@@ -319,11 +309,10 @@ const LinkManement = (props) => {
                   </div>
                   <div
                     className={`${Styles.otherOptionsContShow}
-            ${
-              isUserActive
-                ? Styles.otherOptionsContShow
-                : Styles.otherOptionsContHide
-            }`}
+            ${isUserActive
+                        ? Styles.otherOptionsContShow
+                        : Styles.otherOptionsContHide
+                      }`}
                   >
                     <div
                       className={Styles.otherOptions}
@@ -381,7 +370,6 @@ const LinkManement = (props) => {
             <div className={Styles.linkListSecCont}>
               {showActiveLink && (
                 <div className={Styles.linksContainer}>
-                  {console.log("testingData", routeData)}
                   {routeData.length &&
                     routeData.map((item, index) => {
                       {
@@ -452,10 +440,9 @@ const LinkLayout = (props) => {
   return (
     <>
       <div
-        key={index}
-        className={`${Styles.delCont} ${
-          status ? Styles.delCont : Styles.activeCont
-        }`}
+        key={email}
+        className={`${Styles.delCont} ${status ? Styles.delCont : Styles.activeCont
+          }`}
       >
         <div className={Styles.linkCont}>
           <p>www.freeskout.com/redirect{path}</p>
@@ -513,11 +500,8 @@ const DetailLayout = (props) => {
 
   const hitFetch = async () => {
     sethitLoading(true);
-    let r = await fetchAuth(
-      `http://localhost:1111/user/getAllFromSlug/${props.path.split("/")[1]}`
-    );
+    hitRef.current.innerText = await fetchAuth(`http://localhost:1111/user/getAllFromSlug/${props.path.split("/")[1]}`);
     sethitLoading(false);
-    hitRef.current.innerText = r;
   };
 
   let i = false;

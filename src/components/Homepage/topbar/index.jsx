@@ -13,18 +13,18 @@ const Topbar = (props) => {
 
   let i = false;
   useEffect(() => {
-    !i && props.email === "info@freeskout.com" && setadmin(true);
+    !i && props.email === "info@freeskout.com" && setadmin(props.email);
     return () => (i = true);
   }, [props]);
 
-  return <TopbarLayout admin={admin} person={props.name} />;
+  return <TopbarLayout admin={admin} person={props.name} email={props.email} />;
 };
 
 export default Topbar;
 
 // --------------------------------------------------------------
 
-const TopbarLayout = ({ admin, person }) => {
+const TopbarLayout = ({ admin, person, email }) => {
   const [isActive, setisActive] = useState(false);
 
   const pageNameRef = useRef(null);
@@ -109,7 +109,7 @@ const TopbarLayout = ({ admin, person }) => {
             <Link
               className={Styles.linky}
               to={"/home"}
-              state={{ admin }}
+              state={{ admin, email }}
               onClick={() => hamClick()}
             >
               <p>Create Link</p>
@@ -117,7 +117,7 @@ const TopbarLayout = ({ admin, person }) => {
             <Link
               className={Styles.linky}
               to={"/home/lm"}
-              state={{ admin }}
+              state={{ admin, email }}
               onClick={() => hamClick()}
             >
               <p>Manage Links</p>
@@ -126,7 +126,6 @@ const TopbarLayout = ({ admin, person }) => {
               <Link
                 className={Styles.linky}
                 to={"/home/fum"}
-                state={{ admin }}
                 onClick={() => hamClick()}
               >
                 <p>Manage Users</p>
@@ -135,7 +134,7 @@ const TopbarLayout = ({ admin, person }) => {
             <Link
               className={Styles.linky}
               to={"/home"}
-              state={{ admin }}
+              state={{ admin, email }}
               onClick={() => hamClick()}
             >
               <p>Dashboard</p>
