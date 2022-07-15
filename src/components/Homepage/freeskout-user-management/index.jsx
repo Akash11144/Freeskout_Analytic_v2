@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, createContext } from "react";
+import { useState, useRef, useEffect, useContext, createContext } from "react";
 import { useLocation, useNavigate } from "react-router";
 import Styles from "../freeskout-user-management/index.module.css";
 import { FaRegEye } from "react-icons/fa";
@@ -8,7 +8,6 @@ import SmallLoading from "../../extras/loading-animation/small-loading";
 import { emailChecker, fetchAuth, L_LINK, postAuth } from "../../utlis";
 import InformationPopUp from "../../extras/pop-ups/information";
 import SendMail from "../../extras/loading-animation/send-mail-animation";
-import { useContext } from "react";
 
 let errorObj = {
   desc: "",
@@ -16,12 +15,12 @@ let errorObj = {
   navigationRoute: "",
 };
 export let stateContext = createContext();
+export let activeUserContext = createContext();
 
 const FUM = () => {
   const [newUser, setnewUser] = useState(0);
   const [pageError, setpageError] = useState(false);
   const [pageLoading, setpageLoading] = useState(true)
-  const [Data, setData] = useState([])
   const loc = useLocation();
   const nav = useNavigate();
 
@@ -33,19 +32,17 @@ const FUM = () => {
     return () => j = true;
   }, [])
 
-  const userData = (a) => setData(a);
   const addUser = () => setnewUser(v => v + 1);
   const popUpShow = () => setpageError(true);
 
   return (
     <>
-      <stateContext.Provider value={{ userData, Data, addUser, newUser, popUpShow }}>
+      <stateContext.Provider value={{ addUser, newUser, popUpShow }}>
         {pageLoading && <SmallLoading />}
-        {pageError && <InformationPopUp keyp={"fummain"} pucb={() => setpageError(false)} {...errorObj} />}
         <div className={Styles.mainCont}>
           <div className={Styles.secondaryDiv}>
-            <UserForm />
-            <ActiveUser />
+            {pageError ? <InformationPopUp keyp={"fummain"} pucb={() => setpageError(false)} {...errorObj} />
+              : <> <UserForm /> <ActiveUser /> </>}
           </div>
         </div>
       </stateContext.Provider>
@@ -63,6 +60,7 @@ const UserForm = () => {
   let email = useRef(null);
   let pass = useRef(null);
   let confirmpass = useRef(null);
+
   let passPattern = /^([A-Za-z0-9\-\_\@\#\$\%\&\*\\]{3,12})*$/;
   let password_regex = new RegExp(passPattern);
 
@@ -110,6 +108,7 @@ const UserForm = () => {
 
   return (
     <>
+      {pageE && <InformationPopUp />}
       <div className={Styles.createUserPart}>
         <p className={Styles.createNewUserHead}>Create User</p>
         <div className={Styles.formContainer}>
@@ -153,11 +152,10 @@ const UserForm = () => {
 // --------------------------------------------------------------------------------------
 
 const ActiveUser = () => {
-  const [viewDetails, setviewDetails] = useState(false);
-  const [useDetails, setuseDetails] = useState();
+  const [Data, setData] = useState([]);
+  const [viewData, setviewData] = useState(false);
 
-  let { userData, Data, newUser, popUpShow } = useContext(stateContext);
-
+  let { newUser, popUpShow } = useContext(stateContext);
 
   const dataFetch = async () => {
     let r = await fetchAuth(`${L_LINK}/validate/allFUser`);
@@ -171,7 +169,7 @@ const ActiveUser = () => {
         errorObj.navigation = false;
       }
       popUpShow()
-    } else userData(r)
+    } else setData(r)
   };
 
   let j = false;
@@ -180,60 +178,27 @@ const ActiveUser = () => {
     return () => j = true;
   }, [newUser]);
 
-  const handelViewDetails = () => setviewDetails(true);
-  const handelOKay = () => setviewDetails(false);
+  const setView = (a) => setviewData(a);
 
   return (
-    <>
-      <div className={Styles.presentUsersDiv}>
-        <div className={Styles.presntUsersHeadCont}>
-          <p>Active Users</p>
+    <activeUserContext.Provider value={{ viewData, setView }} >
+      <>
+        <div className={Styles.presentUsersDiv}>
+          <div className={Styles.presntUsersHeadCont}>
+            <p>Active Users</p>
+          </div>
+          <div className={Styles.activeUsersCont}>
+            {Data.length ? Data.map((item, index) => { return !item.deleted && < User key={index} {...item} /> })
+              : <h1>NO user available</h1>}
+          </div>
+          <div className={Styles.activeUsersCont}>
+            {Data.length ? Data.map((item, index) => { return item.deleted && < User key={index} {...item} /> })
+              : <h1>NO user available</h1>}
+          </div>
+          {viewData && <ViewUserDetails />}
         </div>
-        <div className={Styles.activeUsersCont}>
-          {Data.length ? (
-            Data.map((item, index) => {
-              return (
-                !item.deleted && (
-                  <User
-                    key={index}
-                    {...item}
-                    DetailTrigger={(d) => {
-                      setuseDetails(d);
-                      handelViewDetails();
-                    }}
-                  />
-                )
-              );
-            })
-          ) : (
-            <h1>NO user available</h1>
-          )}
-        </div>
-        <div className={Styles.activeUsersCont}>
-          {Data.length ? (
-            Data.map((item, index) => {
-              return (
-                item.deleted && (
-                  <User
-                    key={index}
-                    {...item}
-                    DetailTrigger={(d) => {
-                      setuseDetails(d);
-                      handelViewDetails();
-                    }}
-                  />
-                )
-              );
-            })
-          ) : (
-            <h1>NO user available</h1>
-          )}
-        </div>
-        {viewDetails && (
-          <ViewUserDetails okayTrigger={() => handelOKay()} a={useDetails} />
-        )}
-      </div>
-    </>
+      </>
+    </activeUserContext.Provider>
   );
 };
 
@@ -252,13 +217,12 @@ const User = ({
   const [pageLoading, setpageLoading] = useState(false);
 
   let { addUser, popUpShow } = useContext(stateContext);
+  let { setView } = useContext(activeUserContext);
 
 
   let detailObj = {
     name,
     email,
-    linkNumber: "-",
-    hitNUmber: "-",
   };
 
   const handleUserDelete = async () => {
@@ -312,7 +276,7 @@ const User = ({
           <div className={Styles.userActionBtnsCont}>
             <div
               className={Styles.viewIconCont}
-              onClick={() => DetailTrigger(detailObj)}
+              onClick={() => setView(detailObj)}
             >
               <FaRegEye className={Styles.viewIcon} />
               <p className={`${Styles.HoverNotification} ${Styles.viewHover}`}>
@@ -340,47 +304,54 @@ const User = ({
 
 //-------------------------------------------------------------------------------------------------------------------------------------------
 
-const ViewUserDetails = (props) => {
-  const [pageLoading, setpageLoading] = useState(true)
+const ViewUserDetails = () => {
+  const [pageLoading, setpageLoading] = useState(true);
+
+  let { setView, viewData } = useContext(activeUserContext);
+
 
   let userHitRef = useRef(null);
   let userRouteCount = useRef(null);
 
-  const getUserHit = async () => userHitRef.current.innerText = await fetchAuth(`${L_LINK}/route/getAllUserRoutes/${props.a.email}`);
-  const getRouteCount = async () => userRouteCount.current.innerText = await fetchAuth(`${L_LINK}/route/getAllUserRoutesCount/${props.a.email}`);
+  const getUserHit = async () => {
+    // setpageLoading(true)
+    userHitRef.current.innerText = await fetchAuth(`${L_LINK}/route/getAllUserRoutes/${viewData.email}`);
+  }
+  const getRouteCount = async () => {
+    userRouteCount.current.innerText = await fetchAuth(`${L_LINK}/route/getAllUserRoutesCount/${viewData.email}`);
+    // setpageLoading(false);
+  }
+
   let i = false;
   useEffect(() => {
-    setpageLoading(true)
     if (!i) {
       getUserHit();
       getRouteCount()
     }
-    setpageLoading(false)
     return () => i = true;
   }, [])
 
   return (
     <>
       <div className={Styles.userDataCont}>
-        {console.log("loading...", pageLoading)}
         <div className={Styles.userDataSecondaryDiv}>
           <p className={Styles.selectedUserEmail}>
-            E-Mail: <span className={Styles.userInfo}>{props.a.email}</span>
+            E-Mail: <span className={Styles.userInfo}>{viewData.email}</span>
           </p>
           <p className={Styles.selectedUsePassword}>
-            Name: <span className={Styles.userInfo}>{props.a.name}</span>
+            Name: <span className={Styles.userInfo}>{viewData.name}</span>
           </p>
           <div className={Styles.dataSecondaryDiv}>
             <p className={Styles.linksCreated}>
               Links Created :{" "}
-              <span ref={userRouteCount} className={Styles.userInfo}>{props.a.linkNumber} </span>
+              <span ref={userRouteCount} className={Styles.userInfo}>{"..."} </span>
             </p>
             <p className={Styles.hitsGenerated}>
               Hits Generated:
-              <span ref={userHitRef} className={Styles.userInfo}>{" "}{pageLoading && 0}</span>
+              <span ref={userHitRef} className={Styles.userInfo}>{" "}{"..."}</span>
             </p>
           </div>
-          <div className={Styles.okHolder} onClick={() => props.okayTrigger()}>
+          <div className={Styles.okHolder} onClick={() => setView(false)}>
             <p>Okay</p>
           </div>
         </div>
