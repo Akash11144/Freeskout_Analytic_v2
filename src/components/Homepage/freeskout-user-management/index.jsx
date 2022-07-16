@@ -104,7 +104,7 @@ const UserForm = () => {
       name: name.current.value,
       email: email.current.value,
       password: pass.current.value,
-      time: dt.toDateString() + " " + dt.toTimeString(),
+      created: dt.toDateString() + " " + dt.toTimeString(),
       deleted: false,
       deleted_time: "",
     });
@@ -119,7 +119,12 @@ const UserForm = () => {
         errorObj.navigation = false;
       }
       popUpShow();
-    } else addUser();
+    } else {
+      errorObj.desc = "User Created Successfully!!";
+      errorObj.navigation = false;
+    }
+    popUpShow();
+    addUser();
   };
 
   return (

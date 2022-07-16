@@ -59,13 +59,9 @@ body {
   /* background-color: #fdffff; */
   padding: 1% 0;
   box-sizing: border-box;
-  background: linear-gradient(to left, #d0dae0, #e2ebf0);
+  background: linear-gradient(270deg, #fdffff, #c8e6f3);
   position: relative;
   overflow: hidden;
-}
-.myerror {
-  filter: blur(4px);
-  background: linear-gradient(to right, red, blue);
 }
 
 .presentUsersDiv {
@@ -77,14 +73,13 @@ body {
 }
 .createNewUserHead,
 .presntUsersHeadCont > p {
-  color: #6c757d;
+  color: #0c89bf;
   font-weight: 700;
   font-size: 30px;
   letter-spacing: 1px;
   background-image: linear-gradient(to bottom, #5a6170ca, #1c1018d1);
-
   background-clip: text;
-  color: transparent;
+  text-shadow: 2px 2px 5px #0c89bf;
 }
 .inputFields {
   width: 80%;
