@@ -4,7 +4,7 @@ import Styles from "../freeskout-user-management/index.module.css";
 import { BsFillEyeFill } from "react-icons/bs";
 import { AiTwotoneDelete } from "react-icons/ai";
 import SmallLoading from "../../extras/loading-animation/small-loading";
-import SendMail from "../../extras/loading-animation/send-mail-animation";
+import HitsLoader from "../../extras/loading-animation/HitsLoader";
 import {
   emailChecker,
   fetchAuth,
@@ -391,7 +391,7 @@ const ViewUserDetails = () => {
         <div className={Styles.userDataSecondaryDiv}>
           <p className={Styles.selectedUserEmail}>{viewData.email}</p>
           <div className={Styles.createdBy}>
-            <p>Created by:</p>
+            <p>Name:</p>
             <p>{viewData.name}</p>
           </div>
           <div className={Styles.createdBy}>
@@ -425,14 +425,14 @@ const ViewUserDetails = () => {
           <div className={Styles.dataSecondaryDiv}>
             <p className={Styles.createdBySecondary}>
               Links Created :{" "}
-              <span ref={userRouteCount} className={Styles.hits}>
-                {countLoading && <SendMail></SendMail>}
+              <span ref={userRouteCount} className={Styles.hitsMini}>
+                {countLoading && <HitsLoader></HitsLoader>}
               </span>
             </p>
             <p className={Styles.createdBySecondary}>
               Hits Generated:
-              <span ref={userHitRef} className={Styles.hits}>
-                {hitsLoading && <SendMail></SendMail>}
+              <span ref={userHitRef} className={Styles.hitsMini}>
+                {hitsLoading && <HitsLoader></HitsLoader>}
               </span>
             </p>
           </div>
