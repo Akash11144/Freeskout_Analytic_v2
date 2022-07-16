@@ -4,6 +4,7 @@ import Styles from "../freeskout-user-management/index.module.css";
 import { BsFillEyeFill } from "react-icons/bs";
 import { AiTwotoneDelete } from "react-icons/ai";
 import SmallLoading from "../../extras/loading-animation/small-loading";
+import SendMail from "../../extras/loading-animation/send-mail-animation";
 import {
   emailChecker,
   fetchAuth,
@@ -13,7 +14,6 @@ import {
   durationGenerator,
 } from "../../utlis";
 import InformationPopUp from "../../extras/pop-ups/information";
-import SendMail from "../../extras/loading-animation/send-mail-animation";
 
 let errorObj = {
   desc: "",
@@ -336,7 +336,8 @@ const User = ({ name, email, created, deleted, deleted_time }) => {
 //-------------------------------------------------------------------------------------------------------------------------------------------
 
 const ViewUserDetails = () => {
-  const [pageLoading, setpageLoading] = useState(true);
+  const [hitsLoading, sethitsLoading] = useState(false);
+  const [countLoading, setcountLoading] = useState(false);
 
   let { setView, viewData } = useContext(activeUserContext);
 
@@ -344,16 +345,20 @@ const ViewUserDetails = () => {
   let userRouteCount = useRef(null);
 
   const getUserHit = async () => {
-    // setpageLoading(true)
-    userHitRef.current.innerText = await fetchAuth(
+    sethitsLoading(true);
+    let hits = await fetchAuth(
       `${L_LINK}/route/getAllUserRoutes/${viewData.email}`
     );
+    sethitsLoading(false);
+    userHitRef.current.innerText = hits;
   };
   const getRouteCount = async () => {
-    userRouteCount.current.innerText = await fetchAuth(
+    setcountLoading(true);
+    let counts = await fetchAuth(
       `${L_LINK}/route/getAllUserRoutesCount/${viewData.email}`
     );
-    // setpageLoading(false);
+    setcountLoading(false);
+    userRouteCount.current.innerText = counts;
   };
 
   let i = false;
@@ -420,11 +425,15 @@ const ViewUserDetails = () => {
           <div className={Styles.dataSecondaryDiv}>
             <p className={Styles.createdBySecondary}>
               Links Created :{" "}
-              <span ref={userRouteCount} className={Styles.hits}></span>
+              <span ref={userRouteCount} className={Styles.hits}>
+                {countLoading && <SendMail></SendMail>}
+              </span>
             </p>
             <p className={Styles.createdBySecondary}>
               Hits Generated:
-              <span ref={userHitRef} className={Styles.hits}></span>
+              <span ref={userHitRef} className={Styles.hits}>
+                {hitsLoading && <SendMail></SendMail>}
+              </span>
             </p>
           </div>
           <div className={Styles.okayBtn} onClick={() => setView(false)}>
