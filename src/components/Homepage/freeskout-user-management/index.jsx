@@ -418,13 +418,11 @@ const ViewUserDetails = () => {
             </p>
           </div>
           <div className={Styles.dataSecondaryDiv}>
-            <p className={Styles.createdBy}>
+            <p className={Styles.createdBySecondary}>
               Links Created :{" "}
-              <span ref={userRouteCount} className={Styles.hits}>
-                {"..."}{" "}
-              </span>
+              <span ref={userRouteCount} className={Styles.hits}></span>
             </p>
-            <p className={Styles.createdBy}>
+            <p className={Styles.createdBySecondary}>
               Hits Generated:
               <span ref={userHitRef} className={Styles.hits}></span>
             </p>
