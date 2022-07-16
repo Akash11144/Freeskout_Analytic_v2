@@ -274,6 +274,7 @@ body {
   font-size: 14px;
   padding: 2% 3%;
   font-weight: 600;
+  z-index: 6;
 }
 .userDataSecondaryDiv > p {
   margin: 3% auto;
