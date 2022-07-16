@@ -1,9 +1,8 @@
 import { useState, useRef, useEffect, useContext, createContext } from "react";
 import { useLocation, useNavigate } from "react-router";
 import Styles from "../freeskout-user-management/index.module.css";
-import { FaRegEye } from "react-icons/fa";
-import { AiOutlineDelete } from "react-icons/ai";
-import { TbMinusVertical } from "react-icons/tb";
+import { BsFillEyeFill } from "react-icons/bs";
+import { AiTwotoneDelete } from "react-icons/ai";
 import SmallLoading from "../../extras/loading-animation/small-loading";
 import {
   emailChecker,
@@ -186,7 +185,7 @@ const ActiveUser = () => {
         errorObj.navigation = false;
       }
       popUpShow();
-    } else setData(r);
+    } else setData(r.reverse());
   };
 
   let j = false;
@@ -204,23 +203,25 @@ const ActiveUser = () => {
           <div className={Styles.presntUsersHeadCont}>
             <p>Active Users</p>
           </div>
-          <div className={Styles.activeUsersCont}>
-            {Data.length ? (
-              Data.map((item, index) => {
-                return !item.deleted && <User key={index} {...item} />;
-              })
-            ) : (
-              <SmallLoading></SmallLoading>
-            )}
-          </div>
-          <div className={Styles.activeUsersCont}>
-            {Data.length ? (
-              Data.map((item, index) => {
-                return item.deleted && <User key={index} {...item} />;
-              })
-            ) : (
-              <SmallLoading></SmallLoading>
-            )}
+          <div className={Styles.userSecDiv}>
+            <div className={Styles.activeUsersCont}>
+              {Data.length ? (
+                Data.map((item, index) => {
+                  return !item.deleted && <User key={index} {...item} />;
+                })
+              ) : (
+                <SmallLoading></SmallLoading>
+              )}
+            </div>
+            <div className={Styles.activeUsersCont}>
+              {Data.length ? (
+                Data.map((item, index) => {
+                  return item.deleted && <User key={index} {...item} />;
+                })
+              ) : (
+                <SmallLoading></SmallLoading>
+              )}
+            </div>
           </div>
           {viewData && <ViewUserDetails />}
         </div>
@@ -231,14 +232,9 @@ const ActiveUser = () => {
 
 // -------------------------------------
 
-const User = ({
-  name,
-  email,
-  created,
-  deleted,
-  deleted_time,
-}) => {
+const User = ({ name, email, created, deleted, deleted_time }) => {
   const [pageLoading, setpageLoading] = useState(false);
+  const [status, setstatus] = useState();
 
   let { addUser, popUpShow } = useContext(stateContext);
   let { setView } = useContext(activeUserContext);
@@ -250,6 +246,7 @@ const User = ({
     deleted,
     deleted_time,
   };
+  useEffect(() => setstatus(detailObj.deleted), [detailObj]);
 
   const handleUserDelete = async () => {
     setpageLoading(true);
@@ -295,7 +292,11 @@ const User = ({
     <>
       {pageLoading && <SmallLoading />}
       <div className={Styles.secondCont}>
-        <div className={Styles.userDiv}>
+        <div
+          className={`${Styles.DelUserDiv} ${
+            status ? Styles.DelUserDiv : Styles.ActiveUserDiv
+          }`}
+        >
           <div className={Styles.activeUserName}>
             <p> {name}</p>
           </div>
@@ -304,23 +305,22 @@ const User = ({
               className={Styles.viewIconCont}
               onClick={() => setView(detailObj)}
             >
-              <FaRegEye className={Styles.viewIcon} />
+              <BsFillEyeFill className={Styles.viewIcon} />
               <p className={`${Styles.HoverNotification} ${Styles.viewHover}`}>
                 View
               </p>
             </div>
-            <div className={Styles.TbMinusVertical}>
-              <TbMinusVertical className={Styles.TbMinusVertical} />
-            </div>
-            <div
-              className={`${Styles.delIconCont}`}
-              onClick={() => handleUserDelete()}
-            >
-              <AiOutlineDelete className={Styles.delIcon} />
-              <p className={`${Styles.HoverNotification} ${Styles.delHover}`}>
-                Delete
-              </p>
-            </div>
+            {!status && (
+              <div className={`${Styles.delIconCont}`}>
+                <AiTwotoneDelete
+                  className={Styles.delIcon}
+                  onClick={() => handleUserDelete()}
+                />
+                <p className={`${Styles.HoverNotification} ${Styles.delHover}`}>
+                  Delete
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
