@@ -12,6 +12,7 @@ import {
   durationGenerator,
   fetchAuth,
   L_LINK,
+  monthNogen,
 } from "../../utlis";
 import InformationPopUp from "../../extras//pop-ups/information";
 import SmallLoading from "../../extras/loading-animation/small-loading";
@@ -131,12 +132,10 @@ const LinkManement = (props) => {
   const selected_user = useRef();
   const handelSelctUser = (item) => {
     if (item === "All Users") {
-      console.log("selected item:", item);
       selected_user.current.innerText = "All Users";
       selected_user.current.id = email;
     }
     else {
-      console.log("selected item:", item);
       selected_user.current.innerText = item.name;
       selected_user.current.id = item.email;
     }
@@ -145,36 +144,33 @@ const LinkManement = (props) => {
   };
 
   const handleSortedData = async () => {
-
-    let user = selected_user.current.innerText;
     let std = startDate.current.value;
     let ed = endDate.current.value;
     let cal = dateSelectionError(std, ed);
     console.log(cal);
     if (cal.error) alert(cal.reason);
     else {
-      console.log("start:", startDate.current.value);
-      console.log("end:", endDate.current.value);
-      console.log("user:", user);
-      console.log("selected user id1:", selected_user.current.id);
       let newEmail = selected_user.current.id;
       let newData;
       if (admin) {
-        if (newEmail === "info@freeskout.com") {
-          console.log("checking data:", sortedRouteData, routeData);
-          setsortedRouteData(routeData);
-        }
+        if (newEmail === "info@freeskout.com") setsortedRouteData(routeData);
         else {
           newData = routeData.filter((item) => {
             console.log(item.email, " : ", newEmail);
             return item.email === newEmail
           });
-          console.log("new-data", newData);
           setsortedRouteData(newData);
         }
       }
+      console.log(std, ed);
+      if (!std && !ed) return;
+      else {
+        let stdarr = std.split("-");
+        let edarr = ed.split("-");
+        console.log("success", stdarr, edarr);
+        console.log(monthNogen("Jul"));
+      }
     }
-
   };
 
   const handleview = () => {

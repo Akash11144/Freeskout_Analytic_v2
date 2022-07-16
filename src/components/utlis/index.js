@@ -187,16 +187,10 @@ export const slugchecker = (slug) => {
   return slugSts;
 };
 
-//-------------------------------------------------------------------------------
-export const dateTimegen = (inputString) => {
-  let dateObj = {
-    date: '',
-    time: '',
-    durationDate: '',
-  }
-  let monthNo;
-  let dateInitialization = inputString.split(' ')
-  switch (dateInitialization[1]) {
+
+export const monthNogen = (a) => {
+  let monthNo = false;
+  switch (a) {
     case "Jan":
       monthNo = 1
       break;
@@ -233,7 +227,24 @@ export const dateTimegen = (inputString) => {
     case "Dec":
       monthNo = 12
       break;
+    default:
+      monthNo = false
+      break;
   }
+  return monthNo;
+}
+
+//-------------------------------------------------------------------------------
+export const dateTimegen = (inputString) => {
+  let dateObj = {
+    date: '',
+    time: '',
+    durationDate: '',
+  }
+  let dateInitialization = inputString.split(' ');
+
+  let monthNo = monthNogen(dateInitialization[1]);
+
   let date = dateInitialization[0] + ' ' + dateInitialization[1] + ' ' + dateInitialization[2] + ', ' + dateInitialization[3]
   let timeLayout = dateInitialization[4].split(':')
   let finalTime = timeLayout[0] + ":" + timeLayout[1]
