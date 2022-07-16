@@ -57,8 +57,9 @@ const LinkManement = (props) => {
     try {
       let data1 = false;
       let data2 = false;
-      admin ? data1 = await fetchAuth(`${L_LINK}/route/allRoutes`)
-        : data1 = await fetchAuth(`${L_LINK}/route/allUserRoutes/${email}`);
+      admin
+        ? (data1 = await fetchAuth(`${L_LINK}/route/allRoutes`))
+        : (data1 = await fetchAuth(`${L_LINK}/route/allUserRoutes/${email}`));
       console.log("route-data in manage-link:", data1);
       if (data1.issue) {
         if (data1.storageClear) {
@@ -76,7 +77,8 @@ const LinkManement = (props) => {
           console.log("user-data in manage-link:", data2);
           if (data2.issue) {
             if (data2.storageClear) {
-              data2.storageClear && localStorage.removeItem("Freeskout-session");
+              data2.storageClear &&
+                localStorage.removeItem("Freeskout-session");
               errorObj.desc = data2.issueDetail;
               errorObj.navigationRoute = "/";
             } else {
@@ -84,19 +86,17 @@ const LinkManement = (props) => {
               errorObj.navigation = false;
             }
             setpageError(true);
-          }
-          else setuserData(data2);
+          } else setuserData(data2);
         }
         setrouteData(data1);
         setsortedRouteData(data1);
       }
-    }
-    catch (error) {
+    } catch (error) {
       console.log("error in data-fecth func. in manage link page", error);
       errorObj.desc = "Unknown error caused";
       errorObj.navigation = false;
     }
-  }
+  };
 
   let i = false;
   useEffect(() => {
@@ -139,8 +139,6 @@ const LinkManement = (props) => {
       selected_user.current.innerText = item.name;
       selected_user.current.id = item.email;
     }
-
-
   };
 
   const handleSortedData = async () => {
@@ -157,7 +155,7 @@ const LinkManement = (props) => {
         else {
           newData = routeData.filter((item) => {
             console.log(item.email, " : ", newEmail);
-            return item.email === newEmail
+            return item.email === newEmail;
           });
           setsortedRouteData(newData);
         }
@@ -230,47 +228,99 @@ const LinkManement = (props) => {
             linkMgmtPopUp={() => setpageError(false)}
             {...errorObj}
           />
-        )
-          : (
-            <div className={Styles.secondaryDiv}>
-              <div className={Styles.filtersOnMobile}>
-                <div
-                  className={Styles.filterIconHolder}
-                  onClick={() => {
-                    handelMobileSelectors();
-                    setcloseFilterIcon(!closeFilterIcon);
-                  }}
-                >
-                  {closeFilterIcon ? (
-                    <AiFillCloseCircle
-                      className={Styles.closeFilterIcon}
-                    ></AiFillCloseCircle>
-                  ) : (
-                    <FaFilter></FaFilter>
-                  )}
+        ) : (
+          <div className={Styles.secondaryDiv}>
+            <div className={Styles.filtersOnMobile}>
+              <div
+                className={Styles.filterIconHolder}
+                onClick={() => {
+                  handelMobileSelectors();
+                  setcloseFilterIcon(!closeFilterIcon);
+                }}
+              >
+                {closeFilterIcon ? (
+                  <AiFillCloseCircle
+                    className={Styles.closeFilterIcon}
+                  ></AiFillCloseCircle>
+                ) : (
+                  <FaFilter></FaFilter>
+                )}
+              </div>
+              <div
+                className={`${Styles.selectors} ${isSelectorsActive ? Styles.selectorsShow : Styles.selectors
+                  }`}
+              >
+                <div className={Styles.selectedOption}>
+                  <div className={Styles.initialDiv}>
+                    <p ref={selected_status}>All Links</p>
+                    <div
+                      className={Styles.dropholder}
+                      onClick={() => {
+                        handleStatusSelector();
+                      }}
+                    >
+                      <AiFillCaretDown
+                        className={`${Styles.downIcon}
+              ${isActive ? Styles.rotatedIcon : Styles.downIcon}`}
+                      />
+                    </div>
+                  </div>
+                  <div
+                    className={`${Styles.otherOptionsContShow}
+            ${isActive
+                        ? Styles.otherOptionsContShow
+                        : Styles.otherOptionsContHide
+                      }`}
+                  >
+                    <div
+                      className={Styles.otherOptions}
+                      onClick={() => {
+                        handleStatusSelector();
+
+                        allClick();
+                      }}
+                    >
+                      <p ref={all_links}>All Links</p>
+                    </div>
+                    <div
+                      className={Styles.otherOptions}
+                      onClick={() => {
+                        handleStatusSelector();
+                        activeClick();
+                      }}
+                    >
+                      <p ref={active_links}>Active Links</p>
+                    </div>
+                    <div
+                      className={Styles.otherOptions}
+                      onClick={() => {
+                        handleStatusSelector();
+                        deletedClick();
+                      }}
+                    >
+                      <p ref={deleted_links}>Deleted Links</p>
+                    </div>
+                  </div>
                 </div>
-                <div
-                  className={`${Styles.selectors} ${isSelectorsActive ? Styles.selectorsShow : Styles.selectors
-                    }`}
-                >
-                  <div className={Styles.selectedOption}>
+                {admin && (
+                  <div className={Styles.selectedUserOption}>
                     <div className={Styles.initialDiv}>
-                      <p ref={selected_status}>All Links</p>
+                      <p ref={selected_user} id={email}>
+                        All Users
+                      </p>
                       <div
                         className={Styles.dropholder}
-                        onClick={() => {
-                          handleStatusSelector();
-                        }}
+                        onClick={() => handleUserSelector()}
                       >
                         <AiFillCaretDown
                           className={`${Styles.downIcon}
-              ${isActive ? Styles.rotatedIcon : Styles.downIcon}`}
+              ${isUserActive ? Styles.rotatedIcon : Styles.downIcon}`}
                         />
                       </div>
                     </div>
                     <div
                       className={`${Styles.otherOptionsContShow}
-            ${isActive
+            ${isUserActive
                           ? Styles.otherOptionsContShow
                           : Styles.otherOptionsContHide
                         }`}
@@ -278,161 +328,117 @@ const LinkManement = (props) => {
                       <div
                         className={Styles.otherOptions}
                         onClick={() => {
-                          handleStatusSelector();
-
-                          allClick();
+                          handleUserSelector();
+                          handelSelctUser("All Users");
                         }}
                       >
-                        <p ref={all_links}>All Links</p>
+                        <p>All Users</p>
                       </div>
-                      <div
-                        className={Styles.otherOptions}
-                        onClick={() => {
-                          handleStatusSelector();
-                          activeClick();
-                        }}
-                      >
-                        <p ref={active_links}>Active Links</p>
-                      </div>
-                      <div
-                        className={Styles.otherOptions}
-                        onClick={() => {
-                          handleStatusSelector();
-                          deletedClick();
-                        }}
-                      >
-                        <p ref={deleted_links}>Deleted Links</p>
-                      </div>
+                      {userData ? (
+                        userData.map((item, index) => {
+                          return (
+                            <div
+                              key={index}
+                              className={Styles.otherOptions}
+                              onClick={() => {
+                                handleUserSelector();
+                                handelSelctUser(item);
+                              }}
+                            >
+                              <p>{item.name}</p>
+                            </div>
+                          );
+                        })
+                      ) : (
+                        <h1>Loading...</h1>
+                      )}
                     </div>
                   </div>
-                  {admin && (
-                    <div className={Styles.selectedUserOption}>
-                      <div className={Styles.initialDiv}>
-                        <p ref={selected_user} id={email}>All Users</p>
-                        <div
-                          className={Styles.dropholder}
-                          onClick={() => handleUserSelector()}
-                        >
-                          <AiFillCaretDown
-                            className={`${Styles.downIcon}
-              ${isUserActive ? Styles.rotatedIcon : Styles.downIcon}`}
-                          />
-                        </div>
-                      </div>
-                      <div
-                        className={`${Styles.otherOptionsContShow}
-            ${isUserActive
-                            ? Styles.otherOptionsContShow
-                            : Styles.otherOptionsContHide
-                          }`}
-                      >
-                        <div
-                          className={Styles.otherOptions}
-                          onClick={() => {
-                            handleUserSelector();
-                            handelSelctUser("All Users");
-                          }}
-                        >
-                          <p>All Users</p>
-                        </div>
-                        {userData ? (
-                          userData.map((item, index) => {
-                            return (
-                              <div
-                                key={index}
-                                className={Styles.otherOptions}
-                                onClick={() => {
-                                  handleUserSelector();
-                                  handelSelctUser(item);
-                                }}
-                              >
-                                <p>{item.name}</p>
-                              </div>
-                            );
-                          })
-                        ) : (
-                          <h1>Loading...</h1>
-                        )}
-                      </div>
-                    </div>
-                  )}
-
-                  <div className={Styles.selectDate}>
-                    <p>From: </p>
-                    <input ref={startDate} type="date" required="required"></input>
-                  </div>
-                  <div className={Styles.selectDate}>
-                    <p>To:</p>
-                    <input ref={endDate} type="date" required="required"></input>
-                  </div>
-                  <div
-                    onClick={() => {
-                      {
-                        handleSortedData();
-                        handelMobileSelectors();
-                      }
-                    }}
-                    className={Styles.showBtn}
-                  >
-                    <p>Show Results</p>
-                  </div>
-                </div>
-              </div>
-              <div className={Styles.linkList} ref={linkListCont}>
-                <div className={Styles.linkListSecCont}>
-                  {showActiveLink && (
-                    <div className={Styles.linksContainer}>
-                      {sortedRouteData.length &&
-                        sortedRouteData.map((item, index) => {
-                          {
-                            return (
-                              !item.deleted && (
-                                <LinkLayout
-                                  index={index}
-                                  {...item}
-                                  linkCallBack={(val) => handleDelete(val)}
-                                  viewLInkDetailsTRigger={(mylinkData) => {
-                                    handleview();
-                                    setlinkData(mylinkData);
-                                  }}
-                                />
-                              )
-                            );
-                          }
-                        })}
-                    </div>
-                  )}
-                  {showDeletedlinks && (
-                    <div className={Styles.linksContainerA}>
-                      {sortedRouteData.length &&
-                        sortedRouteData.map((item, index) => {
-                          {
-                            return (
-                              item.deleted && (
-                                <LinkLayout
-                                  index={index}
-                                  {...item}
-                                  linkCallBack={(val) => handleDelete(val)}
-                                  viewLInkDetailsTRigger={(mylinkData) => {
-                                    handleview();
-                                    setlinkData(mylinkData);
-                                  }}
-                                />
-                              )
-                            );
-                          }
-                        })}
-                    </div>
-                  )}
-                </div>
-
-                {viewDetails && (
-                  <DetailLayout index={email} closeInkDetailsTRigger={() => handleCloseDetails()}  {...linkData} />
                 )}
+
+                <div className={Styles.selectDate}>
+                  <p>From: </p>
+                  <input
+                    ref={startDate}
+                    type="date"
+                    required="required"
+                  ></input>
+                </div>
+                <div className={Styles.selectDate}>
+                  <p>To:</p>
+                  <input ref={endDate} type="date" required="required"></input>
+                </div>
+                <div
+                  onClick={() => {
+                    {
+                      handleSortedData();
+                      handelMobileSelectors();
+                    }
+                  }}
+                  className={Styles.showBtn}
+                >
+                  <p>Show Results</p>
+                </div>
               </div>
             </div>
-          )
-        }
+            <div className={Styles.linkList} ref={linkListCont}>
+              <div className={Styles.linkListSecCont}>
+                {showActiveLink && (
+                  <div className={Styles.linksContainer}>
+                    {sortedRouteData.length &&
+                      sortedRouteData.map((item, index) => {
+                        {
+                          return (
+                            !item.deleted && (
+                              <LinkLayout
+                                index={index}
+                                {...item}
+                                linkCallBack={(val) => handleDelete(val)}
+                                viewLInkDetailsTRigger={(mylinkData) => {
+                                  handleview();
+                                  setlinkData(mylinkData);
+                                }}
+                              />
+                            )
+                          );
+                        }
+                      })}
+                  </div>
+                )}
+                {showDeletedlinks && (
+                  <div className={Styles.linksContainerA}>
+                    {sortedRouteData.length &&
+                      sortedRouteData.map((item, index) => {
+                        {
+                          return (
+                            item.deleted && (
+                              <LinkLayout
+                                index={index}
+                                {...item}
+                                linkCallBack={(val) => handleDelete(val)}
+                                viewLInkDetailsTRigger={(mylinkData) => {
+                                  handleview();
+                                  setlinkData(mylinkData);
+                                }}
+                              />
+                            )
+                          );
+                        }
+                      })}
+                  </div>
+                )}
+              </div>
+
+              {viewDetails && (
+                <DetailLayout
+                  index={email}
+                  closeInkDetailsTRigger={() => handleCloseDetails()}
+                  {...linkData}
+                />
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
@@ -514,8 +520,8 @@ const DetailLayout = (props) => {
     let a = await fetchAuth(
       `http://localhost:1111/user/getAllFromSlug/${props.path.split("/")[1]}`
     );
-    hitRef.current.innerText = a;
     sethitLoading(false);
+    hitRef.current.innerText = a;
   };
 
   let i = false;
@@ -582,7 +588,7 @@ const DetailLayout = (props) => {
               <p>Hits</p>
 
               <p ref={hitRef} className={Styles.hits}>
-                {/* {hitLoading && <SendMail></SendMail>} */}
+                {hitLoading && <SendMail></SendMail>}
               </p>
             </div>
           </div>

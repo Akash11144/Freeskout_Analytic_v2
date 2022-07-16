@@ -1,0 +1,11 @@
+.mainCont {
+  width: 20px;
+  height: 15px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mainCont > img {
+  width: 70%;
+}

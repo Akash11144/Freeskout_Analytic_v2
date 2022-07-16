@@ -263,6 +263,7 @@ body {
   height: 54vh;
   display: grid;
   place-items: center;
+  box-sizing: border-box;
 }
 .userDataSecondaryDiv {
   width: 80%;
@@ -275,6 +276,7 @@ body {
   padding: 2% 3%;
   font-weight: 600;
   z-index: 6;
+  box-sizing: border-box;
 }
 .userDataSecondaryDiv > p {
   margin: 3% auto;
@@ -353,7 +355,13 @@ body {
   justify-content: space-evenly;
   align-items: center;
   border-bottom: 1px solid rgba(170, 170, 170, 0.192);
+  color: rgba(0, 0, 0, 0.91);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  font-size: 16px;
+  text-align: left;
 }
+
 .createdBy > p:nth-of-type(2) {
   color: rgba(0, 0, 0, 0.6);
   font-size: 14px;
@@ -381,6 +389,19 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.hitsMini {
+  background-color: #0a3556dd;
+  color: #fdffff !important;
+  font-weight: 900 !important;
+  padding: 2% 4%;
+  border-radius: 10px !important;
+  width: unset !important;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
 }
 .deleted {
   color: #fdffff;
@@ -424,6 +445,31 @@ body {
     font-size: 12px;
   }
 }
+@media (max-width: 980px) {
+  .userDataSecondaryDiv {
+    width: 90%;
+  }
+  .selectedUserEmail {
+    font-size: 12px;
+    padding: 1%;
+  }
+  .createdBy > p:nth-of-type(1) {
+    font-size: 14px;
+  }
+  .createdBy > p:nth-of-type(2) {
+    font-size: 12px;
+  }
+  .active,
+  .deleted {
+    font-size: 12px;
+  }
+  .createdBySecondary {
+    font-size: 14px;
+  }
+  .hitsMini {
+    font-size: 12px;
+  }
+}
 @media (max-width: 768px) {
   .mainCont {
     padding-top: 5vh;
@@ -440,8 +486,14 @@ body {
     font-size: 16px;
     margin-bottom: 3%;
   }
+  .userDataSecondaryDiv {
+    width: 80%;
+  }
 }
 @media (max-width: 510px) {
+  .userDataSecondaryDiv {
+    width: 100%;
+  }
   .activeUserName > p {
     font-size: 12px;
     margin-bottom: 1.5%;
@@ -456,6 +508,18 @@ body {
   }
 }
 @media (max-width: 410px) {
+  .dataSecondaryDiv {
+    flex-direction: column;
+  }
+  .createdBySecondary {
+    width: 98%;
+    margin: 2% auto;
+    justify-content: space-between;
+  }
+  .hitsMini {
+    padding: 1% 2%;
+    font-size: 1opx;
+  }
   .activeUsersCont {
     padding: 2%;
   }
@@ -468,5 +532,31 @@ body {
     justify-content: space-evenly;
     align-items: center;
     padding: 2% 1%;
+  }
+}
+@media (max-width: 351px) {
+  .selectedUserEmail {
+    font-size: 10px;
+    padding: 1%;
+  }
+  .createdBy > p:nth-of-type(1) {
+    font-size: 10px;
+  }
+  .createdBy > p:nth-of-type(2) {
+    font-size: 8px;
+  }
+  .active,
+  .deleted {
+    font-size: 8px;
+  }
+  .createdBySecondary {
+    font-size: 10px;
+  }
+  .hitsMini {
+    font-size: 8px;
+  }
+  .okayBtn {
+    font-size: 12px;
+    padding: 3px 10px;
   }
 }
