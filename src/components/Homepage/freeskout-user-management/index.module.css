@@ -80,7 +80,7 @@ body {
   letter-spacing: 1px;
   background-image: linear-gradient(to bottom, #5a6170ca, #1c1018d1);
   background-clip: text;
-  text-shadow: 2px 2px 5px #0c89bf;
+  text-shadow: 1px 1px 2px #0c89bf;
 }
 .inputFields {
   width: 80%;
