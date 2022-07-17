@@ -32,7 +32,7 @@ const FUM = () => {
 
   let j = false;
   useEffect(() => {
-    console.log("inside manage user main ue,", loc);
+    // console.log("inside manage user main ue,", loc);
     !j && !loc.state && nav("/home");
     setpageLoading(false);
     return () => (j = true);
@@ -206,7 +206,7 @@ const ActiveUser = () => {
       <>
         <div className={Styles.presentUsersDiv}>
           <div className={Styles.presntUsersHeadCont}>
-            <p>Active Users</p>
+            <p>Users</p>
           </div>
           <div className={Styles.userSecDiv}>
             <div className={Styles.activeUsersCont}>
@@ -278,7 +278,7 @@ const User = ({ name, email, created, deleted, deleted_time }) => {
         } else {
           console.log(r1.issueDetail);
           if (r1.issueDetail === "cannot delete ADMIN") {
-            errorObj.desc = "HAHAHA I AM ADMIN :x";
+            errorObj.desc = " 🫵🏻 Can't remove Admin 🙀";
             errorObj.navigation = false;
           } else {
             errorObj.desc = r1.issueDetail;
