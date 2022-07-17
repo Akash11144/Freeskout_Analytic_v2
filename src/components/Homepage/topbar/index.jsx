@@ -40,6 +40,8 @@ const TopbarLayout = ({ admin, person, email }) => {
         pageNameRef.current.innerText = "Manage Link";
       if (loc.pathname === "/home/fum")
         pageNameRef.current.innerText = "Manage Users";
+      if (loc.pathname === "/home/db")
+        pageNameRef.current.innerText = "Dashboard";
     }
     return () => (i = true);
   }, [loc.pathname]);
@@ -72,18 +74,21 @@ const TopbarLayout = ({ admin, person, email }) => {
           >
             <div className={Styles.hamCont}>
               <span
-                className={`${Styles.line} ${isActive ? Styles.lineTop : Styles.line
-                  }`}
+                className={`${Styles.line} ${
+                  isActive ? Styles.lineTop : Styles.line
+                }`}
                 id="topLine"
               ></span>
               <span
-                className={`${Styles.line}  ${isActive ? Styles.lineMiddle : Styles.line
-                  }`}
+                className={`${Styles.line}  ${
+                  isActive ? Styles.lineMiddle : Styles.line
+                }`}
                 id="bottomLine"
               ></span>
               <span
-                className={`${Styles.line} ${isActive ? Styles.lineBottom : Styles.line
-                  }`}
+                className={`${Styles.line} ${
+                  isActive ? Styles.lineBottom : Styles.line
+                }`}
                 id="endLine"
               ></span>
             </div>
@@ -97,8 +102,9 @@ const TopbarLayout = ({ admin, person, email }) => {
         </div>
       </div>
       <div
-        className={`${Styles.sideBarCont} ${isActive ? Styles.sideBarShow : Styles.sideBarCont
-          }`}
+        className={`${Styles.sideBarCont} ${
+          isActive ? Styles.sideBarShow : Styles.sideBarCont
+        }`}
         id="sideMenu"
       >
         <div className={Styles.sideBar}>
@@ -134,7 +140,7 @@ const TopbarLayout = ({ admin, person, email }) => {
             )}
             <Link
               className={Styles.linky}
-              to={"/home"}
+              to={"/home/db"}
               state={{ admin, email }}
               onClick={() => hamClick()}
             >

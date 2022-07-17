@@ -9,6 +9,7 @@ import PageNotFound from "../redirection/page-not-found";
 import InformationPopUp from "../extras/pop-ups/information";
 import SmallLoading from "../extras/loading-animation/small-loading";
 import { fetchAuth, L_LINK } from "../utlis";
+import Dashboard from "./graph-dashboard";
 
 let errorObj = {
   desc: "",
@@ -93,6 +94,10 @@ const HomeRoutes = (props) => {
     {
       path: "/lm",
       element: <LinkManement />,
+    },
+    {
+      path: "/db",
+      element: <Dashboard />,
     },
     {
       path: "*",
