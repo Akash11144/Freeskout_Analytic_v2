@@ -718,14 +718,12 @@ body {
     width: 75%;
   }
   .box {
-    width: 95%;
-    margin: 0 auto;
-    padding: 15% 5%;
-  }
-}
-@media (max-width: 351px) {
-  .logo {
     width: 85%;
+    margin: 0 auto;
+    padding: 7% 5%;
+  }
+  .inputContainer span {
+    font-size: 114px;
   }
   .inputContainer {
     border-width: 1.2px;
@@ -738,5 +736,25 @@ body {
   }
   .userNameInput:focus ~ span {
     font-size: 9px;
+  }
+}
+@media (max-width: 351px) {
+  .logo {
+    width: 85%;
+  }
+  .inputContainer {
+    border-width: 1.2px;
+  }
+  .inputContainer span {
+    font-size: 12px;
+  }
+  .userNameInput {
+    font-size: 10px;
+  }
+  .userNameInput:valid ~ span {
+    font-size: 7px;
+  }
+  .userNameInput:focus ~ span {
+    font-size: 7px;
   }
 }

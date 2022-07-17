@@ -65,7 +65,10 @@ const Home = () => {
       {pageStart &&
         (loggedIn ? (
           <>
-            <Topbar {...person}></Topbar>
+            <div className={Styles.topbarCont}>
+              {" "}
+              <Topbar {...person}></Topbar>
+            </div>
             <HomeRoutes {...person} />
           </>
         ) : (

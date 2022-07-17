@@ -6,6 +6,9 @@
   height: 10vh;
   z-index: 2;
   user-select: none;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
 }
 .topBarSecCont {
   width: 95%;

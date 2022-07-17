@@ -3,6 +3,12 @@
   height: 100vh;
   user-select: none;
 }
+.topbarCont {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 7;
+}
 .sidePlusMain {
   position: relative;
 }
