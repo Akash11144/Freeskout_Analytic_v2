@@ -13,7 +13,7 @@ function RedirectingRoutes() {
       element: <h1 className="homediv">Redirecting..</h1>,
     },
     {
-      path: "/rd",
+      path: "/pagenotfound",
       element: <Redir />,
     },
     {

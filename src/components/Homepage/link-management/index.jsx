@@ -141,16 +141,16 @@ const LinkManement = (props) => {
   };
 
   const handleSortedData = async () => {
+    console.time();
     let std = startDate.current.value;
     let ed = endDate.current.value;
     let cal = dateSelectionError(std, ed);
     console.log(cal);
     if (cal.error) alert(cal.reason);
     else {
-      let newEmail = selected_user.current.id;
       let newData;
       if (admin) {
-        if (newEmail === "info@freeskout.com") setsortedRouteData(routeData);
+        if (selected_user.current.id === "info@freeskout.com") setsortedRouteData(routeData);
         else {
           newData = routeData.filter((item) => {
             console.log(item.email, " : ", newEmail);
@@ -162,12 +162,26 @@ const LinkManement = (props) => {
       console.log(std, ed);
       if (!std && !ed) return;
       else {
-        let stdarr = std.split("-");
-        let edarr = ed.split("-");
+        let stdarr = std.split("-").map(item => +item);
+        let edarr = ed.split("-").map(item => +item);
         console.log("success", stdarr, edarr);
         console.log(monthNogen("Jul"));
+        if (routeData.length) {
+          let newsorted = [];
+          for (let i = 0; i < routeData.length; i++) {
+            let arr = routeData[i].time.split(" ");
+            console.log(+arr[3], +monthNogen(arr[1]), +arr[2]);
+            if (+arr[3] >= stdarr[0] && +arr[3] <= edarr[0])
+              if (+monthNogen(arr[1]) >= stdarr[1] && +monthNogen(arr[1]) <= edarr[1])
+                if (+arr[2] >= stdarr[2] && +arr[2] <= edarr[2]) newsorted.push(routeData[i]);
+          }
+          console.log("new-sorted-data:", newsorted);
+          setsortedRouteData(newsorted);
+        }
+        else setsortedRouteData([]);
       }
     }
+    console.timeEnd()
   };
 
   const handleview = () => {
@@ -246,9 +260,8 @@ const LinkManement = (props) => {
                 )}
               </div>
               <div
-                className={`${Styles.selectors} ${
-                  isSelectorsActive ? Styles.selectorsShow : Styles.selectors
-                }`}
+                className={`${Styles.selectors} ${isSelectorsActive ? Styles.selectorsShow : Styles.selectors
+                  }`}
               >
                 <div className={Styles.selectedOption}>
                   <div className={Styles.initialDiv}>
@@ -267,11 +280,10 @@ const LinkManement = (props) => {
                   </div>
                   <div
                     className={`${Styles.otherOptionsContShow}
-            ${
-              isActive
-                ? Styles.otherOptionsContShow
-                : Styles.otherOptionsContHide
-            }`}
+            ${isActive
+                        ? Styles.otherOptionsContShow
+                        : Styles.otherOptionsContHide
+                      }`}
                   >
                     <div
                       className={Styles.otherOptions}
@@ -321,11 +333,10 @@ const LinkManement = (props) => {
                     </div>
                     <div
                       className={`${Styles.otherOptionsContShow}
-            ${
-              isUserActive
-                ? Styles.otherOptionsContShow
-                : Styles.otherOptionsContHide
-            }`}
+            ${isUserActive
+                          ? Styles.otherOptionsContShow
+                          : Styles.otherOptionsContHide
+                        }`}
                     >
                       <div
                         className={Styles.otherOptions}
@@ -461,9 +472,8 @@ const LinkLayout = (props) => {
     <>
       <div
         key={email}
-        className={`${Styles.delCont} ${
-          status ? Styles.delCont : Styles.activeCont
-        }`}
+        className={`${Styles.delCont} ${status ? Styles.delCont : Styles.activeCont
+          }`}
       >
         <div className={Styles.linkCont}>
           <p>www.freeskout.com/redirect{path}</p>

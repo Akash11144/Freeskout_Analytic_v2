@@ -21,7 +21,6 @@ const Home = () => {
   const [person, setperson] = useState("");
   const [loggedIn, setloggedIn] = useState(false);
   const [pageLoading, setpageLoading] = useState(true);
-  const [pageStart, setpageStart] = useState(false);
   const [pageError, setpageError] = useState(false);
 
   const checkPersistent = async () => {
@@ -37,7 +36,6 @@ const Home = () => {
           errorObj.desc = r.issueDetail;
           errorObj.navigationRoute = "/";
         } else {
-          console.log("inside else");
           errorObj.desc = r.issueDetail;
           errorObj.navigation = false;
         }
@@ -53,7 +51,6 @@ const Home = () => {
 
   useEffect(() => {
     if (!i) {
-      setpageStart(true);
       checkPersistent();
       setpageLoading(false);
     }
@@ -63,8 +60,8 @@ const Home = () => {
   return (
     <React.Fragment>
       {pageLoading && <SmallLoading />}
-      {pageStart &&
-        (loggedIn ? (
+      <div style={{ width: "100%", height: "100vh" }}>
+        {loggedIn ? (
           <>
             <div className={Styles.topbarCont}>
               {" "}
@@ -74,7 +71,8 @@ const Home = () => {
           </>
         ) : (
           pageError && <InformationPopUp {...errorObj} />
-        ))}
+        )}
+      </div>
     </React.Fragment>
   );
 };

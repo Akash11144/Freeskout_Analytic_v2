@@ -95,36 +95,35 @@ const UserForm = () => {
     } else if (pass.current.value != confirmpass.current.value) {
       alert("password dont match");
     } else {
-      console.log("ready to login");
-    }
-    const url = new URL(L_LINK);
-    url.pathname = "/validate/addFUser";
-    const dt = new Date();
-    let r = await postAuth(url, "", {
-      name: name.current.value,
-      email: email.current.value,
-      password: pass.current.value,
-      created: dt.toDateString() + " " + dt.toTimeString(),
-      deleted: false,
-      deleted_time: "",
-    });
-    console.log(r);
-    if (r.issue) {
-      if (r.storageClear) {
-        r.storageClear && localStorage.removeItem("Freeskout-session");
-        errorObj.desc = r.issueDetail;
-        errorObj.navigationRoute = "/";
+      const url = new URL(L_LINK);
+      url.pathname = "/validate/addFUser";
+      const dt = new Date();
+      let r = await postAuth(url, "", {
+        name: name.current.value,
+        email: email.current.value,
+        password: pass.current.value,
+        created: dt.toDateString() + " " + dt.toTimeString(),
+        deleted: false,
+        deleted_time: "",
+      });
+      console.log(r);
+      if (r.issue) {
+        if (r.storageClear) {
+          r.storageClear && localStorage.removeItem("Freeskout-session");
+          errorObj.desc = r.issueDetail;
+          errorObj.navigationRoute = "/";
+        } else {
+          errorObj.desc = r.issueDetail;
+          errorObj.navigation = false;
+        }
+        popUpShow();
       } else {
-        errorObj.desc = r.issueDetail;
+        errorObj.desc = "User Created Successfully!!";
         errorObj.navigation = false;
       }
       popUpShow();
-    } else {
-      errorObj.desc = "User Created Successfully!!";
-      errorObj.navigation = false;
+      addUser();
     }
-    popUpShow();
-    addUser();
   };
 
   return (
@@ -298,9 +297,8 @@ const User = ({ name, email, created, deleted, deleted_time }) => {
       {pageLoading && <SmallLoading />}
       <div className={Styles.secondCont}>
         <div
-          className={`${Styles.DelUserDiv} ${
-            status ? Styles.DelUserDiv : Styles.ActiveUserDiv
-          }`}
+          className={`${Styles.DelUserDiv} ${status ? Styles.DelUserDiv : Styles.ActiveUserDiv
+            }`}
         >
           <div className={Styles.activeUserName}>
             <p> {name}</p>
