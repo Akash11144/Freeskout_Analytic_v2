@@ -61,7 +61,7 @@ const Home = () => {
   return (
     <React.Fragment>
       {pageLoading && <SmallLoading />}
-      <div style={{ width: "100%", height: "100vh" }}>
+      <section style={{ width: "100%", height: "100vh" }}>
         {loggedIn ? (
           <>
             <div className={Styles.topbarCont}>
@@ -73,7 +73,7 @@ const Home = () => {
         ) : (
           pageError && <InformationPopUp {...errorObj} />
         )}
-      </div>
+      </section>
     </React.Fragment>
   );
 };

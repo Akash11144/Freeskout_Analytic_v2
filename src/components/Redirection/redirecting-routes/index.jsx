@@ -48,10 +48,7 @@ function RedirectingRoutes() {
       }
     } catch (error) {
       console.log("error while fetching in frontend", error);
-      return {
-        FetchIssue: true,
-        FetchIssueDetail: "error getting data",
-      };
+      window.open("https://freeskout.com", "_self");
     }
     setData(arr);
     console.timeEnd();

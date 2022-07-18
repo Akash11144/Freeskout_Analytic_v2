@@ -61,7 +61,7 @@ const Login = () => {
   return (
     <>
       {Loading && <SmallLoading />}
-      <div id="main" className={Styles.main_container}>
+      <section id="main" className={Styles.main_container}>
         {popUp ? (
           <InformationPopUp
             keyp={"loginPopUp"}
@@ -117,7 +117,7 @@ const Login = () => {
             </div>
           </>)
         }
-      </div>
+      </section>
     </>
   );
 };
