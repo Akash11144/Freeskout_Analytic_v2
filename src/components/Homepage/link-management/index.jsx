@@ -60,7 +60,7 @@ const LinkManement = (props) => {
       let data2 = false;
       admin
         ? (data1 = await fetchAuth(`${L_LINK}/route/allRoutes`))
-        : (data1 = await fetchAuth(`${L_LINK}/route/allUserRoutes/${email}`));
+        : (data1 = await fetchAuth(`${L_LINK}/route/userAllRoutes/${email}`));
       console.log("route-data in manage-link:", data1);
       if (data1.issue) {
         if (data1.storageClear) {
@@ -109,7 +109,7 @@ const LinkManement = (props) => {
   const handleStatusSelector = () => setisActive(!isActive);
   const handelMobileSelectors = () => setisSelectorsActive(!isSelectorsActive);
   const handleUserSelector = () => setisUserActive(!isUserActive);
-  const handleview = () => setviewDetails(true)
+  const handleview = () => setviewDetails(true);
   const handleCloseDetails = () => setviewDetails(false);
 
   const allClick = () => {
@@ -154,8 +154,7 @@ const LinkManement = (props) => {
         console.log("inside admin if", finalarr);
         if (selected_user.current.id === "info@freeskout.com") {
           finalarr = routeData;
-        }
-        else {
+        } else {
           finalarr = routeData.filter((item) => {
             return item.email === selected_user.current.id;
           });
@@ -166,23 +165,26 @@ const LinkManement = (props) => {
       else {
         !admin && (finalarr = routeData);
         if (finalarr.length) {
-          let stdarr = std.split("-").map(item => +item);
-          let edarr = ed.split("-").map(item => +item);
+          let stdarr = std.split("-").map((item) => +item);
+          let edarr = ed.split("-").map((item) => +item);
           console.log("success", stdarr, edarr);
           let newsorted = [];
           for (let i = 0; i < finalarr.length; i++) {
             let arr = routeData[i].time.split(" ");
             if (+arr[3] >= stdarr[0] && +arr[3] <= edarr[0])
-              if (+monthNogen(arr[1]) >= stdarr[1] && +monthNogen(arr[1]) <= edarr[1])
-                if (+arr[2] >= stdarr[2] && +arr[2] <= edarr[2]) newsorted.push(routeData[i]);
+              if (
+                +monthNogen(arr[1]) >= stdarr[1] &&
+                +monthNogen(arr[1]) <= edarr[1]
+              )
+                if (+arr[2] >= stdarr[2] && +arr[2] <= edarr[2])
+                  newsorted.push(routeData[i]);
           }
           console.log("new-sorted-data:", newsorted);
           setfinalData(newsorted);
-        }
-        else setfinalData([]);
+        } else setfinalData([]);
       }
     }
-    console.timeEnd()
+    console.timeEnd();
     setLoading(false);
   };
 
@@ -220,7 +222,7 @@ const LinkManement = (props) => {
         DataFetch();
       }
     } catch (error) {
-      setLoading(false)
+      setLoading(false);
       errorObj.desc = "Some error while deleting";
       errorObj.navigation = false;
       setpageError(true);
@@ -257,8 +259,9 @@ const LinkManement = (props) => {
                 )}
               </div>
               <div
-                className={`${Styles.selectors} ${isSelectorsActive ? Styles.selectorsShow : Styles.selectors
-                  }`}
+                className={`${Styles.selectors} ${
+                  isSelectorsActive ? Styles.selectorsShow : Styles.selectors
+                }`}
               >
                 <div className={Styles.selectedOption}>
                   <div className={Styles.initialDiv}>
@@ -277,10 +280,11 @@ const LinkManement = (props) => {
                   </div>
                   <div
                     className={`${Styles.otherOptionsContShow}
-            ${isActive
-                        ? Styles.otherOptionsContShow
-                        : Styles.otherOptionsContHide
-                      }`}
+            ${
+              isActive
+                ? Styles.otherOptionsContShow
+                : Styles.otherOptionsContHide
+            }`}
                   >
                     <div
                       className={Styles.otherOptions}
@@ -330,10 +334,11 @@ const LinkManement = (props) => {
                     </div>
                     <div
                       className={`${Styles.otherOptionsContShow}
-            ${isUserActive
-                          ? Styles.otherOptionsContShow
-                          : Styles.otherOptionsContHide
-                        }`}
+            ${
+              isUserActive
+                ? Styles.otherOptionsContShow
+                : Styles.otherOptionsContHide
+            }`}
                     >
                       <div
                         className={Styles.otherOptions}
@@ -396,7 +401,7 @@ const LinkManement = (props) => {
               <div className={Styles.linkListSecCont}>
                 {showActiveLink && (
                   <div className={Styles.linksContainer}>
-                    {finalData.length ?
+                    {finalData.length ? (
                       finalData.map((item, index) => {
                         {
                           return (
@@ -413,12 +418,15 @@ const LinkManement = (props) => {
                             )
                           );
                         }
-                      }) : (<h1>No Data Present.</h1>)}
+                      })
+                    ) : (
+                      <h1>No Data Present.</h1>
+                    )}
                   </div>
                 )}
                 {showDeletedlinks && (
                   <div className={Styles.linksContainerA}>
-                    {finalData.length ?
+                    {finalData.length ? (
                       finalData.map((item, index) => {
                         {
                           return (
@@ -435,7 +443,10 @@ const LinkManement = (props) => {
                             )
                           );
                         }
-                      }) : (<h1>No Data Present.</h1>)}
+                      })
+                    ) : (
+                      <h1>No Data Present.</h1>
+                    )}
                   </div>
                 )}
               </div>
@@ -469,8 +480,9 @@ const LinkLayout = (props) => {
     <>
       <div
         key={email}
-        className={`${Styles.delCont} ${status ? Styles.delCont : Styles.activeCont
-          }`}
+        className={`${Styles.delCont} ${
+          status ? Styles.delCont : Styles.activeCont
+        }`}
       >
         <div className={Styles.linkCont}>
           <p>www.freeskout.com/redirect{path}</p>
@@ -529,7 +541,7 @@ const DetailLayout = (props) => {
   const hitFetch = async () => {
     sethitLoading(true);
     let a = await fetchAuth(
-      `http://localhost:1111/user/getAllSlug/${props.path.split("/")[1]}`
+      `${L_LINK}/user/getAllSlug/${props.path.split("/")[1]}`
     );
     sethitLoading(false);
     hitRef.current.innerText = a;

@@ -2,6 +2,7 @@ import Styles from "./index.module.css";
 import { useEffect, useState, useRef } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import { L_LINK } from "../../utlis";
 
 const getYear = () => {
   var dt = new Date();
@@ -13,7 +14,11 @@ const Topbar = (props) => {
 
   let i = false;
   useEffect(() => {
-    !i && (props.email === "info@freeskout.com" || props.email === "gupta.akash116@gmail.com" || props.email === "shubham.0@outlook.com") && setadmin(props.email);
+    !i &&
+      (props.email === "info@freeskout.com" ||
+        props.email === "gupta.akash116@gmail.com" ||
+        props.email === "shubham.0@outlook.com") &&
+      setadmin(props.email);
     return () => (i = true);
   }, [props]);
 
@@ -52,7 +57,7 @@ const TopbarLayout = ({ admin, person, email }) => {
     navi1("/");
     let dt = JSON.parse(localStorage.getItem("Freeskout-session"));
     localStorage.removeItem("Freeskout-session");
-    let r = await fetch("http://localhost:1111/validate/logout", {
+    let r = await fetch(`${L_LINK}/validate/logout`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -74,18 +79,21 @@ const TopbarLayout = ({ admin, person, email }) => {
           >
             <div className={Styles.hamCont}>
               <span
-                className={`${Styles.line} ${isActive ? Styles.lineTop : Styles.line
-                  }`}
+                className={`${Styles.line} ${
+                  isActive ? Styles.lineTop : Styles.line
+                }`}
                 id="topLine"
               ></span>
               <span
-                className={`${Styles.line}  ${isActive ? Styles.lineMiddle : Styles.line
-                  }`}
+                className={`${Styles.line}  ${
+                  isActive ? Styles.lineMiddle : Styles.line
+                }`}
                 id="bottomLine"
               ></span>
               <span
-                className={`${Styles.line} ${isActive ? Styles.lineBottom : Styles.line
-                  }`}
+                className={`${Styles.line} ${
+                  isActive ? Styles.lineBottom : Styles.line
+                }`}
                 id="endLine"
               ></span>
             </div>
@@ -99,8 +107,9 @@ const TopbarLayout = ({ admin, person, email }) => {
         </div>
       </div>
       <div
-        className={`${Styles.sideBarCont} ${isActive ? Styles.sideBarShow : Styles.sideBarCont
-          }`}
+        className={`${Styles.sideBarCont} ${
+          isActive ? Styles.sideBarShow : Styles.sideBarCont
+        }`}
         id="sideMenu"
       >
         <div className={Styles.sideBar}>

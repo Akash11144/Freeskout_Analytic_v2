@@ -344,16 +344,14 @@ const ViewUserDetails = () => {
 
   const getUserHit = async () => {
     sethitsLoading(true);
-    let hits = await fetchAuth(
-      `${L_LINK}/route/getAllUserRoutes/${viewData.email}`
-    );
+    let hits = await fetchAuth(`${L_LINK}/route/userHits/${viewData.email}`);
     sethitsLoading(false);
     userHitRef.current.innerText = hits;
   };
   const getRouteCount = async () => {
     setcountLoading(true);
     let counts = await fetchAuth(
-      `${L_LINK}/route/getAllUserRoutesCount/${viewData.email}`
+      `${L_LINK}/route/userAllRoutesC/${viewData.email}`
     );
     setcountLoading(false);
     userRouteCount.current.innerText = counts;
