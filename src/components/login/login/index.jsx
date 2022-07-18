@@ -32,7 +32,6 @@ const Login = () => {
     !i &&
       JSON.parse(localStorage.getItem("Freeskout-session")) !== null &&
       navi("/home");
-
     setPageLoading(false);
     return () => (i = true);
   }, []);
@@ -40,9 +39,8 @@ const Login = () => {
   const handleLogin = async () => {
     setLoading(true);
     if (username.current.value === "" || password.current.value === "") {
-      errorObj.desc = "Please fill all fields";
+      alert("Please fill all fields");
       setLoading(false);
-      setpopUp(true);
     } else {
       let r = await postR(L_LINK, "/validate/login", {
         email: username.current.value,
@@ -53,9 +51,9 @@ const Login = () => {
         setLoading(false);
         setpopUp(true);
       } else if (r.output) {
-        setLoading(false);
         localStorage.setItem("Freeskout-session", JSON.stringify(r.output));
         navi("/home");
+        setLoading(false);
       }
     }
   };

@@ -36,7 +36,6 @@ const Home = () => {
           errorObj.desc = r.issueDetail;
           errorObj.navigationRoute = "/";
         } else {
-          console.log("inside else");
           errorObj.desc = r.issueDetail;
           errorObj.navigation = false;
         }
