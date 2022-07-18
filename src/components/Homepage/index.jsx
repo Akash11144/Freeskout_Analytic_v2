@@ -10,6 +10,7 @@ import InformationPopUp from "../extras/pop-ups/information";
 import SmallLoading from "../extras/loading-animation/small-loading";
 import { fetchAuth, L_LINK } from "../utlis";
 import Dashboard from "./graph-dashboard";
+import NoInternet from "../extras/no-internet-page";
 
 let errorObj = {
   desc: "",

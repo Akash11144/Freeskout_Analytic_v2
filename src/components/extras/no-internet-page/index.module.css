@@ -1,0 +1,84 @@
+@import url("https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+.mainDivApp {
+  height: 90vh;
+  width: 100%;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+.gifCont {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 2%;
+  height: 70%;
+  background: url("./noInternetGif.gif");
+  background-position: center;
+  overflow: hidden;
+  background-color: #39ad31;
+}
+
+.msgDiv {
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+  overflow: hidden;
+  margin-top: 0%;
+}
+.mainMsg {
+  width: 100%;
+  margin: 0 auto;
+  font-family: "Arvo", serif;
+  font-size: 40px;
+  padding: unset;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-align: center;
+}
+.message {
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 1%;
+  font-family: "Arvo", serif;
+  font-size: 16px;
+  padding: unset;
+  font-weight: lighter;
+  text-align: center;
+  box-sizing: border-box;
+}
+.homeBtn {
+  background: transparent;
+  background: transparent;
+  background-color: #39ad31;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 6px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: max-content;
+  margin: 0% auto;
+  margin-top: 1%;
+  transition: 0.3px;
+  border: 1px solid #39ad31;
+  letter-spacing: 1px;
+  font-weight: 600;
+  font-family: "Arvo", serif;
+}
+.homeBtn:hover {
+  border: 1px solid #39ad31;
+  background-color: transparent;
+  color: #39ad31;
+}
+.homeBtn:active {
+  transform: translateY(2px);
+}
+
+@media (max-width: 490px) {
+  .ECholder {
+    font-size: 50px;
+  }
+  .mainMsg {
+    font-size: 30px;
+  }
+  .message {
+    font-size: 16px;
+  }
+}
