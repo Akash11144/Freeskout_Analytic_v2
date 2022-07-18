@@ -18,6 +18,8 @@ import InformationPopUp from "../../extras//pop-ups/information";
 import SmallLoading from "../../extras/loading-animation/small-loading";
 import SendMail from "../../extras/loading-animation/send-mail-animation";
 
+// ---------------------------------------------------------------------------------------------
+
 let errorObj = {
   desc: "",
   navigation: true,
@@ -29,7 +31,7 @@ const LinkManement = (props) => {
   const [isUserActive, setisUserActive] = useState(false);
   const [routeData, setrouteData] = useState([]);
   const [userData, setuserData] = useState([]);
-  const [sortedRouteData, setsortedRouteData] = useState([]);
+  const [finalData, setfinalData] = useState([]);
   const [isSelectorsActive, setisSelectorsActive] = useState(false);
   const [pageError, setpageError] = useState(false);
   const [Loading, setLoading] = useState(true);
@@ -46,6 +48,7 @@ const LinkManement = (props) => {
   const linkListCont = useRef(null);
   const startDate = useRef(null);
   const endDate = useRef(null);
+  const selected_user = useRef(null);
 
   const loc = useLocation();
   let { admin, email } = loc.state;
@@ -87,7 +90,7 @@ const LinkManement = (props) => {
           } else setuserData(data2);
         }
         setrouteData(data1);
-        setsortedRouteData(data1);
+        setfinalData(data1);
       }
     } catch (error) {
       console.log("error in data-fecth func. in manage link page", error);
@@ -104,10 +107,10 @@ const LinkManement = (props) => {
   }, []);
 
   const handleStatusSelector = () => setisActive(!isActive);
-
   const handelMobileSelectors = () => setisSelectorsActive(!isSelectorsActive);
-
   const handleUserSelector = () => setisUserActive(!isUserActive);
+  const handleview = () => setviewDetails(true)
+  const handleCloseDetails = () => setviewDetails(false);
 
   const allClick = () => {
     let allLiIt = all_links.current.innerText;
@@ -127,7 +130,6 @@ const LinkManement = (props) => {
     setshowActiveLink(false);
     setshowDeletedlinks(true);
   };
-  const selected_user = useRef();
   const handelSelctUser = (item) => {
     if (item === "All Users") {
       selected_user.current.innerText = "All Users";
@@ -139,6 +141,7 @@ const LinkManement = (props) => {
   };
 
   const handleSortedData = async () => {
+    setLoading(true);
     console.time();
     let std = startDate.current.value;
     let ed = endDate.current.value;
@@ -146,46 +149,45 @@ const LinkManement = (props) => {
     console.log(cal);
     if (cal.error) alert(cal.reason);
     else {
-      let newData;
+      let finalarr = [];
       if (admin) {
-        if (selected_user.current.id === "info@freeskout.com") setsortedRouteData(routeData);
+        console.log("inside admin if", finalarr);
+        if (selected_user.current.id === "info@freeskout.com") {
+          finalarr = routeData;
+        }
         else {
-          newData = routeData.filter((item) => {
-            console.log(item.email, " : ", selected_user.current.id);
+          finalarr = routeData.filter((item) => {
             return item.email === selected_user.current.id;
           });
-          setsortedRouteData(newData);
         }
+        console.log(finalarr);
       }
-      console.log(std, ed);
-      if (!std && !ed) return;
+      if (!std && !ed) setfinalData(finalarr);
       else {
-        let stdarr = std.split("-").map(item => +item);
-        let edarr = ed.split("-").map(item => +item);
-        console.log("success", stdarr, edarr);
-        console.log(monthNogen("Jul"));
-        if (routeData.length) {
+        !admin && (finalarr = routeData);
+        if (finalarr.length) {
+          let stdarr = std.split("-").map(item => +item);
+          let edarr = ed.split("-").map(item => +item);
+          console.log("success", stdarr, edarr);
           let newsorted = [];
-          for (let i = 0; i < routeData.length; i++) {
+          for (let i = 0; i < finalarr.length; i++) {
             let arr = routeData[i].time.split(" ");
-            console.log(+arr[3], +monthNogen(arr[1]), +arr[2]);
             if (+arr[3] >= stdarr[0] && +arr[3] <= edarr[0])
               if (+monthNogen(arr[1]) >= stdarr[1] && +monthNogen(arr[1]) <= edarr[1])
                 if (+arr[2] >= stdarr[2] && +arr[2] <= edarr[2]) newsorted.push(routeData[i]);
           }
           console.log("new-sorted-data:", newsorted);
-          setsortedRouteData(newsorted);
+          setfinalData(newsorted);
         }
-        else setsortedRouteData([]);
+        else setfinalData([]);
       }
     }
     console.timeEnd()
+    setLoading(false);
   };
 
-  const handleview = () => setviewDetails(true)
-  const handleCloseDetails = () => setviewDetails(false);
-
   const handleDelete = async ({ path, email }) => {
+    setLoading(true);
     console.log("deleting route: ", path, email);
     try {
       let dt = new Date();
@@ -211,11 +213,14 @@ const LinkManement = (props) => {
           errorObj.desc = r.issueDetail;
           errorObj.navigation = false;
         }
+        setLoading(false);
         setpageError(true);
       } else {
+        setLoading(false);
         DataFetch();
       }
     } catch (error) {
+      setLoading(false)
       errorObj.desc = "Some error while deleting";
       errorObj.navigation = false;
       setpageError(true);
@@ -391,8 +396,8 @@ const LinkManement = (props) => {
               <div className={Styles.linkListSecCont}>
                 {showActiveLink && (
                   <div className={Styles.linksContainer}>
-                    {sortedRouteData.length &&
-                      sortedRouteData.map((item, index) => {
+                    {finalData.length ?
+                      finalData.map((item, index) => {
                         {
                           return (
                             !item.deleted && (
@@ -408,13 +413,13 @@ const LinkManement = (props) => {
                             )
                           );
                         }
-                      })}
+                      }) : (<h1>No Data Present.</h1>)}
                   </div>
                 )}
                 {showDeletedlinks && (
                   <div className={Styles.linksContainerA}>
-                    {sortedRouteData.length &&
-                      sortedRouteData.map((item, index) => {
+                    {finalData.length ?
+                      finalData.map((item, index) => {
                         {
                           return (
                             item.deleted && (
@@ -430,7 +435,7 @@ const LinkManement = (props) => {
                             )
                           );
                         }
-                      })}
+                      }) : (<h1>No Data Present.</h1>)}
                   </div>
                 )}
               </div>
