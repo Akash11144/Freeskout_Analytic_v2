@@ -4,16 +4,23 @@
   width: 100%;
   background-color: #ffffff;
   overflow: hidden;
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
 }
 .gifCont {
-  width: 50%;
+  width: 100%;
   margin: 0 auto;
   margin-top: 2%;
-  height: 70%;
-  background: url("./noInternetGif.gif");
+  /* height: 50%; */
+  display: grid;
+  place-items: center;
   background-position: center;
   overflow: hidden;
-  background-color: #39ad31;
+  background-size: cover;
+}
+.gifCont > img {
+  width: 70%;
 }
 
 .msgDiv {
@@ -70,11 +77,12 @@
 .homeBtn:active {
   transform: translateY(2px);
 }
-
-@media (max-width: 490px) {
-  .ECholder {
-    font-size: 50px;
+@media (max-width: 670px) {
+  .mainMsg {
+    font-size: 25px;
   }
+}
+@media (max-width: 490px) {
   .mainMsg {
     font-size: 30px;
   }
