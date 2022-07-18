@@ -32,7 +32,6 @@ const FUM = () => {
 
   let j = false;
   useEffect(() => {
-    // console.log("inside manage user main ue,", loc);
     !j && !loc.state && nav("/home");
     setpageLoading(false);
     return () => (j = true);
@@ -297,8 +296,9 @@ const User = ({ name, email, created, deleted, deleted_time }) => {
       {pageLoading && <SmallLoading />}
       <div className={Styles.secondCont}>
         <div
-          className={`${Styles.DelUserDiv} ${status ? Styles.DelUserDiv : Styles.ActiveUserDiv
-            }`}
+          className={`${Styles.DelUserDiv} ${
+            status ? Styles.DelUserDiv : Styles.ActiveUserDiv
+          }`}
         >
           <div className={Styles.activeUserName}>
             <p> {name}</p>
