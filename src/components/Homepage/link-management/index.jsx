@@ -151,8 +151,8 @@ const LinkManement = (props) => {
         if (selected_user.current.id === "info@freeskout.com") setsortedRouteData(routeData);
         else {
           newData = routeData.filter((item) => {
-            console.log(item.email, " : ", email);
-            return item.email === email;
+            console.log(item.email, " : ", selected_user.current.id);
+            return item.email === selected_user.current.id;
           });
           setsortedRouteData(newData);
         }
