@@ -69,7 +69,6 @@ const Home = () => {
               <Topbar {...person}></Topbar>
             </div>
             <HomeRoutes {...person} />
-            <NoInternet></NoInternet>
           </>
         ) : (
           pageError && <InformationPopUp {...errorObj} />
