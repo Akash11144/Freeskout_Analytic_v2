@@ -38,8 +38,6 @@ const LinkManement = (props) => {
   const [showActiveLink, setshowActiveLink] = useState(true);
   const [showDeletedlinks, setshowDeletedlinks] = useState(true);
   const [closeFilterIcon, setcloseFilterIcon] = useState(false);
-  const [isAdmin, setisAdmin] = useState(false);
-  const [pageLoading, setpageLoading] = useState(false);
 
   const selected_status = useRef(null);
   const all_links = useRef(null);
@@ -184,14 +182,8 @@ const LinkManement = (props) => {
     console.timeEnd()
   };
 
-  const handleview = () => {
-    setviewDetails(true);
-    // linkListCont.current.style.overflowY = "hidden";
-  };
-  const handleCloseDetails = () => {
-    setviewDetails(false);
-    // linkListCont.current.style.overflowY = "scroll";
-  };
+  const handleview = () => setviewDetails(true)
+  const handleCloseDetails = () => setviewDetails(false);
 
   const handleDelete = async ({ path, email }) => {
     console.log("deleting route: ", path, email);
@@ -532,7 +524,7 @@ const DetailLayout = (props) => {
   const hitFetch = async () => {
     sethitLoading(true);
     let a = await fetchAuth(
-      `http://localhost:1111/user/getAllFromSlug/${props.path.split("/")[1]}`
+      `http://localhost:1111/user/getAllSlug/${props.path.split("/")[1]}`
     );
     sethitLoading(false);
     hitRef.current.innerText = a;

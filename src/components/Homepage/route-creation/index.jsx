@@ -132,9 +132,7 @@ const RouteCreationDesign = (props) => {
     setgenerateLoading(false);
   };
 
-  const handelSendBtnShow = () => {
-    setsendBtn(false);
-  };
+  const handelSendBtnShow = () => setsendBtn(false);
 
   return (
     <>
@@ -399,17 +397,14 @@ const UserCreationSideForm = ({
     } else sethomeDiv(true);
     setsaveBtnLoading(false);
   };
-  // const handelHomeBtn = () => {
-  //   window.location.reload();
-  // };
+
   return (
     <>
       {pageLoading && <SmallLoading />}
       <div className={Styles.genDetailsCont}>
         <div
-          className={`${Styles.afterSend} ${
-            homeDiv ? Styles.afterSendShow : Styles.afterSend
-          }`}
+          className={`${Styles.afterSend} ${homeDiv ? Styles.afterSendShow : Styles.afterSend
+            }`}
         >
           <div className={Styles.notiCont}>
             <a href="" ref={finalCopiedLink} target="_blank"></a>
